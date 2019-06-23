@@ -1,4 +1,4 @@
-
+estou no detalhe
 <div *ngIf="hero">
   <h2>{{hero.name | uppercase}} Details</h2>
   <div [class.selected]="true"><span>id: </span> {{hero.id}}</div>
@@ -8,3 +8,5 @@
     </label>
   </div>
 </div>
+
+<button (click)="goBack()">go back</button>
