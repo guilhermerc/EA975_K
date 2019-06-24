@@ -7,8 +7,9 @@ router.get('/', function(req, res, next) {
   res.send({titulo: "HP", ano: 2019});
 });
 
-router.get('/pokemon', function(req, res, next) {
+router.get('/:pokemon', function(req, res, next) {
   res.send({titulo: "O rei leao", ano: 2019});
+  console.log(req.params.pokemon);
 });
 
 module.exports = router;

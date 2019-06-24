@@ -1,15 +1,19 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-      UMDB 17:38
+      UMDB
   </h1>
   <button (click) = "pokemon()">1 filme</button>
 
-  
+
   <button (click) = "getfilmes()"> filmes</button>
   <div>
     filme: {{filme.titulo}} ano: {{filme.ano}}
   </div>
+
+  <nav>
+  <a routerLink="/autenticacao">Entrar</a>
+  </nav>
 
 {{log}}
 <router-outlet></router-outlet>
