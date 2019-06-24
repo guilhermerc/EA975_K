@@ -3,6 +3,8 @@ import { Hero } from './hero';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HEROES} from './mock-heroes';
+
 
 
 @Injectable({
@@ -18,7 +20,7 @@ export class HeroService {
 
   /** GET heroes from the server */
   getHeroes (): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl)
+    return of(HEROES);
   }
 
   getHero(id: number): Observable<Hero> {
