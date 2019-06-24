@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 conn1 = mongoose.createConnection('mongodb://localhost:27017/UMDB', {useNewUrlParser: true});
 var Schema = mongoose.Schema;
-var alunoSchema = new Schema({
+var schemaFilme = new Schema({
     "titulo": String,
     "ano": Number,
 	"diretor": String,
@@ -10,4 +10,16 @@ var alunoSchema = new Schema({
 	"imagens": [String]
 	
 });
-module.exports = conn1.model('filmes', alunoSchema);
+
+module.exports = conn1.model('filme', schemaFilme);
+
+
+var schemaUsuario = new Schema({
+	"nome": String,
+	"username": String,
+	"dataNascimento": String,
+	"sexo": String,
+	"fotoPerfil": String
+});
+
+module.exports = conn1.model('usuario', schemaUsuario);

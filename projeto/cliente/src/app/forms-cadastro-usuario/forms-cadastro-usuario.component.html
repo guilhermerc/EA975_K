@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div [hidden]="registrado">
+    <h1>Registro de Usuário</h1>
+    <form (ngSubmit)="registrar()" #formsUsuario="ngForm">
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" required
+        [(ngModel)]="usuario.nome" name="nome"
+        #nome="ngModel">
+        <div [hidden]="nome.valid || nome.pristine"
+        class="alert alert-danger">
+        Nome é obrigatório
+        </div>
+      </div>
+
+      <div id="inline-forms">
+        <div class="form-group" id="campo">
+          <label for="data">Data de Nascimento</label>
+          <input type="date" class="form-control" id="data" required
+          [(ngModel)]="usuario.dataNascimento" name="data">
+        </div>
+
+        <div class="form-group" id="campo">
+          <label for="sexo">Sexo</label>
+          <select class="form-control" id="sexo" required
+          [(ngModel)]="usuario.sexo" name= "sexo">
+            <option *ngFor="let sexo of sexos" [value]="sexo">{{sexo}}</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-success"
+      [disabled]="!formsUsuario.form.valid">Registrar</button>
+
+    </form>
+  </div>
+
+  <div [hidden]="!registrado">
+    <h2>Usuário Cadastrado:</h2>
+    <div class="row">
+      <div class="col-xs-3">Nome</div>
+      <div class="col-xs-9">{{ usuario.nome }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Data de Nascimento</div>
+      <div class="col-xs-9">{{ usuario.dataNascimento }}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">Sexo</div>
+      <div class="col-xs-9">{{ usuario.sexo }}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="registrado=false">Edit</button>
+  </div>
