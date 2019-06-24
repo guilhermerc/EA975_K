@@ -10,12 +10,14 @@ import { Observable, of } from 'rxjs';
 
 export class FilmeService {
 
+router:string;
 
   constructor(
   private http: HttpClient) { }
 
   // Observable ativa uma chamada assincrona do retorno dessa função
-  getFilme():Observable<Filme> {
-    return this.http.get<Filme>('/users');
+  getFilme(nome: string):Observable<Filme> {
+    this.router = '/filmes' + nome;
+    return this.http.get<Filme>(this.router);
   }
 }

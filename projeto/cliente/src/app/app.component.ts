@@ -11,15 +11,27 @@ import { Filme } from '../assets/filme';
 export class AppComponent {
   title = 'cliente';
   log:String = "começo";
-  filme: Filme = {titulo: "teste",ano:2};
+  filme: Filme = {
+    titulo: "",
+    ano: 0,
+    diretor: "",
+    elenco: ""
+    //comentarios: [{}],
+    //imagens: [""]
+  };
 
   constructor(private filmeService: FilmeService) { }
 
   ngOnInit() {
 
   }
-  getfilme():void {
+  pokemon():void {
 
-    this.filmeService.getFilme().subscribe(filme => this.filme = filme);
+    this.filmeService.getFilme("/pokemon").subscribe(filme => this.filme = filme);
+  }
+
+  getfilmes():void {
+
+    this.filmeService.getFilme("").subscribe(filme => this.filme = filme);
   }
 }

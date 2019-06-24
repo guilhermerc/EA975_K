@@ -1,4 +1,8 @@
 export class Filme {
-	titulo: string;
-	ano: number;
+	titulo: String;
+  ano: Number;
+	diretor: String;
+	elenco: String;
+  //comentarios: [{usurname: String, data: String, texto: String}];
+	//imagens: [String];
 }

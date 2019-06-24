@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n      UMDB 17:38\n  </h1>\n  <button (click) = \"getfilme()\"> vaii</button>\n  <div>\n    filme: {{filme.titulo}} ano: {{filme.ano}}\n  </div>\n\n{{log}}\n<router-outlet></router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n      UMDB 17:38\n  </h1>\n  <button (click) = \"pokemon()\">1 filme</button>\n\n  \n  <button (click) = \"getfilmes()\"> filmes</button>\n  <div>\n    filme: {{filme.titulo}} ano: {{filme.ano}}\n  </div>\n\n{{log}}\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -99,13 +99,24 @@ var AppComponent = /** @class */ (function () {
         this.filmeService = filmeService;
         this.title = 'cliente';
         this.log = "começo";
-        this.filme = { titulo: "teste", ano: 2 };
+        this.filme = {
+            titulo: "",
+            ano: 0,
+            diretor: "",
+            elenco: ""
+            //comentarios: [{}],
+            //imagens: [""]
+        };
     }
     AppComponent.prototype.ngOnInit = function () {
     };
-    AppComponent.prototype.getfilme = function () {
+    AppComponent.prototype.pokemon = function () {
         var _this = this;
-        this.filmeService.getFilme().subscribe(function (filme) { return _this.filme = filme; });
+        this.filmeService.getFilme("/pokemon").subscribe(function (filme) { return _this.filme = filme; });
+    };
+    AppComponent.prototype.getfilmes = function () {
+        var _this = this;
+        this.filmeService.getFilme("").subscribe(function (filme) { return _this.filme = filme; });
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -189,8 +200,9 @@ var FilmeService = /** @class */ (function () {
         this.http = http;
     }
     // Observable ativa uma chamada assincrona do retorno dessa função
-    FilmeService.prototype.getFilme = function () {
-        return this.http.get('/users');
+    FilmeService.prototype.getFilme = function (nome) {
+        this.router = '/filmes' + nome;
+        return this.http.get(this.router);
     };
     FilmeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -250,10 +262,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//environment.production = true;
 if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].production) {
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
-    console.log("tamo na produção");
 }
 Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"])
     .catch(function (err) { return console.error(err); });
