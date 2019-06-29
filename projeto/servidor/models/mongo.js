@@ -1,6 +1,9 @@
 var mongoose = require("mongoose");
+
 conn1 = mongoose.createConnection('mongodb://localhost:27017/UMDB', {useNewUrlParser: true});
+
 var Schema = mongoose.Schema;
+
 var schemaFilme = new Schema({
     "titulo": String,
     "ano": Number,

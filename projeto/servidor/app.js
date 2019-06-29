@@ -5,8 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var routerUsuarios = require('./routes/usuarios');
-var routerFilmes = require('./routes/filmes');
+var routerUsuarios = require('./routes/router_usuarios');
+var routerFilmes = require('./routes/router_filmes');
+
+// "Ponteiro" para o MongoDB
+var mongoOp = require('./models/mongo2');
+var modelFilme = require('./models/model_filme');
 
 var app = express();
 
@@ -42,3 +46,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+modelFilme.find(function (err, kittens) {
+	console.log(kittens);
+	console.log("tô no app.js");
+});

@@ -16,8 +16,8 @@ router:string;
   private http: HttpClient) { }
 
   // Observable ativa uma chamada assincrona do retorno dessa função
-  getFilme(nome: string):Observable<Filme> {
-    this.router = '/filmes' + nome;
-    return this.http.get<Filme>(this.router);
+  getFilme(nome: String):Observable<Filme[]> {
+    this.router = '/filmes/' + nome;
+    return this.http.get<Filme[]>(this.router);
   }
 }

@@ -1,7 +1,5 @@
-<button (click) = "pokemon()">1 filme</button>
-
-
-<button (click) = "getfilmes()"> filmes</button>
-<div>
-  filme: {{filme.titulo}} ano: {{filme.ano}}
+<div >
+  <input #pesquisa placeholder="Procurar por um filme, elenco, direção..." id ="busca" />
+  <button (click)="buscaSimples(pesquisa.value)">Buscar</button>
 </div>
+Status{{ log | json }}
