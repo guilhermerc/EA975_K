@@ -8,10 +8,6 @@ var indexRouter = require('./routes/index');
 var routerUsuarios = require('./routes/router_usuarios');
 var routerFilmes = require('./routes/router_filmes');
 
-// "Ponteiro" para o MongoDB
-var mongoOp = require('./models/mongo2');
-var modelFilme = require('./models/model_filme');
-
 var app = express();
 
 // view engine setup
@@ -47,7 +43,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-modelFilme.find(function (err, kittens) {
-	console.log(kittens);
-	console.log("tô no app.js");
-});
+var mock = require('./public/javascripts/mock_db');
+//mock.create();

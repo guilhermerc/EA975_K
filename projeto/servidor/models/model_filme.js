@@ -2,7 +2,16 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var schemaFilme = new Schema({nickname: String});
+var schemaFilme = new Schema(
+{
+	"titulo": String,
+	"ano": Number,
+	"diretor": String,
+	"elenco": String,
+   "comentarios": [{"usurname": String, "data": String, "texto": String}],
+	"imagens": [String]
+});
+
 var modelFilme = mongoose.model('filme', schemaFilme);
 
 module.exports = modelFilme;

@@ -52,7 +52,7 @@ module.exports = "<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div >\n  <input #pesquisa placeholder=\"Procurar por um filme, elenco, direção...\" id =\"busca\" />\n  <button (click)=\"buscaSimples(pesquisa.value)\">Buscar</button>\n</div>\nStatus{{ log | json }}\n"
+module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procurar por um filme, elenco, direção...\" id =\"busca\" />\n  <select id= \"barra\">\n    <option *ngFor=\"let filtro of filtros\" [value]=\"filtro\">{{filtro}}</option>\n  </select>\n  <button (click)=\"buscaSimples(pesquisa.value)\" id= \"barra\">Buscar</button>\n</div>\n\n<h2>Filmes Encontrados</h2>\n<div class=\"container\">\n  <ul class=\"filmesEncontrados\">\n    <li *ngFor=\"let filme of filmesEncontrados\">\n      <p>{{filme.titulo}}\n         <br> {{filme.ano}} </p>\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -126,7 +126,7 @@ AppRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "nav a {\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  display: inline-block;\n  background-color: #eee;\n  border-radius: 4px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibmF2IGEge1xuICBwYWRkaW5nOiA1cHggMTBweDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbn1cbiJdfQ== */"
+module.exports = "/* AppComponent's private CSS styles */\nh1 {\n  font-size: 1.2em;\n  margin-bottom: 0;\n}\nh2 {\n  font-size: 2em;\n  margin-top: 0;\n  padding-top: 0;\n}\nnav a {\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  display: inline-block;\n  background-color: #eee;\n  border-radius: 4px;\n}\nnav a:visited, a:link {\n  color: #334953;\n}\nnav a:hover {\n  color: #039be5;\n  background-color: #cfd8dc;\n}\nnav a.active {\n  color: #039be5;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0NBQXNDO0FBQ3RDO0VBQ0UsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UsY0FBYztFQUNkLGFBQWE7RUFDYixjQUFjO0FBQ2hCO0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsY0FBYztBQUNoQjtBQUNBO0VBQ0UsY0FBYztFQUNkLHlCQUF5QjtBQUMzQjtBQUNBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogQXBwQ29tcG9uZW50J3MgcHJpdmF0ZSBDU1Mgc3R5bGVzICovXG5oMSB7XG4gIGZvbnQtc2l6ZTogMS4yZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5oMiB7XG4gIGZvbnQtc2l6ZTogMmVtO1xuICBtYXJnaW4tdG9wOiAwO1xuICBwYWRkaW5nLXRvcDogMDtcbn1cbm5hdiBhIHtcbiAgcGFkZGluZzogNXB4IDEwcHg7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgbWFyZ2luLXRvcDogMTBweDtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG59XG5uYXYgYTp2aXNpdGVkLCBhOmxpbmsge1xuICBjb2xvcjogIzMzNDk1Mztcbn1cbm5hdiBhOmhvdmVyIHtcbiAgY29sb3I6ICMwMzliZTU7XG4gIGJhY2tncm91bmQtY29sb3I6ICNjZmQ4ZGM7XG59XG5uYXYgYS5hY3RpdmUge1xuICBjb2xvcjogIzAzOWJlNTtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -309,7 +309,7 @@ FilmeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#busca {\n  width: 300px;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7O0FBRWQiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2J1c2NhIHtcbiAgd2lkdGg6IDMwMHB4O1xuXG59XG4iXX0= */"
+module.exports = "#busca {\n  width: 300px;\n  height: 30px;\n\n}\n\n.container {\n  padding: 20px;\n  width: 700px;\n}\n\nul {\n\n  align-self: center;\n  list-style-type: none;\n  padding: 20px;\n  background-color: gray;\n}\n\nli {\n  background-color: #BAE7F7;\n}\n\nli:hover{\n  background-color: #8ce1ff;\n}\n\n#inline-forms {\n   display: flex;\n   justify-content: space-around;\n   align-items: center;\n\n}\n\n#barra {\n  height: 30px;\n  margin: 2px;\n}\n\nbutton #barra{\n  background-color: green;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7RUFDWixZQUFZOztBQUVkOztBQUVBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFDQTs7RUFFRSxrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGFBQWE7RUFDYixzQkFBc0I7QUFDeEI7O0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0I7O0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0I7O0FBQ0E7R0FDRyxhQUFhO0dBQ2IsNkJBQTZCO0dBQzdCLG1CQUFtQjs7QUFFdEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UsdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiNidXNjYSB7XG4gIHdpZHRoOiAzMDBweDtcbiAgaGVpZ2h0OiAzMHB4O1xuXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogNzAwcHg7XG59XG51bCB7XG5cbiAgYWxpZ24tc2VsZjogY2VudGVyO1xuICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IGdyYXk7XG59XG5saSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNCQUU3Rjc7XG59XG5saTpob3ZlcntcbiAgYmFja2dyb3VuZC1jb2xvcjogIzhjZTFmZjtcbn1cbiNpbmxpbmUtZm9ybXMge1xuICAgZGlzcGxheTogZmxleDtcbiAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYXJvdW5kO1xuICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcblxufVxuXG4jYmFycmEge1xuICBoZWlnaHQ6IDMwcHg7XG4gIG1hcmdpbjogMnB4O1xufVxuXG5idXR0b24gI2JhcnJhe1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -333,22 +333,20 @@ let FilmeComponent = class FilmeComponent {
     constructor(filmeService) {
         this.filmeService = filmeService;
         this.filme = {
-            titulo: "",
-            ano: 0,
+            titulo: "Teste",
+            ano: 123,
             diretor: "",
             elenco: ""
             //comentarios: [{}],
             //imagens: [""]
         };
-        this.log = [this.filme, this.filme, this.filme];
-    }
-    pokemon() {
-        this.filmeService.getFilme("/pokemon").subscribe(filmes => this.filme = filmes[0]);
+        this.filmesEncontrados = [this.filme, this.filme, this.filme];
+        this.filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
     }
     ngOnInit() {
     }
     buscaSimples(infoPesquisada) {
-        this.filmeService.getFilme(infoPesquisada).subscribe(filmes => this.log = filmes);
+        this.filmeService.getFilme(infoPesquisada).subscribe(filmes => this.filmesEncontrados = filmes);
     }
 };
 FilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

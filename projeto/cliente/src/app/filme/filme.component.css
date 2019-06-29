@@ -1,4 +1,38 @@
 #busca {
   width: 300px;
+  height: 30px;
 
+}
+
+.container {
+  padding: 20px;
+  width: 700px;
+}
+ul {
+
+  align-self: center;
+  list-style-type: none;
+  padding: 20px;
+  background-color: gray;
+}
+li {
+  background-color: #BAE7F7;
+}
+li:hover{
+  background-color: #8ce1ff;
+}
+#inline-forms {
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+
+}
+
+#barra {
+  height: 30px;
+  margin: 2px;
+}
+
+button #barra{
+  background-color: green;
 }

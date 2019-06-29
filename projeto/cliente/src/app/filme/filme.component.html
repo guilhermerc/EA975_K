@@ -1,5 +1,17 @@
-<div >
+<div class = "row">
   <input #pesquisa placeholder="Procurar por um filme, elenco, direção..." id ="busca" />
-  <button (click)="buscaSimples(pesquisa.value)">Buscar</button>
+  <select id= "barra">
+    <option *ngFor="let filtro of filtros" [value]="filtro">{{filtro}}</option>
+  </select>
+  <button (click)="buscaSimples(pesquisa.value)" id= "barra">Buscar</button>
 </div>
-Status{{ log | json }}
+
+<h2>Filmes Encontrados</h2>
+<div class="container">
+  <ul class="filmesEncontrados">
+    <li *ngFor="let filme of filmesEncontrados">
+      <p>{{filme.titulo}}
+         <br> {{filme.ano}} </p>
+    </li>
+  </ul>
+</div>

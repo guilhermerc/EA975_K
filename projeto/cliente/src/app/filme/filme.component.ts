@@ -11,18 +11,15 @@ export class FilmeComponent implements OnInit {
 
 
   filme: Filme = {
-    titulo: "",
-    ano: 0,
+    titulo: "Teste",
+    ano: 123,
     diretor: "",
     elenco: ""
     //comentarios: [{}],
     //imagens: [""]
   };
-  log: Filme[] = [this.filme, this.filme, this.filme];
-  pokemon():void {
-
-    this.filmeService.getFilme("/pokemon").subscribe(filmes => this.filme = filmes[0]);
-  }
+  filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
+  filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
 
   constructor(private filmeService: FilmeService) { }
 
@@ -30,7 +27,7 @@ export class FilmeComponent implements OnInit {
   }
 
   buscaSimples(infoPesquisada: String): void {
-    this.filmeService.getFilme(infoPesquisada).subscribe(filmes => this.log = filmes);
+    this.filmeService.getFilme(infoPesquisada).subscribe(filmes => this.filmesEncontrados = filmes);
   }
 
 }
