@@ -4,7 +4,7 @@ var router = express.Router();
 var modelFilme = require('../models/model_filme');
 
 
-router.get('/', function(req, res, next) {
+router.get('/titulo', function(req, res, next) {
 	console.log("estou em filmes");
 	
 	var response = {};
@@ -20,12 +20,13 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/:titulo', function(req, res, next) {
+router.get('/titulo/:titulo', function(req, res, next) {
 	var response = {};
 	var query = {"titulo": req.params.titulo};
 
 	console.log("estou no get filme /titulo");
 	console.log(query);
+	
 	modelFilme.find(query, function (err, filmes) {
 		if (err) {
 			console.error(err);

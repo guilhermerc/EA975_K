@@ -21,16 +21,3 @@ var schemaUsuario = new mongoose.Schema(
 
 
 module.exports = mongoose.model('usuario', schemaUsuario);
-
-
-/*
-var Kitten = mongoose.model('Kytten', kittySchema);
-
-var silence = new Kitten({ name: 'Abigail' });
-console.log(silence.name); // 'Silence'
-
-silence.save(function (err, fluffy) {
-    if (err) return console.error(err);
-
-  });
-  */

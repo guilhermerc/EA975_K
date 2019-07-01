@@ -1,0 +1,68 @@
+/* Nav bar*/
+.navbar {
+  height: 58px;
+  background-color: #333;
+  position: fixed;
+  width: 100%;
+}
+
+.topnav-right {
+  float: right;
+}
+.navbar .search-container {
+  float: left;
+}
+
+.navbar a {
+  vertical-align: middle;
+  font-size: 17px;
+  text-align: center;
+  color: #f2f2f2;
+  text-decoration: none;
+  float: left;
+}
+
+.navbar .botao:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.image {
+  margin-top: 1px;
+  margin-left: 1px;
+}
+.botao {
+
+    padding: 16px 16px;
+}
+
+.navbar div {
+  display: block;
+}
+
+
+/*fim nav bar */
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+
+.barra-input {
+  height: 30px;
+  margin: 2px;
+}
+
+
+
+
+.navbar input[type=text] {
+  width: 350px;
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}

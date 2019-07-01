@@ -1,0 +1,18 @@
+
+.container {
+  padding: 20px;
+  width: 700px;
+}
+ul {
+
+  align-self: center;
+  list-style-type: none;
+  padding: 20px;
+  background-color: gray;
+}
+li {
+  background-color: #BAE7F7;
+}
+li:hover{
+  background-color: #8ce1ff;
+}

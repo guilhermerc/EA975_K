@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FilmeService } from '../filme.service';
-import { Filme } from '../../assets/filme';
+
 
 @Component({
   selector: 'app-filme',
@@ -10,24 +9,13 @@ import { Filme } from '../../assets/filme';
 export class FilmeComponent implements OnInit {
 
 
-  filme: Filme = {
-    titulo: "Teste",
-    ano: 123,
-    diretor: "",
-    elenco: ""
-    //comentarios: [{}],
-    //imagens: [""]
-  };
-  filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
 
 
-  constructor(private filmeService: FilmeService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  buscaSimples(infoPesquisada: String): void {
-    this.filmeService.getFilme(infoPesquisada).subscribe(filmes => this.filmesEncontrados = filmes);
-  }
+
 
 }

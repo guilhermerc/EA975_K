@@ -9,7 +9,7 @@ import { Filme } from '../../assets/filme';
 })
 export class BarraDeBuscaComponent implements OnInit {
 
-  filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
+  
 
   constructor() { }
 

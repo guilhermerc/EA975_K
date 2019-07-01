@@ -11,6 +11,7 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
 import { FormsCadastroUsuarioComponent } from './forms-cadastro-usuario/forms-cadastro-usuario.component';
 import { BarraDeBuscaComponent } from './barra-de-busca/barra-de-busca.component';
 import { ResultadoDeBuscaComponent } from './resultado-de-busca/resultado-de-busca.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ResultadoDeBuscaComponent } from './resultado-de-busca/resultado-de-bus
     PerfilUsuarioComponent,
     FormsCadastroUsuarioComponent,
     BarraDeBuscaComponent,
-    ResultadoDeBuscaComponent
+    ResultadoDeBuscaComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

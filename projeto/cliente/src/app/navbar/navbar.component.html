@@ -1,0 +1,30 @@
+<div class="navbar">
+    <!-- logo-->
+    <a class="image" routerLink="/home">
+      <img src="assets/logo2.png" height="55" width="200">
+    </a>
+
+    <div class="search-container">
+      <form (ngSubmit)="buscaSimples()">
+        <input type="text" placeholder="Procurar por um filme, elenco, direção..." name="search"
+        [(ngModel)]="barraDeBusca" class="barra-input">
+        <select id= "filtroDePesquisa" class="barra-input">
+          <option selected>{{filtrosExibidos[0]}}</option>
+          <option>{{filtrosExibidos[1]}}</option>
+          <option>{{filtrosExibidos[2]}}</option>
+          <option>{{filtrosExibidos[3]}}</option>
+          <option>{{filtrosExibidos[4]}}</option>
+        </select>
+        <button type="submit" class="barra-input">Buscar</button>
+      </form>
+    </div>
+
+    <div class="topnav-right">
+      <a class="botao" href="filme/0">Marcelo Perfil</a>
+      <a class="botao" routerLink="/autenticacao" id="link-entrar">Entrar</a>
+    </div>
+
+</div>
+
+
+<br><br><br><br><br>
