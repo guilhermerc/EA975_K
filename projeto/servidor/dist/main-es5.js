@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n      UMDB\n  </h1>\n\n\n  <nav>\n  <a routerLink=\"/autenticacao\">Entrar</a>\n  <a routerLink=\"/filme/0\">Filmes</a>\n  </nav>\n<router-outlet></router-outlet>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/home\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n\n    <div class=\"topnav-right\">\n\n\n      <a class=\"botao\" href=\"filme/0\">Marcelo Perfil</a>\n\n      <a class=\"botao\" routerLink=\"/autenticacao\" id=\"link-entrar\">Entrar</a>\n   </div>\n</div>\n\n\n<br><br><br><br><br><br>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -45,6 +45,17 @@ module.exports = "<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/barra-de-busca/barra-de-busca.component.html":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/barra-de-busca/barra-de-busca.component.html ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procurar por um filme, elenco, direção...\" id =\"input-busca\" />\n  <select id= \"barra\">\n    <option *ngFor=\"let filtro of filtros\" [value]=\"filtro\">{{filtro}}</option>\n  </select>\n  <button (click)=\"buscaSimples(pesquisa.value)\" id= \"barra\">Buscar</button>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/filme/filme.component.html":
 /*!**********************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/filme/filme.component.html ***!
@@ -52,7 +63,7 @@ module.exports = "<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procurar por um filme, elenco, direção...\" id =\"busca\" />\n  <select id= \"barra\">\n    <option *ngFor=\"let filtro of filtros\" [value]=\"filtro\">{{filtro}}</option>\n  </select>\n  <button (click)=\"buscaSimples(pesquisa.value)\" id= \"barra\">Buscar</button>\n</div>\n\n<h2>Filmes Encontrados</h2>\n<div class=\"container\">\n  <ul class=\"filmesEncontrados\">\n    <li *ngFor=\"let filme of filmesEncontrados\">\n      <p>{{filme.titulo}}\n         <br> {{filme.ano}} </p>\n    </li>\n  </ul>\n</div>\n"
+module.exports = "\n\n<h2>Filmes Encontrados</h2>\n<div class=\"container\">\n  <ul class=\"filmesEncontrados\">\n    <li *ngFor=\"let filme of filmesEncontrados\">\n      <p>{{filme.titulo}}\n         <br> {{filme.ano}} </p>\n    </li>\n  </ul>\n</div>\n"
 
 /***/ }),
 
@@ -75,6 +86,17 @@ module.exports = "<div class=\"container\">\n\n  <div [hidden]=\"registrado\">\n
 /***/ (function(module, exports) {
 
 module.exports = "<p>\n  perfil-usuario works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/resultado-de-busca/resultado-de-busca.component.html":
+/*!************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/resultado-de-busca/resultado-de-busca.component.html ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  resultado-de-busca works!\n</p>\n"
 
 /***/ }),
 
@@ -104,7 +126,8 @@ var routes = [
     //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' }, default
     { path: 'perfil/:id', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] },
     { path: 'filme/:id', component: _filme_filme_component__WEBPACK_IMPORTED_MODULE_4__["FilmeComponent"] },
-    { path: 'autenticacao', component: _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__["AutenticacaoComponent"] }
+    { path: 'autenticacao', component: _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__["AutenticacaoComponent"] },
+    { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -129,7 +152,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* AppComponent's private CSS styles */\nh1 {\n  font-size: 1.2em;\n  margin-bottom: 0;\n}\nh2 {\n  font-size: 2em;\n  margin-top: 0;\n  padding-top: 0;\n}\nnav a {\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  display: inline-block;\n  background-color: #eee;\n  border-radius: 4px;\n}\nnav a:visited, a:link {\n  color: #334953;\n}\nnav a:hover {\n  color: #039be5;\n  background-color: #cfd8dc;\n}\nnav a.active {\n  color: #039be5;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsc0NBQXNDO0FBQ3RDO0VBQ0UsZ0JBQWdCO0VBQ2hCLGdCQUFnQjtBQUNsQjtBQUNBO0VBQ0UsY0FBYztFQUNkLGFBQWE7RUFDYixjQUFjO0FBQ2hCO0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQjtBQUNBO0VBQ0UsY0FBYztBQUNoQjtBQUNBO0VBQ0UsY0FBYztFQUNkLHlCQUF5QjtBQUMzQjtBQUNBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyogQXBwQ29tcG9uZW50J3MgcHJpdmF0ZSBDU1Mgc3R5bGVzICovXG5oMSB7XG4gIGZvbnQtc2l6ZTogMS4yZW07XG4gIG1hcmdpbi1ib3R0b206IDA7XG59XG5oMiB7XG4gIGZvbnQtc2l6ZTogMmVtO1xuICBtYXJnaW4tdG9wOiAwO1xuICBwYWRkaW5nLXRvcDogMDtcbn1cbm5hdiBhIHtcbiAgcGFkZGluZzogNXB4IDEwcHg7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgbWFyZ2luLXRvcDogMTBweDtcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZWVlO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG59XG5uYXYgYTp2aXNpdGVkLCBhOmxpbmsge1xuICBjb2xvcjogIzMzNDk1Mztcbn1cbm5hdiBhOmhvdmVyIHtcbiAgY29sb3I6ICMwMzliZTU7XG4gIGJhY2tncm91bmQtY29sb3I6ICNjZmQ4ZGM7XG59XG5uYXYgYS5hY3RpdmUge1xuICBjb2xvcjogIzAzOWJlNTtcbn1cbiJdfQ== */"
+module.exports = "body {\n  background-color: #c7e4f0;\n}\n\n/* AppComponent's private CSS styles */\n\nh1 {\n  font-size: 1.2em;\n  margin-bottom: 0;\n}\n\nh2 {\n  font-size: 2em;\n  margin-top: 0;\n  padding-top: 0;\n}\n\nnav a {\n  padding: 5px 10px;\n  text-decoration: none;\n  margin-top: 10px;\n  display: inline-block;\n  background-color: #eee;\n  border-radius: 4px;\n}\n\nnav a:visited, a:link {\n  color: #334953;\n}\n\nnav a:hover {\n  color: #039be5;\n  background-color: #cfd8dc;\n}\n\nnav a.active {\n  color: #039be5;\n}\n\n/* Nav bar*/\n\n.navbar {\n  height: 58px;\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n}\n\n.topnav-right {\n  float: right;\n}\n\n.navbar a {\n  vertical-align: middle;\n\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n\n}\n\n.botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n\n.botao {\n    padding: 16px 16px;\n}\n\n/*fim nav bar */\n\n/* Add a color to the active/current link */\n\n.topnav a.active {\n  background-color: #4CAF50;\n  color: white;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUEsc0NBQXNDOztBQUN0QztFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7QUFDbEI7O0FBQ0E7RUFDRSxjQUFjO0VBQ2QsYUFBYTtFQUNiLGNBQWM7QUFDaEI7O0FBQ0E7RUFDRSxpQkFBaUI7RUFDakIscUJBQXFCO0VBQ3JCLGdCQUFnQjtFQUNoQixxQkFBcUI7RUFDckIsc0JBQXNCO0VBQ3RCLGtCQUFrQjtBQUNwQjs7QUFDQTtFQUNFLGNBQWM7QUFDaEI7O0FBQ0E7RUFDRSxjQUFjO0VBQ2QseUJBQXlCO0FBQzNCOztBQUNBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQSxXQUFXOztBQUNYO0VBQ0UsWUFBWTtFQUNaLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztBQUNiOztBQUVBO0VBQ0UsWUFBWTtBQUNkOztBQUNBO0VBQ0Usc0JBQXNCOztFQUV0QixlQUFlO0VBQ2Ysa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsV0FBVzs7QUFFYjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQ2xCOztBQUNBO0lBQ0ksa0JBQWtCO0FBQ3RCOztBQUdBLGVBQWU7O0FBRWYsMkNBQTJDOztBQUMzQztFQUNFLHlCQUF5QjtFQUN6QixZQUFZO0FBQ2QiLCJmaWxlIjoic3JjL2FwcC9hcHAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJvZHkge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjYzdlNGYwO1xufVxuXG4vKiBBcHBDb21wb25lbnQncyBwcml2YXRlIENTUyBzdHlsZXMgKi9cbmgxIHtcbiAgZm9udC1zaXplOiAxLjJlbTtcbiAgbWFyZ2luLWJvdHRvbTogMDtcbn1cbmgyIHtcbiAgZm9udC1zaXplOiAyZW07XG4gIG1hcmdpbi10b3A6IDA7XG4gIHBhZGRpbmctdG9wOiAwO1xufVxubmF2IGEge1xuICBwYWRkaW5nOiA1cHggMTBweDtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlZWU7XG4gIGJvcmRlci1yYWRpdXM6IDRweDtcbn1cbm5hdiBhOnZpc2l0ZWQsIGE6bGluayB7XG4gIGNvbG9yOiAjMzM0OTUzO1xufVxubmF2IGE6aG92ZXIge1xuICBjb2xvcjogIzAzOWJlNTtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2NmZDhkYztcbn1cbm5hdiBhLmFjdGl2ZSB7XG4gIGNvbG9yOiAjMDM5YmU1O1xufVxuXG4vKiBOYXYgYmFyKi9cbi5uYXZiYXIge1xuICBoZWlnaHQ6IDU4cHg7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzMzM7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgd2lkdGg6IDEwMCU7XG59XG5cbi50b3BuYXYtcmlnaHQge1xuICBmbG9hdDogcmlnaHQ7XG59XG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuXG4gIGZvbnQtc2l6ZTogMTdweDtcbiAgdGV4dC1hbGlnbjogY2VudGVyO1xuICBjb2xvcjogI2YyZjJmMjtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICBmbG9hdDogbGVmdDtcblxufVxuXG4uYm90YW86aG92ZXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZGRkO1xuICBjb2xvcjogYmxhY2s7XG59XG5cbi5pbWFnZSB7XG4gIG1hcmdpbi10b3A6IDFweDtcbiAgbWFyZ2luLWxlZnQ6IDFweDtcbn1cbi5ib3RhbyB7XG4gICAgcGFkZGluZzogMTZweCAxNnB4O1xufVxuXG5cbi8qZmltIG5hdiBiYXIgKi9cblxuLyogQWRkIGEgY29sb3IgdG8gdGhlIGFjdGl2ZS9jdXJyZW50IGxpbmsgKi9cbi50b3BuYXYgYS5hY3RpdmUge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjNENBRjUwO1xuICBjb2xvcjogd2hpdGU7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -147,6 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 
 
+
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'cliente';
@@ -157,6 +181,7 @@ var AppComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
@@ -189,6 +214,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filme_filme_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./filme/filme.component */ "./src/app/filme/filme.component.ts");
 /* harmony import */ var _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./perfil-usuario/perfil-usuario.component */ "./src/app/perfil-usuario/perfil-usuario.component.ts");
 /* harmony import */ var _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./forms-cadastro-usuario/forms-cadastro-usuario.component */ "./src/app/forms-cadastro-usuario/forms-cadastro-usuario.component.ts");
+/* harmony import */ var _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./barra-de-busca/barra-de-busca.component */ "./src/app/barra-de-busca/barra-de-busca.component.ts");
+/* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
+
+
 
 
 
@@ -210,7 +239,9 @@ var AppModule = /** @class */ (function () {
                 _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_7__["AutenticacaoComponent"],
                 _filme_filme_component__WEBPACK_IMPORTED_MODULE_8__["FilmeComponent"],
                 _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_9__["PerfilUsuarioComponent"],
-                _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__["FormsCadastroUsuarioComponent"]
+                _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__["FormsCadastroUsuarioComponent"],
+                _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["BarraDeBuscaComponent"],
+                _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__["ResultadoDeBuscaComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -274,6 +305,52 @@ var AutenticacaoComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/barra-de-busca/barra-de-busca.component.css":
+/*!*************************************************************!*\
+  !*** ./src/app/barra-de-busca/barra-de-busca.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "#barra {\n  height: 30px;\n  margin: 2px;\n}\n\nbutton #barra{\n  background-color: green;\n}\n\n#input-busca {\n  width: 300px;\n  height: 30px;\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYmFycmEtZGUtYnVzY2EvYmFycmEtZGUtYnVzY2EuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7RUFDWixXQUFXO0FBQ2I7O0FBRUE7RUFDRSx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osWUFBWTs7QUFFZCIsImZpbGUiOiJzcmMvYXBwL2JhcnJhLWRlLWJ1c2NhL2JhcnJhLWRlLWJ1c2NhLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIjYmFycmEge1xuICBoZWlnaHQ6IDMwcHg7XG4gIG1hcmdpbjogMnB4O1xufVxuXG5idXR0b24gI2JhcnJhe1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjtcbn1cblxuI2lucHV0LWJ1c2NhIHtcbiAgd2lkdGg6IDMwMHB4O1xuICBoZWlnaHQ6IDMwcHg7XG5cbn1cbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/barra-de-busca/barra-de-busca.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/barra-de-busca/barra-de-busca.component.ts ***!
+  \************************************************************/
+/*! exports provided: BarraDeBuscaComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BarraDeBuscaComponent", function() { return BarraDeBuscaComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var BarraDeBuscaComponent = /** @class */ (function () {
+    function BarraDeBuscaComponent() {
+        this.filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
+    }
+    BarraDeBuscaComponent.prototype.ngOnInit = function () {
+    };
+    BarraDeBuscaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-barra-de-busca',
+            template: __webpack_require__(/*! raw-loader!./barra-de-busca.component.html */ "./node_modules/raw-loader/index.js!./src/app/barra-de-busca/barra-de-busca.component.html"),
+            styles: [__webpack_require__(/*! ./barra-de-busca.component.css */ "./src/app/barra-de-busca/barra-de-busca.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], BarraDeBuscaComponent);
+    return BarraDeBuscaComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/filme.service.ts":
 /*!**********************************!*\
   !*** ./src/app/filme.service.ts ***!
@@ -319,7 +396,7 @@ var FilmeService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#busca {\n  width: 300px;\n  height: 30px;\n\n}\n\n.container {\n  padding: 20px;\n  width: 700px;\n}\n\nul {\n\n  align-self: center;\n  list-style-type: none;\n  padding: 20px;\n  background-color: gray;\n}\n\nli {\n  background-color: #BAE7F7;\n}\n\nli:hover{\n  background-color: #8ce1ff;\n}\n\n#inline-forms {\n   display: flex;\n   justify-content: space-around;\n   align-items: center;\n\n}\n\n#barra {\n  height: 30px;\n  margin: 2px;\n}\n\nbutton #barra{\n  background-color: green;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7RUFDWixZQUFZOztBQUVkOztBQUVBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7QUFDZDs7QUFDQTs7RUFFRSxrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGFBQWE7RUFDYixzQkFBc0I7QUFDeEI7O0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0I7O0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0I7O0FBQ0E7R0FDRyxhQUFhO0dBQ2IsNkJBQTZCO0dBQzdCLG1CQUFtQjs7QUFFdEI7O0FBRUE7RUFDRSxZQUFZO0VBQ1osV0FBVztBQUNiOztBQUVBO0VBQ0UsdUJBQXVCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiNidXNjYSB7XG4gIHdpZHRoOiAzMDBweDtcbiAgaGVpZ2h0OiAzMHB4O1xuXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogNzAwcHg7XG59XG51bCB7XG5cbiAgYWxpZ24tc2VsZjogY2VudGVyO1xuICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IGdyYXk7XG59XG5saSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNCQUU3Rjc7XG59XG5saTpob3ZlcntcbiAgYmFja2dyb3VuZC1jb2xvcjogIzhjZTFmZjtcbn1cbiNpbmxpbmUtZm9ybXMge1xuICAgZGlzcGxheTogZmxleDtcbiAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYXJvdW5kO1xuICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcblxufVxuXG4jYmFycmEge1xuICBoZWlnaHQ6IDMwcHg7XG4gIG1hcmdpbjogMnB4O1xufVxuXG5idXR0b24gI2JhcnJhe1xuICBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjtcbn1cbiJdfQ== */"
+module.exports = "\n\n.container {\n  padding: 20px;\n  width: 700px;\n}\nul {\n\n  align-self: center;\n  list-style-type: none;\n  padding: 20px;\n  background-color: gray;\n}\nli {\n  background-color: #BAE7F7;\n}\nli:hover{\n  background-color: #8ce1ff;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBO0VBQ0UsYUFBYTtFQUNiLFlBQVk7QUFDZDtBQUNBOztFQUVFLGtCQUFrQjtFQUNsQixxQkFBcUI7RUFDckIsYUFBYTtFQUNiLHNCQUFzQjtBQUN4QjtBQUNBO0VBQ0UseUJBQXlCO0FBQzNCO0FBQ0E7RUFDRSx5QkFBeUI7QUFDM0IiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogNzAwcHg7XG59XG51bCB7XG5cbiAgYWxpZ24tc2VsZjogY2VudGVyO1xuICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIGJhY2tncm91bmQtY29sb3I6IGdyYXk7XG59XG5saSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNCQUU3Rjc7XG59XG5saTpob3ZlcntcbiAgYmFja2dyb3VuZC1jb2xvcjogIzhjZTFmZjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -351,7 +428,6 @@ var FilmeComponent = /** @class */ (function () {
             //imagens: [""]
         };
         this.filmesEncontrados = [this.filme, this.filme, this.filme];
-        this.filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
     }
     FilmeComponent.prototype.ngOnInit = function () {
     };
@@ -474,6 +550,51 @@ var PerfilUsuarioComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], PerfilUsuarioComponent);
     return PerfilUsuarioComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/resultado-de-busca/resultado-de-busca.component.css":
+/*!*********************************************************************!*\
+  !*** ./src/app/resultado-de-busca/resultado-de-busca.component.css ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Jlc3VsdGFkby1kZS1idXNjYS9yZXN1bHRhZG8tZGUtYnVzY2EuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/resultado-de-busca/resultado-de-busca.component.ts":
+/*!********************************************************************!*\
+  !*** ./src/app/resultado-de-busca/resultado-de-busca.component.ts ***!
+  \********************************************************************/
+/*! exports provided: ResultadoDeBuscaComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ResultadoDeBuscaComponent", function() { return ResultadoDeBuscaComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var ResultadoDeBuscaComponent = /** @class */ (function () {
+    function ResultadoDeBuscaComponent() {
+    }
+    ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
+    };
+    ResultadoDeBuscaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-resultado-de-busca',
+            template: __webpack_require__(/*! raw-loader!./resultado-de-busca.component.html */ "./node_modules/raw-loader/index.js!./src/app/resultado-de-busca/resultado-de-busca.component.html"),
+            styles: [__webpack_require__(/*! ./resultado-de-busca.component.css */ "./src/app/resultado-de-busca/resultado-de-busca.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], ResultadoDeBuscaComponent);
+    return ResultadoDeBuscaComponent;
 }());
 
 

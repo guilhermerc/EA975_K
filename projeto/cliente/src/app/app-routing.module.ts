@@ -10,7 +10,8 @@ const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' }, default
   { path: 'perfil/:id', component: PerfilUsuarioComponent},
   { path: 'filme/:id', component: FilmeComponent},
-  { path: 'autenticacao', component: AutenticacaoComponent}
+  { path: 'autenticacao', component: AutenticacaoComponent},
+  { path: 'home', component: PerfilUsuarioComponent}
 ];
 
 @NgModule({

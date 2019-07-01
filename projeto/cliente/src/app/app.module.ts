@@ -9,6 +9,8 @@ import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 import { FilmeComponent } from './filme/filme.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
 import { FormsCadastroUsuarioComponent } from './forms-cadastro-usuario/forms-cadastro-usuario.component';
+import { BarraDeBuscaComponent } from './barra-de-busca/barra-de-busca.component';
+import { ResultadoDeBuscaComponent } from './resultado-de-busca/resultado-de-busca.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { FormsCadastroUsuarioComponent } from './forms-cadastro-usuario/forms-ca
     AutenticacaoComponent,
     FilmeComponent,
     PerfilUsuarioComponent,
-    FormsCadastroUsuarioComponent
+    FormsCadastroUsuarioComponent,
+    BarraDeBuscaComponent,
+    ResultadoDeBuscaComponent
   ],
   imports: [
     BrowserModule,

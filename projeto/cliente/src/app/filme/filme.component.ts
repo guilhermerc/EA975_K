@@ -19,7 +19,7 @@ export class FilmeComponent implements OnInit {
     //imagens: [""]
   };
   filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
-  filtros = ["Título", "Diretor", "Elenco", "Ano", "Todos"];
+
 
   constructor(private filmeService: FilmeService) { }
 

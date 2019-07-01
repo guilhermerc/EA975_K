@@ -1,0 +1,7 @@
+<div class = "row">
+  <input #pesquisa placeholder="Procurar por um filme, elenco, direção..." id ="input-busca" />
+  <select id= "barra">
+    <option *ngFor="let filtro of filtros" [value]="filtro">{{filtro}}</option>
+  </select>
+  <button (click)="buscaSimples(pesquisa.value)" id= "barra">Buscar</button>
+</div>

@@ -1,0 +1,14 @@
+#barra {
+  height: 30px;
+  margin: 2px;
+}
+
+button #barra{
+  background-color: green;
+}
+
+#input-busca {
+  width: 300px;
+  height: 30px;
+
+}
