@@ -13,7 +13,9 @@ import { FilmeService } from '../filme.service';
 export class ResultadoDeBuscaComponent implements OnInit {
 
 
-  filme: Filme = { titulo: "Toy Story 4", ano: 2019,diretor: "Guilherme",elenco: "", id: "toystory"};
+  filme: Filme = { titulo: "Toy Story 4", ano: 2019,diretor: "Guilherme",elenco: "", id: "toystory",
+                   "comentarios": [{usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"}],
+                    imagens: [""], sinopse: ""};//,{usurname: "marcelo", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "Gabriel", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "maiara", data: "12/12/2012", texto: "adorei, achei uma porcaria"}]};
 
   filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
 
@@ -42,6 +44,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
+      // TODO: Sem servidor
       this.getFilmes(this.route.snapshot.queryParams);
 
     });

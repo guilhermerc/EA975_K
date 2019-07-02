@@ -13,5 +13,8 @@ cliente-build:
 cliente-serve:
 	(cd cliente/; ng serve -o)
 
+cliente-update:
+	(cd cliente/; npm install;ng update;npm update)	
+
 clean-dist:
 	(cd servidor/; $(RM) -rf dist/)

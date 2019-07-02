@@ -1,4 +1,43 @@
-<div class="" *ngIf="filme">
-{{filme.titulo}}
+<div class="container" *ngIf="filme">
+
+  <div class="titulo">
+    {{filme.titulo}} ({{filme.ano}})
+    <div style="float:right; margin-top:-10px">
+      <img class="estrelas" src="assets/estrelas/voto_1.jpeg">
+    </div>
+  </div>
+
+  <div class="container-imagens">
+    <div class="linha">
+        <div class="coluna">
+            <img src="{{filme.imagens[0]}}">
+        </div>
+        <div class="coluna">
+          <iframe class="video" src="https://www.youtube.com/embed/g6ng8iy-l0U" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+  </div>
+<div class="">
+  Direção: {{filme.diretor}}
+  <br>
+  Elenco: {{filme.elenco}}
+  <br><br>
 </div>
 
+
+
+SINOPSE
+<br>
+{{filme.sinopse}}
+<br>
+Críticas
+
+<ul>
+  <li *ngFor= "let comentario of filme.comentarios">
+    {{comentario | json}}
+  </li>
+</ul>
+</div>
+
+{{filme | json}}
