@@ -42,7 +42,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      //this.getFilmes(this.route.snapshot.queryParams);
+      this.getFilmes(this.route.snapshot.queryParams);
 
     });
 

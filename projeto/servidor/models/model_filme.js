@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var schemaFilme = new Schema(
 {
+	"id": String,
 	"titulo": String,
 	"ano": Number,
 	"diretor": String,
