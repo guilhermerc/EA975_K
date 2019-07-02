@@ -1,18 +1,28 @@
 
 .container {
   padding: 20px;
-  width: 700px;
+  width: 600px;
+  background: white;
 }
+.mensagem .container {
+  .background-color: white;
+  font-size: 10;
+}
+
+
 ul {
 
   align-self: center;
   list-style-type: none;
   padding: 20px;
-  background-color: gray;
 }
 li {
-  background-color: #BAE7F7;
+  border-style: solid;
+  border-color: black;
+  padding: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
-li:hover{
-  background-color: #8ce1ff;
+h2 {
+  text-align: center;
 }

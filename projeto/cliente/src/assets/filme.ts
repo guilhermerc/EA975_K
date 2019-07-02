@@ -1,4 +1,5 @@
 export class Filme {
+	id: String;
 	titulo: String;
   ano: Number;
 	diretor: String;

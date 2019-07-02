@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Observable, of } from 'rxjs';
 import { Filme } from '../../assets/filme';
 import { FilmeService } from '../filme.service';
 
@@ -12,7 +13,7 @@ import { FilmeService } from '../filme.service';
 export class ResultadoDeBuscaComponent implements OnInit {
 
 
-  filme: Filme = { titulo: "Toy Story 4", ano: 2019,diretor: "",elenco: ""};
+  filme: Filme = { titulo: "Toy Story 4", ano: 2019,diretor: "Guilherme",elenco: "", id: "toystory"};
 
   filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
 
@@ -23,24 +24,28 @@ export class ResultadoDeBuscaComponent implements OnInit {
               }
 
   getFilmes(params: {[key: string]: any;}){
-    console.log('estou no getfilmes');
+
     var conteudo = params.conteudo;
     var filtro = params.filtro;
-
     var router = filtro + '/' + conteudo;
-    console.log('router' + router);
+
+    console.log('agora vai router[' + router + ']');
 
     this.filmeService.getFilme(router).subscribe(filmes => {
+      //window.location.reload();
       this.filmesEncontrados = filmes;
-      console.log(filmes);
+      console.log('Filmes retornados' + filmes+']');
+
     });
 
   }
 
   ngOnInit() {
-    //this.route.snapshot.queryParams.subscribe(params => {this.getFilmes(params);});
-    var params = this.route.snapshot.queryParams;
-    this.getFilmes(params);
+    this.route.queryParams.subscribe(params => {
+      //this.getFilmes(this.route.snapshot.queryParams);
+
+    });
+
   }
 
 }
