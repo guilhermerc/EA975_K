@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <div class="container-imagens">
+  <div class="container-media">
     <div class="linha">
         <div class="coluna">
             <img src="{{filme.imagens[0]}}">
@@ -18,26 +18,37 @@
         </div>
     </div>
   </div>
-<div class="">
-  Direção: {{filme.diretor}}
-  <br>
-  Elenco: {{filme.elenco}}
-  <br><br>
+
+  <div class="info-filme">
+    Direção: {{filme.diretor}}
+    <br>
+    Elenco: {{filme.elenco}}
+    <br><br>
+  </div>
+
+  <div class="sinopse">
+    SINOPSE
+    <br>{{filme.sinopse}}
+  </div>
+
+
+  <div class="container-comentarios">
+      Críticas de Usuários
+      <ul>
+        <li *ngFor= "let comentario of filme.comentarios">
+          <div class="comentario">
+              <button type="button" name="button" class="comentario-botao">Editar</button>
+              <span style="color:red">{{comentario.username}}</span>
+              , no dia {{comentario.data}}, escreveu:
+
+            <br>"{{comentario.texto}}"
+          </div>
+
+
+        </li>
+      </ul>
+  </div>
+
 </div>
 
-
-
-SINOPSE
-<br>
-{{filme.sinopse}}
-<br>
-Críticas
-
-<ul>
-  <li *ngFor= "let comentario of filme.comentarios">
-    {{comentario | json}}
-  </li>
-</ul>
-</div>
-
-{{filme | json}}
+<br><br><br><br><br><br><br><br><br>

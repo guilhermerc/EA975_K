@@ -33,7 +33,7 @@ img {
 
 
 
-.container-imagens {
+.container-media {
   width: 800px;
   height: 310px;
 }
@@ -45,4 +45,20 @@ img {
 .estrelas {
   width: 191;
   height: 64px;
+}
+
+ul {
+  list-style: none;
+}
+.comentario {
+  background-color: #e1e4e8;
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+  margin-top: 5px;
+}
+.comentario-botao {
+  float: right;
+  padding: 5px;
 }

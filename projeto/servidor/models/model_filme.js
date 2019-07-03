@@ -9,7 +9,7 @@ var schemaFilme = new Schema(
 	"ano": Number,
 	"diretor": String,
 	"elenco": String,
-   "comentarios": [{"usurname": String, "data": String, "texto": String}],
+   "comentarios": [{"username": String, "data": String, "texto": String}],
 	"imagens": [String]
 });
 

@@ -63,7 +63,7 @@ module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procur
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\">\n    </div>\n  </div>\n\n  <div class=\"container-imagens\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"{{filme.imagens[0]}}\">\n        </div>\n        <div class=\"coluna\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n<div class=\"\">\n  Direção: {{filme.diretor}}\n  <br>\n  Elenco: {{filme.elenco}}\n  <br><br>\n</div>\n\n\n\nSINOPSE\n<br>\n{{filme.sinopse}}\n<br>\nCríticas\n\n<ul>\n  <li *ngFor= \"let comentario of filme.comentarios\">\n    {{comentario | json}}\n  </li>\n</ul>\n</div>\n\n{{filme | json}}\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\">\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"{{filme.imagens[0]}}\">\n        </div>\n        <div class=\"coluna\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n    Direção: {{filme.diretor}}\n    <br>\n    Elenco: {{filme.elenco}}\n    <br><br>\n  </div>\n\n  <div class=\"sinopse\">\n    SINOPSE\n    <br>{{filme.sinopse}}\n  </div>\n\n\n  <div class=\"container-comentarios\">\n      Críticas de Usuários\n      <ul>\n        <li *ngFor= \"let comentario of filme.comentarios\">\n          <div class=\"comentario\">\n              <button type=\"button\" name=\"button\" class=\"comentario-botao\">Editar</button>\n              <span style=\"color:red\">{{comentario.username}}</span>\n              , no dia {{comentario.data}}, escreveu:\n\n            <br>\"{{comentario.texto}}\"\n          </div>\n\n\n        </li>\n      </ul>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -436,7 +436,7 @@ var FilmeService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding: 20px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.container-imagens {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBSUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZCIsImZpbGUiOiJzcmMvYXBwL2ZpbG1lL2ZpbG1lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIudGl0dWxvIHtcbiAgLypiYWNrZ3JvdW5kLWNvbG9yOiBncmF5OyovXG4gIHdpZHRoOiAxMDAlO1xuICBmb250LXNpemU6IDM2cHg7XG4gIC8qdGV4dC1hbGlnbjogbGVmdDtcblxuICBkaXNwbGF5OiBpbmxpbmU7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1hcmdpbi1yaWdodDogMHB4O1xuKi9cbn1cblxuLmNvbnRhaW5lciB7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIHdpZHRoOiA5MDBweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbmltZyB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1heC1oZWlnaHQ6MzAwcHg7XG4gIG1heC13aWR0aDoxMDAlO1xuICB3aWR0aDogYXV0bztcbiAgaGVpZ2h0OiAzMDBweDtcbn1cblxuLnZpZGVvIHtcbiAgbWluLXdpZHRoOiA1MDBweDtcbiAgbWF4LWhlaWdodDogMzAwcHg7XG4gIGhlaWdodDogMzAwcHg7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG5cblxuXG4uY29udGFpbmVyLWltYWdlbnMge1xuICB3aWR0aDogODAwcHg7XG4gIGhlaWdodDogMzEwcHg7XG59XG5cbi5jb2x1bmEge1xuICBmbG9hdDogbGVmdDtcbn1cblxuLmVzdHJlbGFzIHtcbiAgd2lkdGg6IDE5MTtcbiAgaGVpZ2h0OiA2NHB4O1xufVxuIl19 */"
+module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding: 20px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n}\n\n.comentario {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 80px;\n  margin-top: 5px;\n}\n\n.comentario-botao {\n  float: right;\n  padding: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBSUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFDQTtFQUNFLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CLG9CQUFvQjtFQUNwQixrQkFBa0I7RUFDbEIsZUFBZTtBQUNqQjs7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0FBQ2QiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsbyB7XG4gIC8qYmFja2dyb3VuZC1jb2xvcjogZ3JheTsqL1xuICB3aWR0aDogMTAwJTtcbiAgZm9udC1zaXplOiAzNnB4O1xuICAvKnRleHQtYWxpZ246IGxlZnQ7XG5cbiAgZGlzcGxheTogaW5saW5lO1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDBweDtcbiovXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogOTAwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG5pbWcge1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXgtaGVpZ2h0OjMwMHB4O1xuICBtYXgtd2lkdGg6MTAwJTtcbiAgd2lkdGg6IGF1dG87XG4gIGhlaWdodDogMzAwcHg7XG59XG5cbi52aWRlbyB7XG4gIG1pbi13aWR0aDogNTAwcHg7XG4gIG1heC1oZWlnaHQ6IDMwMHB4O1xuICBoZWlnaHQ6IDMwMHB4O1xuICBwYWRkaW5nOiAxMHB4O1xufVxuXG5cblxuLmNvbnRhaW5lci1tZWRpYSB7XG4gIHdpZHRoOiA4MDBweDtcbiAgaGVpZ2h0OiAzMTBweDtcbn1cblxuLmNvbHVuYSB7XG4gIGZsb2F0OiBsZWZ0O1xufVxuXG4uZXN0cmVsYXMge1xuICB3aWR0aDogMTkxO1xuICBoZWlnaHQ6IDY0cHg7XG59XG5cbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbn1cbi5jb21lbnRhcmlvIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2UxZTRlODtcbiAgcGFkZGluZy10b3A6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDMwcHg7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xuICBwYWRkaW5nLWxlZnQ6IDgwcHg7XG4gIG1hcmdpbi10b3A6IDVweDtcbn1cbi5jb21lbnRhcmlvLWJvdGFvIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiA1cHg7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -466,21 +466,22 @@ var FilmeComponent = /** @class */ (function () {
         this.route = route;
         this.filmeService = filmeService;
         this.location = location;
-        this.filme = { id: "vingadoresultimato1234",
+        this.filme = {
+            id: "vingadoresultimato1234",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretor: " Anthony Russo, Joe Russo",
             elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-            comentarios: [{ usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" }],
+            comentarios: [{ username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" },
+                { username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria" }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
     }
     FilmeComponent.prototype.ngOnInit = function () {
-        var _this = this;
         var idFile = this.route.snapshot.params.id;
         // TODO: Sem servidor
-        this.filmeService.getFilme('id/' + idFile).subscribe(function (filmes) { _this.filme = filmes[0]; });
+        //this.filmeService.getFilme('id/' + idFile).subscribe(filmes => {this.filme = filmes[0];});
     };
     FilmeComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
@@ -708,9 +709,17 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
         this.route = route;
         this.filmeService = filmeService;
         this.location = location;
-        this.filme = { titulo: "Toy Story 4", ano: 2019, diretor: "Guilherme", elenco: "", id: "toystory",
-            "comentarios": [{ usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" }],
-            imagens: [""], sinopse: "" }; //,{usurname: "marcelo", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "Gabriel", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "maiara", data: "12/12/2012", texto: "adorei, achei uma porcaria"}]};
+        this.filme = {
+            id: "vingadoresultimato1234",
+            titulo: "Vingadores: Ultimato",
+            ano: 2019,
+            diretor: " Anthony Russo, Joe Russo",
+            elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+            comentarios: [{ username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" },
+                { username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria" }],
+            imagens: ["/assets/images/vingadores_0.jpg"],
+            sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
+        };
         this.filmesEncontrados = [this.filme, this.filme, this.filme];
         console.log('oi');
     }
@@ -727,10 +736,9 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
         });
     };
     ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.route.queryParams.subscribe(function (params) {
             // TODO: Sem servidor
-            _this.getFilmes(_this.route.snapshot.queryParams);
+            //this.getFilmes(this.route.snapshot.queryParams);
         });
     };
     ResultadoDeBuscaComponent.ctorParameters = function () { return [

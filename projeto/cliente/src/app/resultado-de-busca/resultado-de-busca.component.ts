@@ -12,10 +12,17 @@ import { FilmeService } from '../filme.service';
 })
 export class ResultadoDeBuscaComponent implements OnInit {
 
-
-  filme: Filme = { titulo: "Toy Story 4", ano: 2019,diretor: "Guilherme",elenco: "", id: "toystory",
-                   "comentarios": [{usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"}],
-                    imagens: [""], sinopse: ""};//,{usurname: "marcelo", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "Gabriel", data: "12/12/2012", texto: "adorei, achei uma porcaria"},{usurname: "maiara", data: "12/12/2012", texto: "adorei, achei uma porcaria"}]};
+  filme: Filme = {
+    id: "vingadoresultimato1234",
+    titulo: "Vingadores: Ultimato",
+    ano: 2019,
+    diretor: " Anthony Russo, Joe Russo",
+    elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+    comentarios: [{username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"},
+                  {username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria"}],
+    imagens: ["/assets/images/vingadores_0.jpg"],
+    sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
+  };
 
   filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
 
@@ -45,7 +52,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       // TODO: Sem servidor
-      this.getFilmes(this.route.snapshot.queryParams);
+      //this.getFilmes(this.route.snapshot.queryParams);
 
     });
 
