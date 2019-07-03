@@ -56,6 +56,17 @@ module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procur
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/critica/critica.component.html":
+/*!**************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/critica/critica.component.html ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>critica works!</p>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/filme/filme.component.html":
 /*!**********************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/filme/filme.component.html ***!
@@ -63,7 +74,7 @@ module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procur
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\">\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"{{filme.imagens[0]}}\">\n        </div>\n        <div class=\"coluna\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n    Direção: {{filme.diretor}}\n    <br>\n    Elenco: {{filme.elenco}}\n    <br><br>\n  </div>\n\n  <div class=\"sinopse\">\n    SINOPSE\n    <br>{{filme.sinopse}}\n  </div>\n\n\n  <div class=\"container-comentarios\">\n      Críticas de Usuários\n      <ul>\n        <li *ngFor= \"let comentario of filme.comentarios\">\n          <div class=\"comentario\">\n              <button type=\"button\" name=\"button\" class=\"comentario-botao\">Editar</button>\n              <span style=\"color:red\">{{comentario.username}}</span>\n              , no dia {{comentario.data}}, escreveu:\n\n            <br>\"{{comentario.texto}}\"\n          </div>\n\n\n        </li>\n      </ul>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\">\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"{{filme.imagens[0]}}\">\n        </div>\n        <div class=\"coluna\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n    Direção: {{filme.diretor}}\n    <br>\n    Elenco: {{filme.elenco}}\n    <br><br>\n  </div>\n\n  <div class=\"sinopse\">\n    SINOPSE\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n\n              <button type=\"button\" name=\"button\" class=\"critica-botao\">Editar</button>\n              <span style=\"color:red\">{{critica.username}}</span>\n              , no dia {{critica.data}}, escreveu:\n\n            <br>\"{{critica.comentario}}\"\n\n\n\n        </li>\n      </ul>\n      <div *ngIf=\"!filmeAvaliado\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -231,6 +242,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./barra-de-busca/barra-de-busca.component */ "./src/app/barra-de-busca/barra-de-busca.component.ts");
 /* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
 /* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./critica/critica.component */ "./src/app/critica/critica.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+
+
+
 
 
 
@@ -258,13 +275,19 @@ var AppModule = /** @class */ (function () {
                 _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__["FormsCadastroUsuarioComponent"],
                 _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["BarraDeBuscaComponent"],
                 _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__["ResultadoDeBuscaComponent"],
-                _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__["NavbarComponent"]
+                _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__["NavbarComponent"],
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"]
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_14__["MatDialogModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"]
+            ],
+            entryComponents: [
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -367,6 +390,51 @@ var BarraDeBuscaComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/critica/critica.component.css":
+/*!***********************************************!*\
+  !*** ./src/app/critica/critica.component.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NyaXRpY2EvY3JpdGljYS5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/critica/critica.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/critica/critica.component.ts ***!
+  \**********************************************/
+/*! exports provided: CriticaComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CriticaComponent", function() { return CriticaComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var CriticaComponent = /** @class */ (function () {
+    function CriticaComponent() {
+    }
+    CriticaComponent.prototype.ngOnInit = function () {
+    };
+    CriticaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-critica',
+            template: __webpack_require__(/*! raw-loader!./critica.component.html */ "./node_modules/raw-loader/index.js!./src/app/critica/critica.component.html"),
+            styles: [__webpack_require__(/*! ./critica.component.css */ "./src/app/critica/critica.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], CriticaComponent);
+    return CriticaComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/filme.service.ts":
 /*!**********************************!*\
   !*** ./src/app/filme.service.ts ***!
@@ -436,7 +504,7 @@ var FilmeService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding: 20px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n}\n\n.comentario {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 80px;\n  margin-top: 5px;\n}\n\n.comentario-botao {\n  float: right;\n  padding: 5px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBSUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFDQTtFQUNFLHlCQUF5QjtFQUN6QixpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CLG9CQUFvQjtFQUNwQixrQkFBa0I7RUFDbEIsZUFBZTtBQUNqQjs7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0FBQ2QiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsbyB7XG4gIC8qYmFja2dyb3VuZC1jb2xvcjogZ3JheTsqL1xuICB3aWR0aDogMTAwJTtcbiAgZm9udC1zaXplOiAzNnB4O1xuICAvKnRleHQtYWxpZ246IGxlZnQ7XG5cbiAgZGlzcGxheTogaW5saW5lO1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDBweDtcbiovXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogOTAwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG5pbWcge1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXgtaGVpZ2h0OjMwMHB4O1xuICBtYXgtd2lkdGg6MTAwJTtcbiAgd2lkdGg6IGF1dG87XG4gIGhlaWdodDogMzAwcHg7XG59XG5cbi52aWRlbyB7XG4gIG1pbi13aWR0aDogNTAwcHg7XG4gIG1heC1oZWlnaHQ6IDMwMHB4O1xuICBoZWlnaHQ6IDMwMHB4O1xuICBwYWRkaW5nOiAxMHB4O1xufVxuXG5cblxuLmNvbnRhaW5lci1tZWRpYSB7XG4gIHdpZHRoOiA4MDBweDtcbiAgaGVpZ2h0OiAzMTBweDtcbn1cblxuLmNvbHVuYSB7XG4gIGZsb2F0OiBsZWZ0O1xufVxuXG4uZXN0cmVsYXMge1xuICB3aWR0aDogMTkxO1xuICBoZWlnaHQ6IDY0cHg7XG59XG5cbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbn1cbi5jb21lbnRhcmlvIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2UxZTRlODtcbiAgcGFkZGluZy10b3A6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDMwcHg7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xuICBwYWRkaW5nLWxlZnQ6IDgwcHg7XG4gIG1hcmdpbi10b3A6IDVweDtcbn1cbi5jb21lbnRhcmlvLWJvdGFvIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiA1cHg7XG59XG4iXX0= */"
+module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding: 20px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n  padding-left: 2px;\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-right: 2px;\n}\n\n.critica {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 50px;\n  margin-top: 5px;\n\n\n}\n\n.critica-botao {\n  float: right;\n  padding: 5px;\n}\n\n.container-criticas {\n  margin-top: 10px;\n  margin-bottom: 0px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxhQUFhO0VBQ2IsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBSUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixrQkFBa0I7QUFDcEI7O0FBQ0E7RUFDRSx5QkFBeUI7RUFDekIsaUJBQWlCO0VBQ2pCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsa0JBQWtCO0VBQ2xCLGVBQWU7OztBQUdqQjs7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXR1bG8ge1xuICAvKmJhY2tncm91bmQtY29sb3I6IGdyYXk7Ki9cbiAgd2lkdGg6IDEwMCU7XG4gIGZvbnQtc2l6ZTogMzZweDtcbiAgLyp0ZXh0LWFsaWduOiBsZWZ0O1xuXG4gIGRpc3BsYXk6IGlubGluZTtcbiAgcGFkZGluZzogMTBweDtcbiAgbWFyZ2luLXJpZ2h0OiAwcHg7XG4qL1xufVxuXG4uY29udGFpbmVyIHtcbiAgcGFkZGluZzogMjBweDtcbiAgd2lkdGg6IDkwMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbn1cblxuaW1nIHtcbiAgcGFkZGluZzogMTBweDtcbiAgbWF4LWhlaWdodDozMDBweDtcbiAgbWF4LXdpZHRoOjEwMCU7XG4gIHdpZHRoOiBhdXRvO1xuICBoZWlnaHQ6IDMwMHB4O1xufVxuXG4udmlkZW8ge1xuICBtaW4td2lkdGg6IDUwMHB4O1xuICBtYXgtaGVpZ2h0OiAzMDBweDtcbiAgaGVpZ2h0OiAzMDBweDtcbiAgcGFkZGluZzogMTBweDtcbn1cblxuXG5cbi5jb250YWluZXItbWVkaWEge1xuICB3aWR0aDogODAwcHg7XG4gIGhlaWdodDogMzEwcHg7XG59XG5cbi5jb2x1bmEge1xuICBmbG9hdDogbGVmdDtcbn1cblxuLmVzdHJlbGFzIHtcbiAgd2lkdGg6IDE5MTtcbiAgaGVpZ2h0OiA2NHB4O1xufVxuXG51bCB7XG4gIGxpc3Qtc3R5bGU6IG5vbmU7XG4gIHBhZGRpbmctbGVmdDogMnB4O1xuICBwYWRkaW5nLXRvcDogMnB4O1xuICBwYWRkaW5nLWJvdHRvbTogMnB4O1xuICBwYWRkaW5nLXJpZ2h0OiAycHg7XG59XG4uY3JpdGljYSB7XG4gIGJhY2tncm91bmQtY29sb3I6ICNlMWU0ZTg7XG4gIHBhZGRpbmctdG9wOiA1MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiAzMHB4O1xuICBwYWRkaW5nLWJvdHRvbTogNTBweDtcbiAgcGFkZGluZy1sZWZ0OiA1MHB4O1xuICBtYXJnaW4tdG9wOiA1cHg7XG5cblxufVxuLmNyaXRpY2EtYm90YW8ge1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDVweDtcbn1cblxuLmNvbnRhaW5lci1jcml0aWNhcyB7XG4gIG1hcmdpbi10b3A6IDEwcHg7XG4gIG1hcmdpbi1ib3R0b206IDBweDtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -455,38 +523,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _filme_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../filme.service */ "./src/app/filme.service.ts");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../critica/critica.component */ "./src/app/critica/critica.component.ts");
+
+
 
 
 
 
 
 var FilmeComponent = /** @class */ (function () {
-    // TODO: Remover filme inicial
-    function FilmeComponent(route, filmeService, location) {
+    function FilmeComponent(route, filmeService, location, dialog) {
         this.route = route;
         this.filmeService = filmeService;
         this.location = location;
+        this.dialog = dialog;
         this.filme = {
             id: "vingadoresultimato1234",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretor: " Anthony Russo, Joe Russo",
             elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-            comentarios: [{ username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" },
-                { username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria" }],
+            criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
+                { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
+        this.filmeAvaliado = false;
     }
     FilmeComponent.prototype.ngOnInit = function () {
         var idFile = this.route.snapshot.params.id;
         // TODO: Sem servidor
-        //this.filmeService.getFilme('id/' + idFile).subscribe(filmes => {this.filme = filmes[0];});
+        //this.filmeService.getFilme('id/' + idFile).subscribe(filmes =>
+        //{
+        //this.filme = filmes[0];
+        this.filmeAvaliado = this.filmeFoiAvaliado('guilherme');
+        //});
+    };
+    FilmeComponent.prototype.criticar = function () {
+        var dialogRef = this.dialog.open(_critica_critica_component__WEBPACK_IMPORTED_MODULE_6__["CriticaComponent"], {
+            width: '500px',
+            data: { filme: this.filme }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed');
+            //this.animal = result;
+        });
+    };
+    FilmeComponent.prototype.filmeFoiAvaliado = function (username) {
+        var e_1, _a;
+        var avaliado = false;
+        try {
+            for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this.filme.criticas), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var critica = _c.value;
+                if (critica.username == username) {
+                    avaliado = true;
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        console.log(avaliado);
+        return avaliado;
     };
     FilmeComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
         { type: _filme_service__WEBPACK_IMPORTED_MODULE_4__["FilmeService"] },
-        { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] }
+        { type: _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"] },
+        { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"] }
     ]; };
     FilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -496,7 +605,8 @@ var FilmeComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _filme_service__WEBPACK_IMPORTED_MODULE_4__["FilmeService"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]])
+            _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"],
+            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"]])
     ], FilmeComponent);
     return FilmeComponent;
 }());
@@ -715,8 +825,8 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
             ano: 2019,
             diretor: " Anthony Russo, Joe Russo",
             elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-            comentarios: [{ username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria" },
-                { username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria" }],
+            criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
+                { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };

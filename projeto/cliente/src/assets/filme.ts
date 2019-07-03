@@ -4,7 +4,7 @@ export class Filme {
   ano: Number;
 	diretor: String;
 	elenco: String;
-  comentarios: {username: string, data: string, texto: string}[];
+  criticas: {username: string, data: string, comentario: string, nota: Number}[];
 	imagens: string[];
 	sinopse: string;
 }

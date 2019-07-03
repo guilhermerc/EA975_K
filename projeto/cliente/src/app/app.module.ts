@@ -12,6 +12,10 @@ import { FormsCadastroUsuarioComponent } from './forms-cadastro-usuario/forms-ca
 import { BarraDeBuscaComponent } from './barra-de-busca/barra-de-busca.component';
 import { ResultadoDeBuscaComponent } from './resultado-de-busca/resultado-de-busca.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MatDialogModule } from '@angular/material';
+import { CriticaComponent } from './critica/critica.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -23,13 +27,19 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsCadastroUsuarioComponent,
     BarraDeBuscaComponent,
     ResultadoDeBuscaComponent,
-    NavbarComponent
+    NavbarComponent,
+    CriticaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule
+  ],
+  entryComponents: [
+    CriticaComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

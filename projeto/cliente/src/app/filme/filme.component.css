@@ -49,16 +49,27 @@ img {
 
 ul {
   list-style: none;
+  padding-left: 2px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 2px;
 }
-.comentario {
+.critica {
   background-color: #e1e4e8;
   padding-top: 50px;
   padding-right: 30px;
   padding-bottom: 50px;
-  padding-left: 80px;
+  padding-left: 50px;
   margin-top: 5px;
+
+
 }
-.comentario-botao {
+.critica-botao {
   float: right;
   padding: 5px;
+}
+
+.container-criticas {
+  margin-top: 10px;
+  margin-bottom: 0px;
 }

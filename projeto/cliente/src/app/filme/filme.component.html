@@ -31,22 +31,32 @@
     <br>{{filme.sinopse}}
   </div>
 
+  <hr>
 
-  <div class="container-comentarios">
-      Críticas de Usuários
+
+  <div class="container-criticas">
+    <span style="font-size: 28px; margin-left:20px">Críticas de Usuários</span>
+
+    <br><br>
+
       <ul>
-        <li *ngFor= "let comentario of filme.comentarios">
-          <div class="comentario">
-              <button type="button" name="button" class="comentario-botao">Editar</button>
-              <span style="color:red">{{comentario.username}}</span>
-              , no dia {{comentario.data}}, escreveu:
+        <li *ngFor= "let critica of filme.criticas" class="critica">
 
-            <br>"{{comentario.texto}}"
-          </div>
+              <button type="button" name="button" class="critica-botao">Editar</button>
+              <span style="color:red">{{critica.username}}</span>
+              , no dia {{critica.data}}, escreveu:
+
+            <br>"{{critica.comentario}}"
+
 
 
         </li>
       </ul>
+      <div *ngIf="!filmeAvaliado" class="critica">
+        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!
+        <button with="400px"(click)="criticar()" class="critica-botao">
+        Avaliar esse filme</button>
+      </div>
   </div>
 
 </div>

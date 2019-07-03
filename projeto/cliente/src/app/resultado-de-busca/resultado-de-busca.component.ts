@@ -18,8 +18,8 @@ export class ResultadoDeBuscaComponent implements OnInit {
     ano: 2019,
     diretor: " Anthony Russo, Joe Russo",
     elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
-    comentarios: [{username: "guilherme", data: "12/12/2012", texto: "adorei, achei uma porcaria"},
-                  {username: "marcelo", data: "12/12/2012", texto: "adorei, mas nem tanto uma porcaria"}],
+    criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
+                  {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
     imagens: ["/assets/images/vingadores_0.jpg"],
     sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
   };
