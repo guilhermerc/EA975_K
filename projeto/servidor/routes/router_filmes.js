@@ -17,17 +17,16 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-// TODO: Trocar de 'findOne' para 'find'
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
 	var response = {};
 	var query = {"titulo": req.params.titulo};
 	console.log(query)
-	modelFilme.findOne(query, function (err, filme) {
+	modelFilme.find(query, function (err, filme) {
 		if (err) {
 			console.error(err);
 			response = {resultado: "Erro em GET /filmes/titulo/:titulo"};
-		} else if (filme == null) {
+		} else if (filmes == null || filmes.length === 0) {
 			response = {resultado: "Nenhum filme encontrado."}
 		} else {
 			response = {filme: [filme]};
@@ -36,17 +35,16 @@ router.get('/titulo/:titulo', function(req, res, next) {
 	});
 });
 
-// TODO: Trocar de 'findOne' para 'find'
 router.get('/diretor/:diretor', function(req, res, next) {
 	console.log("GET filmes /diretor/:diretor");
 	var response = {};
 	var query = {"diretor": req.params.diretor};
 	console.log(query);
-	modelFilme.findOne(query, function (err, filme) {
+	modelFilme.find(query, function (err, filme) {
 		if (err) {
 			console.error(err);
 			response = {resultado: "Erro em GET filmes /diretor/:diretor"};
-		} else if (filme == null) {
+		} else if (filmes == null || filmes.length === 0) {
 			response = {resultado: "Nenhum filme encontrado."}
 		} else {
 			response = {filme: [filme]};
@@ -73,17 +71,16 @@ router.get('/elenco/:nome', function(req, res, next) {
 	});
 });
 
-// TODO: Trocar de 'findOne' para 'find'
 router.get('/ano/:ano', function(req, res, next) {
 	console.log("GET filmes /ano/:ano");
 	var response = {};
 	var query = {"ano": req.params.ano};
 	console.log(query);
-	modelFilme.findOne(query, function (err, filme) {
+	modelFilme.find(query, function (err, filme) {
 		if (err) {
 			console.error(err);
 			response = {resultado: "Erro em GET filmes /ano/:ano"};
-		} else if (filme == null) {
+		} else if (filmes == null || filmes.length === 0) {
 			response = {resultado: "Nenhum filme encontrado."}
 		} else {
 			response = {filme: [filme]};
