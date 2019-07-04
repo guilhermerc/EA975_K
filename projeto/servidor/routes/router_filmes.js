@@ -5,13 +5,20 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
 	console.log("GET /filmes");
-	var response = {};
+	var response = {
+	    "houveErro":              	false,
+	    "mensagemErro":           	"",
+	    "totalFilmesEncontrados":	0,
+	    "filmes":                 	[]
+	};
 	modelFilme.find(function (err, filmes) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET /filmes"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else {
-			response = filmes;
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.send(response);
 	});
@@ -19,17 +26,26 @@ router.get('/', function(req, res, next) {
 
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
-	var response = {};
-	var query = {"titulo": req.params.titulo};
+	var response = {
+	    "houveErro":              	false,
+	    "mensagemErro":           	"",
+	    "totalFilmesEncontrados":	0,
+	    "filmes":                 	[]
+	};
+	var query = {
+		"titulo":	req.params.titulo
+	};
 	console.log(query)
-	modelFilme.find(query, function (err, filme) {
+	modelFilme.find(query, function (err, filmes) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET /filmes/titulo/:titulo"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else if (filmes == null || filmes.length === 0) {
-			response = {resultado: "Nenhum filme encontrado."}
+			// 'response' já está pronto para ser enviado
 		} else {
-			response = {filme: [filme]};
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.json(response);
 	});
@@ -37,17 +53,26 @@ router.get('/titulo/:titulo', function(req, res, next) {
 
 router.get('/diretor/:diretor', function(req, res, next) {
 	console.log("GET filmes /diretor/:diretor");
-	var response = {};
-	var query = {"diretor": req.params.diretor};
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		"diretor":	req.params.diretor
+	};
 	console.log(query);
 	modelFilme.find(query, function (err, filme) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET filmes /diretor/:diretor"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else if (filmes == null || filmes.length === 0) {
-			response = {resultado: "Nenhum filme encontrado."}
+			// 'response' já está pronto para ser enviado
 		} else {
-			response = {filme: [filme]};
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.send(response);
 	});
@@ -55,17 +80,26 @@ router.get('/diretor/:diretor', function(req, res, next) {
 
 router.get('/elenco/:nome', function(req, res, next) {
 	console.log("GET filmes/elenco/:nome");
-	var response = {};
-	var query = {'elenco.nome': req.params.nome};
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		'elenco.nome': 	req.params.nome
+	};
 	console.log(query);
 	modelFilme.find(query, function (err, filmes) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET filmes/elenco/:nome"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else if (filmes == null || filmes.length === 0) {
-			response = {resultado: "Nenhum filme encontrado."}
+			// 'response' já está pronto para ser enviado
 		} else {
-			response = {filmes: [filmes]};
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.send(response);
 	});
@@ -73,17 +107,26 @@ router.get('/elenco/:nome', function(req, res, next) {
 
 router.get('/ano/:ano', function(req, res, next) {
 	console.log("GET filmes /ano/:ano");
-	var response = {};
-	var query = {"ano": req.params.ano};
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		"ano":	req.params.ano
+	};
 	console.log(query);
 	modelFilme.find(query, function (err, filme) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET filmes /ano/:ano"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else if (filmes == null || filmes.length === 0) {
-			response = {resultado: "Nenhum filme encontrado."}
+			// 'response' já está pronto para ser enviado
 		} else {
-			response = {filme: [filme]};
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.send(response);
 	});
@@ -91,17 +134,26 @@ router.get('/ano/:ano', function(req, res, next) {
 
 router.get('/id/:id', function(req, res, next) {
 	console.log("GET filmes/id/:id");
-	var response = {};
-	var query = {"id": req.params.id};
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		"id":	req.params.id
+	};
 	console.log(query);
 	modelFilme.findOne(query, function (err, filme) {
 		if (err) {
 			console.error(err);
-			response = {resultado: "Erro em GET filmes/id/:id"};
+			response.houveErro = 	true;
+			response.mensagemErro = err;
 		} else if (filme == null) {
-			response = {resultado: "Nenhum filme encontrado."}
+			// 'response' já está pronto para ser enviado
 		} else {
-			response = {filme: [filme]};
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
 		}
 		res.send(response);
 	});
