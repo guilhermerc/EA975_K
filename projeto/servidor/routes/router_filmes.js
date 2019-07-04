@@ -35,6 +35,42 @@ router.get('/titulo/:titulo', function(req, res, next) {
 	});
 });
 
+router.get('/diretor/:diretor', function(req, res, next) {
+	console.log("GET filmes /diretor/:diretor");
+	var response = {};
+	var query = {"diretor": req.params.diretor};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response = {resultado: "Erro em GET filmes /diretor/:diretor"};
+		} else if (filme == null) {
+			response = {resultado: "Nenhum filme encontrado."}
+		} else {
+			response = {filme: [filme]};
+		}
+		res.send(response);
+	});
+});
+
+router.get('/ano/:ano', function(req, res, next) {
+	console.log("GET filmes /ano/:ano");
+	var response = {};
+	var query = {"ano": req.params.ano};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response = {resultado: "Erro em GET filmes /ano/:ano"};
+		} else if (filme == null) {
+			response = {resultado: "Nenhum filme encontrado."}
+		} else {
+			response = {filme: [filme]};
+		}
+		res.send(response);
+	});
+});
+
 router.get('/id/:id', function(req, res, next) {
 	console.log("GET filmes/id/:id");
 	var response = {};
