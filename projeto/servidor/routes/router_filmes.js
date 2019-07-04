@@ -17,6 +17,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+// TODO: Trocar de 'findOne' para 'find'
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
 	var response = {};
@@ -35,6 +36,7 @@ router.get('/titulo/:titulo', function(req, res, next) {
 	});
 });
 
+// TODO: Trocar de 'findOne' para 'find'
 router.get('/diretor/:diretor', function(req, res, next) {
 	console.log("GET filmes /diretor/:diretor");
 	var response = {};
@@ -53,6 +55,25 @@ router.get('/diretor/:diretor', function(req, res, next) {
 	});
 });
 
+router.get('/elenco/:nome', function(req, res, next) {
+	console.log("GET filmes/elenco/:nome");
+	var response = {};
+	var query = {'elenco.nome': req.params.nome};
+	console.log(query);
+	modelFilme.find(query, function (err, filmes) {
+		if (err) {
+			console.error(err);
+			response = {resultado: "Erro em GET filmes/elenco/:nome"};
+		} else if (filmes == null || filmes.length === 0) {
+			response = {resultado: "Nenhum filme encontrado."}
+		} else {
+			response = {filmes: [filmes]};
+		}
+		res.send(response);
+	});
+});
+
+// TODO: Trocar de 'findOne' para 'find'
 router.get('/ano/:ano', function(req, res, next) {
 	console.log("GET filmes /ano/:ano");
 	var response = {};
