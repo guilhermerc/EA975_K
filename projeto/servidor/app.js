@@ -4,6 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/UMDB', {useNewUrlParser: true});
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("Conexão com a UMDB feita com sucesso!");
+});
+
 var indexRouter = require('./routes/index');
 var routerUsuarios = require('./routes/router_usuarios');
 var routerFilmes = require('./routes/router_filmes');
@@ -43,5 +53,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var mock = require('./public/javascripts/mock_db');
-//mock.create();
+var sample_db = require('./public/javascripts/sample_db');
+//sample_db.create();
