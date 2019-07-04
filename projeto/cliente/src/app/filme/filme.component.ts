@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Filme } from '../../assets/filme';
+import { Filme } from '../filme';
 import { FilmeService } from '../filme.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CriticaComponent } from '../critica/critica.component';
+import { Usuario } from '../usuario';
+import { UsuarioService } from '../usuario.service';
 
 
 export interface DialogData {
@@ -12,11 +14,21 @@ export interface DialogData {
   name: string;
 }
 
+export interface Critica {
+    username: string;
+    data: string;
+    comentario: string;
+    nota: Number;
+}
+
 @Component({
   selector: 'app-filme',
   templateUrl: './filme.component.html',
   styleUrls: ['./filme.component.css']
 })
+
+
+
 export class FilmeComponent implements OnInit {
 
   filme: Filme = {
@@ -34,14 +46,23 @@ export class FilmeComponent implements OnInit {
 // TODO: Remover filme inicial
 
 
-criticaDialogRef: MatDialogRef<CriticaComponent>;
+  criticaDialogRef: MatDialogRef<CriticaComponent>;
 
-  filmeAvaliado: boolean = false;
+  criticaDoUsuario: Critica;
 
   constructor(private route: ActivatedRoute,
               private filmeService: FilmeService,
               private location: Location,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private usuarioService: UsuarioService) {
+
+  this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
+
+    console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
+
+    this.ajustaCriticaDoUsuario();
+  });
+  }
 
 
 
@@ -52,9 +73,30 @@ criticaDialogRef: MatDialogRef<CriticaComponent>;
     //this.filmeService.getFilme('id/' + idFile).subscribe(filmes =>
     //{
       //this.filme = filmes[0];
-      this.filmeAvaliado = this.filmeFoiAvaliado('guilherme');
+      console.log('Estou no ngOnInit');
+      this.ajustaCriticaDoUsuario();
     //});
 
+  }
+
+  // Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
+  // E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
+  ajustaCriticaDoUsuario() {
+    console.log('estou em ajustaCriticaDoUsuario()');
+
+    var user = this.usuarioService.getUser();
+    console.log('estou em ajustaCriticaDoUsuario()+ user:' + user);
+
+    if (user != null) {
+          console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
+          this.criticaDoUsuario = this.getCriticaDoUsuario(user.username);
+          console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
+
+          console.log('criticado usuario'+this.criticaDoUsuario);
+    } else {
+      console.log('else do ajustaCriticaDoUsuario()');
+      this.criticaDoUsuario = null;
+    }
   }
 
   criticar(): void {
@@ -69,14 +111,23 @@ criticaDialogRef: MatDialogRef<CriticaComponent>;
     });
   }
 
-  filmeFoiAvaliado(username: String): boolean {
-    var avaliado = false;
+  getCriticaDoUsuario(username: String): Critica {
+    var index = -1;
+    var critica: any;
     for (let critica of this.filme.criticas) {
       if (critica.username == username) {
-        avaliado = true;
+        index = this.filme.criticas.indexOf(critica);
       }
     }
-    console.log(avaliado);
-    return avaliado;
+    if (index != -1) {
+      console.log('criticas antes:' + JSON.stringify(this.filme));
+      critica = this.filme.criticas.splice(index, 1)[0];
+      console.log('criticas depois:' + JSON.stringify(this.filme));
+      console.log('retirado:' + JSON.stringify(critica));
+      return critica;
+    } else {
+
+      return null;
+    }
   }
 }
