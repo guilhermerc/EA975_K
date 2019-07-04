@@ -9,10 +9,6 @@ import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
 export interface Critica {
     username: string;

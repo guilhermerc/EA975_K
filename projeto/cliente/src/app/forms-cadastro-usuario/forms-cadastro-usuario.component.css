@@ -8,3 +8,10 @@
   margin: 5px;
   width: 100%;
 }
+
+.container {
+  padding: 20px;
+  width: 900px;
+  background: white;
+  padding-bottom: 50px;
+}

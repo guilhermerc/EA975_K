@@ -12,8 +12,8 @@ export class FormsCadastroUsuarioComponent implements OnInit {
 
   usuario: Usuario = {
     nome: "",
-  	username: 'banana2',
-  	dataNascimento: new Date(),
+  	username: "",
+  	dataNascimento: null,
   	sexo: "",
   	fotoPerfil: ""
   };
@@ -25,7 +25,8 @@ export class FormsCadastroUsuarioComponent implements OnInit {
 
   registrar():void {
     this.registrado = true;
-    this.usuarioService.registrar(this.usuario);
+    this.usuarioService.registrar(this.usuario,
+      (usuarioLogouComExito: boolean, mensageDeErro: string) => {});
 
   }
   // TODO: Remove this when we're done

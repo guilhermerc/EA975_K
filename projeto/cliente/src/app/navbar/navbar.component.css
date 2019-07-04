@@ -1,18 +1,34 @@
 /* Nav bar*/
 .navbar {
-  height: 58px;
   background-color: #333;
   position: fixed;
   width: 100%;
+  overflow: visible;
 }
 
 .topnav-right {
   float: right;
 }
-.navbar .search-container {
+
+/* Elementos de Pesquisa */
+.search-container {
+  margin-top: 12px;
+  margin-bottom: 12px;
   float: left;
 }
 
+.barra-input {
+  height: 30px;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+.navbar input[type=text] {
+  width: 350px;
+  padding: 6px;
+  font-size: 17px;
+  border: none;
+}
+/* Fim dos elementos de Pesquisa */
 .navbar a {
   vertical-align: middle;
   font-size: 17px;
@@ -32,37 +48,9 @@
   margin-left: 1px;
 }
 .botao {
-
     padding: 16px 16px;
 }
 
 .navbar div {
   display: block;
-}
-
-
-/*fim nav bar */
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-
-
-.barra-input {
-  height: 30px;
-  margin: 2px;
-}
-
-
-
-
-.navbar input[type=text] {
-  width: 350px;
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
 }

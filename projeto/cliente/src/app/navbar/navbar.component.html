@@ -21,11 +21,12 @@
 
     <div class="topnav-right">
       <a class="botao" routerLink="/">Adicionar Filme</a>
-      <div class="" *ngIf="usuarioEstaLogado">
-        <a class="botao" routerLink="/perfil/0"> {{usuario.username}} Perfil</a>
-      </div>
 
-      <a class="botao" routerLink="/autenticacao" id="link-entrar">Entrar</a>
+      <a class="botao" *ngIf="usuarioEstaLogado" routerLink="/perfil/0"> {{usuario.username}} Perfil</a>
+
+
+      <a class="botao" *ngIf="!usuarioEstaLogado" routerLink="/autenticacao" id="link-entrar">Entrar</a>
+      <a class="botao" *ngIf="usuarioEstaLogado" (click)="logout()"  id="link-entrar">Sair</a>
     </div>
 
 </div>

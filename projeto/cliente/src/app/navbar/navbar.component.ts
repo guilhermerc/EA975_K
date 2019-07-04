@@ -35,6 +35,7 @@ export class NavbarComponent implements OnInit {
       }
     });
   }
+  ngOnInit() {}
 
   atualizaUsuario() {
     var usuario = this.usuarioService.getUser();
@@ -48,7 +49,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+
 
 
   buscaSimples(): void {
@@ -64,6 +65,10 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/busca/_' + this.barraDeBusca],
                          { queryParams: {filtro: idFiltro, conteudo: this.barraDeBusca} });
 
+  }
+
+  logout() {
+    this.usuarioService.logout();
   }
 
 }
