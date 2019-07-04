@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmeService } from '../filme.service';
-import { Filme } from '../../assets/filme';
+import { Filme } from '../filme';
 
 @Component({
   selector: 'app-barra-de-busca',
@@ -9,7 +9,7 @@ import { Filme } from '../../assets/filme';
 })
 export class BarraDeBuscaComponent implements OnInit {
 
-  
+
 
   constructor() { }
 

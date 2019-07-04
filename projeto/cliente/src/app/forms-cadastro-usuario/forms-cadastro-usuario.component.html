@@ -14,6 +14,18 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <label for="username">Usernam</label>
+        <input type="text" class="form-control" id="username" required
+        [(ngModel)]="usuario.username" name="username"
+        #username="ngModel">
+        <div [hidden]="username.valid || username.pristine"
+        class="alert alert-danger">
+        username é obrigatório
+        </div>
+      </div>
+
+
       <div id="inline-forms">
         <div class="form-group" id="campo">
           <label for="data">Data de Nascimento</label>
@@ -53,3 +65,4 @@
     <br>
     <button class="btn btn-primary" (click)="registrado=false">Edit</button>
   </div>
+  {{usuario | json}}

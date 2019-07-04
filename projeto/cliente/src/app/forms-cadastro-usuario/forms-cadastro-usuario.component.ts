@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
+import { UsuarioService } from '../usuario.service';
+
 
 @Component({
   selector: 'app-forms-cadastro-usuario',
@@ -8,8 +10,13 @@ import { Usuario } from '../usuario';
 })
 export class FormsCadastroUsuarioComponent implements OnInit {
 
-  usuario = new Usuario('','',new Date(),'');
-
+  usuario: Usuario = {
+    nome: "",
+  	username: 'banana2',
+  	dataNascimento: new Date(),
+  	sexo: "",
+  	fotoPerfil: ""
+  };
 
   registrado = false;
   sexos = ['Masculino', 'Feminino', 'Outro'];
@@ -17,16 +24,15 @@ export class FormsCadastroUsuarioComponent implements OnInit {
 
 
   registrar():void {
-    console.log("registrar");
     this.registrado = true;
+    this.usuarioService.registrar(this.usuario);
+
   }
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.usuario); }
 
-  constructor() { }
+  constructor(private usuarioService: UsuarioService) { }
 
-  ngOnInit() {
-    console.log('Sabe,' + this.usuario.sexo);
-  }
+  ngOnInit() {  }
 
 }

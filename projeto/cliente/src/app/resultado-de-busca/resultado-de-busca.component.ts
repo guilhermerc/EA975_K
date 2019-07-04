@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable, of } from 'rxjs';
-import { Filme } from '../../assets/filme';
+import { Filme } from '../filme';
 import { FilmeService } from '../filme.service';
 
 @Component({

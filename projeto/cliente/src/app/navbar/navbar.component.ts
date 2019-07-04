@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
+import { Usuario } from '../usuario';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +16,39 @@ export class NavbarComponent implements OnInit {
 
   barraDeBusca: String = '';
 
+  usuario: Usuario;
+
+  usuarioEstaLogado = false;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private usuarioService: UsuarioService) {
 
-  ngOnInit() {
+    this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
+
+      this.usuarioEstaLogado = usuarioEstaLogado;
+
+      console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
+
+      if (usuarioEstaLogado) {
+        this.atualizaUsuario();
+      }
+    });
   }
+
+  atualizaUsuario() {
+    var usuario = this.usuarioService.getUser();
+
+    if (usuario === null) {
+      console.log('Em atualizaUsuario() usuario = null');
+    }
+    else {
+      this.usuario = usuario;
+      console.log('novo usuario é: ' + this.usuario.username);
+    }
+  }
+
+  ngOnInit() {}
 
 
   buscaSimples(): void {

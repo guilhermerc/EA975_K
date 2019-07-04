@@ -3,14 +3,14 @@
   <div class="titulo">
     {{filme.titulo}} ({{filme.ano}})
     <div style="float:right; margin-top:-10px">
-      <img class="estrelas" src="assets/estrelas/voto_1.jpeg">
+      <!-- img class="estrelas" src="assets/estrelas/voto_1.jpeg" -->
     </div>
   </div>
 
   <div class="container-media">
     <div class="linha">
         <div class="coluna">
-            <img src="{{filme.imagens[0]}}">
+            <img src="/assets/imagens/vingadores_0.jpg">
         </div>
         <div class="coluna">
           <iframe class="video" src="https://www.youtube.com/embed/g6ng8iy-l0U" frameborder="0"
@@ -41,21 +41,26 @@
 
       <ul>
         <li *ngFor= "let critica of filme.criticas" class="critica">
-
-              <button type="button" name="button" class="critica-botao">Editar</button>
               <span style="color:red">{{critica.username}}</span>
               , no dia {{critica.data}}, escreveu:
-
             <br>"{{critica.comentario}}"
-
-
-
+            <br>Nota: {{critica.nota}}
         </li>
       </ul>
-      <div *ngIf="!filmeAvaliado" class="critica">
+
+      <div *ngIf="!criticaDoUsuario" class="critica">
         Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!
         <button with="400px"(click)="criticar()" class="critica-botao">
         Avaliar esse filme</button>
+      </div>
+
+      <div *ngIf="criticaDoUsuario" class="critica">
+        <span style="color:red">{{criticaDoUsuario.username}}</span>
+        , no dia {{criticaDoUsuario.data}}, escreveu:
+        <br>"{{criticaDoUsuario.comentario}}"
+        <br>"Nota: {{criticaDoUsuario.nota}}"
+        <button with="400px"(click)="criticar()" class="critica-botao">
+        Editar Crítica</button>
       </div>
   </div>
 
