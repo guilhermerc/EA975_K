@@ -51,7 +51,7 @@ router.get('/titulo/:titulo', function(req, res, next) {
 	});
 });
 
-router.get('/diretor/:diretor', function(req, res, next) {
+router.get('/diretores/:diretor', function(req, res, next) {
 	console.log("GET filmes /diretor/:diretor");
 	var response = {
 		"houveErro":              	false,
@@ -60,10 +60,10 @@ router.get('/diretor/:diretor', function(req, res, next) {
 		"filmes":                 	[]
 	};
 	var query = {
-		"diretor":	req.params.diretor
+		"diretores.nome":	req.params.diretor
 	};
 	console.log(query);
-	modelFilme.find(query, function (err, filme) {
+	modelFilme.find(query, function (err, filmes) {
 		if (err) {
 			console.error(err);
 			response.houveErro = 	true;

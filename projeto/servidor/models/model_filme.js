@@ -5,7 +5,9 @@ var schemaFilme = new Schema(
 {
 	id: 		Number,
 	titulo:		String,
-	diretor:	String,
+	diretores:	[{
+		nome: String
+	}],
 	ano:		Number,
 	elenco: 	[{
 		nome: String
