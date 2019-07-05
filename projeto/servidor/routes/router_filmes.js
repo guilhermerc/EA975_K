@@ -159,4 +159,49 @@ router.get('/id/:id', function(req, res, next) {
 	});
 });
 
+// Comando para simular um POST em /filmes/id/0
+// 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
+// ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
+// }" http://localhost:3000/id/0'
+router.post('/id/:id', function(req, res, next) {
+	console.log("POST filmes/id/:id");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"novaNotaMedia":			0
+	};
+	var query = {
+		"id":	req.params.id
+	};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			// 'response' já está pronto para ser enviado
+		} else {
+			filme.criticas.push({
+				"username":		req.body.username,
+				"data":			req.body.data,
+				"comentario":	req.body.comentario,
+				"nota":			req.body.nota
+			});
+			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
+		}
+		res.send(response);
+	});
+});
+
+function calculaNotaMedia(criticas)
+{
+	var i = 0, notaMedia = 0;
+	for (i = 0; i < criticas.length; i++) {
+		notaMedia += criticas[i].nota;
+	}
+	notaMedia /= criticas.length;
+	return notaMedia;
+}
+
 module.exports = router;
