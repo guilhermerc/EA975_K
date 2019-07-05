@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { RespostaServidorFilmes } from './tipos/resposta-servidor-filmes'
 
 
 @Injectable({
@@ -12,17 +13,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 export class FilmeService {
 
-router:string;
+router: string;
 
   constructor(
   private http: HttpClient) { }
 
   // Observable ativa uma chamada assincrona do retorno dessa função
-  getFilme(nome: String):Observable<Filme[]> {
+  getFilme(nome: String):Observable<RespostaServidorFilmes> {
     this.router = '/filmes/' + nome;
-    return this.http.get<Filme[]>(this.router)
+
+    return this.http.get<RespostaServidorFilmes>(this.router)
     .pipe(
-      catchError(this.handleError<Filme[]>('getFilme', []))
+      //catchError(this.handleError<RespostaServidorFilmes>('getFilme', []))
     );
   }
 

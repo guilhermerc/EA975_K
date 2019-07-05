@@ -10,25 +10,20 @@ import { UsuarioService } from '../usuario.service';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
 
-
-
-
 @Component({
   selector: 'app-filme',
   templateUrl: './filme.component.html',
   styleUrls: ['./filme.component.css']
 })
 
-
-
 export class FilmeComponent implements OnInit {
 
   filme: Filme = {
-    id: "vingadoresultimato1234",
+    id: 1,
     titulo: "Vingadores: Ultimato",
     ano: 2019,
-    diretor: " Anthony Russo, Joe Russo",
-    elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+    direcao: null,
+    elenco: null,
     criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
                   {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
     imagens: ["/assets/images/vingadores_0.jpg"],
@@ -48,27 +43,57 @@ export class FilmeComponent implements OnInit {
               public dialog: MatDialog,
               private usuarioService: UsuarioService) {
 
-  this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-
-    console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-
-    this.ajustaCriticaDoUsuario();
-  });
+    this.observerUsuario();
   }
 
-
-
   ngOnInit() {
-    var idFile = this.route.snapshot.params.id;
+    var idFilme = this.route.snapshot.params.id;
 
     // TODO: Sem servidor
-    this.filmeService.getFilme('id/' + idFile).subscribe(filmes =>
-    {
-      this.filme = filmes[0];
-      console.log('Estou no ngOnInit');
+    // Busca filme id
+    this.getFilme('id/' + idFilme);
+
+  }
+  /**
+    Adiciona um observer ao estado do usuário de logado.
+  */
+  observerUsuario() {
+
+    this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
+
+      console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
+
       this.ajustaCriticaDoUsuario();
     });
 
+  }
+
+  getFilme(router: string) {
+
+    this.filmeService.getFilme(router).subscribe(resposta => {
+
+      console.log('resposta do server:' + JSON.stringify(resposta));
+
+      if (!resposta.houveErro) {
+
+        if (resposta.filmes.length > 0) {
+          this.filme = resposta.filmes[0];
+
+          // Separa o comentario do usuario se ele existir
+          this.ajustaCriticaDoUsuario();
+        } else {
+          // TODO: Dispara ação quando não acha filme.
+          console.log("nenhumFilmeFoiEncontrado");
+        }
+      } else {
+        // Houve erro
+        console.log(resposta.mensagemErro)
+      }
+
+
+      console.log('Filmes retornados' + resposta.filmes+']');
+
+    });
   }
 
   // Se o usuário estiver logado vai precisar ver se ele já faz uma crítica

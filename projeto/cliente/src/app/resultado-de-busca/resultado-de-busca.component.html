@@ -1,5 +1,5 @@
 
-<div *ngIf="filmesEncontrados.length">
+<div *ngIf="!nenhumFilmeFoiEncontrado">
 
   <div class="container" >
     <h2>Filmes Encontrados</h2>
@@ -18,12 +18,14 @@
   </div>
 </div>
 
-<div class="container mensagem" *ngIf="!filmesEncontrados.length" >
+<div class="container mensagem" *ngIf="nenhumFilmeFoiEncontrado" >
   <h2>UMDB Filmes</h2>
 
-  <p class>
-  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!
-  <br> Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.
+  <p >
+  <b>Nenhum filme foi Encontrado!</b><br>
+  <br>
+  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>
+  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.
   </p>
 
 </div>

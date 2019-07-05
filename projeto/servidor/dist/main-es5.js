@@ -63,7 +63,7 @@ module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procur
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-critica\" *ngIf=\"usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n\n\n  <button  (click)=\"botaoEntrar()\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"!usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"fazerCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Enviar Crítica</button>\n    <br><button *ngIf=\"primeiraVez\" type=\"submit\" class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n\n\n  <button  (click)=\"botaoEntrar()\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"fazerCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Adicionar Crítica</button>\n    <br><button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n      <form (ngSubmit)=\"buscaSimples()\">\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n        <select id= \"filtroDePesquisa\" class=\"barra-input\">\n          <option selected>{{filtrosExibidos[0]}}</option>\n          <option>{{filtrosExibidos[1]}}</option>\n          <option>{{filtrosExibidos[2]}}</option>\n          <option>{{filtrosExibidos[3]}}</option>\n          <option>{{filtrosExibidos[4]}}</option>\n        </select>\n        <button type=\"submit\" class=\"barra-input\">Buscar</button>\n      </form>\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> {{usuario.login.username}} Perfil</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n      <form (ngSubmit)=\"buscaSimples()\">\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n        <select id= \"filtroDePesquisa\" class=\"barra-input\">\n          <option selected>{{filtrosExibidos[0]}}</option>\n          <option>{{filtrosExibidos[1]}}</option>\n          <option>{{filtrosExibidos[2]}}</option>\n          <option>{{filtrosExibidos[3]}}</option>\n          <option>{{filtrosExibidos[4]}}</option>\n        </select>\n        <button type=\"submit\" class=\"barra-input\">Buscar</button>\n      </form>\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> {{usuario.login.username}} Perfil</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -118,7 +118,18 @@ module.exports = "<p>\n  perfil-usuario works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"filmesEncontrados.length\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <br> De: {{filme.diretor}}\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"!filmesEncontrados.length\" >\n  <h2>UMDB Filmes</h2>\n\n  <p class>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!\n  <br> Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
+module.exports = "\n<div *ngIf=\"!nenhumFilmeFoiEncontrado\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <br> De: {{filme.diretor}}\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"nenhumFilmeFoiEncontrado\" >\n  <h2>UMDB Filmes</h2>\n\n  <p >\n  <b>Nenhum filme foi Encontrado!</b><br>\n  <br>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>\n  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/testa-servidor/testa-servidor.component.html":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/testa-servidor/testa-servidor.component.html ***!
+  \****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <label for=\"router\">Router</label>\n  <input type=\"text\" [(ngModel)]=\"router\" value=\"\" id=\"router\">\n  <br><br>\n  <label for=\"query\">Query</label>\n  <input type=\"text\" [(ngModel)]=\"query\" value=\"\" id=\"query\">\n  <br><br>\n  <div class=\"\">\n    <button type=\"button\" (click)=\"get()\">GET</button>\n    <button type=\"button\" (click)=\"post()\">POST</button>\n    <button type=\"button\" (click)=\"put()\">PUT</button>\n    <button type=\"button\" (click)=\"delete()\">DELETE</button>\n  </div>\n  <br><br><br><br>\n  Response:<br>\n  {{response | json}}\n\n</div>\n"
 
 /***/ }),
 
@@ -139,6 +150,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filme_filme_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./filme/filme.component */ "./src/app/filme/filme.component.ts");
 /* harmony import */ var _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./autenticacao/autenticacao.component */ "./src/app/autenticacao/autenticacao.component.ts");
 /* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
+/* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
+
 
 
 
@@ -152,7 +165,8 @@ var routes = [
     { path: 'filme/:id', component: _filme_filme_component__WEBPACK_IMPORTED_MODULE_4__["FilmeComponent"] },
     { path: 'autenticacao', component: _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__["AutenticacaoComponent"] },
     { path: 'busca/:id', component: _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__["ResultadoDeBuscaComponent"] },
-    { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] }
+    { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] },
+    { path: 'developer', component: _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__["TestaServidorComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -245,6 +259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./critica/critica.component */ "./src/app/critica/critica.component.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
+
 
 
 
@@ -276,7 +292,8 @@ var AppModule = /** @class */ (function () {
                 _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["BarraDeBuscaComponent"],
                 _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__["ResultadoDeBuscaComponent"],
                 _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__["NavbarComponent"],
-                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"]
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"],
+                _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_17__["TestaServidorComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -522,8 +539,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-
 
 
 
@@ -536,7 +551,9 @@ var FilmeService = /** @class */ (function () {
     FilmeService.prototype.getFilme = function (nome) {
         this.router = '/filmes/' + nome;
         return this.http.get(this.router)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('getFilme', [])));
+            .pipe(
+        //catchError(this.handleError<RespostaServidorFilmes>('getFilme', []))
+        );
     };
     /**
        * Fonte: https://angular.io/tutorial/toh-pt6
@@ -609,36 +626,60 @@ __webpack_require__.r(__webpack_exports__);
 
 var FilmeComponent = /** @class */ (function () {
     function FilmeComponent(route, filmeService, location, dialog, usuarioService) {
-        var _this = this;
         this.route = route;
         this.filmeService = filmeService;
         this.location = location;
         this.dialog = dialog;
         this.usuarioService = usuarioService;
         this.filme = {
-            id: "vingadoresultimato1234",
+            id: 1,
             titulo: "Vingadores: Ultimato",
             ano: 2019,
-            diretor: " Anthony Russo, Joe Russo",
-            elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+            direcao: null,
+            elenco: null,
             criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
                 { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
+        this.observerUsuario();
+    }
+    FilmeComponent.prototype.ngOnInit = function () {
+        var idFilme = this.route.snapshot.params.id;
+        // TODO: Sem servidor
+        // Busca filme id
+        this.getFilme('id/' + idFilme);
+    };
+    /**
+      Adiciona um observer ao estado do usuário de logado.
+    */
+    FilmeComponent.prototype.observerUsuario = function () {
+        var _this = this;
         this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
             console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
             _this.ajustaCriticaDoUsuario();
         });
-    }
-    FilmeComponent.prototype.ngOnInit = function () {
+    };
+    FilmeComponent.prototype.getFilme = function (router) {
         var _this = this;
-        var idFile = this.route.snapshot.params.id;
-        // TODO: Sem servidor
-        this.filmeService.getFilme('id/' + idFile).subscribe(function (filmes) {
-            _this.filme = filmes[0];
-            console.log('Estou no ngOnInit');
-            _this.ajustaCriticaDoUsuario();
+        this.filmeService.getFilme(router).subscribe(function (resposta) {
+            console.log('resposta do server:' + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                if (resposta.filmes.length > 0) {
+                    _this.filme = resposta.filmes[0];
+                    // Separa o comentario do usuario se ele existir
+                    _this.ajustaCriticaDoUsuario();
+                }
+                else {
+                    // TODO: Dispara ação quando não acha filme.
+                    console.log("nenhumFilmeFoiEncontrado");
+                }
+            }
+            else {
+                // Houve erro
+                console.log(resposta.mensagemErro);
+            }
+            console.log('Filmes retornados' + resposta.filmes + ']');
         });
     };
     // Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
@@ -874,7 +915,7 @@ var NavbarComponent = /** @class */ (function () {
         var index = this.filtrosExibidos.indexOf(filtroEscolhido);
         var idFiltro = this.filtroIds[index];
         var pesquisa = idFiltro + '/' + this.barraDeBusca;
-        console.log(pesquisa);
+        // O que estiver nesse vetor é a url da próxima página
         this.router.navigate(['/busca/_' + this.barraDeBusca], { queryParams: { filtro: idFiltro, conteudo: this.barraDeBusca } });
     };
     NavbarComponent.prototype.logout = function () {
@@ -982,28 +1023,49 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
         this.filmeService = filmeService;
         this.location = location;
         this.filme = {
-            id: "vingadoresultimato1234",
+            id: 2,
             titulo: "Vingadores: Ultimato",
             ano: 2019,
-            diretor: " Anthony Russo, Joe Russo",
-            elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+            direcao: null,
+            elenco: null,
             criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
                 { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
+        this.nenhumFilmeFoiEncontrado = true;
         console.log('oi');
     }
     ResultadoDeBuscaComponent.prototype.getFilmes = function (params) {
         var _this = this;
         var conteudo = params.conteudo;
         var filtro = params.filtro;
-        var router = filtro + '/' + conteudo;
+        var router;
+        if (conteudo.length > 0) {
+            console.log('string não vazia');
+            router = filtro + '/' + conteudo;
+        }
+        else {
+            console.log('string vazia');
+            router = "";
+        }
         console.log('agora vai router[' + router + ']');
-        this.filmeService.getFilme(router).subscribe(function (filmes) {
-            //window.location.reload();
-            _this.filmesEncontrados = filmes;
-            console.log('Filmes retornados' + filmes + ']');
+        this.filmeService.getFilme(router).subscribe(function (resposta) {
+            if (!resposta.houveErro) {
+                _this.filmesEncontrados = resposta.filmes;
+                if (_this.filmesEncontrados.length > 0) {
+                    _this.nenhumFilmeFoiEncontrado = false;
+                }
+                else {
+                    // TODO: Dispara ação quando não acha filme.
+                    console.log("nenhumFilmeFoiEncontrado");
+                }
+            }
+            else {
+                // Houve erro
+                console.log(resposta.mensagemErro);
+            }
+            console.log('Filmes retornados' + resposta.filmes + ']');
         });
     };
     ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
@@ -1029,6 +1091,81 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
             _angular_common__WEBPACK_IMPORTED_MODULE_3__["Location"]])
     ], ResultadoDeBuscaComponent);
     return ResultadoDeBuscaComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/testa-servidor/testa-servidor.component.css":
+/*!*************************************************************!*\
+  !*** ./src/app/testa-servidor/testa-servidor.component.css ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "button {\n  margin: 5px;\n}\n\n.container {\n  margin-top: 100px;\n  text-align: center;\n}\n\ninput {\n  margin: 5px;\n  width: 400px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvdGVzdGEtc2Vydmlkb3IvdGVzdGEtc2Vydmlkb3IuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsWUFBWTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvdGVzdGEtc2Vydmlkb3IvdGVzdGEtc2Vydmlkb3IuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbImJ1dHRvbiB7XG4gIG1hcmdpbjogNXB4O1xufVxuXG4uY29udGFpbmVyIHtcbiAgbWFyZ2luLXRvcDogMTAwcHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cblxuaW5wdXQge1xuICBtYXJnaW46IDVweDtcbiAgd2lkdGg6IDQwMHB4O1xufVxuIl19 */"
+
+/***/ }),
+
+/***/ "./src/app/testa-servidor/testa-servidor.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/testa-servidor/testa-servidor.component.ts ***!
+  \************************************************************/
+/*! exports provided: TestaServidorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestaServidorComponent", function() { return TestaServidorComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+var TestaServidorComponent = /** @class */ (function () {
+    function TestaServidorComponent(http) {
+        this.http = http;
+    }
+    TestaServidorComponent.prototype.ngOnInit = function () {
+    };
+    TestaServidorComponent.prototype.get = function () {
+        var _this = this;
+        this.http.get(this.router).subscribe(function (response) {
+            _this.response = response;
+        });
+    };
+    TestaServidorComponent.prototype.post = function () {
+        var _this = this;
+        this.http.post(this.router, this.query).subscribe(function (response) {
+            _this.response = response;
+        });
+    };
+    TestaServidorComponent.prototype.put = function () {
+        var _this = this;
+        this.http.put(this.router, this.query).subscribe(function (response) {
+            _this.response = response;
+        });
+    };
+    TestaServidorComponent.prototype.delete = function () {
+        var _this = this;
+        this.http.delete(this.router).subscribe(function (response) {
+            _this.response = response;
+        });
+    };
+    TestaServidorComponent.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+    ]; };
+    TestaServidorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-testa-servidor',
+            template: __webpack_require__(/*! raw-loader!./testa-servidor.component.html */ "./node_modules/raw-loader/index.js!./src/app/testa-servidor/testa-servidor.component.html"),
+            styles: [__webpack_require__(/*! ./testa-servidor.component.css */ "./src/app/testa-servidor/testa-servidor.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+    ], TestaServidorComponent);
+    return TestaServidorComponent;
 }());
 
 

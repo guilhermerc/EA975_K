@@ -152,8 +152,8 @@ router.get('/id/:id', function(req, res, next) {
 		} else if (filme == null) {
 			// 'response' já está pronto para ser enviado
 		} else {
-			response.totalFilmesEncontrados =	filmes.length;
-			response.filmes =					filmes;
+			response.totalFilmesEncontrados =	filme.length;
+			response.filmes =					filme;
 		}
 		res.send(response);
 	});

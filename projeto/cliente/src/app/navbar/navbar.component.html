@@ -20,6 +20,7 @@
     </div>
 
     <div class="topnav-right">
+      <a class="botao" *ngIf="true" routerLink="/developer">Developer</a>
       <a class="botao" *ngIf="usuarioEstaLogado && usuario.moderador" routerLink="/">Adicionar Filme</a>
 
       <a class="botao" *ngIf="usuarioEstaLogado" routerLink="/perfil/0"> {{usuario.login.username}} Perfil</a>

@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { Filme } from '../filme';
 import { FilmeService } from '../filme.service';
+import { RespostaServidorFilmes } from '../tipos/resposta-servidor-filmes'
 
 @Component({
   selector: 'app-resultado-de-busca',
@@ -13,11 +14,11 @@ import { FilmeService } from '../filme.service';
 export class ResultadoDeBuscaComponent implements OnInit {
 
   filme: Filme = {
-    id: "vingadoresultimato1234",
+    id: 2,
     titulo: "Vingadores: Ultimato",
     ano: 2019,
-    diretor: " Anthony Russo, Joe Russo",
-    elenco: "Robert Downey Jr., Chris Evans, Mark Ruffalo",
+    direcao: null,
+    elenco: null,
     criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
                   {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
     imagens: ["/assets/images/vingadores_0.jpg"],
@@ -25,6 +26,9 @@ export class ResultadoDeBuscaComponent implements OnInit {
   };
 
   filmesEncontrados: Filme[];// = [this.filme, this.filme, this.filme];
+
+  nenhumFilmeFoiEncontrado: boolean = true;
+
 
   constructor(private route: ActivatedRoute,
               private filmeService: FilmeService,
@@ -36,14 +40,36 @@ export class ResultadoDeBuscaComponent implements OnInit {
 
     var conteudo = params.conteudo;
     var filtro = params.filtro;
-    var router = filtro + '/' + conteudo;
+    var router: string;
+
+    if (conteudo.length > 0) {
+      console.log('string não vazia');
+      router = filtro + '/' + conteudo;
+    } else {
+      console.log('string vazia');
+      router = "";
+    }
 
     console.log('agora vai router[' + router + ']');
 
-    this.filmeService.getFilme(router).subscribe(filmes => {
-      //window.location.reload();
-      this.filmesEncontrados = filmes;
-      console.log('Filmes retornados' + filmes+']');
+    this.filmeService.getFilme(router).subscribe(resposta => {
+
+      if (!resposta.houveErro) {
+        this.filmesEncontrados = resposta.filmes;
+
+        if (this.filmesEncontrados.length > 0) {
+          this.nenhumFilmeFoiEncontrado = false;
+        } else {
+          // TODO: Dispara ação quando não acha filme.
+          console.log("nenhumFilmeFoiEncontrado");
+        }
+      } else {
+        // Houve erro
+        console.log(resposta.mensagemErro)
+      }
+
+
+      console.log('Filmes retornados' + resposta.filmes+']');
 
     });
 

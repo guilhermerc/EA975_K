@@ -72,10 +72,8 @@ export class NavbarComponent implements OnInit {
     var idFiltro = this.filtroIds[index];
 
     var pesquisa: String = idFiltro + '/' + this.barraDeBusca;
-    console.log (pesquisa);
 
-
-
+    // O que estiver nesse vetor é a url da próxima página
     this.router.navigate(['/busca/_' + this.barraDeBusca],
                          { queryParams: {filtro: idFiltro, conteudo: this.barraDeBusca} });
 

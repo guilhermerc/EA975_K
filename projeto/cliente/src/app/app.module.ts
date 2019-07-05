@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatDialogModule } from '@angular/material';
 import { CriticaComponent } from './critica/critica.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TestaServidorComponent } from './testa-servidor/testa-servidor.component';
 
 
 
@@ -28,7 +29,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BarraDeBuscaComponent,
     ResultadoDeBuscaComponent,
     NavbarComponent,
-    CriticaComponent
+    CriticaComponent,
+    TestaServidorComponent
   ],
   imports: [
     BrowserModule,

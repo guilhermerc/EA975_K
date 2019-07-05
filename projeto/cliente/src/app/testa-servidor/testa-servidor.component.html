@@ -1,0 +1,18 @@
+<div class="container">
+  <label for="router">Router</label>
+  <input type="text" [(ngModel)]="router" value="" id="router">
+  <br><br>
+  <label for="query">Query</label>
+  <input type="text" [(ngModel)]="query" value="" id="query">
+  <br><br>
+  <div class="">
+    <button type="button" (click)="get()">GET</button>
+    <button type="button" (click)="post()">POST</button>
+    <button type="button" (click)="put()">PUT</button>
+    <button type="button" (click)="delete()">DELETE</button>
+  </div>
+  <br><br><br><br>
+  Response:<br>
+  {{response | json}}
+
+</div>

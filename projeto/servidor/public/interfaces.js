@@ -15,7 +15,7 @@ var response = {
                                         // elementos possuem o formato definido
                                         // em /models/model_filme.js
 };
-
+--------------------------------------------------------------------------------
 /*
     Requisição: PUT
     Recursos:   '/filmes/id/:id'
@@ -25,3 +25,4 @@ var response = {
     "mensagemErro":           	"",
     "novaNotaMedia":			0
 };
+--------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
 import { FilmeComponent } from './filme/filme.component';
 import { AutenticacaoComponent } from './autenticacao/autenticacao.component';
 import { ResultadoDeBuscaComponent } from './resultado-de-busca/resultado-de-busca.component';
-
+import { TestaServidorComponent } from './testa-servidor/testa-servidor.component';
 
 const routes: Routes = [
   //{ path: '', redirectTo: '/dashboard', pathMatch: 'full' }, default
@@ -13,7 +13,8 @@ const routes: Routes = [
   { path: 'filme/:id', component: FilmeComponent},
   { path: 'autenticacao', component: AutenticacaoComponent},
   { path: 'busca/:id', component: ResultadoDeBuscaComponent},
-  { path: 'home', component: PerfilUsuarioComponent}
+  { path: 'home', component: PerfilUsuarioComponent},
+  { path: 'developer', component: TestaServidorComponent}
 ];
 
 @NgModule({
