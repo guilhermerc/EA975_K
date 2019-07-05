@@ -153,7 +153,7 @@ router.get('/id/:id', function(req, res, next) {
 			// 'response' já está pronto para ser enviado
 		} else {
 			response.totalFilmesEncontrados =	filme.length;
-			response.filmes =					filme;
+			response.filmes =					[filme];
 		}
 		res.send(response);
 	});

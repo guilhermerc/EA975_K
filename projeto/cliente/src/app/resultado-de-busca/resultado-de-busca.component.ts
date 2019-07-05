@@ -32,9 +32,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private filmeService: FilmeService,
-              private location: Location) {
-                console.log('oi');
-              }
+              private location: Location) {}
 
   getFilmes(params: {[key: string]: any;}){
 

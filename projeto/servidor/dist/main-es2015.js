@@ -634,6 +634,7 @@ let FilmeComponent = class FilmeComponent {
         var idFilme = this.route.snapshot.params.id;
         // TODO: Sem servidor
         // Busca filme id
+        console.log('Bendito id: ' + idFilme);
         this.getFilme('id/' + idFilme);
     }
     /**
@@ -997,7 +998,6 @@ let ResultadoDeBuscaComponent = class ResultadoDeBuscaComponent {
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
         this.nenhumFilmeFoiEncontrado = true;
-        console.log('oi');
     }
     getFilmes(params) {
         var conteudo = params.conteudo;

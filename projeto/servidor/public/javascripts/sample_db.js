@@ -10,7 +10,7 @@ exports.create = function() {
             }
         });
 		
-		var filme = new modelFilme({
+		var filme0 = new modelFilme({
 			"id": 0,
 			"titulo": 	"Vingadores",
 			"diretor": 	"Deus",
@@ -34,13 +34,13 @@ exports.create = function() {
 				}
 			]
 		});
-		filme.save(function (err, filme) {
+		filme0.save(function (err, filme) {
 			if(err)
 				console.log("ERROU!");
 		});
 /******************************************************************************/
-		var filme2 = new modelFilme({
-			"id": 0,
+		var filme1 = new modelFilme({
+			"id": 1,
 			"titulo": 	"O Rei Leão",
 			"diretor": 	"Mufasa",
 			"ano": 2019,
@@ -63,9 +63,37 @@ exports.create = function() {
 				}
 			]
 		});
-		filme2.save(function (err, filme) {
+		filme1.save(function (err, filme) {
 			if(err)
 				console.log("ERROU!");
 		});
 /******************************************************************************/	
+		var filme2 = new modelFilme({
+			"id": 2,
+			"titulo": 	"Harry Potter",
+			"diretor": 	"Valdemort",
+			"ano": 2019,
+			"elenco": [
+				{"nome": 	"Harrry "},
+				{"nome": 	"Hermione"}
+			],
+			"criticas": [
+				{
+					"username": 	"guilherme",
+					"data": 		"00/00/0000",
+					"comentario": "melhor filme ever",
+					"nota": 2
+				},
+				{
+					"username": 	"marcelo",
+					"data": 		"11/11/1994",
+					"comentario": "Muito diferente do livro :(",
+					"nota": 10
+				}
+			]
+		});
+		filme2.save(function (err, filme) {
+			if(err)
+				console.log("ERROU!");
+		});
 };
