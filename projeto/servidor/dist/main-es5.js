@@ -45,17 +45,6 @@ module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n  
 
 /***/ }),
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/barra-de-busca/barra-de-busca.component.html":
-/*!****************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/barra-de-busca/barra-de-busca.component.html ***!
-  \****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procurar por um filme, elenco, direção...\" id =\"input-busca\" />\n  <select id= \"barra\">\n    <option *ngFor=\"let filtro of filtros\" [value]=\"filtro\">{{filtro}}</option>\n  </select>\n  <button (click)=\"buscaSimples(pesquisa.value)\" id= \"barra\">Buscar</button>\n</div>\n"
-
-/***/ }),
-
 /***/ "./node_modules/raw-loader/index.js!./src/app/critica/critica.component.html":
 /*!**************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/critica/critica.component.html ***!
@@ -63,7 +52,7 @@ module.exports = "<div class = \"row\">\n  <input #pesquisa placeholder=\"Procur
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n\n\n  <button  (click)=\"botaoEntrar()\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"fazerCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Adicionar Crítica</button>\n    <br><button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n\n\n  <button  routerLink=\"autenticacao\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"fazerCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Adicionar Crítica</button>\n    <br><button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -74,7 +63,7 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"coluna\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n    Direção: {{filme.diretor}}\n    <br>\n    Elenco: {{filme.elenco}}\n    <br><br>\n  </div>\n\n  <div class=\"sinopse\">\n    SINOPSE\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              , no dia {{critica.data}}, escreveu:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>\n        , no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              , no dia {{critica.data}}, escreveu:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>\n        , no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -118,7 +107,7 @@ module.exports = "<p>\n  perfil-usuario works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"!nenhumFilmeFoiEncontrado\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <br> De: {{filme.diretor}}\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"nenhumFilmeFoiEncontrado\" >\n  <h2>UMDB Filmes</h2>\n\n  <p >\n  <b>Nenhum filme foi Encontrado!</b><br>\n  <br>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>\n  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
+module.exports = "\n<div *ngIf=\"!nenhumFilmeFoiEncontrado\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\" class=\"filme-da-lista\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <!--Direção--->\n          <div class=\"lista-pessoas\">\n            <ul>\n              <li><b>Direção:</b></li>\n              <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n            </ul>\n          </div>\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"nenhumFilmeFoiEncontrado\" >\n  <h2>UMDB Filmes</h2>\n\n  <p >\n  <b>Nenhum filme foi Encontrado!</b><br>\n  <br>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>\n  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
 
 /***/ }),
 
@@ -253,14 +242,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filme_filme_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./filme/filme.component */ "./src/app/filme/filme.component.ts");
 /* harmony import */ var _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./perfil-usuario/perfil-usuario.component */ "./src/app/perfil-usuario/perfil-usuario.component.ts");
 /* harmony import */ var _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./forms-cadastro-usuario/forms-cadastro-usuario.component */ "./src/app/forms-cadastro-usuario/forms-cadastro-usuario.component.ts");
-/* harmony import */ var _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./barra-de-busca/barra-de-busca.component */ "./src/app/barra-de-busca/barra-de-busca.component.ts");
-/* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
-/* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./critica/critica.component */ "./src/app/critica/critica.component.ts");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
-/* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
-
+/* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
+/* harmony import */ var _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./navbar/navbar.component */ "./src/app/navbar/navbar.component.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./critica/critica.component */ "./src/app/critica/critica.component.ts");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
 
 
 
@@ -289,22 +276,21 @@ var AppModule = /** @class */ (function () {
                 _filme_filme_component__WEBPACK_IMPORTED_MODULE_8__["FilmeComponent"],
                 _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_9__["PerfilUsuarioComponent"],
                 _forms_cadastro_usuario_forms_cadastro_usuario_component__WEBPACK_IMPORTED_MODULE_10__["FormsCadastroUsuarioComponent"],
-                _barra_de_busca_barra_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["BarraDeBuscaComponent"],
-                _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_12__["ResultadoDeBuscaComponent"],
-                _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_13__["NavbarComponent"],
-                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"],
-                _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_17__["TestaServidorComponent"]
+                _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["ResultadoDeBuscaComponent"],
+                _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"],
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"],
+                _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__["TestaServidorComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_14__["MatDialogModule"],
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_16__["BrowserAnimationsModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_13__["MatDialogModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"]
             ],
             entryComponents: [
-                _critica_critica_component__WEBPACK_IMPORTED_MODULE_15__["CriticaComponent"]
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -390,51 +376,6 @@ var AutenticacaoComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/barra-de-busca/barra-de-busca.component.css":
-/*!*************************************************************!*\
-  !*** ./src/app/barra-de-busca/barra-de-busca.component.css ***!
-  \*************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2JhcnJhLWRlLWJ1c2NhL2JhcnJhLWRlLWJ1c2NhLmNvbXBvbmVudC5jc3MifQ== */"
-
-/***/ }),
-
-/***/ "./src/app/barra-de-busca/barra-de-busca.component.ts":
-/*!************************************************************!*\
-  !*** ./src/app/barra-de-busca/barra-de-busca.component.ts ***!
-  \************************************************************/
-/*! exports provided: BarraDeBuscaComponent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BarraDeBuscaComponent", function() { return BarraDeBuscaComponent; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var BarraDeBuscaComponent = /** @class */ (function () {
-    function BarraDeBuscaComponent() {
-    }
-    BarraDeBuscaComponent.prototype.ngOnInit = function () {
-    };
-    BarraDeBuscaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-barra-de-busca',
-            template: __webpack_require__(/*! raw-loader!./barra-de-busca.component.html */ "./node_modules/raw-loader/index.js!./src/app/barra-de-busca/barra-de-busca.component.html"),
-            styles: [__webpack_require__(/*! ./barra-de-busca.component.css */ "./src/app/barra-de-busca/barra-de-busca.component.css")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], BarraDeBuscaComponent);
-    return BarraDeBuscaComponent;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/critica/critica.component.css":
 /*!***********************************************!*\
   !*** ./src/app/critica/critica.component.css ***!
@@ -493,10 +434,12 @@ var CriticaComponent = /** @class */ (function () {
     };
     CriticaComponent.prototype.fazerCritica = function () {
         if (this.primeiraVez) {
+            this.dialogRef.close();
             // post
         }
         else {
             //put
+            this.dialogRef.close();
         }
         //close na callback
     };
@@ -594,7 +537,7 @@ var FilmeService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding-top: 100px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n  padding-left: 2px;\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-right: 2px;\n}\n\n.critica {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 50px;\n  margin-top: 5px;\n\n\n}\n\n.critica-botao {\n  float: right;\n  padding: 5px;\n}\n\n.container-criticas {\n  margin-top: 10px;\n  margin-bottom: 0px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBSUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtBQUNmOztBQUVBO0VBQ0UsV0FBVztBQUNiOztBQUVBO0VBQ0UsVUFBVTtFQUNWLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixrQkFBa0I7QUFDcEI7O0FBQ0E7RUFDRSx5QkFBeUI7RUFDekIsaUJBQWlCO0VBQ2pCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsa0JBQWtCO0VBQ2xCLGVBQWU7OztBQUdqQjs7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCIiwiZmlsZSI6InNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXR1bG8ge1xuICAvKmJhY2tncm91bmQtY29sb3I6IGdyYXk7Ki9cbiAgd2lkdGg6IDEwMCU7XG4gIGZvbnQtc2l6ZTogMzZweDtcbiAgLyp0ZXh0LWFsaWduOiBsZWZ0O1xuXG4gIGRpc3BsYXk6IGlubGluZTtcbiAgcGFkZGluZzogMTBweDtcbiAgbWFyZ2luLXJpZ2h0OiAwcHg7XG4qL1xufVxuXG4uY29udGFpbmVyIHtcbiAgcGFkZGluZy10b3A6IDEwMHB4O1xuICBwYWRkaW5nLWxlZnQ6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDUwcHg7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xuICB3aWR0aDogOTAwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG5pbWcge1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXgtaGVpZ2h0OjMwMHB4O1xuICBtYXgtd2lkdGg6MTAwJTtcbiAgd2lkdGg6IGF1dG87XG4gIGhlaWdodDogMzAwcHg7XG59XG5cbi52aWRlbyB7XG4gIG1pbi13aWR0aDogNTAwcHg7XG4gIG1heC1oZWlnaHQ6IDMwMHB4O1xuICBoZWlnaHQ6IDMwMHB4O1xuICBwYWRkaW5nOiAxMHB4O1xufVxuXG5cblxuLmNvbnRhaW5lci1tZWRpYSB7XG4gIHdpZHRoOiA4MDBweDtcbiAgaGVpZ2h0OiAzMTBweDtcbn1cblxuLmNvbHVuYSB7XG4gIGZsb2F0OiBsZWZ0O1xufVxuXG4uZXN0cmVsYXMge1xuICB3aWR0aDogMTkxO1xuICBoZWlnaHQ6IDY0cHg7XG59XG5cbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbiAgcGFkZGluZy1sZWZ0OiAycHg7XG4gIHBhZGRpbmctdG9wOiAycHg7XG4gIHBhZGRpbmctYm90dG9tOiAycHg7XG4gIHBhZGRpbmctcmlnaHQ6IDJweDtcbn1cbi5jcml0aWNhIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2UxZTRlODtcbiAgcGFkZGluZy10b3A6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDMwcHg7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xuICBwYWRkaW5nLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi10b3A6IDVweDtcblxuXG59XG4uY3JpdGljYS1ib3RhbyB7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogNXB4O1xufVxuXG4uY29udGFpbmVyLWNyaXRpY2FzIHtcbiAgbWFyZ2luLXRvcDogMTBweDtcbiAgbWFyZ2luLWJvdHRvbTogMHB4O1xufVxuIl19 */"
+module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding-top: 50px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.div-video {\n    float: right;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n  padding-left: 2px;\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-right: 2px;\n}\n\n.critica {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 50px;\n  margin-top: 5px;\n\n\n}\n\n.critica-botao {\n  float: right;\n  padding: 5px;\n}\n\n.container-criticas {\n  margin-top: 10px;\n  margin-bottom: 0px;\n}\n\n.lista-pessoas {\n  display: table;\n  width: 100%;\n}\n\n.lista-pessoas ul {\n  list-style: none;\n}\n\n.lista-pessoas li {\n  margin-left: 0px;\n  margin-right: 5px;\n  display: inline;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGFBQWE7QUFDZjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFVBQVU7RUFDVixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixtQkFBbUI7RUFDbkIsa0JBQWtCO0FBQ3BCOztBQUNBO0VBQ0UseUJBQXlCO0VBQ3pCLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsb0JBQW9CO0VBQ3BCLGtCQUFrQjtFQUNsQixlQUFlOzs7QUFHakI7O0FBQ0E7RUFDRSxZQUFZO0VBQ1osWUFBWTtBQUNkOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxXQUFXO0FBQ2I7O0FBQ0E7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGVBQWU7QUFDakIiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsbyB7XG4gIC8qYmFja2dyb3VuZC1jb2xvcjogZ3JheTsqL1xuICB3aWR0aDogMTAwJTtcbiAgZm9udC1zaXplOiAzNnB4O1xuICAvKnRleHQtYWxpZ246IGxlZnQ7XG5cbiAgZGlzcGxheTogaW5saW5lO1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDBweDtcbiovXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nLXRvcDogNTBweDtcbiAgcGFkZGluZy1sZWZ0OiA1MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA1MHB4O1xuICBwYWRkaW5nLWJvdHRvbTogNTBweDtcbiAgd2lkdGg6IDkwMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbn1cblxuaW1nIHtcbiAgcGFkZGluZzogMTBweDtcbiAgbWF4LWhlaWdodDozMDBweDtcbiAgbWF4LXdpZHRoOjEwMCU7XG4gIHdpZHRoOiBhdXRvO1xuICBoZWlnaHQ6IDMwMHB4O1xufVxuXG4udmlkZW8ge1xuICBtaW4td2lkdGg6IDUwMHB4O1xuICBtYXgtaGVpZ2h0OiAzMDBweDtcbiAgaGVpZ2h0OiAzMDBweDtcbiAgcGFkZGluZzogMTBweDtcbn1cblxuLmRpdi12aWRlbyB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4uY29udGFpbmVyLW1lZGlhIHtcbiAgd2lkdGg6IDgwMHB4O1xuICBoZWlnaHQ6IDMxMHB4O1xufVxuXG4uY29sdW5hIHtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5lc3RyZWxhcyB7XG4gIHdpZHRoOiAxOTE7XG4gIGhlaWdodDogNjRweDtcbn1cblxudWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xuICBwYWRkaW5nLWxlZnQ6IDJweDtcbiAgcGFkZGluZy10b3A6IDJweDtcbiAgcGFkZGluZy1ib3R0b206IDJweDtcbiAgcGFkZGluZy1yaWdodDogMnB4O1xufVxuLmNyaXRpY2Ege1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTFlNGU4O1xuICBwYWRkaW5nLXRvcDogNTBweDtcbiAgcGFkZGluZy1yaWdodDogMzBweDtcbiAgcGFkZGluZy1ib3R0b206IDUwcHg7XG4gIHBhZGRpbmctbGVmdDogNTBweDtcbiAgbWFyZ2luLXRvcDogNXB4O1xuXG5cbn1cbi5jcml0aWNhLWJvdGFvIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiA1cHg7XG59XG5cbi5jb250YWluZXItY3JpdGljYXMge1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiAwcHg7XG59XG5cbi5saXN0YS1wZXNzb2FzIHtcbiAgZGlzcGxheTogdGFibGU7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmxpc3RhLXBlc3NvYXMgdWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xufVxuLmxpc3RhLXBlc3NvYXMgbGkge1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDVweDtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuIl19 */"
 
 /***/ }),
 
@@ -632,11 +575,11 @@ var FilmeComponent = /** @class */ (function () {
         this.dialog = dialog;
         this.usuarioService = usuarioService;
         this.filme = {
-            id: 1,
+            id: 2,
             titulo: "Vingadores: Ultimato",
             ano: 2019,
-            direcao: null,
-            elenco: null,
+            diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
+            elenco: [{ nome: "Robert Downey Jr" }, { nome: "Scarlett Johansson" }],
             criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
                 { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
@@ -646,10 +589,8 @@ var FilmeComponent = /** @class */ (function () {
     }
     FilmeComponent.prototype.ngOnInit = function () {
         var idFilme = this.route.snapshot.params.id;
-        // TODO: Sem servidor
         // Busca filme id
-        console.log('Bendito id: ' + idFilme);
-        this.getFilme('id/' + idFilme);
+        this.getFilme('id/' + idFilme); // TODO: Sem servidor
     };
     /**
       Adiciona um observer ao estado do usuário de logado.
@@ -668,6 +609,7 @@ var FilmeComponent = /** @class */ (function () {
             if (!resposta.houveErro) {
                 if (resposta.filmes.length > 0) {
                     _this.filme = resposta.filmes[0];
+                    console.log('resposta:' + JSON.stringify(resposta));
                     // Separa o comentario do usuario se ele existir
                     _this.ajustaCriticaDoUsuario();
                 }
@@ -994,7 +936,7 @@ var PerfilUsuarioComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n.container {\n  padding: 20px;\n  width: 600px;\n  background: white;\n}\n\n.mensagem .container {\n  .background-color: white;\n  font-size: 10;\n}\n\nul {\n\n  align-self: center;\n  list-style-type: none;\n  padding: 20px;\n}\n\nli {\n  border-style: solid;\n  border-color: black;\n  padding: 20px;\n  margin-top: 2px;\n  margin-bottom: 2px;\n}\n\nh2 {\n  text-align: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVzdWx0YWRvLWRlLWJ1c2NhL3Jlc3VsdGFkby1kZS1idXNjYS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLGFBQWE7RUFDYixZQUFZO0VBQ1osaUJBQWlCO0FBQ25COztBQUVBO0VBQ0Usd0JBQXdCO0VBQ3hCLGFBQWE7QUFDZjs7QUFHQTs7RUFFRSxrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGFBQWE7QUFDZjs7QUFDQTtFQUNFLG1CQUFtQjtFQUNuQixtQkFBbUI7RUFDbkIsYUFBYTtFQUNiLGVBQWU7RUFDZixrQkFBa0I7QUFDcEI7O0FBQ0E7RUFDRSxrQkFBa0I7QUFDcEIiLCJmaWxlIjoic3JjL2FwcC9yZXN1bHRhZG8tZGUtYnVzY2EvcmVzdWx0YWRvLWRlLWJ1c2NhLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi5jb250YWluZXIge1xuICBwYWRkaW5nOiAyMHB4O1xuICB3aWR0aDogNjAwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xufVxuXG4ubWVuc2FnZW0gLmNvbnRhaW5lciB7XG4gIC5iYWNrZ3JvdW5kLWNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxMDtcbn1cblxuXG51bCB7XG5cbiAgYWxpZ24tc2VsZjogY2VudGVyO1xuICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG4gIHBhZGRpbmc6IDIwcHg7XG59XG5saSB7XG4gIGJvcmRlci1zdHlsZTogc29saWQ7XG4gIGJvcmRlci1jb2xvcjogYmxhY2s7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIG1hcmdpbi10b3A6IDJweDtcbiAgbWFyZ2luLWJvdHRvbTogMnB4O1xufVxuaDIge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iXX0= */"
+module.exports = "\n.container {\n  padding-left: 20px;\n  padding-top: 40px;\n  width: 600px;\n  background: white;\n}\n\n.mensagem .container {\n  .background-color: white;\n  font-size: 10;\n}\n\n.filmesEncontrados {\n  margin-left: 0px;\n\n  list-style-type: none;\n  padding: 20px;\n}\n\n.filme-da-lista {\n  border-style: solid;\n  border-width: thin;\n  border-color: black;\n  padding: 20px;\n  margin-bottom: 5px;\n}\n\nh2 {\n  text-align: left;\n}\n\n.lista-pessoas {\n  padding-left: 0px;\n  display: table;\n  width: 100%;\n}\n\n.lista-pessoas ul {\n  list-style: none;\n  padding-left: 5px;\n}\n\n.lista-pessoas li {\n\n  margin-left: 0px;\n  margin-right: 5px;\n  display: inline;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcmVzdWx0YWRvLWRlLWJ1c2NhL3Jlc3VsdGFkby1kZS1idXNjYS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFDQTtFQUNFLGtCQUFrQjtFQUNsQixpQkFBaUI7RUFDakIsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLHdCQUF3QjtFQUN4QixhQUFhO0FBQ2Y7O0FBR0E7RUFDRSxnQkFBZ0I7O0VBRWhCLHFCQUFxQjtFQUNyQixhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixhQUFhO0VBQ2Isa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUdBO0VBQ0UsaUJBQWlCO0VBQ2pCLGNBQWM7RUFDZCxXQUFXO0FBQ2I7O0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25COztBQUNBOztFQUVFLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsZUFBZTtBQUNqQiIsImZpbGUiOiJzcmMvYXBwL3Jlc3VsdGFkby1kZS1idXNjYS9yZXN1bHRhZG8tZGUtYnVzY2EuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLmNvbnRhaW5lciB7XG4gIHBhZGRpbmctbGVmdDogMjBweDtcbiAgcGFkZGluZy10b3A6IDQwcHg7XG4gIHdpZHRoOiA2MDBweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbi5tZW5zYWdlbSAuY29udGFpbmVyIHtcbiAgLmJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xuICBmb250LXNpemU6IDEwO1xufVxuXG5cbi5maWxtZXNFbmNvbnRyYWRvcyB7XG4gIG1hcmdpbi1sZWZ0OiAwcHg7XG5cbiAgbGlzdC1zdHlsZS10eXBlOiBub25lO1xuICBwYWRkaW5nOiAyMHB4O1xufVxuXG4uZmlsbWUtZGEtbGlzdGEge1xuICBib3JkZXItc3R5bGU6IHNvbGlkO1xuICBib3JkZXItd2lkdGg6IHRoaW47XG4gIGJvcmRlci1jb2xvcjogYmxhY2s7XG4gIHBhZGRpbmc6IDIwcHg7XG4gIG1hcmdpbi1ib3R0b206IDVweDtcbn1cblxuaDIge1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xufVxuXG5cbi5saXN0YS1wZXNzb2FzIHtcbiAgcGFkZGluZy1sZWZ0OiAwcHg7XG4gIGRpc3BsYXk6IHRhYmxlO1xuICB3aWR0aDogMTAwJTtcbn1cbi5saXN0YS1wZXNzb2FzIHVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbiAgcGFkZGluZy1sZWZ0OiA1cHg7XG59XG4ubGlzdGEtcGVzc29hcyBsaSB7XG5cbiAgbWFyZ2luLWxlZnQ6IDBweDtcbiAgbWFyZ2luLXJpZ2h0OiA1cHg7XG4gIGRpc3BsYXk6IGlubGluZTtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1027,15 +969,22 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
             id: 2,
             titulo: "Vingadores: Ultimato",
             ano: 2019,
-            direcao: null,
-            elenco: null,
+            diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
+            elenco: [{ nome: "Robert Downey Jr" }, { nome: "Scarlett Johansson" }],
             criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
                 { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
-        this.nenhumFilmeFoiEncontrado = true;
+        this.filmesEncontrados = [this.filme, this.filme, this.filme]; // TODO: Sem Servidor
+        this.nenhumFilmeFoiEncontrado = true; // TODO: Sem Servidor tem q ser true
     }
+    ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.queryParams.subscribe(function (params) {
+            _this.getFilmes(_this.route.snapshot.queryParams); // TODO: Sem servidor
+        });
+    };
     ResultadoDeBuscaComponent.prototype.getFilmes = function (params) {
         var _this = this;
         var conteudo = params.conteudo;
@@ -1066,13 +1015,6 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
                 console.log(resposta.mensagemErro);
             }
             console.log('Filmes retornados' + resposta.filmes + ']');
-        });
-    };
-    ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (params) {
-            // TODO: Sem servidor
-            _this.getFilmes(_this.route.snapshot.queryParams);
         });
     };
     ResultadoDeBuscaComponent.ctorParameters = function () { return [

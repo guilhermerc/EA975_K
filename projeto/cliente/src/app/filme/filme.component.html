@@ -12,7 +12,7 @@
         <div class="coluna">
             <img src="/assets/imagens/vingadores_0.jpg">
         </div>
-        <div class="coluna">
+        <div class="div-video">
           <iframe class="video" src="https://www.youtube.com/embed/g6ng8iy-l0U" frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
@@ -20,14 +20,27 @@
   </div>
 
   <div class="info-filme">
-    Direção: {{filme.diretor}}
-    <br>
-    Elenco: {{filme.elenco}}
-    <br><br>
+
+    <!--Direção--->
+    <div class="lista-pessoas">
+      <ul>
+        <li><b>Direção:</b></li>
+        <li *ngFor="let pessoa of filme.diretores">{{pessoa.nome}},</li>
+      </ul>
+    </div>
+
+    <!--Elenco--->
+    <div class="lista-pessoas">
+      <ul>
+        <li><b>Elenco:</b></li>
+        <li *ngFor="let pessoa of filme.elenco">{{pessoa.nome}},</li>
+      </ul>
+    </div>
+
   </div>
 
   <div class="sinopse">
-    SINOPSE
+    <b>Sinopse:</b>
     <br>{{filme.sinopse}}
   </div>
 

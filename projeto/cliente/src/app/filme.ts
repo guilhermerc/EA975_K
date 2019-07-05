@@ -2,7 +2,7 @@ export class Filme {
 	id: 			number;
 	titulo: 	string;
   ano: 			number;
-	direcao: 	 {
+	diretores: 	 {
 		nome: 	string
 	}[];
 	elenco: {

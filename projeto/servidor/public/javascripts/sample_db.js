@@ -13,15 +13,18 @@ exports.create = function() {
 
 	new modelFilme({
 		"id": 0,
-		"titulo": 	"Vingadores",
+		"titulo": 	"Vingadores: Ultimato",
 		"diretores": 	[
-			{"nome": "Deus"}
+			{"nome": "Joe Russo"},
+			{"nome": "Anthony Russo"}
 		],
 		"ano": 2019,
 		"elenco": [
 			{"nome": 	"Robert Downey Jr."},
+			{"nome": 	"Scarlett Johansson"},
 			{"nome": 	"Chris Evans"}
 		],
+		"sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.",
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -53,6 +56,7 @@ exports.create = function() {
 			{"nome": 	"Timão"},
 			{"nome": 	"Pumba"}
 		],
+		"sinopse": "",
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -78,17 +82,18 @@ exports.create = function() {
 		"diretores": 	[
 			{"nome":	"	Chris Columbus"}
 		],
-		"ano": 2019,
+		"ano": 2001,
 		"elenco": [
 			{"nome": 	"Daniel Radcliffe"},
 			{"nome": 	"Emma Watson"},
 			{"nome": 	"Rupert Grint"}
 		],
+		"sinopse": "",
 		"criticas": [
 			{
 				"username": 	"guilherme",
 				"data": 		"00/00/0000",
-				"comentario": 	"A vara quer rala",
+				"comentario": 	"A vara quer raba",
 				"nota": 2
 			},
 			{

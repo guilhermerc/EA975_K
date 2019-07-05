@@ -1,6 +1,7 @@
 
 .container {
-  padding: 20px;
+  padding-left: 20px;
+  padding-top: 40px;
   width: 600px;
   background: white;
 }
@@ -11,19 +12,38 @@
 }
 
 
-ul {
+.filmesEncontrados {
+  margin-left: 0px;
 
-  align-self: center;
   list-style-type: none;
   padding: 20px;
 }
-li {
+
+.filme-da-lista {
   border-style: solid;
+  border-width: thin;
   border-color: black;
   padding: 20px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
+
 h2 {
-  text-align: center;
+  text-align: left;
+}
+
+
+.lista-pessoas {
+  padding-left: 0px;
+  display: table;
+  width: 100%;
+}
+.lista-pessoas ul {
+  list-style: none;
+  padding-left: 5px;
+}
+.lista-pessoas li {
+
+  margin-left: 0px;
+  margin-right: 5px;
+  display: inline;
 }

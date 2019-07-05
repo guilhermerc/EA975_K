@@ -3,13 +3,20 @@
 
   <div class="container" >
     <h2>Filmes Encontrados</h2>
+
     <ul class="filmesEncontrados">
-      <li *ngFor="let filme of filmesEncontrados">
+      <li *ngFor="let filme of filmesEncontrados" class="filme-da-lista">
         <div class="filme">
           <a routerLink="/filme/{{filme.id}}">
             {{filme.titulo}}</a>
           ({{filme.ano}})
-          <br> De: {{filme.diretor}}
+          <!--Direção--->
+          <div class="lista-pessoas">
+            <ul>
+              <li><b>Direção:</b></li>
+              <li *ngFor="let pessoa of filme.diretores">{{pessoa.nome}},</li>
+            </ul>
+          </div>
 
         </div>
 

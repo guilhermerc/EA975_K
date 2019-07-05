@@ -19,11 +19,11 @@ import { DialogData } from '../tipos/dialog-data';
 export class FilmeComponent implements OnInit {
 
   filme: Filme = {
-    id: 1,
+    id: 2,
     titulo: "Vingadores: Ultimato",
     ano: 2019,
-    direcao: null,
-    elenco: null,
+    diretores: [{nome: "Russo1"}, {nome: "Russo2"}],
+    elenco: [{nome: "Robert Downey Jr"}, {nome: "Scarlett Johansson"}],
     criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
                   {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
     imagens: ["/assets/images/vingadores_0.jpg"],
@@ -49,9 +49,9 @@ export class FilmeComponent implements OnInit {
   ngOnInit() {
     var idFilme = this.route.snapshot.params.id;
 
-    // TODO: Sem servidor
+
     // Busca filme id
-    this.getFilme('id/' + idFilme);
+    this.getFilme('id/' + idFilme);// TODO: Sem servidor
 
   }
   /**
@@ -78,6 +78,7 @@ export class FilmeComponent implements OnInit {
 
         if (resposta.filmes.length > 0) {
           this.filme = resposta.filmes[0];
+          console.log('resposta:' + JSON.stringify(resposta));
 
           // Separa o comentario do usuario se ele existir
           this.ajustaCriticaDoUsuario();

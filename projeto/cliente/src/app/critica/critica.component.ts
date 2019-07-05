@@ -56,9 +56,11 @@ export class CriticaComponent implements OnInit {
 
   fazerCritica() {
     if (this.primeiraVez) {
+      this.dialogRef.close();
       // post
     } else {
       //put
+      this.dialogRef.close();
     }
     //close na callback
   }
