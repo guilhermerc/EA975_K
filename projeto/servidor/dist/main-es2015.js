@@ -52,7 +52,7 @@ module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n\n\n  <button  routerLink=\"autenticacao\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"fazerCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Adicionar Crítica</button>\n    <br><button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>\n\n  <div class=\"botao-entrar\">\n    <button  (click)=\"autenticar()\" routerLink=\"autenticacao\">Entrar</button>\n  </div>\n</div>\n\n<!-- Isso só aparece quando o usuário está logado -->\n<div *ngIf=\"usuario\" class=\"container-critica\">\n\n  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>\n\n  <form (ngSubmit)=\"submeterCritica()\" #formsUsuario=\"ngForm\">\n\n    <div class=\"form-group\" id=\"nota\">\n      <label for=\"nota\">Qual nota você dá pra esse filme?</label>\n      <select class=\"form-control\" id=\"nota\"\n      [(ngModel)]=\"critica.nota\" name= \"nota\">\n        <option *ngFor=\"let opcaoNota of notasPossiveis\" [value]=\"opcaoNota\">{{opcaoNota}}</option>\n      </select>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"comentario\">Escreva uma sua crítica</label>\n      <textarea name=\"name\" [(ngModel)]=\"critica.comentario\" rows=\"4\"\n      style=\"margin-right: 0\"></textarea>\n    </div>\n\n    <button *ngIf=\"!primeiraVez\" type=\"submit\" class=\"botao-critica\">Atualizar Crítica</button>\n    <button *ngIf=\"primeiraVez\"type=\"submit\" class=\"botao-critica\">Adicionar Crítica</button>\n    <br><button *ngIf=\"!primeiraVez\" type=\"button\" (click)=\"removerCritica()\"\n     class=\"botao-remover-critica\">Remover sua crítica</button>\n\n  </form>\n\n\n  <div class=\"botao-entrar\">\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              , no dia {{critica.data}}, escreveu:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>\n        , no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -392,15 +392,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
 /* harmony import */ var _filme_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../filme.service */ "./src/app/filme.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 let CriticaComponent = class CriticaComponent {
     // precisa receber o filme e o usuario
-    constructor(dialogRef, filmeService, data) {
+    constructor(dialogRef, filmeService, router, data) {
         this.dialogRef = dialogRef;
         this.filmeService = filmeService;
+        this.router = router;
         this.data = data;
         this.critica = {
             username: "a",
@@ -414,33 +417,55 @@ let CriticaComponent = class CriticaComponent {
         this.usuario = data.usuario;
         this.filme = data.filme;
         if (data.critica != null) {
-            this.critica = data.critica;
+            // Sinaliza de que se trata de uma edição de crítica
             this.primeiraVez = false;
+            // Copia dos parametros da crítica
+            this.critica.username = data.critica.username;
+            this.critica.comentario = data.critica.comentario;
+            this.critica.nota = data.critica.nota;
         }
     }
     ngOnInit() {
     }
-    botaoEntrar() {
-        this.dialogRef.close();
+    autenticar() {
+        this.router.navigate(['/autenticacao']);
+        this.dialogRef.close(null);
     }
-    fazerCritica() {
+    submeterCritica() {
+        // Atualiza a data
+        var date = new Date();
+        this.critica.data = date.toDateString();
+        // Se é a primeira vez faz post
         if (this.primeiraVez) {
-            this.dialogRef.close();
-            // post
+            this.filmeService.postCritica(this.filme.id, this.critica)
+                .subscribe(resposta => {
+                this.getFilmeAndClose();
+            });
+            // Senão faz put
         }
         else {
-            //put
-            this.dialogRef.close();
+            this.filmeService.putCritica(this.filme.id, this.usuario.login.username, this.critica)
+                .subscribe(resposta => {
+                this.getFilmeAndClose();
+            });
         }
-        //close na callback
     }
     removerCritica() {
-        //delet
+        this.filmeService.deleteCritica(this.filme.id, this.usuario.login.username)
+            .subscribe(resposta => {
+            this.getFilmeAndClose();
+        });
+    }
+    getFilmeAndClose() {
+        this.filmeService.getFilmeById(this.filme.id).subscribe(resposta => {
+            this.dialogRef.close(resposta);
+        });
     }
 };
 CriticaComponent.ctorParameters = () => [
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] },
     { type: _filme_service__WEBPACK_IMPORTED_MODULE_3__["FilmeService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
     { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"],] }] }
 ];
 CriticaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -449,9 +474,10 @@ CriticaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./critica.component.html */ "./node_modules/raw-loader/index.js!./src/app/critica/critica.component.html"),
         styles: [__webpack_require__(/*! ./critica.component.css */ "./src/app/critica/critica.component.css")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"],
-        _filme_service__WEBPACK_IMPORTED_MODULE_3__["FilmeService"], Object])
+        _filme_service__WEBPACK_IMPORTED_MODULE_3__["FilmeService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], Object])
 ], CriticaComponent);
 
 
@@ -480,13 +506,43 @@ let FilmeService = class FilmeService {
     constructor(http) {
         this.http = http;
     }
-    // Observable ativa uma chamada assincrona do retorno dessa função
-    getFilme(nome) {
-        this.router = '/filmes/' + nome;
-        return this.http.get(this.router)
-            .pipe(
-        //catchError(this.handleError<RespostaServidorFilmes>('getFilme', []))
-        );
+    /** Observable ativa uma chamada assincrona do retorno dessa função
+    *  @identificador: Aceita as opções:
+    *   1. ""
+    *   2. "filtro/informação do Filme
+    *   3. "id/id do filme"
+    */
+    getFilme(identificador) {
+        var router = '/filmes/' + identificador;
+        return this.http.get(router);
+    }
+    getFilmeById(id) {
+        var router = '/filmes/id/' + id;
+        return this.http.get(router);
+    }
+    postFilme(filme) {
+    }
+    putFilme(filme) {
+    }
+    /** Observable ativa uma chamada assincrona do retorno dessa função
+    *  @idFilme: Id do filme que se deseja excluir
+    */
+    deleteFilme(idFilme) {
+    }
+    // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
+    postCritica(idFilme, critica) {
+        var router = 'filmes/criticas/' + idFilme;
+        return this.http.post(router, critica);
+    }
+    // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
+    putCritica(idFilme, username, critica) {
+        var router = 'filmes/criticas/' + idFilme + '/' + username;
+        return this.http.put(router, critica);
+    }
+    // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
+    deleteCritica(idFilme, username) {
+        var router = 'filmes/criticas/' + idFilme + '/' + username;
+        return this.http.get(router);
     }
     /**
        * Fonte: https://angular.io/tutorial/toh-pt6
@@ -576,60 +632,84 @@ let FilmeComponent = class FilmeComponent {
         this.observerUsuario();
     }
     ngOnInit() {
-        var idFilme = this.route.snapshot.params.id;
         // Busca filme id
-        this.getFilme('id/' + idFilme); // TODO: Sem servidor
+        this.getFilme(); // TODO: Sem servidor
     }
     /**
-      Adiciona um observer ao estado do usuário de logado.
-    */
+     *Adiciona um observer ao estado do usuário de logado.
+     */
     observerUsuario() {
         this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-            console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-            this.ajustaCriticaDoUsuario();
+            console.log("USUARIO MUDOU DE ESTADO");
+            this.getFilme();
         });
     }
-    getFilme(router) {
+    getFilme() {
+        var router = 'id/' + this.route.snapshot.params.id;
         this.filmeService.getFilme(router).subscribe(resposta => {
-            console.log('resposta do server:' + JSON.stringify(resposta));
-            if (!resposta.houveErro) {
-                if (resposta.filmes.length > 0) {
-                    this.filme = resposta.filmes[0];
-                    console.log('resposta:' + JSON.stringify(resposta));
-                    // Separa o comentario do usuario se ele existir
-                    this.ajustaCriticaDoUsuario();
-                }
-                else {
-                    // TODO: Dispara ação quando não acha filme.
-                    console.log("nenhumFilmeFoiEncontrado");
-                }
+            this.carregaDadosDoFilme(resposta);
+        });
+    }
+    // Essa função carrega os dados do filme na página
+    carregaDadosDoFilme(resposta) {
+        console.log('resposta do server:' + JSON.stringify(resposta));
+        if (!resposta.houveErro) {
+            if (resposta.filmes.length > 0) {
+                this.filme = resposta.filmes[0];
+                console.log('achou um filme');
+                // Separa o comentario do usuario se ele existir
+                this.ajustaCriticas();
             }
             else {
-                // Houve erro
-                console.log(resposta.mensagemErro);
+                // TODO: Dispara ação quando não acha filme.
+                console.log("nenhumFilmeFoiEncontrado");
             }
-            console.log('Filmes retornados' + resposta.filmes + ']');
-        });
+        }
+        else {
+            // Houve erro
+            console.log("ERRO!");
+            console.log(resposta.mensagemErro);
+        }
     }
-    // Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
-    // E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
-    ajustaCriticaDoUsuario() {
-        console.log('estou em ajustaCriticaDoUsuario()');
+    /* Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
+     *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
+     */
+    ajustaCriticas() {
+        console.log('estou em ajustaCriticas()');
         var user = this.usuarioService.getUser();
-        console.log('estou em ajustaCriticaDoUsuario()+ user:' + user);
         if (user != null) {
+            console.log('Usuário Logado =>' + user.login.username);
             console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
             this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
             console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
-            console.log('criticado usuario' + this.criticaDoUsuario);
         }
         else {
-            console.log('else do ajustaCriticaDoUsuario()');
+            console.log('Usuário não esta logado.');
             this.criticaDoUsuario = null;
         }
     }
+    /*
+    * Extrai a crítica do usuário logado do vetor de críticas para exibir ela separadamente.
+    * Após isso, o vetor críticas está pronto para ser exibido.
+    */
+    getCriticaDoUsuario(username) {
+        var index = -1;
+        var criticaDoUsuario = null;
+        for (let critica of this.filme.criticas) {
+            if (critica.username == username) {
+                // Encontra a posição da crítica e a remove do vetor
+                index = this.filme.criticas.indexOf(critica);
+                criticaDoUsuario = this.filme.criticas.splice(index, 1)[0];
+            }
+        }
+        return criticaDoUsuario;
+    }
+    /*
+     *  As próximas funções são sobre a caixa de dialogo de crítica
+     */
     criticar() {
         var usuario = this.usuarioService.getUser();
+        // Se this.criticaDoUsuario for null quer dizer não fez crítica antes.
         var dados = {
             filme: this.filme,
             usuario: usuario,
@@ -639,29 +719,15 @@ let FilmeComponent = class FilmeComponent {
             width: '500px',
             data: dados
         });
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(resposta => {
             console.log('Fechou caixa de dialogo');
-            // atualiza filmes
-        });
-    }
-    getCriticaDoUsuario(username) {
-        var index = -1;
-        var critica;
-        for (let critica of this.filme.criticas) {
-            if (critica.username == username) {
-                index = this.filme.criticas.indexOf(critica);
+            console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(resposta));
+            // atualiza os dados da página
+            // TODO: Uma possível otimização seria só atualizar as críticas
+            if (resposta != null) {
+                this.carregaDadosDoFilme(resposta);
             }
-        }
-        if (index != -1) {
-            console.log('criticas antes:' + JSON.stringify(this.filme));
-            critica = this.filme.criticas.splice(index, 1)[0];
-            console.log('criticas depois:' + JSON.stringify(this.filme));
-            console.log('retirado:' + JSON.stringify(critica));
-            return critica;
-        }
-        else {
-            return null;
-        }
+        });
     }
 };
 FilmeComponent.ctorParameters = () => [
@@ -1133,13 +1199,13 @@ let UsuarioService = class UsuarioService {
         }
     }
     getUser() {
-        console.log('getUser:' + this.usuarioEstaLogado);
+        console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
         if (this.usuarioEstaLogado) {
+            console.log('UsuarioService: Usuário está logado');
             return this.usuario;
-            console.log('get user usuario');
         }
         else {
-            console.log('get user null');
+            console.log('UsuarioService: Usuário não está logado');
             return null;
         }
     }

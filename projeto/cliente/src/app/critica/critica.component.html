@@ -2,9 +2,7 @@
   <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>
 
   <div class="botao-entrar">
-
-
-  <button  routerLink="autenticacao">Entrar</button>
+    <button  (click)="autenticar()" routerLink="autenticacao">Entrar</button>
   </div>
 </div>
 
@@ -13,7 +11,7 @@
 
   <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>
 
-  <form (ngSubmit)="fazerCritica()" #formsUsuario="ngForm">
+  <form (ngSubmit)="submeterCritica()" #formsUsuario="ngForm">
 
     <div class="form-group" id="nota">
       <label for="nota">Qual nota você dá pra esse filme?</label>
@@ -31,7 +29,8 @@
 
     <button *ngIf="!primeiraVez" type="submit" class="botao-critica">Atualizar Crítica</button>
     <button *ngIf="primeiraVez"type="submit" class="botao-critica">Adicionar Crítica</button>
-    <br><button *ngIf="!primeiraVez" type="submit" class="botao-remover-critica">Remover sua crítica</button>
+    <br><button *ngIf="!primeiraVez" type="button" (click)="removerCritica()"
+     class="botao-remover-critica">Remover sua crítica</button>
 
   </form>
 

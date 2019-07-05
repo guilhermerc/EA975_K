@@ -5,6 +5,7 @@ import { Filme } from '../filme';
 import { Usuario } from '../usuario';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
+import { Router } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ export class CriticaComponent implements OnInit {
 
   usuario: Usuario;
   filme: Filme;
+
   critica: Critica = {
     username: "a",
     data: null,
@@ -34,6 +36,7 @@ export class CriticaComponent implements OnInit {
    constructor(
      public dialogRef: MatDialogRef<CriticaComponent>,
      private filmeService: FilmeService,
+     private router: Router,
      @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) {
       console.log('data:' + JSON.stringify(data));
@@ -42,32 +45,61 @@ export class CriticaComponent implements OnInit {
       this.filme = data.filme;
 
       if (data.critica != null) {
-        this.critica = data.critica;
+
+        // Sinaliza de que se trata de uma edição de crítica
         this.primeiraVez = false;
+
+        // Copia dos parametros da crítica
+        this.critica.username = data.critica.username;
+        this.critica.comentario = data.critica.comentario;
+        this.critica.nota = data.critica.nota;
+
       }
     }
 
   ngOnInit() {
   }
 
-  botaoEntrar() {
-    this.dialogRef.close();
+  autenticar() {
+    this.router.navigate(['/autenticacao']);
+    this.dialogRef.close(null);
   }
 
-  fazerCritica() {
+  submeterCritica() {
+
+    // Atualiza a data
+    var date = new Date();
+    this.critica.data = date.toDateString();
+
+    // Se é a primeira vez faz post
     if (this.primeiraVez) {
-      this.dialogRef.close();
-      // post
+      this.filmeService.postCritica(this.filme.id, this.critica)
+      .subscribe(resposta => {
+        this.getFilmeAndClose();
+      });
+
+    // Senão faz put
     } else {
-      //put
-      this.dialogRef.close();
+      this.filmeService.putCritica(this.filme.id, this.usuario.login.username,this.critica)
+      .subscribe(resposta => {
+        this.getFilmeAndClose();
+      });
     }
-    //close na callback
   }
 
   removerCritica() {
-    //delet
+
+    this.filmeService.deleteCritica(this.filme.id, this.usuario.login.username)
+    .subscribe(resposta => {
+      this.getFilmeAndClose();
+    });
 
   }
 
+  getFilmeAndClose() {
+
+    this.filmeService.getFilmeById(this.filme.id).subscribe(resposta => {
+      this.dialogRef.close(resposta);
+    });
+  }
 }

@@ -9,6 +9,7 @@ import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
+import { RespostaServidorFilmes } from '../tipos/resposta-servidor-filmes'
 
 @Component({
   selector: 'app-filme',
@@ -47,79 +48,101 @@ export class FilmeComponent implements OnInit {
   }
 
   ngOnInit() {
-    var idFilme = this.route.snapshot.params.id;
-
 
     // Busca filme id
-    this.getFilme('id/' + idFilme);// TODO: Sem servidor
+    this.getFilme();// TODO: Sem servidor
 
   }
   /**
-    Adiciona um observer ao estado do usuário de logado.
-  */
+   *Adiciona um observer ao estado do usuário de logado.
+   */
   observerUsuario() {
 
     this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
 
-      console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
+      console.log("USUARIO MUDOU DE ESTADO");
 
-      this.ajustaCriticaDoUsuario();
+      this.getFilme();
     });
-
   }
 
-  getFilme(router: string) {
+  getFilme() {
+
+    var router = 'id/' + this.route.snapshot.params.id;
 
     this.filmeService.getFilme(router).subscribe(resposta => {
-
-      console.log('resposta do server:' + JSON.stringify(resposta));
-
-      if (!resposta.houveErro) {
-
-        if (resposta.filmes.length > 0) {
-          this.filme = resposta.filmes[0];
-          console.log('resposta:' + JSON.stringify(resposta));
-
-          // Separa o comentario do usuario se ele existir
-          this.ajustaCriticaDoUsuario();
-        } else {
-          // TODO: Dispara ação quando não acha filme.
-          console.log("nenhumFilmeFoiEncontrado");
-        }
-      } else {
-        // Houve erro
-        console.log(resposta.mensagemErro)
-      }
-
-
-      console.log('Filmes retornados' + resposta.filmes+']');
-
+      this.carregaDadosDoFilme(resposta);
     });
   }
 
-  // Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
-  // E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
-  ajustaCriticaDoUsuario() {
-    console.log('estou em ajustaCriticaDoUsuario()');
+  // Essa função carrega os dados do filme na página
+  carregaDadosDoFilme(resposta: RespostaServidorFilmes) {
+    console.log('resposta do server:' + JSON.stringify(resposta));
 
-    var user = this.usuarioService.getUser();
-    console.log('estou em ajustaCriticaDoUsuario()+ user:' + user);
+    if (!resposta.houveErro) {
 
-    if (user != null) {
-          console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
-          this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
-          console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
+      if (resposta.filmes.length > 0) {
+        this.filme = resposta.filmes[0];
+        console.log('achou um filme');
 
-          console.log('criticado usuario'+this.criticaDoUsuario);
+        // Separa o comentario do usuario se ele existir
+        this.ajustaCriticas();
+      } else {
+        // TODO: Dispara ação quando não acha filme.
+        console.log("nenhumFilmeFoiEncontrado");
+      }
     } else {
-      console.log('else do ajustaCriticaDoUsuario()');
-      this.criticaDoUsuario = null;
+      // Houve erro
+      console.log("ERRO!");
+      console.log(resposta.mensagemErro)
     }
   }
 
+
+  /* Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
+   *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
+   */
+  ajustaCriticas() {
+    console.log('estou em ajustaCriticas()');
+
+    var user = this.usuarioService.getUser();
+
+    if (user != null) {
+        console.log('Usuário Logado =>' + user.login.username);
+          console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
+          this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
+          console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
+    } else {
+      console.log('Usuário não esta logado.');
+      this.criticaDoUsuario = null;
+    }
+  }
+  /*
+  * Extrai a crítica do usuário logado do vetor de críticas para exibir ela separadamente.
+  * Após isso, o vetor críticas está pronto para ser exibido.
+  */
+  getCriticaDoUsuario(username: String): Critica {
+    var index = -1;
+    var criticaDoUsuario: Critica = null;
+
+    for (let critica of this.filme.criticas) {
+      if (critica.username == username) {
+        // Encontra a posição da crítica e a remove do vetor
+        index = this.filme.criticas.indexOf(critica);
+        criticaDoUsuario = this.filme.criticas.splice(index, 1)[0];
+      }
+    }
+    return criticaDoUsuario;
+  }
+
+  /*
+   *  As próximas funções são sobre a caixa de dialogo de crítica
+   */
   criticar(): void {
 
     var usuario = this.usuarioService.getUser();
+
+    // Se this.criticaDoUsuario for null quer dizer não fez crítica antes.
     var dados: DialogData = {
       filme: this.filme,
       usuario: usuario,
@@ -131,30 +154,18 @@ export class FilmeComponent implements OnInit {
       data: dados
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(resposta => {
       console.log('Fechou caixa de dialogo');
-      // atualiza filmes
+      console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(resposta));
+
+      // atualiza os dados da página
+      // TODO: Uma possível otimização seria só atualizar as críticas
+      if (resposta != null) {
+        this.carregaDadosDoFilme(resposta);
+      }
 
     });
   }
 
-  getCriticaDoUsuario(username: String): Critica {
-    var index = -1;
-    var critica: any;
-    for (let critica of this.filme.criticas) {
-      if (critica.username == username) {
-        index = this.filme.criticas.indexOf(critica);
-      }
-    }
-    if (index != -1) {
-      console.log('criticas antes:' + JSON.stringify(this.filme));
-      critica = this.filme.criticas.splice(index, 1)[0];
-      console.log('criticas depois:' + JSON.stringify(this.filme));
-      console.log('retirado:' + JSON.stringify(critica));
-      return critica;
-    } else {
 
-      return null;
-    }
-  }
 }

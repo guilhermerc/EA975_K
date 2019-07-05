@@ -6,3 +6,7 @@ export class RespostaServidorFilmes {
     totalFilmesEncontrados: number;
     filmes:                 Filme[] ;
 }
+
+export class INTERFACE {
+
+}

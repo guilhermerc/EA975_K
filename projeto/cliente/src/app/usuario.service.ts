@@ -61,14 +61,14 @@ export class UsuarioService {
   }
 
   getUser(): Usuario {
-    console.log('getUser:' + this.usuarioEstaLogado);
+    console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
 
     if (this.usuarioEstaLogado) {
+      console.log('UsuarioService: Usuário está logado');
       return this.usuario;
-      console.log('get user usuario');
     }
     else {
-      console.log('get user null');
+      console.log('UsuarioService: Usuário não está logado');
       return null;
     }
   }

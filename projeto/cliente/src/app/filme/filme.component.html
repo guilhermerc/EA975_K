@@ -55,7 +55,7 @@
       <ul>
         <li *ngFor= "let critica of filme.criticas" class="critica">
               <span style="color:red">{{critica.username}}</span>
-              , no dia {{critica.data}}, escreveu:
+              escreveu, no dia {{critica.data}}:
             <br>"{{critica.comentario}}"
             <br>Nota: {{critica.nota}}
         </li>
@@ -68,8 +68,7 @@
       </div>
 
       <div *ngIf="criticaDoUsuario" class="critica">
-        <span style="color:red">{{criticaDoUsuario.username}}</span>
-        , no dia {{criticaDoUsuario.data}}, escreveu:
+        <span style="color:red">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:
         <br>"{{criticaDoUsuario.comentario}}"
         <br>"Nota: {{criticaDoUsuario.nota}}"
         <button with="400px"(click)="criticar()" class="critica-botao">
