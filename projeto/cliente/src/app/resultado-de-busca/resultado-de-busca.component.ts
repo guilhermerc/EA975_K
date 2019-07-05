@@ -24,7 +24,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
     sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
   };
 
-  filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];
+  filmesEncontrados: Filme[];// = [this.filme, this.filme, this.filme];
 
   constructor(private route: ActivatedRoute,
               private filmeService: FilmeService,
@@ -52,7 +52,7 @@ export class ResultadoDeBuscaComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       // TODO: Sem servidor
-      //this.getFilmes(this.route.snapshot.queryParams);
+      this.getFilmes(this.route.snapshot.queryParams);
 
     });
 

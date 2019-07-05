@@ -1,1 +1,41 @@
-<p>critica works!</p>
+<div class="container-critica" *ngIf="!usuario">
+  <h2 mat-dialog-title> Você precisa estar logado para poder dar sua crítica!</h2>
+
+  <div class="botao-entrar">
+
+
+  <button  (click)="botaoEntrar()">Entrar</button>
+  </div>
+</div>
+
+<!-- Isso só aparece quando o usuário está logado -->
+<div *ngIf="usuario" class="container-critica">
+
+  <h2 mat-dialog-title> Crítica do filme : {{filme.titulo}}</h2>
+
+  <form (ngSubmit)="fazerCritica()" #formsUsuario="ngForm">
+
+    <div class="form-group" id="nota">
+      <label for="nota">Qual nota você dá pra esse filme?</label>
+      <select class="form-control" id="nota"
+      [(ngModel)]="critica.nota" name= "nota">
+        <option *ngFor="let opcaoNota of notasPossiveis" [value]="opcaoNota">{{opcaoNota}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="comentario">Escreva uma sua crítica</label>
+      <textarea name="name" [(ngModel)]="critica.comentario" rows="4"
+      style="margin-right: 0"></textarea>
+    </div>
+
+    <button *ngIf="!primeiraVez" type="submit" class="botao-critica">Atualizar Crítica</button>
+    <button *ngIf="primeiraVez"type="submit" class="botao-critica">Adicionar Crítica</button>
+    <br><button *ngIf="!primeiraVez" type="submit" class="botao-remover-critica">Remover sua crítica</button>
+
+  </form>
+
+
+  <div class="botao-entrar">
+  </div>
+</div>

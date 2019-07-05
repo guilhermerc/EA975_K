@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Registro de Usuário</h1>
+  <h1>Registro de Usuário</h1><br>
   <form (ngSubmit)="registrar()" #formsUsuario="ngForm">
     <div class="form-group">
       <label for="nome">Nome</label>
@@ -13,9 +13,9 @@
     </div>
 
     <div class="form-group">
-      <label for="username">Usernam</label>
+      <label for="username">Nomde de Usuário</label>
       <input type="text" class="form-control" id="username" required
-      [(ngModel)]="usuario.username" name="username"
+      [(ngModel)]="usuario.login.username" name="username"
       #username="ngModel">
       <div [hidden]="username.valid || username.pristine"
       class="alert alert-danger">
@@ -43,6 +43,8 @@
         </select>
       </div>
     </div>
+
+
 
     <button type="submit" class="btn btn-success"
     [disabled]="!formsUsuario.form.valid">Registrar</button>

@@ -1,10 +1,15 @@
 export class Usuario {
 
+//  public fotoPerfil: string?,
+
   constructor(
-  	public nome: String,
-  	public username: string,
+  	public login: {
+                username: string,
+                senha:  string
+    },
+    public nome: string,
   	public dataNascimento: Date,
-  	public sexo: String,
-  	public fotoPerfil?: String
+  	public sexo: string,
+    public moderador: boolean
   ){}
 }

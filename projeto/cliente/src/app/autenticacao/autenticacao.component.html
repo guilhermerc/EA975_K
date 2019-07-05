@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <h1>Login</h1>
+    <h1>Login</h1><br>
     <form (ngSubmit)="login()" #formsUsuario="ngForm">
       <div class="form-group">
         <label for="username">Username</label>
@@ -33,9 +33,7 @@
       [disabled]="!formsUsuario.form.valid">Fazer Login</button>
     </form>
   </div>
-
-      <hr>
-
-
+  <br>
+  <hr>
 </div>
 <app-forms-cadastro-usuario></app-forms-cadastro-usuario>

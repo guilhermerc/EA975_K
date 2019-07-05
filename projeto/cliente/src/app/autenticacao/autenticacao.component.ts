@@ -30,8 +30,6 @@ export class AutenticacaoComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    console.log('this.dadosLogin:'+this.dadosLogin);
-
   }
 
   login() {

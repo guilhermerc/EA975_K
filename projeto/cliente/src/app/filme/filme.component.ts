@@ -7,15 +7,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CriticaComponent } from '../critica/critica.component';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
+import { Critica } from '../tipos/critica';
+import { DialogData } from '../tipos/dialog-data';
 
 
 
-export interface Critica {
-    username: string;
-    data: string;
-    comentario: string;
-    nota: Number;
-}
 
 @Component({
   selector: 'app-filme',
@@ -66,12 +62,12 @@ export class FilmeComponent implements OnInit {
     var idFile = this.route.snapshot.params.id;
 
     // TODO: Sem servidor
-    //this.filmeService.getFilme('id/' + idFile).subscribe(filmes =>
-    //{
-      //this.filme = filmes[0];
+    this.filmeService.getFilme('id/' + idFile).subscribe(filmes =>
+    {
+      this.filme = filmes[0];
       console.log('Estou no ngOnInit');
       this.ajustaCriticaDoUsuario();
-    //});
+    });
 
   }
 
@@ -85,7 +81,7 @@ export class FilmeComponent implements OnInit {
 
     if (user != null) {
           console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
-          this.criticaDoUsuario = this.getCriticaDoUsuario(user.username);
+          this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
           console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
 
           console.log('criticado usuario'+this.criticaDoUsuario);
@@ -96,14 +92,23 @@ export class FilmeComponent implements OnInit {
   }
 
   criticar(): void {
+
+    var usuario = this.usuarioService.getUser();
+    var dados: DialogData = {
+      filme: this.filme,
+      usuario: usuario,
+      critica: this.criticaDoUsuario
+    };
+
     const dialogRef = this.dialog.open(CriticaComponent, {
       width: '500px',
-      data: {filme: this.filme}
+      data: dados
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
+      console.log('Fechou caixa de dialogo');
+      // atualiza filmes
+
     });
   }
 

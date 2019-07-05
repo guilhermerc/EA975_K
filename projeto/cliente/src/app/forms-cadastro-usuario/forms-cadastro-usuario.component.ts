@@ -11,11 +11,14 @@ import { UsuarioService } from '../usuario.service';
 export class FormsCadastroUsuarioComponent implements OnInit {
 
   usuario: Usuario = {
+    login: {
+      username: "",
+      senha:  ""
+    },
     nome: "",
-  	username: "",
   	dataNascimento: null,
   	sexo: "",
-  	fotoPerfil: ""
+    moderador: false
   };
 
   registrado = false;

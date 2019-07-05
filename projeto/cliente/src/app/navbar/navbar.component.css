@@ -7,11 +7,13 @@
 }
 
 .topnav-right {
+  position: static;
   float: right;
 }
 
 /* Elementos de Pesquisa */
 .search-container {
+  
   margin-top: 12px;
   margin-bottom: 12px;
   float: left;
@@ -48,7 +50,7 @@
   margin-left: 1px;
 }
 .botao {
-    padding: 16px 16px;
+    padding: 16px 20px;
 }
 
 .navbar div {

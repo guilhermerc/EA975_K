@@ -20,6 +20,8 @@ export class NavbarComponent implements OnInit {
 
   usuarioEstaLogado = false;
 
+  usuarioModerador = false;
+
 
   constructor(private router: Router,
               private usuarioService: UsuarioService) {
@@ -45,9 +47,21 @@ export class NavbarComponent implements OnInit {
     }
     else {
       this.usuario = usuario;
-      console.log('novo usuario é: ' + this.usuario.username);
+      console.log('novo usuario é: ' + this.usuario.login.username);
     }
   }
+
+  atualizaModerador() {
+
+    if (this.usuario != null) {
+      if (this.usuario.moderador){
+
+      }
+    } else {
+      console.log("Erro! Usuário não está logado. Em atualizaModerador()")
+    }
+  }
+
 
 
 

@@ -20,14 +20,18 @@ export class UsuarioService {
 
       //chama callback
       // se logou
-      if (username == 'guilherme' || username == 'marcelo') {
+      if (username == 'guilherme' || username == 'marcelo' ||  username == 'gabriel') {
 
         //TODO: atribui a this.usuario o ususario obtido pelo servidor
         this.usuario  = {
+          login: {
+            username: username,
+            senha:  ""
+          },
           nome: 'String',
-        	username: username,
         	dataNascimento: new Date(),
-        	sexo: 'String'
+        	sexo: 'String',
+          moderador: true
         }
 
         // Atualiza o observable
@@ -44,7 +48,7 @@ export class UsuarioService {
 
     //TODO: Subustituir por pegar do servidor os dados cadastrados.
       //request
-      if (usuario.username == 'guilherme' || usuario.username == 'marcelo') {
+      if (usuario.login.username == 'guilherme' || usuario.login.username == 'marcelo'  ||  usuario.login.username == 'gabriel') {
         //TODO: colocar o usuario recebido do servidor
         this.usuario  = usuario;
         // se logar de verdade

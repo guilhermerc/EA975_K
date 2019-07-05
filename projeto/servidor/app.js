@@ -54,4 +54,4 @@ app.use(function(err, req, res, next) {
 module.exports = app;
 
 var sample_db = require('./public/javascripts/sample_db');
-//sample_db.create();
+sample_db.create();
