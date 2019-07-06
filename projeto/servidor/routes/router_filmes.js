@@ -202,14 +202,62 @@ router.post('/id/:id/comentario', function(req, res, next) {
 	});
 });
 
-function calculaNotaMedia(criticas)
-{
+router.put('/id/:id/comentario', function(req, res, next) {
+	console.log("PUT filmes/id/:id/comentario");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"novaNotaMedia":			-1
+	};
+	var query = {
+		"id":					req.params.id,
+	};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			// 'response' já está pronto para ser enviado
+			console.error("Filme não encontrado na base de dados.");
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme não encontrado na base de dados.";
+		} else {
+			var novaCritica = {
+				"username":		req.body.username,
+				"data":			req.body.data,
+				"comentario":	req.body.comentario,
+				"nota":			req.body.nota
+			}
+			atualizaCritica(filme.criticas, novaCritica);
+			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
+				if(err){
+					console.log(err);
+				}
+			});
+			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
+		}
+		res.send(response);
+	});
+});
+
+function calculaNotaMedia(criticas) {
 	var i = 0, notaMedia = 0;
 	for (i = 0; i < criticas.length; i++) {
 		notaMedia += criticas[i].nota;
 	}
 	notaMedia /= criticas.length;
 	return notaMedia;
+}
+
+function atualizaCritica(criticas, novaCritica) {
+	for (var i in criticas) {
+     	if (criticas[i].username == novaCritica.username) {
+    		criticas[i] = novaCritica;
+        	break;
+     	}
+   	}
 }
 
 module.exports = router;

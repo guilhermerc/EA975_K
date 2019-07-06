@@ -11,6 +11,7 @@
 | '/filmes/ano/:ano'            | GET           | Filtra lista de filmes pelo ano 'ano'                 |
 | '/filmes/elenco/:nome'        | GET           | Filtra lista de filmes pelo ator ':nome'              |
 | '/filmes/id/:id/comentario'   | POST          | Adiciona novo comentário ao filme de id ':id'         |
+| '/filmes/id/:id/comentario'   | PUT           | Altera comentário já feito ao filme de id ':id'       |
 
 
 ##### Base de dados: usuarios 
