@@ -12,7 +12,7 @@ exports.create = function() {
     });
 
 	new modelFilme({
-		"id": 0,
+		"id": "HOLA",
 		"titulo": 	"Vingadores: Ultimato",
 		"diretores": 	[
 			{"nome": "Joe Russo"},
@@ -45,7 +45,7 @@ exports.create = function() {
 	});
 
 	new modelFilme({
-		"id": 1,
+		"id": "CHE",
 		"titulo": 	"O Rei Leão",
 		"diretores": 	[
 			{"nome":	"Mufasa"},
@@ -75,9 +75,9 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-	
+
 	new modelFilme({
-		"id": 2,
+		"id": "QUE",
 		"titulo": 	"Harry Potter e a Pedra Filosofal",
 		"diretores": 	[
 			{"nome":	"	Chris Columbus"}
