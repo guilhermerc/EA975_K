@@ -13,10 +13,13 @@
 
 /* Elementos de Pesquisa */
 .search-container {
-  
+
   margin-top: 12px;
   margin-bottom: 12px;
   float: left;
+}
+.form-control {
+  width: 50px;
 }
 
 .barra-input {

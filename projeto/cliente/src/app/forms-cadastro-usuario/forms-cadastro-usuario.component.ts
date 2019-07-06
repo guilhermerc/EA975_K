@@ -28,8 +28,9 @@ export class FormsCadastroUsuarioComponent implements OnInit {
 
   registrar():void {
     this.registrado = true;
-    this.usuarioService.registrar(this.usuario,
-      (usuarioLogouComExito: boolean, mensageDeErro: string) => {});
+    this.usuarioService.registrar(this.usuario).subscribe(resposta => {
+      console.log('Resposta do post de novo usuário:' + JSON.stringify(resposta));
+    });
 
   }
   // TODO: Remove this when we're done

@@ -3,13 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, INTERFACE } from './tipos/resposta-servidor-filmes'
+import { RespostaServidorFilmes, RespPostFilme }  from './tipos/interfaces-servidor';
 import { Critica } from './tipos/critica';
 
 @Injectable({
   providedIn: 'root'
 })
-
 
 export class FilmeService {
 
@@ -47,23 +46,23 @@ export class FilmeService {
 
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  postCritica(idFilme: number, critica: Critica): Observable<INTERFACE> {
-    var router = 'filmes/criticas/' + idFilme;
+  postCritica(idFilme: number, critica: Critica): Observable<RespPostFilme> {
+    var router = '/filmes/id/' + idFilme;
 
-    return this.http.post<INTERFACE>(router, critica);
+    return this.http.post(router, critica);
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  putCritica(idFilme: number, username: string, critica: Critica): Observable<INTERFACE> {
-    var router = 'filmes/criticas/' + idFilme + '/' + username;
+  putCritica(idFilme: number, username: string, critica: Critica): Observable<RespPostFilme> {
+    var router = '/filmes/criticas/' + idFilme + '/' + username;
 
-    return this.http.put<INTERFACE>(router, critica);
+    return this.http.put<RespPostFilme>(router, critica);
   }
 
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  deleteCritica(idFilme: number, username: string): Observable<INTERFACE> {
-    var router = 'filmes/criticas/' + idFilme + '/' + username;
+  deleteCritica(idFilme: number, username: string): Observable<RespPostFilme> {
+    var router = '/filmes/criticas/' + idFilme + '/' + username;
 
-    return this.http.get<INTERFACE>(router);
+    return this.http.get<RespPostFilme>(router);
   }
 
 

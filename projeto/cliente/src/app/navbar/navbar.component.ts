@@ -10,9 +10,13 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
-  filtroIds = ['titulo', 'diretor', 'elenco', 'ano', 'todos'];
-  filtrosExibidos = ['Título', 'Diretor', 'Elenco', 'Ano', 'Todos'];
+  filtros = [
+    {chave: "titulo", rotulo: "Título"},
+    {chave: "diretores", rotulo: "Direção"},
+    {chave: "elenco", rotulo: "Elenco"},
+    {chave: "ano", rotulo: "Ano"},
+    {chave: "todos", rotulo: "Todos"}
+  ];
 
   barraDeBusca: String = '';
 
@@ -67,16 +71,18 @@ export class NavbarComponent implements OnInit {
 
 
   buscaSimples(): void {
-    var filtroEscolhido =  (<HTMLInputElement>document.getElementById("filtroDePesquisa")).value;
-    var index = this.filtrosExibidos.indexOf(filtroEscolhido);
-    var idFiltro = this.filtroIds[index];
 
-    var pesquisa: String = idFiltro + '/' + this.barraDeBusca;
+    var filtroSelecionado =  (<HTMLInputElement>document.getElementById("filtroSelecionado")).value;
+    var pesquisa: String = filtroSelecionado + '/' + this.barraDeBusca;
 
     // O que estiver nesse vetor é a url da próxima página
-    this.router.navigate(['/busca/_' + this.barraDeBusca],
-                         { queryParams: {filtro: idFiltro, conteudo: this.barraDeBusca} });
-
+    this.router.navigate(
+      ['/busca/_' + this.barraDeBusca],
+      { queryParams: {
+        filtro: filtroSelecionado,
+        conteudo: this.barraDeBusca}
+      }
+    );
   }
 
   logout() {

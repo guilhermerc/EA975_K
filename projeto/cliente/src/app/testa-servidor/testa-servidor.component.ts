@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Component({
   selector: 'app-testa-servidor',
   templateUrl: './testa-servidor.component.html',
@@ -25,7 +31,11 @@ export class TestaServidorComponent implements OnInit {
   }
 
   post() {
-    this.http.post(this.router, this.query).subscribe(response =>{
+
+    var req = {usuario: {username: "marcelo"}};
+
+    console.log('post this query:' + req);
+    this.http.post(this.router, req).subscribe(response =>{
       this.response = response;
     });
   }

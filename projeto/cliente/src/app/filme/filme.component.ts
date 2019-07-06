@@ -9,7 +9,7 @@ import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
-import { RespostaServidorFilmes } from '../tipos/resposta-servidor-filmes'
+import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
 
 @Component({
   selector: 'app-filme',
@@ -67,7 +67,7 @@ export class FilmeComponent implements OnInit {
   }
 
   getFilme() {
-
+    console.log('GET FILME' + this.route.snapshot.params.id);
     var router = 'id/' + this.route.snapshot.params.id;
 
     this.filmeService.getFilme(router).subscribe(resposta => {

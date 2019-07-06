@@ -1,3 +1,53 @@
-<p>
-  perfil-usuario works!
-</p>
+<div class="container">
+  <h1>Edição de Perfil</h1><br>
+  <form (ngSubmit)="atualizarDados()" #formsUsuario="ngForm">
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" required
+      [(ngModel)]="usuario.nome" name="nome"
+      #nome="ngModel">
+      <div [hidden]="nome.valid || nome.pristine"
+      class="alert alert-danger">
+      Nome é obrigatório
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Nomde de Usuário</label>
+      <input type="text" class="form-control" id="username" required
+      [(ngModel)]="usuario.login.username" name="username"
+      #username="ngModel">
+      <div [hidden]="username.valid || username.pristine"
+      class="alert alert-danger">
+      username é obrigatório
+      </div>
+    </div>
+
+
+    <div id="inline-forms">
+      <div class="form-group" id="campo">
+        <label for="data">Data de Nascimento</label>
+        <input type="date" class="form-control" id="data" required
+        [(ngModel)]="usuario.dataNascimento" name="data" #dataNascimento="ngModel">
+        <div [hidden]="dataNascimento.valid || dataNascimento.pristine"
+        class="alert alert-danger">
+        Data de nascimento é obrigatório
+        </div>
+      </div>
+
+      <div class="form-group" id="campo">
+        <label for="sexo">Sexo</label>
+        <select class="form-control" id="sexo" required
+        [(ngModel)]="usuario.sexo" name= "sexo">
+          <option *ngFor="let sexo of sexos" [value]="sexo">{{sexo}}</option>
+        </select>
+      </div>
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success"
+    [disabled]="!formsUsuario.form.valid">Registrar</button>
+
+  </form>
+</div>

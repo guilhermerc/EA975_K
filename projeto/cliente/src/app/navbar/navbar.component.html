@@ -5,18 +5,17 @@
     </a>
 
     <div class="search-container">
-      <form (ngSubmit)="buscaSimples()">
+
+
         <input type="text" placeholder="Procurar por um filme, elenco, direção..." name="search"
         [(ngModel)]="barraDeBusca" class="barra-input">
-        <select id= "filtroDePesquisa" class="barra-input">
-          <option selected>{{filtrosExibidos[0]}}</option>
-          <option>{{filtrosExibidos[1]}}</option>
-          <option>{{filtrosExibidos[2]}}</option>
-          <option>{{filtrosExibidos[3]}}</option>
-          <option>{{filtrosExibidos[4]}}</option>
-        </select>
-        <button type="submit" class="barra-input">Buscar</button>
-      </form>
+
+        <select class="barra-input" id="filtroSelecionado">
+         <option *ngFor="let filtro of filtros" [value]="filtro.chave">{{filtro.rotulo}}</option>
+       </select>
+
+        <button type="button" (click)="buscaSimples()" class="barra-input">Buscar</button>
+
     </div>
 
     <div class="topnav-right">

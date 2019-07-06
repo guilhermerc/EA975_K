@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 import { Observable, of } from 'rxjs';
 import { Filme } from '../filme';
 import { FilmeService } from '../filme.service';
-import { RespostaServidorFilmes } from '../tipos/resposta-servidor-filmes'
+import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
 
 @Component({
   selector: 'app-resultado-de-busca',
@@ -26,10 +26,6 @@ export class ResultadoDeBuscaComponent implements OnInit {
   };
 
   filmesEncontrados: Filme[] = [this.filme, this.filme, this.filme];// TODO: Sem Servidor
-
-
-  nenhumFilmeFoiEncontrado: boolean = true;// TODO: Sem Servidor tem q ser true
-
 
   constructor(private route: ActivatedRoute,
               private filmeService: FilmeService,
@@ -57,19 +53,19 @@ export class ResultadoDeBuscaComponent implements OnInit {
       router = "";
     }
 
-    console.log('agora vai router[' + router + ']');
+    console.log('Vai buscar lista de filmes [' + router + ']');
 
     this.filmeService.getFilme(router).subscribe(resposta => {
+      console.log('Resposta ao pegar lista de filmes:' + JSON.stringify(resposta))
 
       if (!resposta.houveErro) {
         this.filmesEncontrados = resposta.filmes;
-
+        /*
         if (this.filmesEncontrados.length > 0) {
-          this.nenhumFilmeFoiEncontrado = false;
         } else {
           // TODO: Dispara ação quando não acha filme.
           console.log("nenhumFilmeFoiEncontrado");
-        }
+        }*/
       } else {
         // Houve erro
         console.log(resposta.mensagemErro)

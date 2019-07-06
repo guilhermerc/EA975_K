@@ -85,7 +85,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n      <form (ngSubmit)=\"buscaSimples()\">\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n        <select id= \"filtroDePesquisa\" class=\"barra-input\">\n          <option selected>{{filtrosExibidos[0]}}</option>\n          <option>{{filtrosExibidos[1]}}</option>\n          <option>{{filtrosExibidos[2]}}</option>\n          <option>{{filtrosExibidos[3]}}</option>\n          <option>{{filtrosExibidos[4]}}</option>\n        </select>\n        <button type=\"submit\" class=\"barra-input\">Buscar</button>\n      </form>\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> {{usuario.login.username}} Perfil</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> {{usuario.login.username}} Perfil</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  perfil-usuario works!\n</p>\n"
+module.exports = "<div class=\"container\">\n  <h1>Edição de Perfil</h1><br>\n  <form (ngSubmit)=\"atualizarDados()\" #formsUsuario=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"nome\">Nome</label>\n      <input type=\"text\" class=\"form-control\" id=\"nome\" required\n      [(ngModel)]=\"usuario.nome\" name=\"nome\"\n      #nome=\"ngModel\">\n      <div [hidden]=\"nome.valid || nome.pristine\"\n      class=\"alert alert-danger\">\n      Nome é obrigatório\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"username\">Nomde de Usuário</label>\n      <input type=\"text\" class=\"form-control\" id=\"username\" required\n      [(ngModel)]=\"usuario.login.username\" name=\"username\"\n      #username=\"ngModel\">\n      <div [hidden]=\"username.valid || username.pristine\"\n      class=\"alert alert-danger\">\n      username é obrigatório\n      </div>\n    </div>\n\n\n    <div id=\"inline-forms\">\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"data\">Data de Nascimento</label>\n        <input type=\"date\" class=\"form-control\" id=\"data\" required\n        [(ngModel)]=\"usuario.dataNascimento\" name=\"data\" #dataNascimento=\"ngModel\">\n        <div [hidden]=\"dataNascimento.valid || dataNascimento.pristine\"\n        class=\"alert alert-danger\">\n        Data de nascimento é obrigatório\n        </div>\n      </div>\n\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"sexo\">Sexo</label>\n        <select class=\"form-control\" id=\"sexo\" required\n        [(ngModel)]=\"usuario.sexo\" name= \"sexo\">\n          <option *ngFor=\"let sexo of sexos\" [value]=\"sexo\">{{sexo}}</option>\n        </select>\n      </div>\n    </div>\n\n\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Registrar</button>\n\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<p>\n  perfil-usuario works!\n</p>\n"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf=\"!nenhumFilmeFoiEncontrado\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\" class=\"filme-da-lista\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <!--Direção--->\n          <div class=\"lista-pessoas\">\n            <ul>\n              <li><b>Direção:</b></li>\n              <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n            </ul>\n          </div>\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"nenhumFilmeFoiEncontrado\" >\n  <h2>UMDB Filmes</h2>\n\n  <p >\n  <b>Nenhum filme foi Encontrado!</b><br>\n  <br>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>\n  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
+module.exports = "\n<div *ngIf=\"filmesEncontrados.length > 0\">\n\n  <div class=\"container\" >\n    <h2>Filmes Encontrados</h2>\n\n    <ul class=\"filmesEncontrados\">\n      <li *ngFor=\"let filme of filmesEncontrados\" class=\"filme-da-lista\">\n        <div class=\"filme\">\n          <a routerLink=\"/filme/{{filme.id}}\">\n            {{filme.titulo}}</a>\n          ({{filme.ano}})\n          <!--Direção--->\n          <div class=\"lista-pessoas\">\n            <ul>\n              <li><b>Direção:</b></li>\n              <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n            </ul>\n          </div>\n\n        </div>\n\n      </li>\n    </ul>\n  </div>\n</div>\n\n<div class=\"container mensagem\" *ngIf=\"filmesEncontrados.length == 0\" >\n  <h2>UMDB Filmes</h2>\n\n  <p >\n  <b>Nenhum filme foi Encontrado!</b><br>\n  <br>\n  Escolha uma categoria (Título, Diretor, Elenco ou Ano) e digite pelo conteúdo que você procura!<br>\n  Se não souber a categoria, não se preocupe, você também pode pesquisar em todas selecionando a categoria Todos.\n  </p>\n\n</div>\n"
 
 /***/ }),
 
@@ -449,6 +449,7 @@ var CriticaComponent = /** @class */ (function () {
         if (this.primeiraVez) {
             this.filmeService.postCritica(this.filme.id, this.critica)
                 .subscribe(function (resposta) {
+                console.log('resposta do post da critica:' + JSON.stringify(resposta));
                 _this.getFilmeAndClose();
             });
             // Senão faz put
@@ -544,17 +545,17 @@ var FilmeService = /** @class */ (function () {
     };
     // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
     FilmeService.prototype.postCritica = function (idFilme, critica) {
-        var router = 'filmes/criticas/' + idFilme;
+        var router = '/filmes/id/' + idFilme;
         return this.http.post(router, critica);
     };
     // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
     FilmeService.prototype.putCritica = function (idFilme, username, critica) {
-        var router = 'filmes/criticas/' + idFilme + '/' + username;
+        var router = '/filmes/criticas/' + idFilme + '/' + username;
         return this.http.put(router, critica);
     };
     // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
     FilmeService.prototype.deleteCritica = function (idFilme, username) {
-        var router = 'filmes/criticas/' + idFilme + '/' + username;
+        var router = '/filmes/criticas/' + idFilme + '/' + username;
         return this.http.get(router);
     };
     /**
@@ -662,6 +663,7 @@ var FilmeComponent = /** @class */ (function () {
     };
     FilmeComponent.prototype.getFilme = function () {
         var _this = this;
+        console.log('GET FILME' + this.route.snapshot.params.id);
         var router = 'id/' + this.route.snapshot.params.id;
         this.filmeService.getFilme(router).subscribe(function (resposta) {
             _this.carregaDadosDoFilme(resposta);
@@ -829,7 +831,9 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
     }
     FormsCadastroUsuarioComponent.prototype.registrar = function () {
         this.registrado = true;
-        this.usuarioService.registrar(this.usuario, function (usuarioLogouComExito, mensageDeErro) { });
+        this.usuarioService.registrar(this.usuario).subscribe(function (resposta) {
+            console.log('Resposta do post de novo usuário:' + JSON.stringify(resposta));
+        });
     };
     Object.defineProperty(FormsCadastroUsuarioComponent.prototype, "diagnostic", {
         // TODO: Remove this when we're done
@@ -863,7 +867,7 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n  \n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDtBQUVBLDBCQUEwQjtBQUMxQjs7RUFFRSxnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLFdBQVc7QUFDYjtBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osZUFBZTtFQUNmLFlBQVk7QUFDZDtBQUNBLGtDQUFrQztBQUNsQztFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2Ysa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsV0FBVztBQUNiO0FBRUE7RUFDRSxzQkFBc0I7RUFDdEIsWUFBWTtBQUNkO0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQ2xCO0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEI7QUFFQTtFQUNFLGNBQWM7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBOYXYgYmFyKi9cbi5uYXZiYXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzMzO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBvdmVyZmxvdzogdmlzaWJsZTtcbn1cblxuLnRvcG5hdi1yaWdodCB7XG4gIHBvc2l0aW9uOiBzdGF0aWM7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLyogRWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4uc2VhcmNoLWNvbnRhaW5lciB7XG4gIFxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
+module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n\n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.form-control {\n  width: 50px;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDtBQUVBLDBCQUEwQjtBQUMxQjs7RUFFRSxnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLFdBQVc7QUFDYjtBQUNBO0VBQ0UsV0FBVztBQUNiO0FBRUE7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGlCQUFpQjtBQUNuQjtBQUNBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixlQUFlO0VBQ2YsWUFBWTtBQUNkO0FBQ0Esa0NBQWtDO0FBQ2xDO0VBQ0Usc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLHFCQUFxQjtFQUNyQixXQUFXO0FBQ2I7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixZQUFZO0FBQ2Q7QUFFQTtFQUNFLGVBQWU7RUFDZixnQkFBZ0I7QUFDbEI7QUFDQTtJQUNJLGtCQUFrQjtBQUN0QjtBQUVBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIE5hdiBiYXIqL1xuLm5hdmJhciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzMzM7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgd2lkdGg6IDEwMCU7XG4gIG92ZXJmbG93OiB2aXNpYmxlO1xufVxuXG4udG9wbmF2LXJpZ2h0IHtcbiAgcG9zaXRpb246IHN0YXRpYztcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4vKiBFbGVtZW50b3MgZGUgUGVzcXVpc2EgKi9cbi5zZWFyY2gtY29udGFpbmVyIHtcblxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cbi5mb3JtLWNvbnRyb2wge1xuICB3aWR0aDogNTBweDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -890,8 +894,13 @@ var NavbarComponent = /** @class */ (function () {
         var _this = this;
         this.router = router;
         this.usuarioService = usuarioService;
-        this.filtroIds = ['titulo', 'diretor', 'elenco', 'ano', 'todos'];
-        this.filtrosExibidos = ['Título', 'Diretor', 'Elenco', 'Ano', 'Todos'];
+        this.filtros = [
+            { chave: "titulo", rotulo: "Título" },
+            { chave: "diretores", rotulo: "Direção" },
+            { chave: "elenco", rotulo: "Elenco" },
+            { chave: "ano", rotulo: "Ano" },
+            { chave: "todos", rotulo: "Todos" }
+        ];
         this.barraDeBusca = '';
         this.usuarioEstaLogado = false;
         this.usuarioModerador = false;
@@ -924,12 +933,14 @@ var NavbarComponent = /** @class */ (function () {
         }
     };
     NavbarComponent.prototype.buscaSimples = function () {
-        var filtroEscolhido = document.getElementById("filtroDePesquisa").value;
-        var index = this.filtrosExibidos.indexOf(filtroEscolhido);
-        var idFiltro = this.filtroIds[index];
-        var pesquisa = idFiltro + '/' + this.barraDeBusca;
+        var filtroSelecionado = document.getElementById("filtroSelecionado").value;
+        var pesquisa = filtroSelecionado + '/' + this.barraDeBusca;
         // O que estiver nesse vetor é a url da próxima página
-        this.router.navigate(['/busca/_' + this.barraDeBusca], { queryParams: { filtro: idFiltro, conteudo: this.barraDeBusca } });
+        this.router.navigate(['/busca/_' + this.barraDeBusca], { queryParams: {
+                filtro: filtroSelecionado,
+                conteudo: this.barraDeBusca
+            }
+        });
     };
     NavbarComponent.prototype.logout = function () {
         this.usuarioService.logout();
@@ -961,7 +972,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BlcmZpbC11c3VhcmlvL3BlcmZpbC11c3VhcmlvLmNvbXBvbmVudC5jc3MifQ== */"
+module.exports = ".container {\n  padding-left: 20px;\n  padding-right: 20px;\n  padding-top: 20px;\n  padding-bottom: 0px;\n\n  width: 900px;\n  background: white;\n  padding-bottom: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGVyZmlsLXVzdWFyaW8vcGVyZmlsLXVzdWFyaW8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLG1CQUFtQjs7RUFFbkIsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixvQkFBb0I7QUFDdEIiLCJmaWxlIjoic3JjL2FwcC9wZXJmaWwtdXN1YXJpby9wZXJmaWwtdXN1YXJpby5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gIHBhZGRpbmctbGVmdDogMjBweDtcbiAgcGFkZGluZy1yaWdodDogMjBweDtcbiAgcGFkZGluZy10b3A6IDIwcHg7XG4gIHBhZGRpbmctYm90dG9tOiAwcHg7XG5cbiAgd2lkdGg6IDkwMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgcGFkZGluZy1ib3R0b206IDUwcHg7XG59XG4iXX0= */"
 
 /***/ }),
 
@@ -977,20 +988,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PerfilUsuarioComponent", function() { return PerfilUsuarioComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _usuario_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../usuario.service */ "./src/app/usuario.service.ts");
+
 
 
 var PerfilUsuarioComponent = /** @class */ (function () {
-    function PerfilUsuarioComponent() {
+    function PerfilUsuarioComponent(usuarioService) {
+        this.usuarioService = usuarioService;
+        this.observerUsuario();
     }
+    /*
+    login: {
+            username:   String,
+            senha:      String
+        },
+        nome:           String,
+        dataNascimento: String,
+        sexo:           String,
+        moderador:      Boolean
+    */
     PerfilUsuarioComponent.prototype.ngOnInit = function () {
+        var usuario = this.usuarioService.getUser();
+        if (usuario != null) {
+            this.usuario = usuario;
+        }
     };
+    /**
+     *Adiciona um observer ao estado do usuário de logado.
+     */
+    PerfilUsuarioComponent.prototype.observerUsuario = function () {
+        var _this = this;
+        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
+            if (!usuarioEstaLogado) {
+                console.log("SAIR DESSA PÁGINA");
+                _this.usuario = null;
+            }
+            else {
+                console.log("CONTINUO LOGADO");
+            }
+        });
+    };
+    PerfilUsuarioComponent.prototype.atualizarDados = function () {
+        console.log(JSON.stringify(this.usuario));
+    };
+    PerfilUsuarioComponent.ctorParameters = function () { return [
+        { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] }
+    ]; };
     PerfilUsuarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-perfil-usuario',
             template: __webpack_require__(/*! raw-loader!./perfil-usuario.component.html */ "./node_modules/raw-loader/index.js!./src/app/perfil-usuario/perfil-usuario.component.html"),
             styles: [__webpack_require__(/*! ./perfil-usuario.component.css */ "./src/app/perfil-usuario/perfil-usuario.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"]])
     ], PerfilUsuarioComponent);
     return PerfilUsuarioComponent;
 }());
@@ -1047,7 +1097,6 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
         this.filmesEncontrados = [this.filme, this.filme, this.filme]; // TODO: Sem Servidor
-        this.nenhumFilmeFoiEncontrado = true; // TODO: Sem Servidor tem q ser true
     }
     ResultadoDeBuscaComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1068,17 +1117,17 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
             console.log('string vazia');
             router = "";
         }
-        console.log('agora vai router[' + router + ']');
+        console.log('Vai buscar lista de filmes [' + router + ']');
         this.filmeService.getFilme(router).subscribe(function (resposta) {
+            console.log('Resposta ao pegar lista de filmes:' + JSON.stringify(resposta));
             if (!resposta.houveErro) {
                 _this.filmesEncontrados = resposta.filmes;
-                if (_this.filmesEncontrados.length > 0) {
-                    _this.nenhumFilmeFoiEncontrado = false;
-                }
-                else {
-                    // TODO: Dispara ação quando não acha filme.
-                    console.log("nenhumFilmeFoiEncontrado");
-                }
+                /*
+                if (this.filmesEncontrados.length > 0) {
+                } else {
+                  // TODO: Dispara ação quando não acha filme.
+                  console.log("nenhumFilmeFoiEncontrado");
+                }*/
             }
             else {
                 // Houve erro
@@ -1136,6 +1185,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
 var TestaServidorComponent = /** @class */ (function () {
     function TestaServidorComponent(http) {
         this.http = http;
@@ -1150,7 +1204,9 @@ var TestaServidorComponent = /** @class */ (function () {
     };
     TestaServidorComponent.prototype.post = function () {
         var _this = this;
-        this.http.post(this.router, this.query).subscribe(function (response) {
+        var req = { usuario: { username: "marcelo" } };
+        console.log('post this query:' + req);
+        this.http.post(this.router, req).subscribe(function (response) {
             _this.response = response;
         });
     };
@@ -1197,11 +1253,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
 
 
 
 var UsuarioService = /** @class */ (function () {
-    function UsuarioService() {
+    function UsuarioService(http) {
+        this.http = http;
         this.usuarioEstaLogado = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
     }
     UsuarioService.prototype.login = function (username, senha, callback) {
@@ -1230,20 +1291,32 @@ var UsuarioService = /** @class */ (function () {
             callback(false, mensagem);
         }
     };
-    UsuarioService.prototype.registrar = function (usuario, callback) {
-        //TODO: Subustituir por pegar do servidor os dados cadastrados.
-        //request
-        if (usuario.login.username == 'guilherme' || usuario.login.username == 'marcelo' || usuario.login.username == 'gabriel') {
-            //TODO: colocar o usuario recebido do servidor
+    UsuarioService.prototype.atualizaUsuario = function (usuario) {
+        if (usuario != null) {
             this.usuario = usuario;
-            // se logar de verdade
             this.usuarioEstaLogado.next(true);
-            callback(true, null);
+            // se usuário for null
+        }
+        else if (this.usuario != null) {
+            this.usuario = null;
         }
         else {
-            var mensagem = "Exemplo: Usuário já existente";
-            callback(false, mensagem);
+            console.log('Usuário já está deslogado');
         }
+    };
+    UsuarioService.prototype.registrar = function (usuario) {
+        var _this = this;
+        var router = "/usuarios/";
+        var req = { usuario: usuario };
+        console.log('minha req:' + JSON.stringify(req));
+        return this.http.post(router, req).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                _this.atualizaUsuario(usuario);
+            }
+        }));
     };
     UsuarioService.prototype.getUser = function () {
         console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
@@ -1261,11 +1334,14 @@ var UsuarioService = /** @class */ (function () {
         this.usuarioEstaLogado.next(false);
         this.usuario = null;
     };
+    UsuarioService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+    ]; };
     UsuarioService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], UsuarioService);
     return UsuarioService;
 }());

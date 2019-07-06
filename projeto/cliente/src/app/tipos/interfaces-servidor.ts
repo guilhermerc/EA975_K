@@ -7,6 +7,11 @@ export class RespostaServidorFilmes {
     filmes:                 Filme[] ;
 }
 
-export class INTERFACE {
+export class RespPostUsuario {
+  houveErro: boolean;
+  mensagem: string;
+}
+
+export class RespPostFilme {
 
 }

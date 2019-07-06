@@ -1,5 +1,5 @@
 
-<div *ngIf="!nenhumFilmeFoiEncontrado">
+<div *ngIf="filmesEncontrados.length > 0">
 
   <div class="container" >
     <h2>Filmes Encontrados</h2>
@@ -25,7 +25,7 @@
   </div>
 </div>
 
-<div class="container mensagem" *ngIf="nenhumFilmeFoiEncontrado" >
+<div class="container mensagem" *ngIf="filmesEncontrados.length == 0" >
   <h2>UMDB Filmes</h2>
 
   <p >

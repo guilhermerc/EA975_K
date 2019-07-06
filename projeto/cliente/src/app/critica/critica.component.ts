@@ -75,6 +75,7 @@ export class CriticaComponent implements OnInit {
     if (this.primeiraVez) {
       this.filmeService.postCritica(this.filme.id, this.critica)
       .subscribe(resposta => {
+        console.log('resposta do post da critica:' + JSON.stringify(resposta));
         this.getFilmeAndClose();
       });
 
