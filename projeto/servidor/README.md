@@ -1,5 +1,7 @@
 #### Tabela correlacionando URL do recurso, requisição HTTP e funcionalidade
 
+##### Base de dados: filmes 
+
 | URL do recurso                | Req. HTTP     | Funcionalidade                                        |
 | ---                           | ---           | ---                                                   |
 | '/filmes'                     | GET           | Lista todos os filmes                                 |
@@ -8,3 +10,9 @@
 | '/filmes/ano/:ano'            | GET           | Filtra lista de filmes pelo ano 'ano'                 |
 | '/filmes/elenco/:nome'        | GET           | Filtra lista de filmes pelo ator ':nome'              |
 | '/filmes/id/:id/comentario'   | POST          | Adiciona novo comentário ao filme de id ':id'         |
+
+
+##### Base de dados: usuarios 
+
+| URL do recurso                | Req. HTTP     | Funcionalidade                                        |
+| ---                           | ---           | ---                                                   |
