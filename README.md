@@ -57,5 +57,5 @@ Baseado nos Casos de Uso.
 - [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme
-- [ ] Inserção de um filme na base de dados
+- [x] Inserção de um filme na base de dados
 - [ ] Remoção de um filme na base de dados

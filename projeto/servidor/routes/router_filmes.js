@@ -24,6 +24,38 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+
+router.post('/', function(req, res, next) {
+	console.log("POST /filmes");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+	};
+	var filme = {
+		"id": 			-1,
+		"titulo":		req.body.titulo,
+		"diretores": 	req.body.diretores,
+		"ano":			req.body.ano,
+		"elenco":		req.body.elenco,
+		"sinopse": 		req.body.sinospe,
+		"criticas":		[]
+	}
+	modelFilme.create(filme, function(err, filme) {
+		if(err) {
+			console.log(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		}
+		
+		modelFilme.update({_id: filme._id}, {id: filme._id}, function(err, res) {
+			console.log(err);
+			console.log(res);
+		});
+		res.send(response);
+	});
+});
+
+
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
 	var response = {
