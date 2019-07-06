@@ -1,9 +1,13 @@
-# EA975_K - "Software engineering laboratory"
-Repository of EA975 - "Software engineering laboratory" project.
+# EA975_K - "Laboratório de Engenharia de Software"
+Repositório do projeto de EA975 - "Laboratório de Engenharia de Software".
 
-TODO: Project description (as soon as we decide what it will be)
+Projeto: UMDB - University Movie Database 
 
-### Group 1 (G1)
+Um catálogo/sistema de avaliação de filmes onde é possível acrescentar, 
+remover, consultar e avaliar filmes. Inspirado no IMDB.
+
+
+### Grupo 1 (G1)
 RA: 155475 - Gabriel Silvano Ramirez\
 RA: 156531 - Marcelo Martimiano Junior\
 RA: 169127 - Guilherme Ricioli Cruz
