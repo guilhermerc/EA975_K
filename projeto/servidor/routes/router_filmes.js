@@ -168,7 +168,7 @@ router.post('/id/:id', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"novaNotaMedia":			0
+		"novaNotaMedia":			-1
 	};
 	var query = {
 		"id":	req.params.id
@@ -181,6 +181,9 @@ router.post('/id/:id', function(req, res, next) {
 			response.mensagemErro = err;
 		} else if (filme == null) {
 			// 'response' já está pronto para ser enviado
+			console.error("Filme não encontrado na base de dados.");
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
 			filme.criticas.push({
 				"username":		req.body.username,
@@ -188,6 +191,8 @@ router.post('/id/:id', function(req, res, next) {
 				"comentario":	req.body.comentario,
 				"nota":			req.body.nota
 			});
+			console.log(filme);
+			modelFilme.replaceOne({_id: filme._id}, filme);
 			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
 		}
 		res.send(response);
