@@ -191,8 +191,11 @@ router.post('/id/:id', function(req, res, next) {
 				"comentario":	req.body.comentario,
 				"nota":			req.body.nota
 			});
-			console.log(filme);
-			modelFilme.replaceOne({_id: filme._id}, filme);
+			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
+				if(err){
+					console.log(err);
+				}
+			});
 			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
 		}
 		res.send(response);
