@@ -163,8 +163,8 @@ router.get('/id/:id', function(req, res, next) {
 // 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
 // ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
 // }" http://localhost:3000/id/0'
-router.post('/id/:id', function(req, res, next) {
-	console.log("POST filmes/id/:id");
+router.post('/id/:id/comentario', function(req, res, next) {
+	console.log("POST filmes/id/:id/comentario");
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
@@ -191,8 +191,11 @@ router.post('/id/:id', function(req, res, next) {
 				"comentario":	req.body.comentario,
 				"nota":			req.body.nota
 			});
-			console.log(filme);
-			modelFilme.replaceOne({_id: filme._id}, filme);
+			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
+				if(err){
+					console.log(err);
+				}
+			});
 			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
 		}
 		res.send(response);
