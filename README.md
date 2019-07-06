@@ -54,7 +54,7 @@ Baseado nos Casos de Uso.
 - [ ] Alterar senha
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
-- [ ] Exibir informações sobre um filme
+- [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
 - [ ] Editar opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
