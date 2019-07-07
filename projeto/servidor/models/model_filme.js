@@ -12,7 +12,8 @@ var schemaFilme = new Schema(
 	elenco: 	[{
 		nome: String
 	}],
-	sinopse: String,
+	sinopse: 	String,
+	nota:		Number,
 	criticas: 	[{
 		username: 	String,
 		data:		String,

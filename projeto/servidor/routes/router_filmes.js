@@ -37,6 +37,7 @@ router.post('/', function(req, res, next) {
 		"ano":			req.body.ano,
 		"elenco":		req.body.elenco,
 		"sinopse": 		req.body.sinospe,
+		"nota":			0,
 		"criticas":		[]
 	}
 	modelFilme.create(filme, function(err, filme) {
@@ -246,8 +247,8 @@ router.post('/id/:id/comentario', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"novaNotaMedia":			-1
-	};
+		"filme":					[]
+		};
 	var query = {
 		"id":	req.params.id
 	};
@@ -263,18 +264,14 @@ router.post('/id/:id/comentario', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
-			filme.criticas.push({
-				"username":		req.body.username,
-				"data":			req.body.data,
-				"comentario":	req.body.comentario,
-				"nota":			req.body.nota
-			});
+			filme.criticas.push(req.body);
+			atualizaNotaMedia(filme, filme.criticas);
 			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
 				if(err){
 					console.log(err);
 				}
 			});
-			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
+			response.filme = 	[filme];
 		}
 		res.send(response);
 	});
@@ -283,12 +280,12 @@ router.post('/id/:id/comentario', function(req, res, next) {
 router.put('/id/:id/comentario', function(req, res, next) {
 	console.log("PUT filmes/id/:id/comentario");
 	var response = {
-		"houveErro":              	false,
-		"mensagemErro":           	"",
-		"novaNotaMedia":			-1
+		"houveErro":		false,
+		"mensagemErro":		"",
+		"novaNotaMedia":	-1
 	};
 	var query = {
-		"id":					req.params.id,
+		"id":	req.params.id,
 	};
 	console.log(query);
 	modelFilme.findOne(query, function (err, filme) {
@@ -302,31 +299,26 @@ router.put('/id/:id/comentario', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
-			var novaCritica = {
-				"username":		req.body.username,
-				"data":			req.body.data,
-				"comentario":	req.body.comentario,
-				"nota":			req.body.nota
-			}
-			atualizaCritica(filme.criticas, novaCritica);
+			atualizaCritica(filme.criticas, req.body);
+			atualizaNotaMedia(filme, filme.criticas);
 			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
 				if(err){
 					console.log(err);
 				}
 			});
-			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
+			response.filme = 	[filme];
 		}
 		res.send(response);
 	});
 });
 
-function calculaNotaMedia(criticas) {
+function atualizaNotaMedia(filme, criticas) {
 	var i = 0, notaMedia = 0;
 	for (i = 0; i < criticas.length; i++) {
 		notaMedia += criticas[i].nota;
 	}
 	notaMedia /= criticas.length;
-	return notaMedia;
+	filme.nota = notaMedia;
 }
 
 function atualizaCritica(criticas, novaCritica) {
