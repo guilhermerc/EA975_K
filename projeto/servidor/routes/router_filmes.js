@@ -24,6 +24,35 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+router.post('/', function(req, res, next) {
+	console.log("POST /filmes");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+	};
+	var filme = {
+		"id": 			"",
+		"titulo":		req.body.titulo,
+		"diretores": 	req.body.diretores,
+		"ano":			req.body.ano,
+		"elenco":		req.body.elenco,
+		"sinopse": 		req.body.sinospe,
+		"criticas":		[]
+	}
+	modelFilme.create(filme, function(err, filme) {
+		if(err) {
+			console.log(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		}
+		modelFilme.update({_id: filme._id}, {id: filme._id}, function(err, res) {
+			console.log(err);
+			console.log(res);
+		});
+		res.send(response);
+	});
+});
+
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
 	var response = {
@@ -159,6 +188,55 @@ router.get('/id/:id', function(req, res, next) {
 	});
 });
 
+router.put('/id/:id', function(req, res, next) {
+	console.log("PUT /filmes");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+	};
+	var query = {
+		"id":	req.params.id
+	};
+	console.log(req.body);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme inexistente na base de dados!";
+		} else {
+			modelFilme.update({_id: filme._id}, req.body, function(err, res) {
+				console.log(err);
+				console.log(res);
+			});
+		}
+		res.send(response);
+	});
+});
+
+router.delete('/id/:id', function(req, res, next) {
+	console.log("DELETE filmes/id/:id");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	""
+	};
+	var query = {
+		"id":	req.params.id
+	};
+	console.log(query);
+	modelFilme.deleteOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		}
+
+		res.send(response);
+	});
+});
+
 // Comando para simular um POST em /filmes/id/0
 // 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
 // ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
@@ -202,14 +280,62 @@ router.post('/id/:id/comentario', function(req, res, next) {
 	});
 });
 
-function calculaNotaMedia(criticas)
-{
+router.put('/id/:id/comentario', function(req, res, next) {
+	console.log("PUT filmes/id/:id/comentario");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"novaNotaMedia":			-1
+	};
+	var query = {
+		"id":					req.params.id,
+	};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			// 'response' já está pronto para ser enviado
+			console.error("Filme não encontrado na base de dados.");
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme não encontrado na base de dados.";
+		} else {
+			var novaCritica = {
+				"username":		req.body.username,
+				"data":			req.body.data,
+				"comentario":	req.body.comentario,
+				"nota":			req.body.nota
+			}
+			atualizaCritica(filme.criticas, novaCritica);
+			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
+				if(err){
+					console.log(err);
+				}
+			});
+			response.novaNotaMedia = calculaNotaMedia(filme.criticas);
+		}
+		res.send(response);
+	});
+});
+
+function calculaNotaMedia(criticas) {
 	var i = 0, notaMedia = 0;
 	for (i = 0; i < criticas.length; i++) {
 		notaMedia += criticas[i].nota;
 	}
 	notaMedia /= criticas.length;
 	return notaMedia;
+}
+
+function atualizaCritica(criticas, novaCritica) {
+	for (var i in criticas) {
+     	if (criticas[i].username == novaCritica.username) {
+    		criticas[i] = novaCritica;
+        	break;
+     	}
+   	}
 }
 
 module.exports = router;

@@ -29,6 +29,7 @@ Baseado nos Casos de Uso.
 - [ ] Opinar sobre um filme
 - [ ] Editar opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
+- [ ] Edição de um filme na base de dados
 - [ ] Remoção de um filme na base de dados
 
 
@@ -44,6 +45,7 @@ Baseado nos Casos de Uso.
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
+- [ ] Edição de um filme na base de dados
 - [ ] Remoção de um filme na base de dados
 
 ##### Lado servidor/banco de dados:
@@ -56,6 +58,7 @@ Baseado nos Casos de Uso.
 - [ ] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
-- [ ] Editar opinião sobre um filme
-- [ ] Inserção de um filme na base de dados
-- [ ] Remoção de um filme na base de dados
+- [x] Editar opinião sobre um filme
+- [x] Inserção de um filme na base de dados
+- [x] Edição de um filme na base de dados
+- [x] Remoção de um filme na base de dados
