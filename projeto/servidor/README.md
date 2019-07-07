@@ -14,6 +14,7 @@
 | '/filmes/ano/:ano'            | GET           | Filtra lista de filmes pelo ano 'ano'                 |
 | '/filmes/elenco/:nome'        | GET           | Filtra lista de filmes pelo ator ':nome'              |
 | '/filmes/id/:id/criticas'     | POST          | Adiciona nova crítica ao filme de id ':id'            |
+| '/filmes/id/:id/criticas'     | PUT           | Edita crítica previamente feita ao filme de id ':id'  |
 | '/filmes/id/:id/criticas/:username'   | DELETE        | Deleta a crítica feita pelo usuário de username ':username' no filme de id ':id'   |
 
 
