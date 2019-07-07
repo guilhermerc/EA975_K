@@ -61,4 +61,4 @@ Baseado nos Casos de Uso.
 - [x] Editar opinião sobre um filme
 - [x] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
-- [ ] Remoção de um filme na base de dados
+- [x] Remoção de um filme na base de dados

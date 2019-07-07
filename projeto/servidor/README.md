@@ -8,6 +8,7 @@
 | '/filmes'                     | POST          | Acrescenta um filme na base de dados                  |
 | '/filmes/id/:id'              | GET           | Retorna informações sobre o filme de id ':id'         |
 | '/filmes/id/:id'              | PUT           | Edita informações do filme de id ':id'                |
+| '/filmes/id/:id'              | DELETE        | Deleta filme de id ':id' da base de dados             |
 | '/filmes/titulo/:titulo'      | GET           | Filtra lista de filmes por título ':titulo'           |
 | '/filmes/diretores/:diretor'  | GET           | Filtra lista de filmes pelo diretor ':diretor'        |
 | '/filmes/ano/:ano'            | GET           | Filtra lista de filmes pelo ano 'ano'                 |
@@ -22,6 +23,7 @@
 | '/filmes'                     | POST          | {"titulo": String, "diretores": [{"nome": String}], "ano": Number, "elenco": [{"nome": String}], "sinopse": String}   | {"houveErro": Boolean, "mensagemErro"}                                                                |
 | '/filmes/id/:id'              | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
 | '/filmes/id/:id'              | PUT           | JSON contendo somente os campos editados                                                                              | {"houveErro": Boolean, "mensagemErro": String}                                                        |
+| '/filmes/id/:id'              | DELETE        | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String}                                                        |
 | '/filmes/titulo/:titulo'      | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
 | '/filmes/diretores/:diretor'  | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
 | '/filmes/ano/:ano'            | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |

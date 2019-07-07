@@ -216,6 +216,27 @@ router.put('/id/:id', function(req, res, next) {
 	});
 });
 
+router.delete('/id/:id', function(req, res, next) {
+	console.log("DELETE filmes/id/:id");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	""
+	};
+	var query = {
+		"id":	req.params.id
+	};
+	console.log(query);
+	modelFilme.deleteOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		}
+
+		res.send(response);
+	});
+});
+
 // Comando para simular um POST em /filmes/id/0
 // 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
 // ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
