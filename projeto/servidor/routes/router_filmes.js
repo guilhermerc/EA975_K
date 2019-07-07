@@ -264,7 +264,7 @@ router.post('/id/:id/criticas', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
-			filme.criticas.push(req.body);
+			adicionaCritica(filme.criticas, req.body);
 			atualizaNotaMedia(filme, filme.criticas);
 			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
 				if(err){
@@ -282,7 +282,7 @@ router.put('/id/:id/criticas', function(req, res, next) {
 	var response = {
 		"houveErro":		false,
 		"mensagemErro":		"",
-		"novaNotaMedia":	-1
+		"filme":			[]
 	};
 	var query = {
 		"id":	req.params.id,
@@ -312,19 +312,66 @@ router.put('/id/:id/criticas', function(req, res, next) {
 	});
 });
 
-function atualizaNotaMedia(filme, criticas) {
+router.delete('/id/:id/criticas/:username', function(req, res, next) {
+	var response = {
+		"houveErro":		false,
+		"mensagemErro":		"",
+		"filme":			[]
+	};
+	var query = {
+		"id":	req.params.id,
+	};
+	console.log(query);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			console.error("Filme não encontrado na base de dados.");
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme não encontrado na base de dados.";
+		} else {
+			console.log(req.params.username);
+			removeCritica(filme.criticas, req.params.username);
+			atualizaNotaMedia(filme, filme.criticas);
+			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
+				if(err){
+					console.log(err);
+				}
+			});
+			response.filme =	[filme];
+		}
+		res.send(response);
+	});
+});
+
+function atualizaNotaMedia(filme) {
 	var i = 0, notaMedia = 0;
-	for (i = 0; i < criticas.length; i++) {
-		notaMedia += criticas[i].nota;
+	for (i = 0; i < filme.criticas.length; i++) {
+		notaMedia += filme.criticas[i].nota;
 	}
-	notaMedia /= criticas.length;
+	notaMedia /= filme.criticas.length;
 	filme.nota = notaMedia;
+}
+
+function adicionaCritica(criticas, novaCritica) {
+	criticas.push(novaCritica);
 }
 
 function atualizaCritica(criticas, novaCritica) {
 	for (var i in criticas) {
      	if (criticas[i].username == novaCritica.username) {
     		criticas[i] = novaCritica;
+        	break;
+     	}
+   	}
+}
+
+function removeCritica(criticas, username) {
+	for (var i in criticas) {
+     	if (criticas[i].username == username) {
+			criticas.splice(i, 1);
         	break;
      	}
    	}
