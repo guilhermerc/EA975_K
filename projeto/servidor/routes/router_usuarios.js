@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
 
 	
 	var query = {
-			"login.username":	req.body.usuario.login.username
+			"login.username":	req.body.login.username
 	};
 	
 	console.log("query:" + JSON.stringify(query));
@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 			
 		} else {
 			// response já está pronta
-			novoUsuario = new modelUsuario(req.body.usuario);
+			novoUsuario = new modelUsuario(req.body);
 			
 			novoUsuario.save( function(err, res){
 				if(err){

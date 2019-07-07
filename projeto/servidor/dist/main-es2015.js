@@ -1320,6 +1320,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
 let UsuarioService = class UsuarioService {
     constructor(http) {
         this.http = http;
@@ -1368,8 +1373,9 @@ let UsuarioService = class UsuarioService {
         var router = "/usuarios/";
         var req = { usuario: usuario };
         console.log('minha req:' + JSON.stringify(req));
-        console.log(JSON.stringify(usuario));
-        return this.http.post(router, req).
+        var body = JSON.stringify(usuario);
+        console.log("body:" + body);
+        return this.http.post(router, body, httpOptions).
             pipe(
         // Com tap podemos pegar a resposta antes dela ser retornada.
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {

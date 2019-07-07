@@ -37,6 +37,8 @@ export class FormsCadastroUsuarioComponent implements OnInit {
               private router: Router) { }
 
   registrar():void {
+    // Nesse ponto a senha já foi verificada e pode ser salva no login do usuário.
+    this.usuario.login.senha = this.senha;
     this.registrado = true;
 
     // Inicializa a variável pois já pode ter dado erro anteriormente.
