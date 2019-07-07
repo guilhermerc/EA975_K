@@ -242,8 +242,8 @@ router.delete('/id/:id', function(req, res, next) {
 // 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
 // ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
 // }" http://localhost:3000/id/0'
-router.post('/id/:id/comentario', function(req, res, next) {
-	console.log("POST filmes/id/:id/comentario");
+router.post('/id/:id/criticas', function(req, res, next) {
+	console.log("POST filmes/id/:id/criticas");
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
@@ -277,8 +277,8 @@ router.post('/id/:id/comentario', function(req, res, next) {
 	});
 });
 
-router.put('/id/:id/comentario', function(req, res, next) {
-	console.log("PUT filmes/id/:id/comentario");
+router.put('/id/:id/criticas', function(req, res, next) {
+	console.log("PUT filmes/id/:id/criticas");
 	var response = {
 		"houveErro":		false,
 		"mensagemErro":		"",

@@ -1,4 +1,4 @@
-#### Tabela correlacionando URL do recurso, requisição HTTP e funcionalidade
+#### Tabelas correlacionando URL do recurso, requisição HTTP, funcionalidade e JSONS de comunicação
 
 ##### Base de dados: filmes
 
@@ -13,8 +13,8 @@
 | '/filmes/diretores/:diretor'  | GET           | Filtra lista de filmes pelo diretor ':diretor'        |
 | '/filmes/ano/:ano'            | GET           | Filtra lista de filmes pelo ano 'ano'                 |
 | '/filmes/elenco/:nome'        | GET           | Filtra lista de filmes pelo ator ':nome'              |
-| '/filmes/id/:id/comentario'   | POST          | Adiciona novo comentário ao filme de id ':id'         |
-| '/filmes/id/:id/comentario'   | PUT           | Altera comentário já feito ao filme de id ':id'       |
+| '/filmes/id/:id/criticas'     | POST          | Adiciona nova crítica ao filme de id ':id'            |
+| '/filmes/id/:id/criticas'     | PUT           | Altera crítica já feita ao filme de id ':id'          |
 
 
 | URL do recurso                | Req. HTTP     | JSON requisição                                                                                                       | JSON resposta                                                                                         |
@@ -28,8 +28,8 @@
 | '/filmes/diretores/:diretor'  | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
 | '/filmes/ano/:ano'            | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
 | '/filmes/elenco/:nome'        | GET           | {}                                                                                                                    | {"houveErro": Boolean, "mensagemErro": String, "totalFilmesEncontrados": Number, "filmes": [filmes]}  |
-| '/filmes/id/:id/comentario'   | POST          | {"username": String, "data": String, "comentario": String, "nota": Number}                                            | {"houveErro": Boolean, "mensagemErro": String, "filme": [filme]}                                      |
-| '/filmes/id/:id/comentario'   | PUT           | {"username": String, "data": String, "comentario": String, "nota": Number}                                            | {"houveErro": Boolean, "mensagemErro": String, "filme": [filme]}
+| '/filmes/id/:id/criticas'     | POST          | {"username": String, "data": String, "comentario": String, "nota": Number}                                            | {"houveErro": Boolean, "mensagemErro": String, "filme": [filme]}                                      |
+| '/filmes/id/:id/criticas'     | PUT           | {"username": String, "data": String, "comentario": String, "nota": Number}                                            | {"houveErro": Boolean, "mensagemErro": String, "filme": [filme]}
 
 ##### Base de dados: usuarios
 
