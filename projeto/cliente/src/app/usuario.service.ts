@@ -68,6 +68,8 @@ export class UsuarioService {
 
       console.log('minha req:' + JSON.stringify(req));
 
+      console.log(JSON.stringify(usuario));
+
       return this.http.post<RespPostUsuario>(router, req).
       pipe(
         // Com tap podemos pegar a resposta antes dela ser retornada.

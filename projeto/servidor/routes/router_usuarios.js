@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 /* Post usuário */
 router.post('/', function(req, res, next) {
 	console.log("POST /usuarios/");
-	console.log("Usuário recebido:" + req.body.usuario);
+	console.log("Usuário recebido:" + req.body.login);
 	
 	var response = {
 		"houveErro":              	false,

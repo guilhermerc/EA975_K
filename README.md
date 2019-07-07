@@ -19,7 +19,7 @@ Baseado nos Casos de Uso.
 
 #### Integração entre os lados: 
 
-- [ ] Cadastra
+- [x] Cadastra
 - [ ] Autentica
 - [ ] Encerrar sessão
 - [ ] Alterar senha
@@ -34,15 +34,15 @@ Baseado nos Casos de Uso.
 
 #### Lado cliente:
 
-- [ ] Cadastra
+- [x] Cadastra
 - [ ] Autentica
 - [ ] Encerrar sessão
 - [ ] Alterar senha
-- [ ] Busca simples por filme
+- [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
-- [ ] Exibir informações sobre um filme
-- [ ] Opinar sobre um filme
-- [ ] Editar opinião sobre um filme
+- [x] Exibir informações sobre um filme
+- [x] Opinar sobre um filme
+- [x] Editar opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
 - [ ] Remoção de um filme na base de dados
 

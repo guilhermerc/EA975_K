@@ -16,4 +16,4 @@
 ##### Base de dados: usuarios 
 
 | URL do recurso                | Req. HTTP     | Funcionalidade                                        |
-| ---                           | ---           | ---                                                   |
+| '/usuarios/'                  | POST          | Adiciona novo usuário a base de dados					  |
