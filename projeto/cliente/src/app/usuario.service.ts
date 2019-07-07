@@ -6,6 +6,12 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { RespPostUsuario } from './tipos/interfaces-servidor';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,7 +74,10 @@ export class UsuarioService {
 
       console.log('minha req:' + JSON.stringify(req));
 
-      return this.http.post<RespPostUsuario>(router, req).
+      var body = JSON.stringify(usuario);
+      console.log("body:" + body);
+
+      return this.http.post<RespPostUsuario>(router, body, httpOptions).
       pipe(
         // Com tap podemos pegar a resposta antes dela ser retornada.
         tap(resposta => {

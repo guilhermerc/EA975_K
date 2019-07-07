@@ -14,6 +14,8 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   usuario: Usuario;
+  
+
 /*
 login: {
 		username:   String,

@@ -22,7 +22,7 @@
       <a class="botao" *ngIf="true" routerLink="/developer">Developer</a>
       <a class="botao" *ngIf="usuarioEstaLogado && usuario.moderador" routerLink="/">Adicionar Filme</a>
 
-      <a class="botao" *ngIf="usuarioEstaLogado" routerLink="/perfil/0"> {{usuario.login.username}} Perfil</a>
+      <a class="botao" *ngIf="usuarioEstaLogado" routerLink="/perfil/0"> Perfil: {{usuario.login.username}}</a>
 
 
       <a class="botao" *ngIf="!usuarioEstaLogado" routerLink="/autenticacao">Entrar</a>

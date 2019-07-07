@@ -34,4 +34,43 @@
 ##### Base de dados: usuarios
 
 | URL do recurso                | Req. HTTP     | Funcionalidade                                        |
-| ---                           | ---           | ---                                                   |
+| '/usuarios/'                  | POST          | Adiciona novo usuário a base de dados					  |
+
+
+| URL do recurso                | Req. HTTP     | JSON requisição                                                                                                             | JSON resposta                                        	    |
+| ---                           | ---           | ---                                                                                                                         | ---                                                        |
+| '/usuarios/'                  | POST          | {{"login":{"username": String,"senha": String},"nome": String,"dataNascimento": String,"sexo": String,"moderador":Boolean}} | { houveErro: Boolean, mensagemErro: String} 					 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

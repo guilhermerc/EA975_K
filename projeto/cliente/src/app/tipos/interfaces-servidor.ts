@@ -9,7 +9,7 @@ export class RespostaServidorFilmes {
 
 export class RespPostUsuario {
   houveErro: boolean;
-  mensagem: string;
+  mensagemErro: string;
 }
 
 export class RespPostFilme {
