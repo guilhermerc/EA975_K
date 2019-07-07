@@ -3,8 +3,8 @@ var modelFilme = require('../models/model_filme');
 var express = require('express');
 var router = express.Router();
 
+// GET /filmes
 router.get('/', function(req, res, next) {
-	console.log("GET /filmes");
 	var response = {
 	    "houveErro":              	false,
 	    "mensagemErro":           	"",
@@ -24,8 +24,8 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+// POST /filmes
 router.post('/', function(req, res, next) {
-	console.log("POST /filmes");
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
@@ -54,114 +54,7 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-router.get('/titulo/:titulo', function(req, res, next) {
-	console.log("GET filmes/titulo/:titulo");
-	var response = {
-	    "houveErro":              	false,
-	    "mensagemErro":           	"",
-	    "totalFilmesEncontrados":	0,
-	    "filmes":                 	[]
-	};
-	var query = {
-		"titulo":	req.params.titulo
-	};
-	console.log(query)
-	modelFilme.find(query, function (err, filmes) {
-		if (err) {
-			console.error(err);
-			response.houveErro = 	true;
-			response.mensagemErro = err;
-		} else if (filmes == null || filmes.length === 0) {
-			// 'response' já está pronto para ser enviado
-		} else {
-			response.totalFilmesEncontrados =	filmes.length;
-			response.filmes =					filmes;
-		}
-		res.json(response);
-	});
-});
-
-router.get('/diretores/:diretor', function(req, res, next) {
-	console.log("GET filmes /diretor/:diretor");
-	var response = {
-		"houveErro":              	false,
-		"mensagemErro":           	"",
-		"totalFilmesEncontrados":	0,
-		"filmes":                 	[]
-	};
-	var query = {
-		"diretores.nome":	req.params.diretor
-	};
-	console.log(query);
-	modelFilme.find(query, function (err, filmes) {
-		if (err) {
-			console.error(err);
-			response.houveErro = 	true;
-			response.mensagemErro = err;
-		} else if (filmes == null || filmes.length === 0) {
-			// 'response' já está pronto para ser enviado
-		} else {
-			response.totalFilmesEncontrados =	filmes.length;
-			response.filmes =					filmes;
-		}
-		res.send(response);
-	});
-});
-
-router.get('/elenco/:nome', function(req, res, next) {
-	console.log("GET filmes/elenco/:nome");
-	var response = {
-		"houveErro":              	false,
-		"mensagemErro":           	"",
-		"totalFilmesEncontrados":	0,
-		"filmes":                 	[]
-	};
-	var query = {
-		'elenco.nome': 	req.params.nome
-	};
-	console.log(query);
-	modelFilme.find(query, function (err, filmes) {
-		if (err) {
-			console.error(err);
-			response.houveErro = 	true;
-			response.mensagemErro = err;
-		} else if (filmes == null || filmes.length === 0) {
-			// 'response' já está pronto para ser enviado
-		} else {
-			response.totalFilmesEncontrados =	filmes.length;
-			response.filmes =					filmes;
-		}
-		res.send(response);
-	});
-});
-
-router.get('/ano/:ano', function(req, res, next) {
-	console.log("GET filmes /ano/:ano");
-	var response = {
-		"houveErro":              	false,
-		"mensagemErro":           	"",
-		"totalFilmesEncontrados":	0,
-		"filmes":                 	[]
-	};
-	var query = {
-		"ano":	req.params.ano
-	};
-	console.log(query);
-	modelFilme.find(query, function (err, filme) {
-		if (err) {
-			console.error(err);
-			response.houveErro = 	true;
-			response.mensagemErro = err;
-		} else if (filmes == null || filmes.length === 0) {
-			// 'response' já está pronto para ser enviado
-		} else {
-			response.totalFilmesEncontrados =	filmes.length;
-			response.filmes =					filmes;
-		}
-		res.send(response);
-	});
-});
-
+// GET /filmes/id/:id
 router.get('/id/:id', function(req, res, next) {
 	console.log("GET filmes/id/:id");
 	var response = {
@@ -189,6 +82,7 @@ router.get('/id/:id', function(req, res, next) {
 	});
 });
 
+// PUT /filmes/id/:id
 router.put('/id/:id', function(req, res, next) {
 	console.log("PUT /filmes");
 	var response = {
@@ -209,14 +103,15 @@ router.put('/id/:id', function(req, res, next) {
 			response.mensagemErro = "Filme inexistente na base de dados!";
 		} else {
 			modelFilme.update({_id: filme._id}, req.body, function(err, res) {
-				console.log(err);
-				console.log(res);
+				if(err)
+					console.log(err);
 			});
 		}
 		res.send(response);
 	});
 });
 
+// DELETE /filmes/id/:id
 router.delete('/id/:id', function(req, res, next) {
 	console.log("DELETE filmes/id/:id");
 	var response = {
@@ -238,12 +133,117 @@ router.delete('/id/:id', function(req, res, next) {
 	});
 });
 
+// GET filmes/titulo/:titulo
+router.get('/titulo/:titulo', function(req, res, next) {
+	var response = {
+	    "houveErro":              	false,
+	    "mensagemErro":           	"",
+	    "totalFilmesEncontrados":	0,
+	    "filmes":                 	[]
+	};
+	var query = {
+		"titulo":	req.params.titulo
+	};
+	modelFilme.find(query, function (err, filmes) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filmes == null || filmes.length === 0) {
+			// 'response' já está pronto para ser enviado
+		} else {
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
+		}
+		res.json(response);
+	});
+});
+
+// GET /filmes/diretores/:diretor
+router.get('/diretores/:diretor', function(req, res, next) {
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		"diretores.nome":	req.params.diretor
+	};
+	modelFilme.find(query, function (err, filmes) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filmes == null || filmes.length === 0) {
+			// 'response' já está pronto para ser enviado
+		} else {
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
+		}
+		res.send(response);
+	});
+});
+
+// GET /filmes/ano/:ano
+router.get('/ano/:ano', function(req, res, next) {
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		"ano":	req.params.ano
+	};
+	modelFilme.find(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filmes == null || filmes.length === 0) {
+			// 'response' já está pronto para ser enviado
+		} else {
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
+		}
+		res.send(response);
+	});
+});
+
+// GET /filmes/elenco/:nome
+router.get('/elenco/:nome', function(req, res, next) {
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+		"totalFilmesEncontrados":	0,
+		"filmes":                 	[]
+	};
+	var query = {
+		'elenco.nome': 	req.params.nome
+	};
+	modelFilme.find(query, function (err, filmes) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filmes == null || filmes.length === 0) {
+			// 'response' já está pronto para ser enviado
+		} else {
+			response.totalFilmesEncontrados =	filmes.length;
+			response.filmes =					filmes;
+		}
+		res.send(response);
+	});
+});
+
+
 // Comando para simular um POST em /filmes/id/0
 // 'curl --header "Content-Type: application/json" -d "{\"username\":\"gabriel\
 // ",\"data\":\"22/22/2222\", \"comentario\":\"Achei um lixão\", \"nota\":\"20\"
 // }" http://localhost:3000/id/0'
+// POST /filmes/id/:id/criticas
 router.post('/id/:id/criticas', function(req, res, next) {
-	console.log("POST filmes/id/:id/criticas");
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
@@ -252,7 +252,6 @@ router.post('/id/:id/criticas', function(req, res, next) {
 	var query = {
 		"id":	req.params.id
 	};
-	console.log(query);
 	modelFilme.findOne(query, function (err, filme) {
 		if (err) {
 			console.error(err);
@@ -277,8 +276,8 @@ router.post('/id/:id/criticas', function(req, res, next) {
 	});
 });
 
+// PUT /filmes/id/:id/criticas
 router.put('/id/:id/criticas', function(req, res, next) {
-	console.log("PUT filmes/id/:id/criticas");
 	var response = {
 		"houveErro":		false,
 		"mensagemErro":		"",
@@ -287,7 +286,6 @@ router.put('/id/:id/criticas', function(req, res, next) {
 	var query = {
 		"id":	req.params.id,
 	};
-	console.log(query);
 	modelFilme.findOne(query, function (err, filme) {
 		if (err) {
 			console.error(err);
@@ -312,6 +310,7 @@ router.put('/id/:id/criticas', function(req, res, next) {
 	});
 });
 
+// DELETE /filmes/id/:id/criticas/:username
 router.delete('/id/:id/criticas/:username', function(req, res, next) {
 	var response = {
 		"houveErro":		false,
@@ -321,7 +320,6 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 	var query = {
 		"id":	req.params.id,
 	};
-	console.log(query);
 	modelFilme.findOne(query, function (err, filme) {
 		if (err) {
 			console.error(err);
@@ -332,7 +330,6 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
-			console.log(req.params.username);
 			removeCritica(filme.criticas, req.params.username);
 			atualizaNotaMedia(filme, filme.criticas);
 			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
