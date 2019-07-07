@@ -24,7 +24,6 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-
 router.post('/', function(req, res, next) {
 	console.log("POST /filmes");
 	var response = {
@@ -32,7 +31,7 @@ router.post('/', function(req, res, next) {
 		"mensagemErro":           	"",
 	};
 	var filme = {
-		"id": 			-1,
+		"id": 			"",
 		"titulo":		req.body.titulo,
 		"diretores": 	req.body.diretores,
 		"ano":			req.body.ano,
@@ -46,7 +45,6 @@ router.post('/', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = err;
 		}
-		
 		modelFilme.update({_id: filme._id}, {id: filme._id}, function(err, res) {
 			console.log(err);
 			console.log(res);
@@ -54,7 +52,6 @@ router.post('/', function(req, res, next) {
 		res.send(response);
 	});
 });
-
 
 router.get('/titulo/:titulo', function(req, res, next) {
 	console.log("GET filmes/titulo/:titulo");
@@ -186,6 +183,34 @@ router.get('/id/:id', function(req, res, next) {
 		} else {
 			response.totalFilmesEncontrados =	filme.length;
 			response.filmes =					[filme];
+		}
+		res.send(response);
+	});
+});
+
+router.put('/id/:id', function(req, res, next) {
+	console.log("PUT /filmes");
+	var response = {
+		"houveErro":              	false,
+		"mensagemErro":           	"",
+	};
+	var query = {
+		"id":	req.params.id
+	};
+	console.log(req.body);
+	modelFilme.findOne(query, function (err, filme) {
+		if (err) {
+			console.error(err);
+			response.houveErro = 	true;
+			response.mensagemErro = err;
+		} else if (filme == null) {
+			response.houveErro = 	true;
+			response.mensagemErro = "Filme inexistente na base de dados!";
+		} else {
+			modelFilme.update({_id: filme._id}, req.body, function(err, res) {
+				console.log(err);
+				console.log(res);
+			});
 		}
 		res.send(response);
 	});
