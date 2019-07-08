@@ -3,8 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, RespPostFilme }  from './tipos/interfaces-servidor';
+import { RespostaServidorFilmes, RespPutFilme, RespPostFilme }  from './tipos/interfaces-servidor';
 import { Critica } from './tipos/critica';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +32,7 @@ export class FilmeService {
 
     return this.http.get<RespostaServidorFilmes>(router);
   }
-  getFilmeById(id: number): Observable<RespostaServidorFilmes> {
+  getFilmeById(id: string): Observable<RespostaServidorFilmes> {
     var router = '/filmes/id/' + id;
 
     return this.http.get<RespostaServidorFilmes>(router);
@@ -36,30 +42,33 @@ export class FilmeService {
 
   }
 
-  putFilme(filme: Filme) {
+  putFilme(idFilme: string, body: string):Observable<RespPutFilme> {
 
+    var url = '/filmes/id/' + idFilme;
+
+    return this.http.put<RespPostFilme>(url, body, httpOptions);
   }
   /** Observable ativa uma chamada assincrona do retorno dessa função
   *  @idFilme: Id do filme que se deseja excluir
   */
-  deleteFilme(idFilme: number) {
+  deleteFilme(idFilme: string) {
 
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  postCritica(idFilme: number, critica: Critica): Observable<RespPostFilme> {
+  postCritica(idFilme: string, critica: Critica): Observable<RespPostFilme> {
     var router = '/filmes/id/' + idFilme;
 
-    return this.http.post(router, critica);
+    return this.http.post<RespPutFilme>(router, critica);
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  putCritica(idFilme: number, username: string, critica: Critica): Observable<RespPostFilme> {
+  putCritica(idFilme: string, username: string, critica: Critica): Observable<RespPostFilme> {
     var router = '/filmes/criticas/' + idFilme + '/' + username;
 
     return this.http.put<RespPostFilme>(router, critica);
   }
 
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  deleteCritica(idFilme: number, username: string): Observable<RespPostFilme> {
+  deleteCritica(idFilme: string, username: string): Observable<RespPostFilme> {
     var router = '/filmes/criticas/' + idFilme + '/' + username;
 
     return this.http.get<RespPostFilme>(router);

@@ -66,8 +66,6 @@ ul {
   padding-bottom: 50px;
   padding-left: 50px;
   margin-top: 5px;
-
-
 }
 .critica-botao {
   float: right;
@@ -90,4 +88,8 @@ ul {
   margin-left: 0px;
   margin-right: 5px;
   display: inline;
+}
+
+.botao-editar-filme {
+  float: right;
 }

@@ -1,5 +1,5 @@
 export class Filme {
-	id: 			number;
+	id: 			string;
 	titulo: 	string;
   ano: 			number;
 	diretores: 	 {

@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
 export class FilmeComponent implements OnInit {
 
   filme: Filme = {
-    id: 2,
+    id: "2",
     titulo: "Vingadores: Ultimato",
     ano: 2019,
     diretores: [{nome: "Russo1"}, {nome: "Russo2"}],

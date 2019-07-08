@@ -1,0 +1,117 @@
+<div class="container">
+
+
+  <form (ngSubmit)="salvar()" #formsUsuario="ngForm">
+
+
+    <div class="form-group">
+      <label for="titulo">Titulo</label>
+      <input type="text" class="form-control" id="titulo" required
+      [(ngModel)]="filme.titulo" name="titulo"
+      #titulo="ngModel">
+      <div [hidden]="titulo.valid || titulo.pristine"
+      class="alert alert-danger">
+      O campo Título não pode ficar vazio
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="ano">Ano</label>
+      <input type="text" class="form-control" id="ano" required
+      [(ngModel)]="filme.ano" name="ano"
+      #ano="ngModel">
+      <div [hidden]="ano.valid || ano.pristine"
+      class="alert alert-danger">
+      O campo Ano não pode ficar vazio
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sinopse">Sinopse</label>
+      <textarea name="sinopse" id="sinopse" required
+      [(ngModel)]="filme.sinopse" class="form-control"
+      #sinopse="ngModel" rows="8" cols="80" ></textarea>
+
+      <div [hidden]="sinopse.valid || sinopse.pristine"
+      class="alert alert-danger">
+      O campo Sinopse não pode ficar vazio
+      </div>
+    </div>
+
+    <!--Atores -->
+    <div class="container-lista">
+      <div class="form-group">
+        <label for="elenco">Elenco</label>
+        <div class="form-group">
+
+          <input type="text" class="input-pessoa" name="novoAtor" maxlength="50" [(ngModel)]="novoAtor">
+          <button type="button" name="button" class="botao-adicionar" (click)="adicionarAtor()">Adicionar</button>
+        </div>
+
+        <ul>
+          <li *ngFor="let pessoa of filme.elenco" class="item-lista-pessoas">
+            <div class="pessoa">
+
+              <div class="nome-pessoa">{{pessoa.nome}}</div> <button class="delete" title="Remover pessoa do elenco"
+          (click)="removerAtor(pessoa.nome)">x</button>
+            </div>
+          </li>
+        </ul>
+        <div [hidden]="filme.elenco.length != 0"
+        class="alert alert-danger">
+        O filme precisa de pelo menos uma pessoa no elenco.
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!--Direção-->
+    <div class="container-lista">
+      <div class="form-group">
+        <label for="direcao">Direção</label>
+
+        <div class="form-group">
+
+          <input type="text" class="input-pessoa" name="novoDiretor" maxlength="50" [(ngModel)]="novoDiretor">
+          <button type="button" name="button" class="botao-adicionar" (click)="adicionarDiretor()">Adicionar</button>
+        </div>
+        <ul>
+          <li *ngFor="let pessoa of filme.diretores" class="item-lista-pessoas">
+            <div class="pessoa">
+
+              <div class="nome-pessoa">{{pessoa.nome}}</div> <button class="delete" title="Remover pessoa da direção"
+          (click)="removerDiretor(pessoa.nome)">x</button>
+            </div>
+          </li>
+        </ul>
+
+        <div [hidden]="filme.diretores.length != 0"
+        class="alert alert-danger">
+        O filme precisa de pelo menos uma pessoa na direção.
+        </div>
+      </div>
+    </div>
+
+    <!--Críticas-->
+    <div class="container-lista">
+      <div class="form-group">
+        <label for="criticas">Críticas</label>
+
+        <ul>
+          <li *ngFor= "let critica of filme.criticas" class="critica">
+
+              <span style="color:red">{{critica.username}}</span>
+              escreveu, no dia {{critica.data}}:
+              <button class="botao-delete-critica" title="Remover crítica"
+          (click)="removerCritica(critica.username)">x</button>
+              <br>"{{critica.comentario}}"
+              <br>Nota: {{critica.nota}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+    [disabled]="!formsUsuario.form.valid">Salvar</button>
+
+  </form>
+</div>

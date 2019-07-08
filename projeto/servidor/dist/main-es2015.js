@@ -41,7 +41,7 @@ module.exports = "<app-navbar></app-navbar>\n<br>\n<br>\n<br>\n<router-outlet></
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n    <form (ngSubmit)=\"login()\" #formsUsuario=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"usernameLogin\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"usernameLogin\" required\n        [(ngModel)]=\"dadosLogin.username\" name=\"usernameLogin\"\n        #usernameLogin=\"ngModel\">\n        <div [hidden]=\"usernameLogin.valid || usernameLogin.pristine\"\n        class=\"alert alert-danger\">\n        Username é obrigatório.\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"senhaLogin\">Senha</label>\n        <input type=\"text\" class=\"form-control\" id=\"senhaLogin\" required\n        [(ngModel)]=\"dadosLogin.senha\" name=\"senhaLogin\"\n        #senhaLogin=\"ngModel\">\n        <div [hidden]=\"senhaLogin.valid || senhaLogin.pristine\"\n        class=\"alert alert-danger\">\n        Senha é obrigatória.\n        </div>\n      </div>\n\n      <div class=\"\" *ngIf=\"mensageDeErro\" style=\"color: red\">\n        {{mensageDeErro}}\n      </div>\n\n\n      <button type=\"submit\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid\">Fazer Login</button>\n    </form>\n  </div>\n  <br>\n  <hr>\n</div>\n<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
+module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n    <form (ngSubmit)=\"login()\" #formsUsuario=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"usernameLogin\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"usernameLogin\" required\n        [(ngModel)]=\"dadosLogin.username\" name=\"usernameLogin\"\n        #usernameLogin=\"ngModel\">\n        <div [hidden]=\"usernameLogin.valid || usernameLogin.pristine\"\n        class=\"alert alert-danger\">\n        Username é obrigatório.\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"senhaLogin\">Senha</label>\n        <input type=\"password\" class=\"form-control\" id=\"senhaLogin\" required\n        [(ngModel)]=\"dadosLogin.senha\" name=\"senhaLogin\"\n        #senhaLogin=\"ngModel\">\n        <div [hidden]=\"senhaLogin.valid || senhaLogin.pristine\"\n        class=\"alert alert-danger\">\n        Senha é obrigatória.\n        </div>\n      </div>\n\n      <div class=\"\" *ngIf=\"mensageDeErro\" style=\"color: red\">\n        {{mensageDeErro}}\n      </div>\n\n\n      <button type=\"submit\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid\">Fazer Login</button>\n    </form>\n  </div>\n  <br>\n  <hr>\n</div>\n<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
 
 /***/ }),
 
@@ -67,6 +67,17 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/edicao-filme/edicao-filme.component.html":
+/*!************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/edicao-filme/edicao-filme.component.html ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n\n\n  <form (ngSubmit)=\"salvar()\" #formsUsuario=\"ngForm\">\n\n\n    <div class=\"form-group\">\n      <label for=\"titulo\">Titulo</label>\n      <input type=\"text\" class=\"form-control\" id=\"titulo\" required\n      [(ngModel)]=\"filme.titulo\" name=\"titulo\"\n      #titulo=\"ngModel\">\n      <div [hidden]=\"titulo.valid || titulo.pristine\"\n      class=\"alert alert-danger\">\n      O campo Título não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"ano\">Ano</label>\n      <input type=\"text\" class=\"form-control\" id=\"ano\" required\n      [(ngModel)]=\"filme.ano\" name=\"ano\"\n      #ano=\"ngModel\">\n      <div [hidden]=\"ano.valid || ano.pristine\"\n      class=\"alert alert-danger\">\n      O campo Ano não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"sinopse\">Sinopse</label>\n      <textarea name=\"sinopse\" id=\"sinopse\" required\n      [(ngModel)]=\"filme.sinopse\" class=\"form-control\"\n      #sinopse=\"ngModel\" rows=\"8\" cols=\"80\" ></textarea>\n\n      <div [hidden]=\"sinopse.valid || sinopse.pristine\"\n      class=\"alert alert-danger\">\n      O campo Sinopse não pode ficar vazio\n      </div>\n    </div>\n\n    <!--Atores -->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"elenco\">Elenco</label>\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoAtor\" maxlength=\"50\" [(ngModel)]=\"novoAtor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarAtor()\">Adicionar</button>\n        </div>\n\n        <ul>\n          <li *ngFor=\"let pessoa of filme.elenco\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa do elenco\"\n          (click)=\"removerAtor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n        <div [hidden]=\"filme.elenco.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no elenco.\n        </div>\n      </div>\n    </div>\n    <hr>\n    <!--Direção-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Direção</label>\n\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoDiretor\" maxlength=\"50\" [(ngModel)]=\"novoDiretor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarDiretor()\">Adicionar</button>\n        </div>\n        <ul>\n          <li *ngFor=\"let pessoa of filme.diretores\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa da direção\"\n          (click)=\"removerDiretor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n\n        <div [hidden]=\"filme.diretores.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa na direção.\n        </div>\n      </div>\n    </div>\n\n    <!--Críticas-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"criticas\">Críticas</label>\n\n        <ul>\n          <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n              <button class=\"botao-delete-critica\" title=\"Remover crítica\"\n          (click)=\"removerCritica(critica.username)\">x</button>\n              <br>\"{{critica.comentario}}\"\n              <br>Nota: {{critica.nota}}\n          </li>\n        </ul>\n      </div>\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Salvar</button>\n\n  </form>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/filme/filme.component.html":
 /*!**********************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/filme/filme.component.html ***!
@@ -74,7 +85,7 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n    <button class=\"botao-editar-filme\" type=\"button\"\n\n    name=\"button\" routerLink=\"/edicao-filme/{{filme.id}}\">Editar Filme</button>\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -151,6 +162,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./autenticacao/autenticacao.component */ "./src/app/autenticacao/autenticacao.component.ts");
 /* harmony import */ var _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./resultado-de-busca/resultado-de-busca.component */ "./src/app/resultado-de-busca/resultado-de-busca.component.ts");
 /* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
+/* harmony import */ var _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./edicao-filme/edicao-filme.component */ "./src/app/edicao-filme/edicao-filme.component.ts");
+
 
 
 
@@ -166,7 +179,8 @@ const routes = [
     { path: 'autenticacao', component: _autenticacao_autenticacao_component__WEBPACK_IMPORTED_MODULE_5__["AutenticacaoComponent"] },
     { path: 'busca/:id', component: _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__["ResultadoDeBuscaComponent"] },
     { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] },
-    { path: 'developer', component: _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__["TestaServidorComponent"] }
+    { path: 'developer', component: _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__["TestaServidorComponent"] },
+    { path: 'edicao-filme/:id', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -256,6 +270,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
 /* harmony import */ var _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./confirmacao-registro/confirmacao-registro.component */ "./src/app/confirmacao-registro/confirmacao-registro.component.ts");
+/* harmony import */ var _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./edicao-filme/edicao-filme.component */ "./src/app/edicao-filme/edicao-filme.component.ts");
+
 
 
 
@@ -288,7 +304,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"],
             _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"],
             _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__["TestaServidorComponent"],
-            _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__["ConfirmacaoRegistroComponent"]
+            _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__["ConfirmacaoRegistroComponent"],
+            _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_18__["EdicaoFilmeComponent"]
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -557,6 +574,189 @@ CriticaComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/edicao-filme/edicao-filme.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/edicao-filme/edicao-filme.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".container {\n  padding-left: 20px;\n  padding-right: 20px;\n  padding-top: 20px;\n  padding-bottom: 0px;\n\n  width: 900px;\n  background: white;\n  padding-bottom: 50px;\n}\n\n.container-lista {\n  max-width: 600px;\n}\n\nul {\n  width: 100%;\n  height: auto;\n  padding: 2px;\n  list-style-type: none;\n}\n\n.item-lista-pessoas {\n  text-decoration: none;\n  position: relative;\n  display: block;\n  width: 100%;\n  height: 50px;\n  margin-bottom: 20px;\n  padding-left: 5px;\n  padding-right: 10px;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  background-color: #dddddd;\n\n}\n\n.nome-pessoa {\n  display: inline;\n  /*background-color: #DDDDDD;*/\n  padding-top: 7px;\n  padding-bottom: 7px;\n  max-width: 200px;\n  font-size: 16px;\n}\n\n.delete {\n  float: right;\n  background-color: #AA0000;\n  color: white;\n  height: 30px;\n  width: 30px;\n}\n\n.input-pessoa {\n  width: 80%;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n\n.botao-adicionar {\n  width: 19%;\n  display: inline;\n}\n\n.critica {\n  margin-bottom: 20px;\n  width: 100%;\n  padding-left: 5px;\n  padding-right: 10px;\n  padding-top: 10px;\n  padding-bottom: 10px;\n  text-decoration: none;\n  position: relative;\n  display: block;\n  background-color: #dddddd;\n\n  width: 600px;\n}\n\n.botao-delete-critica {\n  background-color: #AA0000;\n  color: white;\n  height: 30px;\n  width: 30px;\n  float: right;\n\n  display: block;\n  vertical-align: middle;\n  margin-top: ;\n\n\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZWRpY2FvLWZpbG1lL2VkaWNhby1maWxtZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixpQkFBaUI7RUFDakIsbUJBQW1COztFQUVuQixZQUFZO0VBQ1osaUJBQWlCO0VBQ2pCLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxZQUFZO0VBQ1osWUFBWTtFQUNaLHFCQUFxQjtBQUN2Qjs7QUFHQTtFQUNFLHFCQUFxQjtFQUNyQixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLFdBQVc7RUFDWCxZQUFZO0VBQ1osbUJBQW1CO0VBQ25CLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLG9CQUFvQjtFQUNwQix5QkFBeUI7O0FBRTNCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLDZCQUE2QjtFQUM3QixnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLGdCQUFnQjtFQUNoQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osWUFBWTtFQUNaLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFVBQVU7RUFDVixnQkFBZ0I7RUFDaEIsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsVUFBVTtFQUNWLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxtQkFBbUI7RUFDbkIsV0FBVztFQUNYLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLG9CQUFvQjtFQUNwQixxQkFBcUI7RUFDckIsa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCx5QkFBeUI7O0VBRXpCLFlBQVk7QUFDZDs7QUFDQTtFQUNFLHlCQUF5QjtFQUN6QixZQUFZO0VBQ1osWUFBWTtFQUNaLFdBQVc7RUFDWCxZQUFZOztFQUVaLGNBQWM7RUFDZCxzQkFBc0I7RUFDdEIsWUFBWTs7O0FBR2QiLCJmaWxlIjoic3JjL2FwcC9lZGljYW8tZmlsbWUvZWRpY2FvLWZpbG1lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29udGFpbmVyIHtcbiAgcGFkZGluZy1sZWZ0OiAyMHB4O1xuICBwYWRkaW5nLXJpZ2h0OiAyMHB4O1xuICBwYWRkaW5nLXRvcDogMjBweDtcbiAgcGFkZGluZy1ib3R0b206IDBweDtcblxuICB3aWR0aDogOTAwcHg7XG4gIGJhY2tncm91bmQ6IHdoaXRlO1xuICBwYWRkaW5nLWJvdHRvbTogNTBweDtcbn1cblxuLmNvbnRhaW5lci1saXN0YSB7XG4gIG1heC13aWR0aDogNjAwcHg7XG59XG5cbnVsIHtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogYXV0bztcbiAgcGFkZGluZzogMnB4O1xuICBsaXN0LXN0eWxlLXR5cGU6IG5vbmU7XG59XG5cblxuLml0ZW0tbGlzdGEtcGVzc29hcyB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgcG9zaXRpb246IHJlbGF0aXZlO1xuICBkaXNwbGF5OiBibG9jaztcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogNTBweDtcbiAgbWFyZ2luLWJvdHRvbTogMjBweDtcbiAgcGFkZGluZy1sZWZ0OiA1cHg7XG4gIHBhZGRpbmctcmlnaHQ6IDEwcHg7XG4gIHBhZGRpbmctdG9wOiAxMHB4O1xuICBwYWRkaW5nLWJvdHRvbTogMTBweDtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZGRkZDtcblxufVxuXG4ubm9tZS1wZXNzb2Ege1xuICBkaXNwbGF5OiBpbmxpbmU7XG4gIC8qYmFja2dyb3VuZC1jb2xvcjogI0RERERERDsqL1xuICBwYWRkaW5nLXRvcDogN3B4O1xuICBwYWRkaW5nLWJvdHRvbTogN3B4O1xuICBtYXgtd2lkdGg6IDIwMHB4O1xuICBmb250LXNpemU6IDE2cHg7XG59XG5cbi5kZWxldGUge1xuICBmbG9hdDogcmlnaHQ7XG4gIGJhY2tncm91bmQtY29sb3I6ICNBQTAwMDA7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgaGVpZ2h0OiAzMHB4O1xuICB3aWR0aDogMzBweDtcbn1cblxuLmlucHV0LXBlc3NvYSB7XG4gIHdpZHRoOiA4MCU7XG4gIG1hcmdpbi1sZWZ0OiAycHg7XG4gIG1hcmdpbi1yaWdodDogMnB4O1xufVxuXG4uYm90YW8tYWRpY2lvbmFyIHtcbiAgd2lkdGg6IDE5JTtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuXG4uY3JpdGljYSB7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG4gIHdpZHRoOiAxMDAlO1xuICBwYWRkaW5nLWxlZnQ6IDVweDtcbiAgcGFkZGluZy1yaWdodDogMTBweDtcbiAgcGFkZGluZy10b3A6IDEwcHg7XG4gIHBhZGRpbmctYm90dG9tOiAxMHB4O1xuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgZGlzcGxheTogYmxvY2s7XG4gIGJhY2tncm91bmQtY29sb3I6ICNkZGRkZGQ7XG5cbiAgd2lkdGg6IDYwMHB4O1xufVxuLmJvdGFvLWRlbGV0ZS1jcml0aWNhIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI0FBMDAwMDtcbiAgY29sb3I6IHdoaXRlO1xuICBoZWlnaHQ6IDMwcHg7XG4gIHdpZHRoOiAzMHB4O1xuICBmbG9hdDogcmlnaHQ7XG5cbiAgZGlzcGxheTogYmxvY2s7XG4gIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gIG1hcmdpbi10b3A6IDtcblxuXG59XG4iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/edicao-filme/edicao-filme.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/edicao-filme/edicao-filme.component.ts ***!
+  \********************************************************/
+/*! exports provided: EdicaoFilmeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EdicaoFilmeComponent", function() { return EdicaoFilmeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _filme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../filme */ "./src/app/filme.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _filme_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filme.service */ "./src/app/filme.service.ts");
+
+
+
+
+
+
+
+let EdicaoFilmeComponent = class EdicaoFilmeComponent {
+    constructor(route, filmeService, location, router) {
+        this.route = route;
+        this.filmeService = filmeService;
+        this.location = location;
+        this.router = router;
+        this.filme = {
+            id: "2",
+            titulo: "Vingadores: Ultimato",
+            ano: 2019,
+            diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
+            elenco: [{ nome: "Robert Downey Jr" }, { nome: "Scarlett Johansson" }],
+            criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
+                { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
+            imagens: ["/assets/images/vingadores_0.jpg"],
+            sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
+        };
+        this.filmeOriginal = new _filme__WEBPACK_IMPORTED_MODULE_2__["Filme"]();
+    }
+    ngOnInit() {
+        this.getFilme();
+    }
+    clonarFilme() {
+        this.filmeOriginal = Object.assign({}, this.filme);
+        this.filmeOriginal.elenco = [...this.filme.elenco];
+        this.filmeOriginal.diretores = [...this.filme.diretores];
+        this.filmeOriginal.criticas = [...this.filme.criticas];
+    }
+    getFilme() {
+        console.log('GET FILME EM EDIÇÃO' + this.route.snapshot.params.id);
+        var id = this.route.snapshot.params.id;
+        this.filmeService.getFilmeById(id).subscribe(resposta => {
+            this.carregaDadosDoFilme(resposta);
+        });
+    }
+    // Essa função carrega os dados do filme na página
+    carregaDadosDoFilme(resposta) {
+        console.log('resposta do server:' + JSON.stringify(resposta));
+        if (!resposta.houveErro) {
+            if (resposta.filmes.length > 0) {
+                this.filme = resposta.filmes[0];
+                console.log('achou um filme');
+                // Faz cópia de filme para comparar depois
+                this.clonarFilme();
+            }
+            else {
+                // TODO: Dispara ação quando não acha filme.
+                console.log("nenhumFilmeFoiEncontrado");
+            }
+        }
+        else {
+            // Houve erro
+            console.log("ERRO!");
+            console.log(resposta.mensagemErro);
+        }
+    }
+    removerAtor(nome) {
+        var index = -1;
+        for (let pessoa of this.filme.elenco) {
+            if (pessoa.nome == nome) {
+                index = this.filme.elenco.indexOf(pessoa);
+            }
+        }
+        if (index != -1) {
+            this.filme.elenco.splice(index, 1);
+        }
+    }
+    adicionarAtor() {
+        var ator = { nome: this.novoAtor };
+        this.filme.elenco.push(ator);
+        this.novoAtor = "";
+    }
+    removerDiretor(nome) {
+        var index = -1;
+        for (let pessoa of this.filme.diretores) {
+            if (pessoa.nome == nome) {
+                index = this.filme.diretores.indexOf(pessoa);
+            }
+        }
+        if (index != -1) {
+            this.filme.diretores.splice(index, 1);
+        }
+    }
+    adicionarDiretor() {
+        var diretor = { nome: this.novoDiretor };
+        this.filme.diretores.push(diretor);
+        this.novoDiretor = "";
+    }
+    removerCritica(username) {
+        var index = -1;
+        for (let critica of this.filme.criticas) {
+            if (critica.username == username) {
+                index = this.filme.criticas.indexOf(critica);
+            }
+        }
+        if (index != -1) {
+            this.filme.criticas.splice(index, 1);
+        }
+    }
+    salvar() {
+        var body = {};
+        if (this.filme.titulo != this.filmeOriginal.titulo) {
+            body["titulo"] = this.filme.titulo;
+        }
+        if (JSON.stringify(this.filme.diretores) != JSON.stringify(this.filmeOriginal.diretores)) {
+            body["diretores"] = this.filme.diretores;
+        }
+        if (this.filme.ano != this.filmeOriginal.ano) {
+            body["ano"] = this.filme.ano;
+        }
+        if (JSON.stringify(this.filme.elenco) != JSON.stringify(this.filmeOriginal.elenco)) {
+            body["elenco"] = this.filme.elenco;
+        }
+        if (this.filme.sinopse != this.filmeOriginal.sinopse) {
+            body["sinopse"] = this.filme.sinopse;
+        }
+        if (JSON.stringify(this.filme.criticas) != JSON.stringify(this.filmeOriginal.criticas)) {
+            body["criticas"] = this.filme.criticas;
+        }
+        var bodyFinal = JSON.stringify(body);
+        console.log("body que será enviado:" + bodyFinal);
+        this.filmeService.putFilme(this.filme.id, bodyFinal).subscribe(resposta => {
+            console.log("Resposta do putFilme: " + JSON.stringify(resposta));
+            this.router.navigate(['filme/' + this.filme.id]);
+        });
+    }
+};
+EdicaoFilmeComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"] },
+    { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
+EdicaoFilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-edicao-filme',
+        template: __webpack_require__(/*! raw-loader!./edicao-filme.component.html */ "./node_modules/raw-loader/index.js!./src/app/edicao-filme/edicao-filme.component.html"),
+        styles: [__webpack_require__(/*! ./edicao-filme.component.css */ "./src/app/edicao-filme/edicao-filme.component.css")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+], EdicaoFilmeComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/filme.service.ts":
 /*!**********************************!*\
   !*** ./src/app/filme.service.ts ***!
@@ -575,6 +775,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
 let FilmeService = class FilmeService {
     constructor(http) {
         this.http = http;
@@ -595,7 +800,9 @@ let FilmeService = class FilmeService {
     }
     postFilme(filme) {
     }
-    putFilme(filme) {
+    putFilme(idFilme, body) {
+        var url = '/filmes/id/' + idFilme;
+        return this.http.put(url, body, httpOptions);
     }
     /** Observable ativa uma chamada assincrona do retorno dessa função
     *  @idFilme: Id do filme que se deseja excluir
@@ -647,6 +854,22 @@ FilmeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/filme.ts":
+/*!**************************!*\
+  !*** ./src/app/filme.ts ***!
+  \**************************/
+/*! exports provided: Filme */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Filme", function() { return Filme; });
+class Filme {
+}
+
+
+/***/ }),
+
 /***/ "./src/app/filme/filme.component.css":
 /*!*******************************************!*\
   !*** ./src/app/filme/filme.component.css ***!
@@ -654,7 +877,7 @@ FilmeService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding-top: 50px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.div-video {\n    float: right;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n  padding-left: 2px;\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-right: 2px;\n}\n\n.critica {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 50px;\n  margin-top: 5px;\n\n\n}\n\n.critica-botao {\n  float: right;\n  padding: 5px;\n}\n\n.container-criticas {\n  margin-top: 10px;\n  margin-bottom: 0px;\n}\n\n.lista-pessoas {\n  display: table;\n  width: 100%;\n}\n\n.lista-pessoas ul {\n  list-style: none;\n}\n\n.lista-pessoas li {\n  margin-left: 0px;\n  margin-right: 5px;\n  display: inline;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGFBQWE7QUFDZjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFVBQVU7RUFDVixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixtQkFBbUI7RUFDbkIsa0JBQWtCO0FBQ3BCOztBQUNBO0VBQ0UseUJBQXlCO0VBQ3pCLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsb0JBQW9CO0VBQ3BCLGtCQUFrQjtFQUNsQixlQUFlOzs7QUFHakI7O0FBQ0E7RUFDRSxZQUFZO0VBQ1osWUFBWTtBQUNkOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxXQUFXO0FBQ2I7O0FBQ0E7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBQ0E7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGVBQWU7QUFDakIiLCJmaWxlIjoic3JjL2FwcC9maWxtZS9maWxtZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRpdHVsbyB7XG4gIC8qYmFja2dyb3VuZC1jb2xvcjogZ3JheTsqL1xuICB3aWR0aDogMTAwJTtcbiAgZm9udC1zaXplOiAzNnB4O1xuICAvKnRleHQtYWxpZ246IGxlZnQ7XG5cbiAgZGlzcGxheTogaW5saW5lO1xuICBwYWRkaW5nOiAxMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDBweDtcbiovXG59XG5cbi5jb250YWluZXIge1xuICBwYWRkaW5nLXRvcDogNTBweDtcbiAgcGFkZGluZy1sZWZ0OiA1MHB4O1xuICBwYWRkaW5nLXJpZ2h0OiA1MHB4O1xuICBwYWRkaW5nLWJvdHRvbTogNTBweDtcbiAgd2lkdGg6IDkwMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbn1cblxuaW1nIHtcbiAgcGFkZGluZzogMTBweDtcbiAgbWF4LWhlaWdodDozMDBweDtcbiAgbWF4LXdpZHRoOjEwMCU7XG4gIHdpZHRoOiBhdXRvO1xuICBoZWlnaHQ6IDMwMHB4O1xufVxuXG4udmlkZW8ge1xuICBtaW4td2lkdGg6IDUwMHB4O1xuICBtYXgtaGVpZ2h0OiAzMDBweDtcbiAgaGVpZ2h0OiAzMDBweDtcbiAgcGFkZGluZzogMTBweDtcbn1cblxuLmRpdi12aWRlbyB7XG4gICAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4uY29udGFpbmVyLW1lZGlhIHtcbiAgd2lkdGg6IDgwMHB4O1xuICBoZWlnaHQ6IDMxMHB4O1xufVxuXG4uY29sdW5hIHtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5lc3RyZWxhcyB7XG4gIHdpZHRoOiAxOTE7XG4gIGhlaWdodDogNjRweDtcbn1cblxudWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xuICBwYWRkaW5nLWxlZnQ6IDJweDtcbiAgcGFkZGluZy10b3A6IDJweDtcbiAgcGFkZGluZy1ib3R0b206IDJweDtcbiAgcGFkZGluZy1yaWdodDogMnB4O1xufVxuLmNyaXRpY2Ege1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjZTFlNGU4O1xuICBwYWRkaW5nLXRvcDogNTBweDtcbiAgcGFkZGluZy1yaWdodDogMzBweDtcbiAgcGFkZGluZy1ib3R0b206IDUwcHg7XG4gIHBhZGRpbmctbGVmdDogNTBweDtcbiAgbWFyZ2luLXRvcDogNXB4O1xuXG5cbn1cbi5jcml0aWNhLWJvdGFvIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiA1cHg7XG59XG5cbi5jb250YWluZXItY3JpdGljYXMge1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiAwcHg7XG59XG5cbi5saXN0YS1wZXNzb2FzIHtcbiAgZGlzcGxheTogdGFibGU7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmxpc3RhLXBlc3NvYXMgdWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xufVxuLmxpc3RhLXBlc3NvYXMgbGkge1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDVweDtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuIl19 */"
+module.exports = ".titulo {\n  /*background-color: gray;*/\n  width: 100%;\n  font-size: 36px;\n  /*text-align: left;\n\n  display: inline;\n  padding: 10px;\n  margin-right: 0px;\n*/\n}\n\n.container {\n  padding-top: 50px;\n  padding-left: 50px;\n  padding-right: 50px;\n  padding-bottom: 50px;\n  width: 900px;\n  background: white;\n}\n\nimg {\n  padding: 10px;\n  max-height:300px;\n  max-width:100%;\n  width: auto;\n  height: 300px;\n}\n\n.video {\n  min-width: 500px;\n  max-height: 300px;\n  height: 300px;\n  padding: 10px;\n}\n\n.div-video {\n    float: right;\n}\n\n.container-media {\n  width: 800px;\n  height: 310px;\n}\n\n.coluna {\n  float: left;\n}\n\n.estrelas {\n  width: 191;\n  height: 64px;\n}\n\nul {\n  list-style: none;\n  padding-left: 2px;\n  padding-top: 2px;\n  padding-bottom: 2px;\n  padding-right: 2px;\n}\n\n.critica {\n  background-color: #e1e4e8;\n  padding-top: 50px;\n  padding-right: 30px;\n  padding-bottom: 50px;\n  padding-left: 50px;\n  margin-top: 5px;\n}\n\n.critica-botao {\n  float: right;\n  padding: 5px;\n}\n\n.container-criticas {\n  margin-top: 10px;\n  margin-bottom: 0px;\n}\n\n.lista-pessoas {\n  display: table;\n  width: 100%;\n}\n\n.lista-pessoas ul {\n  list-style: none;\n}\n\n.lista-pessoas li {\n  margin-left: 0px;\n  margin-right: 5px;\n  display: inline;\n}\n\n.botao-editar-filme {\n  float: right;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLDBCQUEwQjtFQUMxQixXQUFXO0VBQ1gsZUFBZTtFQUNmOzs7OztDQUtEO0FBQ0Q7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixvQkFBb0I7RUFDcEIsWUFBWTtFQUNaLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLGFBQWE7RUFDYixnQkFBZ0I7RUFDaEIsY0FBYztFQUNkLFdBQVc7RUFDWCxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGFBQWE7RUFDYixhQUFhO0FBQ2Y7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0VBQ0UsWUFBWTtFQUNaLGFBQWE7QUFDZjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLFVBQVU7RUFDVixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixtQkFBbUI7RUFDbkIsa0JBQWtCO0FBQ3BCOztBQUNBO0VBQ0UseUJBQXlCO0VBQ3pCLGlCQUFpQjtFQUNqQixtQkFBbUI7RUFDbkIsb0JBQW9CO0VBQ3BCLGtCQUFrQjtFQUNsQixlQUFlO0FBQ2pCOztBQUNBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxjQUFjO0VBQ2QsV0FBVztBQUNiOztBQUNBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUNBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGlCQUFpQjtFQUNqQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsWUFBWTtBQUNkIiwiZmlsZSI6InNyYy9hcHAvZmlsbWUvZmlsbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi50aXR1bG8ge1xuICAvKmJhY2tncm91bmQtY29sb3I6IGdyYXk7Ki9cbiAgd2lkdGg6IDEwMCU7XG4gIGZvbnQtc2l6ZTogMzZweDtcbiAgLyp0ZXh0LWFsaWduOiBsZWZ0O1xuXG4gIGRpc3BsYXk6IGlubGluZTtcbiAgcGFkZGluZzogMTBweDtcbiAgbWFyZ2luLXJpZ2h0OiAwcHg7XG4qL1xufVxuXG4uY29udGFpbmVyIHtcbiAgcGFkZGluZy10b3A6IDUwcHg7XG4gIHBhZGRpbmctbGVmdDogNTBweDtcbiAgcGFkZGluZy1yaWdodDogNTBweDtcbiAgcGFkZGluZy1ib3R0b206IDUwcHg7XG4gIHdpZHRoOiA5MDBweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG59XG5cbmltZyB7XG4gIHBhZGRpbmc6IDEwcHg7XG4gIG1heC1oZWlnaHQ6MzAwcHg7XG4gIG1heC13aWR0aDoxMDAlO1xuICB3aWR0aDogYXV0bztcbiAgaGVpZ2h0OiAzMDBweDtcbn1cblxuLnZpZGVvIHtcbiAgbWluLXdpZHRoOiA1MDBweDtcbiAgbWF4LWhlaWdodDogMzAwcHg7XG4gIGhlaWdodDogMzAwcHg7XG4gIHBhZGRpbmc6IDEwcHg7XG59XG5cbi5kaXYtdmlkZW8ge1xuICAgIGZsb2F0OiByaWdodDtcbn1cblxuLmNvbnRhaW5lci1tZWRpYSB7XG4gIHdpZHRoOiA4MDBweDtcbiAgaGVpZ2h0OiAzMTBweDtcbn1cblxuLmNvbHVuYSB7XG4gIGZsb2F0OiBsZWZ0O1xufVxuXG4uZXN0cmVsYXMge1xuICB3aWR0aDogMTkxO1xuICBoZWlnaHQ6IDY0cHg7XG59XG5cbnVsIHtcbiAgbGlzdC1zdHlsZTogbm9uZTtcbiAgcGFkZGluZy1sZWZ0OiAycHg7XG4gIHBhZGRpbmctdG9wOiAycHg7XG4gIHBhZGRpbmctYm90dG9tOiAycHg7XG4gIHBhZGRpbmctcmlnaHQ6IDJweDtcbn1cbi5jcml0aWNhIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2UxZTRlODtcbiAgcGFkZGluZy10b3A6IDUwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDMwcHg7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xuICBwYWRkaW5nLWxlZnQ6IDUwcHg7XG4gIG1hcmdpbi10b3A6IDVweDtcbn1cbi5jcml0aWNhLWJvdGFvIHtcbiAgZmxvYXQ6IHJpZ2h0O1xuICBwYWRkaW5nOiA1cHg7XG59XG5cbi5jb250YWluZXItY3JpdGljYXMge1xuICBtYXJnaW4tdG9wOiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiAwcHg7XG59XG5cbi5saXN0YS1wZXNzb2FzIHtcbiAgZGlzcGxheTogdGFibGU7XG4gIHdpZHRoOiAxMDAlO1xufVxuLmxpc3RhLXBlc3NvYXMgdWwge1xuICBsaXN0LXN0eWxlOiBub25lO1xufVxuLmxpc3RhLXBlc3NvYXMgbGkge1xuICBtYXJnaW4tbGVmdDogMHB4O1xuICBtYXJnaW4tcmlnaHQ6IDVweDtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuXG4uYm90YW8tZWRpdGFyLWZpbG1lIHtcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuIl19 */"
 
 /***/ }),
 
@@ -692,7 +915,7 @@ let FilmeComponent = class FilmeComponent {
         this.dialog = dialog;
         this.usuarioService = usuarioService;
         this.filme = {
-            id: 2,
+            id: "2",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
@@ -948,7 +1171,7 @@ FormsCadastroUsuarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n\n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.form-control {\n  width: 50px;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDtBQUVBLDBCQUEwQjtBQUMxQjs7RUFFRSxnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLFdBQVc7QUFDYjtBQUNBO0VBQ0UsV0FBVztBQUNiO0FBRUE7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGlCQUFpQjtBQUNuQjtBQUNBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixlQUFlO0VBQ2YsWUFBWTtBQUNkO0FBQ0Esa0NBQWtDO0FBQ2xDO0VBQ0Usc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLHFCQUFxQjtFQUNyQixXQUFXO0FBQ2I7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixZQUFZO0FBQ2Q7QUFFQTtFQUNFLGVBQWU7RUFDZixnQkFBZ0I7QUFDbEI7QUFDQTtJQUNJLGtCQUFrQjtBQUN0QjtBQUVBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIE5hdiBiYXIqL1xuLm5hdmJhciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzMzM7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgd2lkdGg6IDEwMCU7XG4gIG92ZXJmbG93OiB2aXNpYmxlO1xufVxuXG4udG9wbmF2LXJpZ2h0IHtcbiAgcG9zaXRpb246IHN0YXRpYztcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4vKiBFbGVtZW50b3MgZGUgUGVzcXVpc2EgKi9cbi5zZWFyY2gtY29udGFpbmVyIHtcblxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cbi5mb3JtLWNvbnRyb2wge1xuICB3aWR0aDogNTBweDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
+module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n  z-index: 100;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n\n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.form-control {\n  width: 50px;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixZQUFZO0FBQ2Q7QUFFQSwwQkFBMEI7QUFDMUI7O0VBRUUsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixXQUFXO0FBQ2I7QUFDQTtFQUNFLFdBQVc7QUFDYjtBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osZUFBZTtFQUNmLFlBQVk7QUFDZDtBQUNBLGtDQUFrQztBQUNsQztFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2Ysa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsV0FBVztBQUNiO0FBRUE7RUFDRSxzQkFBc0I7RUFDdEIsWUFBWTtBQUNkO0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQ2xCO0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEI7QUFFQTtFQUNFLGNBQWM7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBOYXYgYmFyKi9cbi5uYXZiYXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzMzO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgei1pbmRleDogMTAwO1xufVxuXG4udG9wbmF2LXJpZ2h0IHtcbiAgcG9zaXRpb246IHN0YXRpYztcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4vKiBFbGVtZW50b3MgZGUgUGVzcXVpc2EgKi9cbi5zZWFyY2gtY29udGFpbmVyIHtcblxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cbi5mb3JtLWNvbnRyb2wge1xuICB3aWR0aDogNTBweDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1159,7 +1382,7 @@ let ResultadoDeBuscaComponent = class ResultadoDeBuscaComponent {
         this.filmeService = filmeService;
         this.location = location;
         this.filme = {
-            id: 2,
+            id: "2",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],

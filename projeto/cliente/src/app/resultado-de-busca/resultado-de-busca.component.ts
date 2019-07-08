@@ -14,7 +14,7 @@ import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
 export class ResultadoDeBuscaComponent implements OnInit {
 
   filme: Filme = {
-    id: 2,
+    id: "2",
     titulo: "Vingadores: Ultimato",
     ano: 2019,
     diretores: [{nome: "Russo1"}, {nome: "Russo2"}],
