@@ -25,6 +25,7 @@ exports.create = function() {
 			{"nome": 	"Chris Evans"}
 		],
 		"sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -57,6 +58,7 @@ exports.create = function() {
 			{"nome": 	"Pumba"}
 		],
 		"sinopse": "",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -89,6 +91,7 @@ exports.create = function() {
 			{"nome": 	"Rupert Grint"}
 		],
 		"sinopse": "",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",
