@@ -35,17 +35,18 @@ export class AutenticacaoComponent implements OnInit {
   login() {
     console.log('estou em login');
 
-    this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha,
-      (usuarioLogouComExito: boolean, mensageDeErro: string) => {
-        if (usuarioLogouComExito) {
+    //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
+      var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
+        if (!resposta.houveErro) {
+            // Vai para a página inicial
             this.router.navigate(['/']);
+            // Omite mensagem de erro no html
             this.mensageDeErro = null;
         }
         else {
-          this.mensageDeErro = mensageDeErro;
+          // Exibe mensagem de erro
+          this.mensageDeErro = resposta.mensagemErro;
         }
-
-      }
-    );
+    //});
   }
 }

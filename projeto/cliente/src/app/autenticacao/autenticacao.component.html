@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <label for="senhaLogin">Senha</label>
-        <input type="text" class="form-control" id="senhaLogin" required
+        <input type="password" class="form-control" id="senhaLogin" required
         [(ngModel)]="dadosLogin.senha" name="senhaLogin"
         #senhaLogin="ngModel">
         <div [hidden]="senhaLogin.valid || senhaLogin.pristine"
