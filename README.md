@@ -25,7 +25,7 @@ Baseado nos Casos de Uso.
 - [ ] Alterar senha
 - [ ] Busca simples por filme
 - [ ] Busca combinada por filme (??)
-- [ ] Exibir informações sobre um filme
+- [x] Exibir informações sobre um filme
 - [ ] Opinar sobre um filme
 - [ ] Editar opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
@@ -36,8 +36,8 @@ Baseado nos Casos de Uso.
 #### Lado cliente:
 
 - [x] Cadastra
-- [ ] Autentica
-- [ ] Encerrar sessão
+- [x] Autentica
+- [x] Encerrar sessão
 - [ ] Alterar senha
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
@@ -50,7 +50,7 @@ Baseado nos Casos de Uso.
 
 ##### Lado servidor/banco de dados:
 
-- [ ] Cadastra
+- [x] Cadastra
 - [ ] Autentica
 - [ ] Encerrar sessão
 - [ ] Alterar senha
