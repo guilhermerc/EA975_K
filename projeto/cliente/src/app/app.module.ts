@@ -16,6 +16,7 @@ import { CriticaComponent } from './critica/critica.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TestaServidorComponent } from './testa-servidor/testa-servidor.component';
 import { ConfirmacaoRegistroComponent } from './confirmacao-registro/confirmacao-registro.component';
+import { EdicaoFilmeComponent } from './edicao-filme/edicao-filme.component';
 
 
 
@@ -30,7 +31,8 @@ import { ConfirmacaoRegistroComponent } from './confirmacao-registro/confirmacao
     NavbarComponent,
     CriticaComponent,
     TestaServidorComponent,
-    ConfirmacaoRegistroComponent
+    ConfirmacaoRegistroComponent,
+    EdicaoFilmeComponent
   ],
   imports: [
     BrowserModule,
