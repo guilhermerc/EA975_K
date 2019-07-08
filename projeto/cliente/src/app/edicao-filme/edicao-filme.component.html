@@ -49,15 +49,15 @@
         </div>
 
         <ul>
-          <li *ngFor="let pessoa of elencoEdicao" class="item-lista-pessoas">
+          <li *ngFor="let pessoa of filme.elenco" class="item-lista-pessoas">
             <div class="pessoa">
 
-              <div class="nome-pessoa">{{pessoa}}</div> <button class="delete" title="Remover pessoa do elenco"
-          (click)="removerAtor(pessoa)">x</button>
+              <div class="nome-pessoa">{{pessoa.nome}}</div> <button class="delete" title="Remover pessoa do elenco"
+          (click)="removerAtor(pessoa.nome)">x</button>
             </div>
           </li>
         </ul>
-        <div [hidden]="elencoEdicao.length != 0"
+        <div [hidden]="filme.elenco.length != 0"
         class="alert alert-danger">
         O filme precisa de pelo menos uma pessoa no elenco.
         </div>
@@ -75,18 +75,18 @@
           <button type="button" name="button" class="botao-adicionar" (click)="adicionarDiretor()">Adicionar</button>
         </div>
         <ul>
-          <li *ngFor="let pessoa of direcaoEdicao" class="item-lista-pessoas">
+          <li *ngFor="let pessoa of filme.diretores" class="item-lista-pessoas">
             <div class="pessoa">
 
-              <div class="nome-pessoa">{{pessoa}}</div> <button class="delete" title="Remover pessoa da direção"
-          (click)="removerDiretor(pessoa)">x</button>
+              <div class="nome-pessoa">{{pessoa.nome}}</div> <button class="delete" title="Remover pessoa da direção"
+          (click)="removerDiretor(pessoa.nome)">x</button>
             </div>
           </li>
         </ul>
 
-        <div [hidden]="direcaoEdicao.length != 0"
+        <div [hidden]="filme.diretores.length != 0"
         class="alert alert-danger">
-        O filme precisa de pelo menos uma pessoa no direção.
+        O filme precisa de pelo menos uma pessoa na direção.
         </div>
       </div>
     </div>
@@ -94,10 +94,10 @@
     <!--Críticas-->
     <div class="container-lista">
       <div class="form-group">
-        <label for="direcao">Críticas</label>
+        <label for="criticas">Críticas</label>
 
         <ul>
-          <li *ngFor= "let critica of criticasEdicao" class="critica">
+          <li *ngFor= "let critica of filme.criticas" class="critica">
 
               <span style="color:red">{{critica.username}}</span>
               escreveu, no dia {{critica.data}}:
@@ -105,31 +105,9 @@
           (click)="removerCritica(critica.username)">x</button>
               <br>"{{critica.comentario}}"
               <br>Nota: {{critica.nota}}
-
-
-
-
           </li>
         </ul>
-
-        <div [hidden]="direcaoEdicao.length != 0"
-        class="alert alert-danger">
-        O filme precisa de pelo menos uma pessoa no direção.
-        </div>
       </div>
-    </div>
-
-
-
-
-
-    <div class="mensagem" *ngIf="senha != repeticaoDeSenha"
-    style="color: red; margin-bottom: 20px">
-      Senhas não coincidem.
-    </div>
-    <div class="mensagem" *ngIf="mensagemErro"
-    style="color: red; margin-bottom: 20px">
-      {{mensagemErro}}
     </div>
 
     <button type="submit" class="btn btn-success"

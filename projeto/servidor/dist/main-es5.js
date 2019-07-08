@@ -74,7 +74,7 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n\n  <form (ngSubmit)=\"salvar()\" #formsUsuario=\"ngForm\">\n\n\n    <div class=\"form-group\">\n      <label for=\"titulo\">Titulo</label>\n      <input type=\"text\" class=\"form-control\" id=\"titulo\" required\n      [(ngModel)]=\"filme.titulo\" name=\"titulo\"\n      #titulo=\"ngModel\">\n      <div [hidden]=\"titulo.valid || titulo.pristine\"\n      class=\"alert alert-danger\">\n      O campo Título não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"ano\">Ano</label>\n      <input type=\"text\" class=\"form-control\" id=\"ano\" required\n      [(ngModel)]=\"filme.ano\" name=\"ano\"\n      #ano=\"ngModel\">\n      <div [hidden]=\"ano.valid || ano.pristine\"\n      class=\"alert alert-danger\">\n      O campo Ano não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"sinopse\">Sinopse</label>\n      <textarea name=\"sinopse\" id=\"sinopse\" required\n      [(ngModel)]=\"filme.sinopse\" class=\"form-control\"\n      #sinopse=\"ngModel\" rows=\"8\" cols=\"80\" ></textarea>\n\n      <div [hidden]=\"sinopse.valid || sinopse.pristine\"\n      class=\"alert alert-danger\">\n      O campo Sinopse não pode ficar vazio\n      </div>\n    </div>\n\n    <!--Atores -->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"elenco\">Elenco</label>\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoAtor\" maxlength=\"50\" [(ngModel)]=\"novoAtor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarAtor()\">Adicionar</button>\n        </div>\n\n        <ul>\n          <li *ngFor=\"let pessoa of elencoEdicao\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa}}</div> <button class=\"delete\" title=\"Remover pessoa do elenco\"\n          (click)=\"removerAtor(pessoa)\">x</button>\n            </div>\n          </li>\n        </ul>\n        <div [hidden]=\"elencoEdicao.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no elenco.\n        </div>\n      </div>\n    </div>\n    <hr>\n    <!--Direção-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Direção</label>\n\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoDiretor\" maxlength=\"50\" [(ngModel)]=\"novoDiretor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarDiretor()\">Adicionar</button>\n        </div>\n        <ul>\n          <li *ngFor=\"let pessoa of direcaoEdicao\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa}}</div> <button class=\"delete\" title=\"Remover pessoa da direção\"\n          (click)=\"removerDiretor(pessoa)\">x</button>\n            </div>\n          </li>\n        </ul>\n\n        <div [hidden]=\"direcaoEdicao.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no direção.\n        </div>\n      </div>\n    </div>\n\n    <!--Críticas-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Críticas</label>\n\n        <ul>\n          <li *ngFor= \"let critica of criticasEdicao\" class=\"critica\">\n\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n              <button class=\"botao-delete-critica\" title=\"Remover crítica\"\n          (click)=\"removerCritica(critica.username)\">x</button>\n              <br>\"{{critica.comentario}}\"\n              <br>Nota: {{critica.nota}}\n\n\n\n\n          </li>\n        </ul>\n\n        <div [hidden]=\"direcaoEdicao.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no direção.\n        </div>\n      </div>\n    </div>\n\n\n\n\n\n    <div class=\"mensagem\" *ngIf=\"senha != repeticaoDeSenha\"\n    style=\"color: red; margin-bottom: 20px\">\n      Senhas não coincidem.\n    </div>\n    <div class=\"mensagem\" *ngIf=\"mensagemErro\"\n    style=\"color: red; margin-bottom: 20px\">\n      {{mensagemErro}}\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Salvar</button>\n\n  </form>\n</div>\n"
+module.exports = "<div class=\"container\">\n\n\n  <form (ngSubmit)=\"salvar()\" #formsUsuario=\"ngForm\">\n\n\n    <div class=\"form-group\">\n      <label for=\"titulo\">Titulo</label>\n      <input type=\"text\" class=\"form-control\" id=\"titulo\" required\n      [(ngModel)]=\"filme.titulo\" name=\"titulo\"\n      #titulo=\"ngModel\">\n      <div [hidden]=\"titulo.valid || titulo.pristine\"\n      class=\"alert alert-danger\">\n      O campo Título não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"ano\">Ano</label>\n      <input type=\"text\" class=\"form-control\" id=\"ano\" required\n      [(ngModel)]=\"filme.ano\" name=\"ano\"\n      #ano=\"ngModel\">\n      <div [hidden]=\"ano.valid || ano.pristine\"\n      class=\"alert alert-danger\">\n      O campo Ano não pode ficar vazio\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"sinopse\">Sinopse</label>\n      <textarea name=\"sinopse\" id=\"sinopse\" required\n      [(ngModel)]=\"filme.sinopse\" class=\"form-control\"\n      #sinopse=\"ngModel\" rows=\"8\" cols=\"80\" ></textarea>\n\n      <div [hidden]=\"sinopse.valid || sinopse.pristine\"\n      class=\"alert alert-danger\">\n      O campo Sinopse não pode ficar vazio\n      </div>\n    </div>\n\n    <!--Atores -->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"elenco\">Elenco</label>\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoAtor\" maxlength=\"50\" [(ngModel)]=\"novoAtor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarAtor()\">Adicionar</button>\n        </div>\n\n        <ul>\n          <li *ngFor=\"let pessoa of filme.elenco\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa do elenco\"\n          (click)=\"removerAtor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n        <div [hidden]=\"filme.elenco.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no elenco.\n        </div>\n      </div>\n    </div>\n    <hr>\n    <!--Direção-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Direção</label>\n\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoDiretor\" maxlength=\"50\" [(ngModel)]=\"novoDiretor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarDiretor()\">Adicionar</button>\n        </div>\n        <ul>\n          <li *ngFor=\"let pessoa of filme.diretores\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa da direção\"\n          (click)=\"removerDiretor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n\n        <div [hidden]=\"filme.diretores.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa na direção.\n        </div>\n      </div>\n    </div>\n\n    <!--Críticas-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"criticas\">Críticas</label>\n\n        <ul>\n          <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n              <button class=\"botao-delete-critica\" title=\"Remover crítica\"\n          (click)=\"removerCritica(critica.username)\">x</button>\n              <br>\"{{critica.comentario}}\"\n              <br>Nota: {{critica.nota}}\n          </li>\n        </ul>\n      </div>\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Salvar</button>\n\n  </form>\n</div>\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<div class=\"container\">\n\n\n  <form (ngSubmit)=\"salvar()\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n    <button class=\"botao-editar-filme\" type=\"button\"\n    \n    name=\"button\" routerLink=\"/edicao-filmes\">Editar Filme</button>\n\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n    <button class=\"botao-editar-filme\" type=\"button\"\n\n    name=\"button\" routerLink=\"/edicao-filme/{{filme.id}}\">Editar Filme</button>\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -180,7 +180,7 @@ var routes = [
     { path: 'busca/:id', component: _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__["ResultadoDeBuscaComponent"] },
     { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] },
     { path: 'developer', component: _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__["TestaServidorComponent"] },
-    { path: 'edicao-filmes', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] }
+    { path: 'edicao-filme/:id', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -610,12 +610,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EdicaoFilmeComponent", function() { return EdicaoFilmeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _filme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../filme */ "./src/app/filme.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _filme_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filme.service */ "./src/app/filme.service.ts");
+
+
+
+
+
 
 
 var EdicaoFilmeComponent = /** @class */ (function () {
-    function EdicaoFilmeComponent() {
+    function EdicaoFilmeComponent(route, filmeService, location, router) {
+        this.route = route;
+        this.filmeService = filmeService;
+        this.location = location;
+        this.router = router;
         this.filme = {
-            id: 2,
+            id: "2",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
@@ -625,45 +638,166 @@ var EdicaoFilmeComponent = /** @class */ (function () {
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
-        this.elencoEdicao = ["Steve Rogers", "Chris Evans", "Natasha Romanov", "Scarlett Johansson"];
-        this.direcaoEdicao = ["Steve Rogers", "Chris Evans", "Natasha Romanov", "Scarlett Johansson"];
-        this.criticasEdicao = [
-            { username: "eu", data: "hoje", comentario: "ruim", nota: 1 },
-            { username: "tu", data: "hoje", comentario: "mé", nota: 1 },
-            { username: "ele", data: "hoje", comentario: "mt ruim", nota: 1 },
-            { username: "vós", data: "hoje", comentario: "ruim, gostei", nota: 1 }
-        ];
+        this.filmeOriginal = new _filme__WEBPACK_IMPORTED_MODULE_2__["Filme"]();
     }
     EdicaoFilmeComponent.prototype.ngOnInit = function () {
+        this.getFilme();
+    };
+    EdicaoFilmeComponent.prototype.clonarFilme = function () {
+        this.filmeOriginal = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.filme);
+        this.filmeOriginal.elenco = tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](this.filme.elenco);
+        this.filmeOriginal.diretores = tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](this.filme.diretores);
+        this.filmeOriginal.criticas = tslib__WEBPACK_IMPORTED_MODULE_0__["__spread"](this.filme.criticas);
+    };
+    EdicaoFilmeComponent.prototype.getFilme = function () {
+        var _this = this;
+        console.log('GET FILME EM EDIÇÃO' + this.route.snapshot.params.id);
+        var id = this.route.snapshot.params.id;
+        this.filmeService.getFilmeById(id).subscribe(function (resposta) {
+            _this.carregaDadosDoFilme(resposta);
+        });
+    };
+    // Essa função carrega os dados do filme na página
+    EdicaoFilmeComponent.prototype.carregaDadosDoFilme = function (resposta) {
+        console.log('resposta do server:' + JSON.stringify(resposta));
+        if (!resposta.houveErro) {
+            if (resposta.filmes.length > 0) {
+                this.filme = resposta.filmes[0];
+                console.log('achou um filme');
+                // Faz cópia de filme para comparar depois
+                this.clonarFilme();
+            }
+            else {
+                // TODO: Dispara ação quando não acha filme.
+                console.log("nenhumFilmeFoiEncontrado");
+            }
+        }
+        else {
+            // Houve erro
+            console.log("ERRO!");
+            console.log(resposta.mensagemErro);
+        }
     };
     EdicaoFilmeComponent.prototype.removerAtor = function (nome) {
-        console.log("remover Ator");
-        var index = this.elencoEdicao.indexOf(nome);
-        this.elencoEdicao.splice(index, 1);
+        var e_1, _a;
+        var index = -1;
+        try {
+            for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this.filme.elenco), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var pessoa = _c.value;
+                if (pessoa.nome == nome) {
+                    index = this.filme.elenco.indexOf(pessoa);
+                }
+            }
+        }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
+        if (index != -1) {
+            this.filme.elenco.splice(index, 1);
+        }
     };
     EdicaoFilmeComponent.prototype.adicionarAtor = function () {
-        this.elencoEdicao.push(this.novoAtor);
+        var ator = { nome: this.novoAtor };
+        this.filme.elenco.push(ator);
         this.novoAtor = "";
     };
     EdicaoFilmeComponent.prototype.removerDiretor = function (nome) {
-        var index = this.direcaoEdicao.indexOf(nome);
-        this.direcaoEdicao.splice(index, 1);
+        var e_2, _a;
+        var index = -1;
+        try {
+            for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this.filme.diretores), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var pessoa = _c.value;
+                if (pessoa.nome == nome) {
+                    index = this.filme.diretores.indexOf(pessoa);
+                }
+            }
+        }
+        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_2) throw e_2.error; }
+        }
+        if (index != -1) {
+            this.filme.diretores.splice(index, 1);
+        }
     };
     EdicaoFilmeComponent.prototype.adicionarDiretor = function () {
-        this.direcaoEdicao.push(this.novoDiretor);
+        var diretor = { nome: this.novoDiretor };
+        this.filme.diretores.push(diretor);
         this.novoDiretor = "";
     };
-    EdicaoFilmeComponent.prototype.removerCritica = function () {
+    EdicaoFilmeComponent.prototype.removerCritica = function (username) {
+        var e_3, _a;
+        var index = -1;
+        try {
+            for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this.filme.criticas), _c = _b.next(); !_c.done; _c = _b.next()) {
+                var critica = _c.value;
+                if (critica.username == username) {
+                    index = this.filme.criticas.indexOf(critica);
+                }
+            }
+        }
+        catch (e_3_1) { e_3 = { error: e_3_1 }; }
+        finally {
+            try {
+                if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+            }
+            finally { if (e_3) throw e_3.error; }
+        }
+        if (index != -1) {
+            this.filme.criticas.splice(index, 1);
+        }
     };
     EdicaoFilmeComponent.prototype.salvar = function () {
+        var _this = this;
+        var body = {};
+        if (this.filme.titulo != this.filmeOriginal.titulo) {
+            body["titulo"] = this.filme.titulo;
+        }
+        if (JSON.stringify(this.filme.diretores) != JSON.stringify(this.filmeOriginal.diretores)) {
+            body["diretores"] = this.filme.diretores;
+        }
+        if (this.filme.ano != this.filmeOriginal.ano) {
+            body["ano"] = this.filme.ano;
+        }
+        if (JSON.stringify(this.filme.elenco) != JSON.stringify(this.filmeOriginal.elenco)) {
+            body["elenco"] = this.filme.elenco;
+        }
+        if (this.filme.sinopse != this.filmeOriginal.sinopse) {
+            body["sinopse"] = this.filme.sinopse;
+        }
+        if (JSON.stringify(this.filme.criticas) != JSON.stringify(this.filmeOriginal.criticas)) {
+            body["criticas"] = this.filme.criticas;
+        }
+        var bodyFinal = JSON.stringify(body);
+        console.log("body que será enviado:" + bodyFinal);
+        this.filmeService.putFilme(this.filme.id, bodyFinal).subscribe(function (resposta) {
+            console.log("Resposta do putFilme: " + JSON.stringify(resposta));
+            _this.router.navigate(['filme/' + _this.filme.id]);
+        });
     };
+    EdicaoFilmeComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+        { type: _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"] },
+        { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+    ]; };
     EdicaoFilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-edicao-filme',
             template: __webpack_require__(/*! raw-loader!./edicao-filme.component.html */ "./node_modules/raw-loader/index.js!./src/app/edicao-filme/edicao-filme.component.html"),
             styles: [__webpack_require__(/*! ./edicao-filme.component.css */ "./src/app/edicao-filme/edicao-filme.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+            _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], EdicaoFilmeComponent);
     return EdicaoFilmeComponent;
 }());
@@ -690,6 +824,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
 var FilmeService = /** @class */ (function () {
     function FilmeService(http) {
         this.http = http;
@@ -710,7 +849,9 @@ var FilmeService = /** @class */ (function () {
     };
     FilmeService.prototype.postFilme = function (filme) {
     };
-    FilmeService.prototype.putFilme = function (filme) {
+    FilmeService.prototype.putFilme = function (idFilme, body) {
+        var url = '/filmes/id/' + idFilme;
+        return this.http.put(url, body, httpOptions);
     };
     /** Observable ativa uma chamada assincrona do retorno dessa função
     *  @idFilme: Id do filme que se deseja excluir
@@ -764,6 +905,26 @@ var FilmeService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/filme.ts":
+/*!**************************!*\
+  !*** ./src/app/filme.ts ***!
+  \**************************/
+/*! exports provided: Filme */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Filme", function() { return Filme; });
+var Filme = /** @class */ (function () {
+    function Filme() {
+    }
+    return Filme;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/filme/filme.component.css":
 /*!*******************************************!*\
   !*** ./src/app/filme/filme.component.css ***!
@@ -809,7 +970,7 @@ var FilmeComponent = /** @class */ (function () {
         this.dialog = dialog;
         this.usuarioService = usuarioService;
         this.filme = {
-            id: 2,
+            id: "2",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
@@ -1087,7 +1248,7 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n\n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.form-control {\n  width: 50px;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtBQUNuQjtBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFlBQVk7QUFDZDtBQUVBLDBCQUEwQjtBQUMxQjs7RUFFRSxnQkFBZ0I7RUFDaEIsbUJBQW1CO0VBQ25CLFdBQVc7QUFDYjtBQUNBO0VBQ0UsV0FBVztBQUNiO0FBRUE7RUFDRSxZQUFZO0VBQ1osZ0JBQWdCO0VBQ2hCLGlCQUFpQjtBQUNuQjtBQUNBO0VBQ0UsWUFBWTtFQUNaLFlBQVk7RUFDWixlQUFlO0VBQ2YsWUFBWTtBQUNkO0FBQ0Esa0NBQWtDO0FBQ2xDO0VBQ0Usc0JBQXNCO0VBQ3RCLGVBQWU7RUFDZixrQkFBa0I7RUFDbEIsY0FBYztFQUNkLHFCQUFxQjtFQUNyQixXQUFXO0FBQ2I7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixZQUFZO0FBQ2Q7QUFFQTtFQUNFLGVBQWU7RUFDZixnQkFBZ0I7QUFDbEI7QUFDQTtJQUNJLGtCQUFrQjtBQUN0QjtBQUVBO0VBQ0UsY0FBYztBQUNoQiIsImZpbGUiOiJzcmMvYXBwL25hdmJhci9uYXZiYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qIE5hdiBiYXIqL1xuLm5hdmJhciB7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzMzM7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgd2lkdGg6IDEwMCU7XG4gIG92ZXJmbG93OiB2aXNpYmxlO1xufVxuXG4udG9wbmF2LXJpZ2h0IHtcbiAgcG9zaXRpb246IHN0YXRpYztcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4vKiBFbGVtZW50b3MgZGUgUGVzcXVpc2EgKi9cbi5zZWFyY2gtY29udGFpbmVyIHtcblxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cbi5mb3JtLWNvbnRyb2wge1xuICB3aWR0aDogNTBweDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
+module.exports = "/* Nav bar*/\n.navbar {\n  background-color: #333;\n  position: fixed;\n  width: 100%;\n  overflow: visible;\n  z-index: 100;\n}\n.topnav-right {\n  position: static;\n  float: right;\n}\n/* Elementos de Pesquisa */\n.search-container {\n\n  margin-top: 12px;\n  margin-bottom: 12px;\n  float: left;\n}\n.form-control {\n  width: 50px;\n}\n.barra-input {\n  height: 30px;\n  margin-left: 2px;\n  margin-right: 2px;\n}\n.navbar input[type=text] {\n  width: 350px;\n  padding: 6px;\n  font-size: 17px;\n  border: none;\n}\n/* Fim dos elementos de Pesquisa */\n.navbar a {\n  vertical-align: middle;\n  font-size: 17px;\n  text-align: center;\n  color: #f2f2f2;\n  text-decoration: none;\n  float: left;\n}\n.navbar .botao:hover {\n  background-color: #ddd;\n  color: black;\n}\n.image {\n  margin-top: 1px;\n  margin-left: 1px;\n}\n.botao {\n    padding: 16px 20px;\n}\n.navbar div {\n  display: block;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbmF2YmFyL25hdmJhci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFdBQVc7QUFDWDtFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2YsV0FBVztFQUNYLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixZQUFZO0FBQ2Q7QUFFQSwwQkFBMEI7QUFDMUI7O0VBRUUsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixXQUFXO0FBQ2I7QUFDQTtFQUNFLFdBQVc7QUFDYjtBQUVBO0VBQ0UsWUFBWTtFQUNaLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7QUFDQTtFQUNFLFlBQVk7RUFDWixZQUFZO0VBQ1osZUFBZTtFQUNmLFlBQVk7QUFDZDtBQUNBLGtDQUFrQztBQUNsQztFQUNFLHNCQUFzQjtFQUN0QixlQUFlO0VBQ2Ysa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsV0FBVztBQUNiO0FBRUE7RUFDRSxzQkFBc0I7RUFDdEIsWUFBWTtBQUNkO0FBRUE7RUFDRSxlQUFlO0VBQ2YsZ0JBQWdCO0FBQ2xCO0FBQ0E7SUFDSSxrQkFBa0I7QUFDdEI7QUFFQTtFQUNFLGNBQWM7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9uYXZiYXIvbmF2YmFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiBOYXYgYmFyKi9cbi5uYXZiYXIge1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzMzO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgei1pbmRleDogMTAwO1xufVxuXG4udG9wbmF2LXJpZ2h0IHtcbiAgcG9zaXRpb246IHN0YXRpYztcbiAgZmxvYXQ6IHJpZ2h0O1xufVxuXG4vKiBFbGVtZW50b3MgZGUgUGVzcXVpc2EgKi9cbi5zZWFyY2gtY29udGFpbmVyIHtcblxuICBtYXJnaW4tdG9wOiAxMnB4O1xuICBtYXJnaW4tYm90dG9tOiAxMnB4O1xuICBmbG9hdDogbGVmdDtcbn1cbi5mb3JtLWNvbnRyb2wge1xuICB3aWR0aDogNTBweDtcbn1cblxuLmJhcnJhLWlucHV0IHtcbiAgaGVpZ2h0OiAzMHB4O1xuICBtYXJnaW4tbGVmdDogMnB4O1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5uYXZiYXIgaW5wdXRbdHlwZT10ZXh0XSB7XG4gIHdpZHRoOiAzNTBweDtcbiAgcGFkZGluZzogNnB4O1xuICBmb250LXNpemU6IDE3cHg7XG4gIGJvcmRlcjogbm9uZTtcbn1cbi8qIEZpbSBkb3MgZWxlbWVudG9zIGRlIFBlc3F1aXNhICovXG4ubmF2YmFyIGEge1xuICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICBmb250LXNpemU6IDE3cHg7XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgY29sb3I6ICNmMmYyZjI7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbiAgZmxvYXQ6IGxlZnQ7XG59XG5cbi5uYXZiYXIgLmJvdGFvOmhvdmVyIHtcbiAgYmFja2dyb3VuZC1jb2xvcjogI2RkZDtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG4uaW1hZ2Uge1xuICBtYXJnaW4tdG9wOiAxcHg7XG4gIG1hcmdpbi1sZWZ0OiAxcHg7XG59XG4uYm90YW8ge1xuICAgIHBhZGRpbmc6IDE2cHggMjBweDtcbn1cblxuLm5hdmJhciBkaXYge1xuICBkaXNwbGF5OiBibG9jaztcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1302,7 +1463,7 @@ var ResultadoDeBuscaComponent = /** @class */ (function () {
         this.filmeService = filmeService;
         this.location = location;
         this.filme = {
-            id: 2,
+            id: "2",
             titulo: "Vingadores: Ultimato",
             ano: 2019,
             diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],

@@ -12,6 +12,12 @@ export class RespPostUsuario {
   mensagemErro: string;
 }
 
-export class RespPostFilme {
+export class RespPutFilme {
+  houveErro: boolean;
+  mensagemErro: string;
+}
 
+export class RespPostFilme {
+  houveErro: boolean;
+  mensagemErro: string;
 }
