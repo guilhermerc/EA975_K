@@ -57,7 +57,7 @@ exports.create = function() {
 			{"nome": 	"Timão"},
 			{"nome": 	"Pumba"}
 		],
-		"sinopse": "",
+		"sinopse": "O CARA É UM LEÃO E É REI",
 		"nota":	0,
 		"criticas": [
 			{
@@ -90,7 +90,7 @@ exports.create = function() {
 			{"nome": 	"Emma Watson"},
 			{"nome": 	"Rupert Grint"}
 		],
-		"sinopse": "",
+		"sinopse": "EITA BRUXINHA...",
 		"nota":	0,
 		"criticas": [
 			{

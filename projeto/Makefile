@@ -1,7 +1,14 @@
+SERVER_FOLDER = servidor
+TEST_FOLDER = $(SERVER_FOLDER)/spec/api
+
+# Performs a test suite
+frisby-test:
+	jasmine-node $(TEST_FOLDER)
+
 make test: cliente-build serve-update serve-start
 
 serve-start:
-	(cd servidor/; npm install; npm start)
+	(cd $(SERVER_FOLDER); npm install && npm start)
 
 serve-update: clean-dist
 	 (cd servidor/; cp -r ../cliente/dist/cliente/ ./dist)
