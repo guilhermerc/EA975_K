@@ -96,7 +96,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuario && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuario\"  routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -359,17 +359,20 @@ var AutenticacaoComponent = /** @class */ (function () {
     AutenticacaoComponent.prototype.ngOnInit = function () {
     };
     AutenticacaoComponent.prototype.login = function () {
-        var _this = this;
         console.log('estou em login');
-        this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha, function (usuarioLogouComExito, mensageDeErro) {
-            if (usuarioLogouComExito) {
-                _this.router.navigate(['/']);
-                _this.mensageDeErro = null;
-            }
-            else {
-                _this.mensageDeErro = mensageDeErro;
-            }
-        });
+        //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
+        var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
+        if (!resposta.houveErro) {
+            // Vai para a página inicial
+            this.router.navigate(['/']);
+            // Omite mensagem de erro no html
+            this.mensageDeErro = null;
+        }
+        else {
+            // Exibe mensagem de erro
+            this.mensageDeErro = resposta.mensagemErro;
+        }
+        //});
     };
     AutenticacaoComponent.ctorParameters = function () { return [
         { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] },
@@ -725,9 +728,12 @@ var FilmeComponent = /** @class */ (function () {
      */
     FilmeComponent.prototype.observerUsuario = function () {
         var _this = this;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            console.log("USUARIO MUDOU DE ESTADO");
-            _this.getFilme();
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                // TODO: Apagar esse log
+                console.log("Observer do filme.component: " + JSON.stringify(novoUsuario));
+                _this.getFilme();
+            }
         });
     };
     FilmeComponent.prototype.getFilme = function () {
@@ -911,6 +917,8 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
     }
     FormsCadastroUsuarioComponent.prototype.registrar = function () {
         var _this = this;
+        // Nesse ponto a senha já foi verificada e pode ser salva no login do usuário.
+        this.usuario.login.senha = this.senha;
         this.registrado = true;
         // Inicializa a variável pois já pode ter dado erro anteriormente.
         this.mensagemErro = null;
@@ -1001,7 +1009,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent(router, usuarioService) {
-        var _this = this;
         this.router = router;
         this.usuarioService = usuarioService;
         this.filtros = [
@@ -1012,26 +1019,19 @@ var NavbarComponent = /** @class */ (function () {
             { chave: "todos", rotulo: "Todos" }
         ];
         this.barraDeBusca = '';
-        this.usuarioEstaLogado = false;
+        this.usuario = null;
         this.usuarioModerador = false;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            _this.usuarioEstaLogado = usuarioEstaLogado;
-            console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-            if (usuarioEstaLogado) {
-                _this.atualizaUsuario();
-            }
-        });
+        this.observerLogDeUsuario();
     }
     NavbarComponent.prototype.ngOnInit = function () { };
-    NavbarComponent.prototype.atualizaUsuario = function () {
-        var usuario = this.usuarioService.getUser();
-        if (usuario === null) {
-            console.log('Em atualizaUsuario() usuario = null');
-        }
-        else {
-            this.usuario = usuario;
-            console.log('novo usuario é: ' + this.usuario.login.username);
-        }
+    NavbarComponent.prototype.observerLogDeUsuario = function () {
+        var _this = this;
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                console.log("Observer do navbar.component: " + JSON.stringify(novoUsuario));
+                _this.usuario = novoUsuario;
+            }
+        });
     };
     NavbarComponent.prototype.atualizaModerador = function () {
         if (this.usuario != null) {
@@ -1053,6 +1053,7 @@ var NavbarComponent = /** @class */ (function () {
         });
     };
     NavbarComponent.prototype.logout = function () {
+        console.log("BOTAO SAIR");
         this.usuarioService.logout();
     };
     NavbarComponent.ctorParameters = function () { return [
@@ -1128,13 +1129,16 @@ var PerfilUsuarioComponent = /** @class */ (function () {
      */
     PerfilUsuarioComponent.prototype.observerUsuario = function () {
         var _this = this;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            if (!usuarioEstaLogado) {
-                console.log("SAIR DESSA PÁGINA");
-                _this.usuario = null;
-            }
-            else {
-                console.log("CONTINUO LOGADO");
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                console.log("Observer do pesfil-usuario.component: " + JSON.stringify(novoUsuario));
+                if (novoUsuario == null) {
+                    console.log("SAIR DESSA PÁGINA");
+                    _this.usuario = null;
+                }
+                else {
+                    console.log("CONTINUO LOGADO");
+                }
             }
         });
     };
@@ -1314,7 +1318,7 @@ var TestaServidorComponent = /** @class */ (function () {
     };
     TestaServidorComponent.prototype.post = function () {
         var _this = this;
-        var req = { usuario: { username: "marcelo" } };
+        var req = JSON.stringify(this.query);
         console.log('post this query:' + req);
         this.http.post(this.router, req).subscribe(function (response) {
             _this.response = response;
@@ -1322,7 +1326,8 @@ var TestaServidorComponent = /** @class */ (function () {
     };
     TestaServidorComponent.prototype.put = function () {
         var _this = this;
-        this.http.put(this.router, this.query).subscribe(function (response) {
+        var req = JSON.stringify(this.query);
+        this.http.put(this.router, req).subscribe(function (response) {
             _this.response = response;
         });
     };
@@ -1378,16 +1383,30 @@ var httpOptions = {
 var UsuarioService = /** @class */ (function () {
     function UsuarioService(http) {
         this.http = http;
-        this.usuarioEstaLogado = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.usuario$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
     }
-    UsuarioService.prototype.login = function (username, senha, callback) {
+    UsuarioService.prototype.registrar = function (usuario) {
+        var _this = this;
+        var router = "/usuarios/";
+        var body = JSON.stringify(usuario);
+        console.log("body:" + body);
+        return this.http.post(router, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                _this.atualizaUsuario(usuario);
+            }
+        }));
+    };
+    UsuarioService.prototype.login = function (username, senha) {
         console.log('estou em login do servico');
-        //requisição
-        //chama callback
+        // TODO: Requisição http
         // se logou
         if (username == 'guilherme' || username == 'marcelo' || username == 'gabriel') {
-            //TODO: atribui a this.usuario o ususario obtido pelo servidor
-            this.usuario = {
+            //TODO: pega o usuario obtido pelo servidor
+            var usuarioLogado = {
                 login: {
                     username: username,
                     senha: ""
@@ -1398,58 +1417,42 @@ var UsuarioService = /** @class */ (function () {
                 moderador: true
             };
             // Atualiza o observable
-            this.usuarioEstaLogado.next(true);
-            callback(true, null);
-        }
-        else {
-            var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-            callback(false, mensagem);
-        }
-    };
-    UsuarioService.prototype.atualizaUsuario = function (usuario) {
-        if (usuario != null) {
-            this.usuario = usuario;
-            this.usuarioEstaLogado.next(true);
-            // se usuário for null
-        }
-        else if (this.usuario != null) {
-            this.usuario = null;
-        }
-        else {
-            console.log('Usuário já está deslogado');
-        }
-    };
-    UsuarioService.prototype.registrar = function (usuario) {
-        var _this = this;
-        var router = "/usuarios/";
-        var req = { usuario: usuario };
-        console.log('minha req:' + JSON.stringify(req));
-        var body = JSON.stringify(usuario);
-        console.log("body:" + body);
-        return this.http.post(router, body, httpOptions).
-            pipe(
-        // Com tap podemos pegar a resposta antes dela ser retornada.
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
-            if (!resposta.houveErro) {
-                _this.atualizaUsuario(usuario);
+            this.atualizaUsuario(usuarioLogado);
+            //// TODO: Remover isso depois de criar login no Observer
+            if (this.usuario == null) {
+                var resposta = {
+                    houveErro: true,
+                    mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
+                };
+                return resposta;
             }
-        }));
-    };
-    UsuarioService.prototype.getUser = function () {
-        console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
-        if (this.usuarioEstaLogado) {
-            console.log('UsuarioService: Usuário está logado');
-            return this.usuario;
-        }
-        else {
-            console.log('UsuarioService: Usuário não está logado');
-            return null;
+            else {
+                var resposta = {
+                    houveErro: false,
+                    mensagemErro: ""
+                };
+                return resposta;
+            }
+            //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
         }
     };
     UsuarioService.prototype.logout = function () {
         console.log('Logout no serviço');
-        this.usuarioEstaLogado.next(false);
-        this.usuario = null;
+        this.atualizaUsuario(null);
+    };
+    UsuarioService.prototype.atualizaUsuario = function (novoUsuario) {
+        if (this.usuario != novoUsuario) {
+            console.log('Atualização de usuário para: ' + novoUsuario);
+            this.usuario = novoUsuario;
+            this.usuario$.next(this.usuario);
+        }
+        else {
+            console.log('Usuário novo é o mesmo do anterior, nada muda!');
+        }
+    };
+    UsuarioService.prototype.getUser = function () {
+        console.log("Usuário retornado em getUser: " + this.usuario);
+        return this.usuario;
     };
     UsuarioService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }

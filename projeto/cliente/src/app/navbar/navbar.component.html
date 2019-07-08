@@ -20,13 +20,13 @@
 
     <div class="topnav-right">
       <a class="botao" *ngIf="true" routerLink="/developer">Developer</a>
-      <a class="botao" *ngIf="usuarioEstaLogado && usuario.moderador" routerLink="/">Adicionar Filme</a>
+      <a class="botao" *ngIf="usuario && usuario.moderador" routerLink="/">Adicionar Filme</a>
 
-      <a class="botao" *ngIf="usuarioEstaLogado" routerLink="/perfil/0"> Perfil: {{usuario.login.username}}</a>
+      <a class="botao" *ngIf="usuario" routerLink="/perfil/0"> Perfil: {{usuario.login.username}}</a>
 
 
-      <a class="botao" *ngIf="!usuarioEstaLogado" routerLink="/autenticacao">Entrar</a>
-      <a class="botao" *ngIf="usuarioEstaLogado" (click)="logout()">Sair</a>
+      <a class="botao" *ngIf="!usuario"  routerLink="/autenticacao">Entrar</a>
+      <a class="botao" *ngIf="usuario" routerLink="" (click)="logout()">Sair</a>
     </div>
 
 </div>

@@ -10,6 +10,7 @@ import { UsuarioService } from '../usuario.service';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
 import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-filme',
@@ -58,11 +59,15 @@ export class FilmeComponent implements OnInit {
    */
   observerUsuario() {
 
-    this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
+    this.usuarioService.usuario$.subscribe({
 
-      console.log("USUARIO MUDOU DE ESTADO");
+      next: (novoUsuario) => {
+        // TODO: Apagar esse log
+        console.log(`Observer do filme.component: ${JSON.stringify(novoUsuario)}`);
 
-      this.getFilme();
+        this.getFilme();
+      }
+
     });
   }
 

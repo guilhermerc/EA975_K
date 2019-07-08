@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UsuarioService } from '../usuario.service';
 import { Usuario } from '../usuario';
 import { Observable, of } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -20,39 +21,26 @@ export class NavbarComponent implements OnInit {
 
   barraDeBusca: String = '';
 
-  usuario: Usuario;
-
-  usuarioEstaLogado = false;
+  usuario: Usuario = null;
 
   usuarioModerador = false;
-
 
   constructor(private router: Router,
               private usuarioService: UsuarioService) {
 
-    this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-
-      this.usuarioEstaLogado = usuarioEstaLogado;
-
-      console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-
-      if (usuarioEstaLogado) {
-        this.atualizaUsuario();
-      }
-    });
+    this.observerLogDeUsuario();
   }
+
   ngOnInit() {}
 
-  atualizaUsuario() {
-    var usuario = this.usuarioService.getUser();
+  observerLogDeUsuario() {
+    this.usuarioService.usuario$.subscribe({
+        next: (novoUsuario) => {
+          console.log(`Observer do navbar.component: ${JSON.stringify(novoUsuario)}`);
 
-    if (usuario === null) {
-      console.log('Em atualizaUsuario() usuario = null');
-    }
-    else {
-      this.usuario = usuario;
-      console.log('novo usuario é: ' + this.usuario.login.username);
-    }
+          this.usuario = novoUsuario;
+        }
+    });
   }
 
   atualizaModerador() {
@@ -65,10 +53,6 @@ export class NavbarComponent implements OnInit {
       console.log("Erro! Usuário não está logado. Em atualizaModerador()")
     }
   }
-
-
-
-
 
   buscaSimples(): void {
 
@@ -86,6 +70,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    console.log("BOTAO SAIR");
     this.usuarioService.logout();
   }
 

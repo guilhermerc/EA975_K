@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -14,7 +15,7 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   usuario: Usuario;
-  
+
 
 /*
 login: {
@@ -39,13 +40,17 @@ login: {
    */
   observerUsuario() {
 
-    this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-      if (!usuarioEstaLogado) {
-          console.log("SAIR DESSA PÁGINA");
-          this.usuario = null;
-      }
-      else {
-        console.log("CONTINUO LOGADO");
+    this.usuarioService.usuario$.subscribe({
+      next: (novoUsuario) => {
+        console.log(`Observer do pesfil-usuario.component: ${JSON.stringify(novoUsuario)}`);
+
+        if (novoUsuario == null) {
+            console.log("SAIR DESSA PÁGINA");
+            this.usuario = null;
+        }
+        else {
+          console.log("CONTINUO LOGADO");
+        }
       }
     });
   }

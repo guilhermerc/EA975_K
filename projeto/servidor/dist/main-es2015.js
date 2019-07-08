@@ -96,7 +96,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuario && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuario\"  routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -353,15 +353,19 @@ let AutenticacaoComponent = class AutenticacaoComponent {
     }
     login() {
         console.log('estou em login');
-        this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha, (usuarioLogouComExito, mensageDeErro) => {
-            if (usuarioLogouComExito) {
-                this.router.navigate(['/']);
-                this.mensageDeErro = null;
-            }
-            else {
-                this.mensageDeErro = mensageDeErro;
-            }
-        });
+        //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
+        var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
+        if (!resposta.houveErro) {
+            // Vai para a página inicial
+            this.router.navigate(['/']);
+            // Omite mensagem de erro no html
+            this.mensageDeErro = null;
+        }
+        else {
+            // Exibe mensagem de erro
+            this.mensageDeErro = resposta.mensagemErro;
+        }
+        //});
     }
 };
 AutenticacaoComponent.ctorParameters = () => [
@@ -708,9 +712,12 @@ let FilmeComponent = class FilmeComponent {
      *Adiciona um observer ao estado do usuário de logado.
      */
     observerUsuario() {
-        this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-            console.log("USUARIO MUDOU DE ESTADO");
-            this.getFilme();
+        this.usuarioService.usuario$.subscribe({
+            next: (novoUsuario) => {
+                // TODO: Apagar esse log
+                console.log(`Observer do filme.component: ${JSON.stringify(novoUsuario)}`);
+                this.getFilme();
+            }
         });
     }
     getFilme() {
@@ -879,6 +886,8 @@ let FormsCadastroUsuarioComponent = class FormsCadastroUsuarioComponent {
         this.sexos = ['Masculino', 'Feminino', 'Outro'];
     }
     registrar() {
+        // Nesse ponto a senha já foi verificada e pode ser salva no login do usuário.
+        this.usuario.login.senha = this.senha;
         this.registrado = true;
         // Inicializa a variável pois já pode ter dado erro anteriormente.
         this.mensagemErro = null;
@@ -973,26 +982,18 @@ let NavbarComponent = class NavbarComponent {
             { chave: "todos", rotulo: "Todos" }
         ];
         this.barraDeBusca = '';
-        this.usuarioEstaLogado = false;
+        this.usuario = null;
         this.usuarioModerador = false;
-        this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-            this.usuarioEstaLogado = usuarioEstaLogado;
-            console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-            if (usuarioEstaLogado) {
-                this.atualizaUsuario();
-            }
-        });
+        this.observerLogDeUsuario();
     }
     ngOnInit() { }
-    atualizaUsuario() {
-        var usuario = this.usuarioService.getUser();
-        if (usuario === null) {
-            console.log('Em atualizaUsuario() usuario = null');
-        }
-        else {
-            this.usuario = usuario;
-            console.log('novo usuario é: ' + this.usuario.login.username);
-        }
+    observerLogDeUsuario() {
+        this.usuarioService.usuario$.subscribe({
+            next: (novoUsuario) => {
+                console.log(`Observer do navbar.component: ${JSON.stringify(novoUsuario)}`);
+                this.usuario = novoUsuario;
+            }
+        });
     }
     atualizaModerador() {
         if (this.usuario != null) {
@@ -1014,6 +1015,7 @@ let NavbarComponent = class NavbarComponent {
         });
     }
     logout() {
+        console.log("BOTAO SAIR");
         this.usuarioService.logout();
     }
 };
@@ -1087,13 +1089,16 @@ let PerfilUsuarioComponent = class PerfilUsuarioComponent {
      *Adiciona um observer ao estado do usuário de logado.
      */
     observerUsuario() {
-        this.usuarioService.usuarioEstaLogado.subscribe(usuarioEstaLogado => {
-            if (!usuarioEstaLogado) {
-                console.log("SAIR DESSA PÁGINA");
-                this.usuario = null;
-            }
-            else {
-                console.log("CONTINUO LOGADO");
+        this.usuarioService.usuario$.subscribe({
+            next: (novoUsuario) => {
+                console.log(`Observer do pesfil-usuario.component: ${JSON.stringify(novoUsuario)}`);
+                if (novoUsuario == null) {
+                    console.log("SAIR DESSA PÁGINA");
+                    this.usuario = null;
+                }
+                else {
+                    console.log("CONTINUO LOGADO");
+                }
             }
         });
     }
@@ -1267,14 +1272,15 @@ let TestaServidorComponent = class TestaServidorComponent {
         });
     }
     post() {
-        var req = { usuario: { username: "marcelo" } };
+        var req = JSON.stringify(this.query);
         console.log('post this query:' + req);
         this.http.post(this.router, req).subscribe(response => {
             this.response = response;
         });
     }
     put() {
-        this.http.put(this.router, this.query).subscribe(response => {
+        var req = JSON.stringify(this.query);
+        this.http.put(this.router, req).subscribe(response => {
             this.response = response;
         });
     }
@@ -1328,16 +1334,29 @@ const httpOptions = {
 let UsuarioService = class UsuarioService {
     constructor(http) {
         this.http = http;
-        this.usuarioEstaLogado = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.usuario$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
     }
-    login(username, senha, callback) {
+    registrar(usuario) {
+        var router = "/usuarios/";
+        var body = JSON.stringify(usuario);
+        console.log("body:" + body);
+        return this.http.post(router, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                this.atualizaUsuario(usuario);
+            }
+        }));
+    }
+    login(username, senha) {
         console.log('estou em login do servico');
-        //requisição
-        //chama callback
+        // TODO: Requisição http
         // se logou
         if (username == 'guilherme' || username == 'marcelo' || username == 'gabriel') {
-            //TODO: atribui a this.usuario o ususario obtido pelo servidor
-            this.usuario = {
+            //TODO: pega o usuario obtido pelo servidor
+            var usuarioLogado = {
                 login: {
                     username: username,
                     senha: ""
@@ -1348,57 +1367,42 @@ let UsuarioService = class UsuarioService {
                 moderador: true
             };
             // Atualiza o observable
-            this.usuarioEstaLogado.next(true);
-            callback(true, null);
-        }
-        else {
-            var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-            callback(false, mensagem);
-        }
-    }
-    atualizaUsuario(usuario) {
-        if (usuario != null) {
-            this.usuario = usuario;
-            this.usuarioEstaLogado.next(true);
-            // se usuário for null
-        }
-        else if (this.usuario != null) {
-            this.usuario = null;
-        }
-        else {
-            console.log('Usuário já está deslogado');
-        }
-    }
-    registrar(usuario) {
-        var router = "/usuarios/";
-        var req = { usuario: usuario };
-        console.log('minha req:' + JSON.stringify(req));
-        var body = JSON.stringify(usuario);
-        console.log("body:" + body);
-        return this.http.post(router, body, httpOptions).
-            pipe(
-        // Com tap podemos pegar a resposta antes dela ser retornada.
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {
-            if (!resposta.houveErro) {
-                this.atualizaUsuario(usuario);
+            this.atualizaUsuario(usuarioLogado);
+            //// TODO: Remover isso depois de criar login no Observer
+            if (this.usuario == null) {
+                var resposta = {
+                    houveErro: true,
+                    mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
+                };
+                return resposta;
             }
-        }));
-    }
-    getUser() {
-        console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
-        if (this.usuarioEstaLogado) {
-            console.log('UsuarioService: Usuário está logado');
-            return this.usuario;
-        }
-        else {
-            console.log('UsuarioService: Usuário não está logado');
-            return null;
+            else {
+                var resposta = {
+                    houveErro: false,
+                    mensagemErro: ""
+                };
+                return resposta;
+            }
+            //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
         }
     }
     logout() {
         console.log('Logout no serviço');
-        this.usuarioEstaLogado.next(false);
-        this.usuario = null;
+        this.atualizaUsuario(null);
+    }
+    atualizaUsuario(novoUsuario) {
+        if (this.usuario != novoUsuario) {
+            console.log('Atualização de usuário para: ' + novoUsuario);
+            this.usuario = novoUsuario;
+            this.usuario$.next(this.usuario);
+        }
+        else {
+            console.log('Usuário novo é o mesmo do anterior, nada muda!');
+        }
+    }
+    getUser() {
+        console.log("Usuário retornado em getUser: " + this.usuario);
+        return this.usuario;
     }
 };
 UsuarioService.ctorParameters = () => [
