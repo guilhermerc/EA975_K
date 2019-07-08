@@ -1,9 +1,14 @@
 <div class="container">
+  <h1 style="font-size:20px; color:green">
+    Edição dos dados do filme: <b>{{filme.titulo}}</b></h1>
+  <div class="botoes-controle">
+    <button type="submit" (click)="salvar()" class="btn btn-success"
+    [disabled]="!formsUsuario.form.valid">Salvar</button>
 
-
-  <form (ngSubmit)="salvar()" #formsUsuario="ngForm">
-
-
+  </div>
+  <br><br>
+  <form  #formsUsuario="ngForm">
+    <hr>
     <div class="form-group">
       <label for="titulo">Titulo</label>
       <input type="text" class="form-control" id="titulo" required
@@ -15,6 +20,7 @@
       </div>
     </div>
 
+    <hr>
     <div class="form-group">
       <label for="ano">Ano</label>
       <input type="text" class="form-control" id="ano" required
@@ -26,6 +32,7 @@
       </div>
     </div>
 
+    <hr>
     <div class="form-group">
       <label for="sinopse">Sinopse</label>
       <textarea name="sinopse" id="sinopse" required
@@ -38,6 +45,7 @@
       </div>
     </div>
 
+    <hr>
     <!--Atores -->
     <div class="container-lista">
       <div class="form-group">
@@ -91,6 +99,7 @@
       </div>
     </div>
 
+    <hr>
     <!--Críticas-->
     <div class="container-lista">
       <div class="form-group">
@@ -109,9 +118,10 @@
         </ul>
       </div>
     </div>
-
-    <button type="submit" class="btn btn-success"
-    [disabled]="!formsUsuario.form.valid">Salvar</button>
-
   </form>
+
+  <hr>
+
+  <button type="button" class="btn btn-danger" (click)="removerFilme()">Remover Filme</button>
+
 </div>

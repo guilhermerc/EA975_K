@@ -31,7 +31,7 @@ Baseado nos Casos de Uso.
 - [x] Remover opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
-- [ ] Remoção de um filme na base de dados
+- [x] Remoção de um filme na base de dados
 
 
 #### Lado cliente:
@@ -48,7 +48,7 @@ Baseado nos Casos de Uso.
 - [x] Remover opinião sobre um filme
 - [ ] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
-- [ ] Remoção de um filme na base de dados
+- [x] Remoção de um filme na base de dados
 
 ##### Lado servidor/banco de dados:
 

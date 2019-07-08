@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, RespPutFilme, RespPostFilme }  from './tipos/interfaces-servidor';
+import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespStatusFilme}  from './tipos/interfaces-servidor';
 import { Critica } from './tipos/critica';
 
 const httpOptions = {
@@ -51,8 +51,9 @@ export class FilmeService {
   /** Observable ativa uma chamada assincrona do retorno dessa função
   *  @idFilme: Id do filme que se deseja excluir
   */
-  deleteFilme(idFilme: string) {
-
+  deleteFilme(idFilme: string): Observable<RespStatusFilme> {
+    var url = '/filmes/id/' + idFilme;
+    return this.http.delete<RespStatusFilme>(url, httpOptions);
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
   postCritica(idFilme: string, critica: Critica): Observable<RespPostFilme> {
