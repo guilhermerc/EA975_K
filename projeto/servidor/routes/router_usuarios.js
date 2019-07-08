@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/username/:username', function(req, res, next) {
     console.log("GET/usuarios/username/:username");
-	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.params));
+	console.log("Usuário recebido:" + /*req.body*/ JSON.stringify(req.params));
     
     var response = {
 		"houveErro":  false,
@@ -46,9 +46,9 @@ router.get('/username/:username', function(req, res, next) {
 });
 
 /*POST/usuarios/autenticacao - Autenticação de usuário */
-router.post('/autentica', function(req, res, next) {
+router.post('/autenticacao', function(req, res, next) {
     console.log("POST/usuarios/autenticacao");
-	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.body));
+	console.log("Usuário recebido:" + /*req.body*/ JSON.stringify(req.body));
     
     var response = {
 		"houveErro":  false,
@@ -57,7 +57,7 @@ router.post('/autentica', function(req, res, next) {
 	};
     
     var query = {
-			"login.username":	req.body.usuario.login.username
+			"login.username":	req.body.login.username
 	};
     
     console.log("query:" + JSON.stringify(query));
@@ -75,7 +75,7 @@ router.post('/autentica', function(req, res, next) {
 			response.mensagemErro = mensagem;
         } else {
             
-            senha_dada = req.body.usuario.login.senha;
+            senha_dada = req.body.login.senha;
             if(usuario.login.senha != senha_dada){
                 response.mensagem = "Senha incorreta";
                 response.houveErro = true;                
@@ -96,9 +96,9 @@ router.post('/autentica', function(req, res, next) {
 });
 
 /*POST /usuarios/cadastro - Cadastra um usuário*/
-router.post('/cadastro', function(req, res, next) {
+router.post('/', function(req, res, next) {
 	console.log("POST /usuarios/cadastro");
-	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.body));
+	console.log("Usuário recebido:" + /*req.body*/ JSON.stringify(req.body));
 	
 	var response = {
 		"houveErro":              	false,
@@ -106,7 +106,7 @@ router.post('/cadastro', function(req, res, next) {
 	};
     
 	var query = {
-			"login.username": req.body.usuario.login.username
+			"login.username": req.body.login.username
 
 	};
 	
@@ -127,7 +127,7 @@ router.post('/cadastro', function(req, res, next) {
 			
 		} else {
 			// response já está pronta
-			var novoUsuario = new modelUsuario(req.body.usuario);
+			var novoUsuario = new modelUsuario(req.body);
 			
 			novoUsuario.save( function(err, res){
 				if(err){
@@ -143,7 +143,7 @@ router.post('/cadastro', function(req, res, next) {
 /*PUT/usuarios/login - Altera os dados do usuário*/
 router.put('/username/:username', function(req, res, next) {
     console.log("PUT /usuarios/login");
-	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.body));
+	console.log("Usuário recebido:" + /*req.body*/ JSON.stringify(req.body));
     
     var response = {
         "houveErro":              	false,
@@ -175,10 +175,10 @@ router.put('/username/:username', function(req, res, next) {
             response.houveErro = 	true;
             response.mensagemErro = mensagem;
         } else {
-            usuario.login.senha = (req.body.usuario.login.senha !== "") ? req.body.usuario.login.senha : usuario.login.senha;
-            usuario.nome = (req.body.usuario.nome !== "") ? req.body.usuario.nome : usuario.nome ;
-            usuario.dataNascimento = (req.body.usuario.dataNascimento !== "") ? req.body.usuario.dataNascimento : usuario.dataNascimento;
-            usuario.sexo = (req.body.usuario.sexo !== "") ? req.body.usuario.sexo : usuario.sexo;
+            usuario.login.senha = (req.body.login.senha !== "") ? req.body.login.senha : usuario.login.senha;
+            usuario.nome = (req.body.nome !== "") ? req.body.nome : usuario.nome ;
+            usuario.dataNascimento = (req.body.dataNascimento !== "") ? req.body.dataNascimento : usuario.dataNascimento;
+            usuario.sexo = (req.body.sexo !== "") ? req.body.sexo : usuario.sexo;
             
             var modified_user = {
                 "login":{
@@ -204,7 +204,7 @@ router.put('/username/:username', function(req, res, next) {
 });
 
 /*Encerramento de sessão do usuário */
-router.delete('/autentica', function(req, res, next) {
+router.delete('/autenticacao', function(req, res, next) {
     console.log("DELETE /usuarios");
 	
 	var response = {
