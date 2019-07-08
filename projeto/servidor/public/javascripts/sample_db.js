@@ -12,7 +12,7 @@ exports.create = function() {
     });
 
 	new modelFilme({
-		"id": 0,
+		"id": "HOLA",
 		"titulo": 	"Vingadores: Ultimato",
 		"diretores": 	[
 			{"nome": "Joe Russo"},
@@ -25,6 +25,7 @@ exports.create = function() {
 			{"nome": 	"Chris Evans"}
 		],
 		"sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -45,7 +46,7 @@ exports.create = function() {
 	});
 
 	new modelFilme({
-		"id": 1,
+		"id": "CHE",
 		"titulo": 	"O Rei Leão",
 		"diretores": 	[
 			{"nome":	"Mufasa"},
@@ -56,7 +57,8 @@ exports.create = function() {
 			{"nome": 	"Timão"},
 			{"nome": 	"Pumba"}
 		],
-		"sinopse": "",
+		"sinopse": "O CARA É UM LEÃO E É REI",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",
@@ -75,9 +77,9 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-	
+
 	new modelFilme({
-		"id": 2,
+		"id": "QUE",
 		"titulo": 	"Harry Potter e a Pedra Filosofal",
 		"diretores": 	[
 			{"nome":	"	Chris Columbus"}
@@ -88,7 +90,8 @@ exports.create = function() {
 			{"nome": 	"Emma Watson"},
 			{"nome": 	"Rupert Grint"}
 		],
-		"sinopse": "",
+		"sinopse": "EITA BRUXINHA...",
+		"nota":	0,
 		"criticas": [
 			{
 				"username": 	"guilherme",

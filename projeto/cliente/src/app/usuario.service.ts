@@ -6,28 +6,52 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { RespPostUsuario } from './tipos/interfaces-servidor';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  public usuario: Usuario;
-  public usuarioEstaLogado: Subject<boolean> = new Subject<boolean>();
+  private usuario: Usuario;
+  public usuario$: Subject<Usuario> = new Subject<Usuario>();
 
   constructor(private http: HttpClient) { }
 
-  public login(username: string, senha: string,
-    callback: (usuarioLogouComExito: boolean, mensageDeErro: string) => void) {
+  public registrar(usuario: Usuario): Observable<RespPostUsuario> {
+
+      var router = "/usuarios/"
+
+      var body = JSON.stringify(usuario);
+
+      console.log("body:" + body);
+
+      return this.http.post<RespPostUsuario>(router, body, httpOptions).
+      pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        tap(resposta => {
+
+          if (!resposta.houveErro) {
+            // Atualiza variável usuário e os observers.
+            this.atualizaUsuario(usuario);
+          }
+        }));
+  }
+
+  public login(username: string, senha: string): RespPostUsuario {//Observable<RespPostUsuario> {
 
       console.log('estou em login do servico');
-    //requisição
 
-      //chama callback
+        // TODO: Requisição http
       // se logou
       if (username == 'guilherme' || username == 'marcelo' ||  username == 'gabriel') {
 
-        //TODO: atribui a this.usuario o ususario obtido pelo servidor
-        this.usuario  = {
+        //TODO: pega o usuario obtido pelo servidor
+        var usuarioLogado  = {
           login: {
             username: username,
             senha:  ""
@@ -39,63 +63,47 @@ export class UsuarioService {
         }
 
         // Atualiza o observable
-        this.usuarioEstaLogado.next(true);
-        callback(true, null);
-      } else {
-        var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-        callback(false, mensagem);
+        this.atualizaUsuario(usuarioLogado);
+
+        //// TODO: Remover isso depois de criar login no Observer
+        if (this.usuario == null) {
+          var resposta = {
+            houveErro: true,
+            mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
+          }
+          return resposta;
+        }
+        else {
+           var resposta = {
+             houveErro: false,
+             mensagemErro: ""
+           }
+           return resposta;
+         }
+
+        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
       }
   }
 
-  atualizaUsuario(usuario: Usuario) {
-
-    if (usuario != null) {
-        this.usuario = usuario;
-        this.usuarioEstaLogado.next(true);
-
-    // se usuário for null
-    } else if (this.usuario != null) {
-      this.usuario = null;
-    } else {
-        console.log('Usuário já está deslogado');
-    }
+  public logout() {
+    console.log('Logout no serviço')
+    this.atualizaUsuario(null);
   }
 
-  public registrar(usuario: Usuario): Observable<RespPostUsuario> {
+  private atualizaUsuario(novoUsuario: Usuario) {
 
-      var router = "/usuarios/"
-      var req = {usuario: usuario};
+    if (this.usuario != novoUsuario) {
+      console.log('Atualização de usuário para: ' + novoUsuario);
+      this.usuario = novoUsuario;
+      this.usuario$.next(this.usuario);
 
-      console.log('minha req:' + JSON.stringify(req));
-
-      return this.http.post<RespPostUsuario>(router, req).
-      pipe(
-        // Com tap podemos pegar a resposta antes dela ser retornada.
-        tap(resposta => {
-
-          if (!resposta.houveErro) {
-            this.atualizaUsuario(usuario);
-          }
-        }));
+    } else {
+      console.log('Usuário novo é o mesmo do anterior, nada muda!');
+    }
   }
 
   getUser(): Usuario {
-    console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
-
-    if (this.usuarioEstaLogado) {
-      console.log('UsuarioService: Usuário está logado');
-      return this.usuario;
-    }
-    else {
-      console.log('UsuarioService: Usuário não está logado');
-      return null;
-    }
-  }
-
-  logout() {
-    console.log('Logout no serviço')
-    this.usuarioEstaLogado.next(false);
-    this.usuario = null;
-
+    console.log("Usuário retornado em getUser: " + this.usuario);
+    return this.usuario;
   }
 }

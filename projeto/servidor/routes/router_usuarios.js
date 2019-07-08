@@ -3,106 +3,6 @@ var modelUsuario = require('../models/model_usuario');
 
 var router = express.Router();
 
-/* GET users listing. */
-/*router.get('/', function(req, res, next) {
-  res.send({titulo: "Avengers", ano: 2019});
-});*/
-
-/* Autenticação de usuário */
-// router.get('/username/:username/senha/:senha', function(req, res, next) {
-//     console.log("GET /usuarios/username:username/senha:senha");
-// 	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.params));
-//     
-//     var response = {
-// 		"houveErro":  false,
-// 		"mensagemErro":   "",
-//         "usuario":    "" 
-// 	};
-//     
-//     var query = {
-// 			"username":	req.params.username
-// 	};
-//     
-//     console.log("query:" + JSON.stringify(query));
-//     
-//     modelUsuario.findOne(query, function (err, usuario) {
-// 		if (err) {
-// 			console.error(err);
-// 			response.houveErro = 	true;
-// 			response.mensagemErro = err;
-//         } else if (usuario == null) {
-//             // usuário não existe
-// 			var mensagem = "Usuário não existente.";
-// 			console.error(mensagem);
-// 			response.houveErro = 	true;
-// 			response.mensagemErro = mensagem;
-//         } else {
-//             
-//             senha_dada = req.params.senha;
-//             if(usuario.senha != senha_dada){
-//                 response.mensagem = "Senha incorreta";
-//                 response.houveErro = true;                
-//                 console.error(mensagem)
-//             }
-//             else {
-//                 // resposta já pronta
-//                 var content = {"key":"secret", "role": "usuario"};
-//                 res.cookie('autenticacaoUsuario', JSON.stringify(content), {'maxAge': 3600000*24*5});  
-//                 
-//                 response.usuario = usuario
-//             }
-//         }
-//         
-//         res.send(response);
-//     });
-// });
-    
-/* Post usuário */
-// router.post('/', function(req, res, next) {
-// 	console.log("POST /usuarios/");
-// 	console.log("Usuário recebido:" + /*req.body.usuario*/ req.body);
-// 	
-// 	var response = {
-// 		"houveErro":              	false,
-// 		"mensagemErro":           		""
-// 	};
-// 
-// 	var query = {
-// 			"username":	req.body.username
-// 	};
-// 	
-// 	console.log("query:" + JSON.stringify(query));
-// 
-// 	modelUsuario.findOne(query, function (err, usuario) {
-// 		if (err) {
-// 			console.error(err);
-// 			response.houveErro = 	true;
-// 			response.mensagemErro = err;
-// 			
-// 		} else if (usuario != null) {
-// 		// não pode usar usse usuário
-// 			var mensagem = "Usuário já existente, tente outro.";
-// 			console.error(mensagem);
-// 			response.houveErro = 	true;
-// 			response.mensagemErro = mensagem;
-// 			
-// 		} else {
-// 			// response já está pronta
-//             
-// 			novoUsuario = new modelUsuario(req.body);
-// 			
-// 			novoUsuario.save( function(err, res){
-// 				if(err){
-// 					console.log(err);
-// 				}
-// 			});
-// 		}
-// 					
-// 		res.send(response);
-// 	});
-// });
-
-
 router.get('/username/:username', function(req, res, next) {
     console.log("GET/usuarios/username/:username");
 	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.params));
@@ -143,7 +43,6 @@ router.get('/username/:username', function(req, res, next) {
         
         res.send(response);
     });
-    
 });
 
 /*POST/usuarios/autenticacao - Autenticação de usuário */
@@ -200,7 +99,7 @@ router.post('/autentica', function(req, res, next) {
 router.post('/cadastro', function(req, res, next) {
 	console.log("POST /usuarios/cadastro");
 	console.log("Usuário recebido:" + /*req.body.usuario*/ JSON.stringify(req.body));
-    
+	
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           		""
@@ -208,6 +107,7 @@ router.post('/cadastro', function(req, res, next) {
     
 	var query = {
 			"login.username": req.body.usuario.login.username
+
 	};
 	
 	console.log("query:" + JSON.stringify(query));
@@ -228,7 +128,7 @@ router.post('/cadastro', function(req, res, next) {
 		} else {
 			// response já está pronta
 			var novoUsuario = new modelUsuario(req.body.usuario);
-            
+			
 			novoUsuario.save( function(err, res){
 				if(err){
 					console.log(err);

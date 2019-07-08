@@ -41,7 +41,18 @@ module.exports = "<app-navbar></app-navbar>\n<br>\n<br>\n<br>\n<router-outlet></
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n    <form (ngSubmit)=\"login()\" #formsUsuario=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"username\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"username\" required\n        [(ngModel)]=\"dadosLogin.username\" name=\"username\"\n        #username=\"ngModel\">\n        <div [hidden]=\"username.valid || username.pristine\"\n        class=\"alert alert-danger\">\n        Username é obrigatório.\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"senha\">Senha</label>\n        <input type=\"text\" class=\"form-control\" id=\"senha\" required\n        [(ngModel)]=\"dadosLogin.senha\" name=\"senha\"\n        #senha=\"ngModel\">\n        <div [hidden]=\"senha.valid || senha.pristine\"\n        class=\"alert alert-danger\">\n        Senha é obrigatória.\n        </div>\n      </div>\n\n      <div class=\"\" *ngIf=\"mensageDeErro\" style=\"color: red\">\n        {{mensageDeErro}}\n      </div>\n\n\n      <button type=\"submit\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid\">Fazer Login</button>\n    </form>\n  </div>\n  <br>\n  <hr>\n</div>\n<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
+module.exports = "<div class=\"container\">\n  <div>\n    <h1>Login</h1><br>\n    <form (ngSubmit)=\"login()\" #formsUsuario=\"ngForm\">\n      <div class=\"form-group\">\n        <label for=\"usernameLogin\">Username</label>\n        <input type=\"text\" class=\"form-control\" id=\"usernameLogin\" required\n        [(ngModel)]=\"dadosLogin.username\" name=\"usernameLogin\"\n        #usernameLogin=\"ngModel\">\n        <div [hidden]=\"usernameLogin.valid || usernameLogin.pristine\"\n        class=\"alert alert-danger\">\n        Username é obrigatório.\n        </div>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"senhaLogin\">Senha</label>\n        <input type=\"text\" class=\"form-control\" id=\"senhaLogin\" required\n        [(ngModel)]=\"dadosLogin.senha\" name=\"senhaLogin\"\n        #senhaLogin=\"ngModel\">\n        <div [hidden]=\"senhaLogin.valid || senhaLogin.pristine\"\n        class=\"alert alert-danger\">\n        Senha é obrigatória.\n        </div>\n      </div>\n\n      <div class=\"\" *ngIf=\"mensageDeErro\" style=\"color: red\">\n        {{mensageDeErro}}\n      </div>\n\n\n      <button type=\"submit\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid\">Fazer Login</button>\n    </form>\n  </div>\n  <br>\n  <hr>\n</div>\n<app-forms-cadastro-usuario></app-forms-cadastro-usuario>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/confirmacao-registro/confirmacao-registro.component.html":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/confirmacao-registro/confirmacao-registro.component.html ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"confirmacao\">\n  <h1>Registro feito com sucesso!</h1>\n  <br>\n <button mat-button [mat-dialog-close]=\"true\">Fechar</button>\n</div>\n"
 
 /***/ }),
 
@@ -74,7 +85,7 @@ module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n  <div class=\"ti
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>\n  <form (ngSubmit)=\"registrar()\" #formsUsuario=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"nome\">Nome</label>\n      <input type=\"text\" class=\"form-control\" id=\"nome\" required\n      [(ngModel)]=\"usuario.nome\" name=\"nome\"\n      #nome=\"ngModel\">\n      <div [hidden]=\"nome.valid || nome.pristine\"\n      class=\"alert alert-danger\">\n      Nome é obrigatório\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"username\">Nomde de Usuário</label>\n      <input type=\"text\" class=\"form-control\" id=\"username\" required\n      [(ngModel)]=\"usuario.login.username\" name=\"username\"\n      #username=\"ngModel\">\n      <div [hidden]=\"username.valid || username.pristine\"\n      class=\"alert alert-danger\">\n      username é obrigatório\n      </div>\n    </div>\n\n\n    <div id=\"inline-forms\">\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"data\">Data de Nascimento</label>\n        <input type=\"date\" class=\"form-control\" id=\"data\" required\n        [(ngModel)]=\"usuario.dataNascimento\" name=\"data\" #dataNascimento=\"ngModel\">\n        <div [hidden]=\"dataNascimento.valid || dataNascimento.pristine\"\n        class=\"alert alert-danger\">\n        Data de nascimento é obrigatório\n        </div>\n      </div>\n\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"sexo\">Sexo</label>\n        <select class=\"form-control\" id=\"sexo\" required\n        [(ngModel)]=\"usuario.sexo\" name= \"sexo\">\n          <option *ngFor=\"let sexo of sexos\" [value]=\"sexo\">{{sexo}}</option>\n        </select>\n      </div>\n    </div>\n\n\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Registrar</button>\n\n  </form>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>\n  <form (ngSubmit)=\"registrar()\" #formsUsuario=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"nome\">Nome</label>\n      <input type=\"text\" class=\"form-control\" id=\"nome\" required\n      [(ngModel)]=\"usuario.nome\" name=\"nome\"\n      #nome=\"ngModel\">\n      <div [hidden]=\"nome.valid || nome.pristine\"\n      class=\"alert alert-danger\">\n      Nome é obrigatório\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"username\">Nome de Usuário</label>\n      <input type=\"text\" class=\"form-control\" id=\"username\" required\n      [(ngModel)]=\"usuario.login.username\" name=\"username\"\n      #username=\"ngModel\">\n      <div [hidden]=\"username.valid || username.pristine\"\n      class=\"alert alert-danger\">\n      username é obrigatório\n      </div>\n    </div>\n\n\n    <div id=\"inline-forms\">\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"data\">Data de Nascimento</label>\n        <input type=\"date\" class=\"form-control\" id=\"data\" required\n        [(ngModel)]=\"usuario.dataNascimento\" name=\"data\" #dataNascimento=\"ngModel\">\n        <div [hidden]=\"dataNascimento.valid || dataNascimento.pristine\"\n        class=\"alert alert-danger\">\n        Data de nascimento é obrigatório\n        </div>\n      </div>\n\n\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"sexo\">Sexo</label>\n        <select class=\"form-control\" id=\"sexo\" required\n        [(ngModel)]=\"usuario.sexo\" name= \"sexo\">\n          <option *ngFor=\"let sexo of sexos\" [value]=\"sexo\">{{sexo}}</option>\n        </select>\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"senha\">Senha</label>\n      <input type=\"password\" class=\"form-control\" id=\"senha\" required\n      [(ngModel)]=\"senha\" name=\"senha\" pattern=\"(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\"\n      #senhas=\"ngModel\">\n      <div [hidden]=\"senhas.valid || senhas.pristine\"\n      class=\"alert alert-danger\">\n      A senha deve possuir no mímino 8 caracteres.<br>\n      Destes pelo menos uma letra maíuscula, uma minúscula e um número.\n      </div>\n    </div>\n\n\n    <div class=\"form-group\">\n      <label for=\"repeticaoSenha\">Repetição Senha</label>\n      <input type=\"password\" class=\"form-control\" id=\"repeticaoSenha\" required\n      [(ngModel)]=\"repeticaoDeSenha\" name=\"repeticaoSenha\"\n      #repeticaoDeSenhas=\"ngModel\">\n      <div [hidden]=\"repeticaoDeSenhas.valid || repeticaoDeSenhas.pristine\"\n      class=\"alert alert-danger\">\n      Senha é obrigatória\n      </div>\n    </div>\n\n    <div class=\"mensagem\" *ngIf=\"senha != repeticaoDeSenha\"\n    style=\"color: red; margin-bottom: 20px\">\n      Senhas não coincidem.\n    </div>\n    <div class=\"mensagem\" *ngIf=\"mensagemErro\"\n    style=\"color: red; margin-bottom: 20px\">\n      {{mensagemErro}}\n    </div>\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Registrar</button>\n\n  </form>\n</div>\n<br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -85,7 +96,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" routerLink=\"/perfil/0\"> {{usuario.login.username}} Perfil</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuarioEstaLogado\" routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuarioEstaLogado\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuario && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuario\"  routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -248,6 +259,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./critica/critica.component */ "./src/app/critica/critica.component.ts");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./testa-servidor/testa-servidor.component */ "./src/app/testa-servidor/testa-servidor.component.ts");
+/* harmony import */ var _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./confirmacao-registro/confirmacao-registro.component */ "./src/app/confirmacao-registro/confirmacao-registro.component.ts");
+
 
 
 
@@ -279,7 +292,8 @@ var AppModule = /** @class */ (function () {
                 _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_11__["ResultadoDeBuscaComponent"],
                 _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_12__["NavbarComponent"],
                 _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"],
-                _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__["TestaServidorComponent"]
+                _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_16__["TestaServidorComponent"],
+                _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__["ConfirmacaoRegistroComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -290,7 +304,8 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_15__["BrowserAnimationsModule"]
             ],
             entryComponents: [
-                _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"]
+                _critica_critica_component__WEBPACK_IMPORTED_MODULE_14__["CriticaComponent"],
+                _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_17__["ConfirmacaoRegistroComponent"]
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
@@ -344,17 +359,20 @@ var AutenticacaoComponent = /** @class */ (function () {
     AutenticacaoComponent.prototype.ngOnInit = function () {
     };
     AutenticacaoComponent.prototype.login = function () {
-        var _this = this;
         console.log('estou em login');
-        this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha, function (usuarioLogouComExito, mensageDeErro) {
-            if (usuarioLogouComExito) {
-                _this.router.navigate(['/']);
-                _this.mensageDeErro = null;
-            }
-            else {
-                _this.mensageDeErro = mensageDeErro;
-            }
-        });
+        //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
+        var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
+        if (!resposta.houveErro) {
+            // Vai para a página inicial
+            this.router.navigate(['/']);
+            // Omite mensagem de erro no html
+            this.mensageDeErro = null;
+        }
+        else {
+            // Exibe mensagem de erro
+            this.mensageDeErro = resposta.mensagemErro;
+        }
+        //});
     };
     AutenticacaoComponent.ctorParameters = function () { return [
         { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] },
@@ -370,6 +388,60 @@ var AutenticacaoComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], AutenticacaoComponent);
     return AutenticacaoComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/confirmacao-registro/confirmacao-registro.component.css":
+/*!*************************************************************************!*\
+  !*** ./src/app/confirmacao-registro/confirmacao-registro.component.css ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".confirmacao {\n  text-align: center;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29uZmlybWFjYW8tcmVnaXN0cm8vY29uZmlybWFjYW8tcmVnaXN0cm8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtBQUNwQiIsImZpbGUiOiJzcmMvYXBwL2NvbmZpcm1hY2FvLXJlZ2lzdHJvL2NvbmZpcm1hY2FvLXJlZ2lzdHJvLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY29uZmlybWFjYW8ge1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/confirmacao-registro/confirmacao-registro.component.ts":
+/*!************************************************************************!*\
+  !*** ./src/app/confirmacao-registro/confirmacao-registro.component.ts ***!
+  \************************************************************************/
+/*! exports provided: ConfirmacaoRegistroComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfirmacaoRegistroComponent", function() { return ConfirmacaoRegistroComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+
+
+
+var ConfirmacaoRegistroComponent = /** @class */ (function () {
+    function ConfirmacaoRegistroComponent(dialogRef) {
+        this.dialogRef = dialogRef;
+    }
+    ConfirmacaoRegistroComponent.prototype.ngOnInit = function () {
+    };
+    ConfirmacaoRegistroComponent.prototype.fechar = function () {
+        this.dialogRef.close();
+    };
+    ConfirmacaoRegistroComponent.ctorParameters = function () { return [
+        { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"] }
+    ]; };
+    ConfirmacaoRegistroComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-confirmacao-registro',
+            template: __webpack_require__(/*! raw-loader!./confirmacao-registro.component.html */ "./node_modules/raw-loader/index.js!./src/app/confirmacao-registro/confirmacao-registro.component.html"),
+            styles: [__webpack_require__(/*! ./confirmacao-registro.component.css */ "./src/app/confirmacao-registro/confirmacao-registro.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"]])
+    ], ConfirmacaoRegistroComponent);
+    return ConfirmacaoRegistroComponent;
 }());
 
 
@@ -656,9 +728,12 @@ var FilmeComponent = /** @class */ (function () {
      */
     FilmeComponent.prototype.observerUsuario = function () {
         var _this = this;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            console.log("USUARIO MUDOU DE ESTADO");
-            _this.getFilme();
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                // TODO: Apagar esse log
+                console.log("Observer do filme.component: " + JSON.stringify(novoUsuario));
+                _this.getFilme();
+            }
         });
     };
     FilmeComponent.prototype.getFilme = function () {
@@ -810,12 +885,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _usuario_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../usuario.service */ "./src/app/usuario.service.ts");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm5/dialog.es5.js");
+/* harmony import */ var _confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../confirmacao-registro/confirmacao-registro.component */ "./src/app/confirmacao-registro/confirmacao-registro.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
 
 
 
 var FormsCadastroUsuarioComponent = /** @class */ (function () {
-    function FormsCadastroUsuarioComponent(usuarioService) {
+    function FormsCadastroUsuarioComponent(usuarioService, dialog, router) {
         this.usuarioService = usuarioService;
+        this.dialog = dialog;
+        this.router = router;
         this.usuario = {
             login: {
                 username: "",
@@ -826,13 +909,44 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
             sexo: "",
             moderador: false
         };
+        this.senha = "";
+        this.repeticaoDeSenha = "";
         this.registrado = false;
+        this.mensagemErro = null;
         this.sexos = ['Masculino', 'Feminino', 'Outro'];
     }
     FormsCadastroUsuarioComponent.prototype.registrar = function () {
+        var _this = this;
+        // Nesse ponto a senha já foi verificada e pode ser salva no login do usuário.
+        this.usuario.login.senha = this.senha;
         this.registrado = true;
+        // Inicializa a variável pois já pode ter dado erro anteriormente.
+        this.mensagemErro = null;
+        // Registra novo usuário
         this.usuarioService.registrar(this.usuario).subscribe(function (resposta) {
             console.log('Resposta do post de novo usuário:' + JSON.stringify(resposta));
+            if (resposta.houveErro) {
+                _this.mensagemErro = resposta.mensagemErro;
+                console.log("houve erro" + _this.mensagemErro);
+            }
+            else {
+                _this.confirmacaoDeRegistro();
+            }
+        });
+    };
+    /*
+    Abra caixa de diálogo com a confirmação de registro de usuário
+    */
+    FormsCadastroUsuarioComponent.prototype.confirmacaoDeRegistro = function () {
+        var _this = this;
+        var dialogRef = this.dialog.open(_confirmacao_registro_confirmacao_registro_component__WEBPACK_IMPORTED_MODULE_4__["ConfirmacaoRegistroComponent"], {
+            width: '400px',
+            height: '140px'
+        });
+        dialogRef.afterClosed().subscribe(function (respostaCaixaDialogo) {
+            console.log('Fechou caixa de dialogo');
+            console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(respostaCaixaDialogo));
+            _this.router.navigate(['/']);
         });
     };
     Object.defineProperty(FormsCadastroUsuarioComponent.prototype, "diagnostic", {
@@ -843,7 +957,9 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
     });
     FormsCadastroUsuarioComponent.prototype.ngOnInit = function () { };
     FormsCadastroUsuarioComponent.ctorParameters = function () { return [
-        { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] }
+        { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] },
+        { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialog"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
     ]; };
     FormsCadastroUsuarioComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -851,7 +967,9 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./forms-cadastro-usuario.component.html */ "./node_modules/raw-loader/index.js!./src/app/forms-cadastro-usuario/forms-cadastro-usuario.component.html"),
             styles: [__webpack_require__(/*! ./forms-cadastro-usuario.component.css */ "./src/app/forms-cadastro-usuario/forms-cadastro-usuario.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"],
+            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialog"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], FormsCadastroUsuarioComponent);
     return FormsCadastroUsuarioComponent;
 }());
@@ -891,7 +1009,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var NavbarComponent = /** @class */ (function () {
     function NavbarComponent(router, usuarioService) {
-        var _this = this;
         this.router = router;
         this.usuarioService = usuarioService;
         this.filtros = [
@@ -902,26 +1019,19 @@ var NavbarComponent = /** @class */ (function () {
             { chave: "todos", rotulo: "Todos" }
         ];
         this.barraDeBusca = '';
-        this.usuarioEstaLogado = false;
+        this.usuario = null;
         this.usuarioModerador = false;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            _this.usuarioEstaLogado = usuarioEstaLogado;
-            console.log("this.usuarioService.usuarioEstaLogado.subscribe()");
-            if (usuarioEstaLogado) {
-                _this.atualizaUsuario();
-            }
-        });
+        this.observerLogDeUsuario();
     }
     NavbarComponent.prototype.ngOnInit = function () { };
-    NavbarComponent.prototype.atualizaUsuario = function () {
-        var usuario = this.usuarioService.getUser();
-        if (usuario === null) {
-            console.log('Em atualizaUsuario() usuario = null');
-        }
-        else {
-            this.usuario = usuario;
-            console.log('novo usuario é: ' + this.usuario.login.username);
-        }
+    NavbarComponent.prototype.observerLogDeUsuario = function () {
+        var _this = this;
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                console.log("Observer do navbar.component: " + JSON.stringify(novoUsuario));
+                _this.usuario = novoUsuario;
+            }
+        });
     };
     NavbarComponent.prototype.atualizaModerador = function () {
         if (this.usuario != null) {
@@ -943,6 +1053,7 @@ var NavbarComponent = /** @class */ (function () {
         });
     };
     NavbarComponent.prototype.logout = function () {
+        console.log("BOTAO SAIR");
         this.usuarioService.logout();
     };
     NavbarComponent.ctorParameters = function () { return [
@@ -1018,13 +1129,16 @@ var PerfilUsuarioComponent = /** @class */ (function () {
      */
     PerfilUsuarioComponent.prototype.observerUsuario = function () {
         var _this = this;
-        this.usuarioService.usuarioEstaLogado.subscribe(function (usuarioEstaLogado) {
-            if (!usuarioEstaLogado) {
-                console.log("SAIR DESSA PÁGINA");
-                _this.usuario = null;
-            }
-            else {
-                console.log("CONTINUO LOGADO");
+        this.usuarioService.usuario$.subscribe({
+            next: function (novoUsuario) {
+                console.log("Observer do pesfil-usuario.component: " + JSON.stringify(novoUsuario));
+                if (novoUsuario == null) {
+                    console.log("SAIR DESSA PÁGINA");
+                    _this.usuario = null;
+                }
+                else {
+                    console.log("CONTINUO LOGADO");
+                }
             }
         });
     };
@@ -1204,7 +1318,7 @@ var TestaServidorComponent = /** @class */ (function () {
     };
     TestaServidorComponent.prototype.post = function () {
         var _this = this;
-        var req = { usuario: { username: "marcelo" } };
+        var req = JSON.stringify(this.query);
         console.log('post this query:' + req);
         this.http.post(this.router, req).subscribe(function (response) {
             _this.response = response;
@@ -1212,7 +1326,8 @@ var TestaServidorComponent = /** @class */ (function () {
     };
     TestaServidorComponent.prototype.put = function () {
         var _this = this;
-        this.http.put(this.router, this.query).subscribe(function (response) {
+        var req = JSON.stringify(this.query);
+        this.http.put(this.router, req).subscribe(function (response) {
             _this.response = response;
         });
     };
@@ -1260,19 +1375,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
+        'Content-Type': 'application/json'
+    })
+};
 var UsuarioService = /** @class */ (function () {
     function UsuarioService(http) {
         this.http = http;
-        this.usuarioEstaLogado = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
+        this.usuario$ = new rxjs__WEBPACK_IMPORTED_MODULE_2__["Subject"]();
     }
-    UsuarioService.prototype.login = function (username, senha, callback) {
+    UsuarioService.prototype.registrar = function (usuario) {
+        var _this = this;
+        var router = "/usuarios/";
+        var body = JSON.stringify(usuario);
+        console.log("body:" + body);
+        return this.http.post(router, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                _this.atualizaUsuario(usuario);
+            }
+        }));
+    };
+    UsuarioService.prototype.login = function (username, senha) {
         console.log('estou em login do servico');
-        //requisição
-        //chama callback
+        // TODO: Requisição http
         // se logou
         if (username == 'guilherme' || username == 'marcelo' || username == 'gabriel') {
-            //TODO: atribui a this.usuario o ususario obtido pelo servidor
-            this.usuario = {
+            //TODO: pega o usuario obtido pelo servidor
+            var usuarioLogado = {
                 login: {
                     username: username,
                     senha: ""
@@ -1283,56 +1417,42 @@ var UsuarioService = /** @class */ (function () {
                 moderador: true
             };
             // Atualiza o observable
-            this.usuarioEstaLogado.next(true);
-            callback(true, null);
-        }
-        else {
-            var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-            callback(false, mensagem);
-        }
-    };
-    UsuarioService.prototype.atualizaUsuario = function (usuario) {
-        if (usuario != null) {
-            this.usuario = usuario;
-            this.usuarioEstaLogado.next(true);
-            // se usuário for null
-        }
-        else if (this.usuario != null) {
-            this.usuario = null;
-        }
-        else {
-            console.log('Usuário já está deslogado');
-        }
-    };
-    UsuarioService.prototype.registrar = function (usuario) {
-        var _this = this;
-        var router = "/usuarios/";
-        var req = { usuario: usuario };
-        console.log('minha req:' + JSON.stringify(req));
-        return this.http.post(router, req).
-            pipe(
-        // Com tap podemos pegar a resposta antes dela ser retornada.
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
-            if (!resposta.houveErro) {
-                _this.atualizaUsuario(usuario);
+            this.atualizaUsuario(usuarioLogado);
+            //// TODO: Remover isso depois de criar login no Observer
+            if (this.usuario == null) {
+                var resposta = {
+                    houveErro: true,
+                    mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
+                };
+                return resposta;
             }
-        }));
-    };
-    UsuarioService.prototype.getUser = function () {
-        console.log('FLAG DE USUÁRIO: ' + this.usuarioEstaLogado);
-        if (this.usuarioEstaLogado) {
-            console.log('UsuarioService: Usuário está logado');
-            return this.usuario;
-        }
-        else {
-            console.log('UsuarioService: Usuário não está logado');
-            return null;
+            else {
+                var resposta = {
+                    houveErro: false,
+                    mensagemErro: ""
+                };
+                return resposta;
+            }
+            //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
         }
     };
     UsuarioService.prototype.logout = function () {
         console.log('Logout no serviço');
-        this.usuarioEstaLogado.next(false);
-        this.usuario = null;
+        this.atualizaUsuario(null);
+    };
+    UsuarioService.prototype.atualizaUsuario = function (novoUsuario) {
+        if (this.usuario != novoUsuario) {
+            console.log('Atualização de usuário para: ' + novoUsuario);
+            this.usuario = novoUsuario;
+            this.usuario$.next(this.usuario);
+        }
+        else {
+            console.log('Usuário novo é o mesmo do anterior, nada muda!');
+        }
+    };
+    UsuarioService.prototype.getUser = function () {
+        console.log("Usuário retornado em getUser: " + this.usuario);
+        return this.usuario;
     };
     UsuarioService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }

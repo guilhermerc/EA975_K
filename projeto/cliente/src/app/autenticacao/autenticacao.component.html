@@ -3,22 +3,22 @@
     <h1>Login</h1><br>
     <form (ngSubmit)="login()" #formsUsuario="ngForm">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" required
-        [(ngModel)]="dadosLogin.username" name="username"
-        #username="ngModel">
-        <div [hidden]="username.valid || username.pristine"
+        <label for="usernameLogin">Username</label>
+        <input type="text" class="form-control" id="usernameLogin" required
+        [(ngModel)]="dadosLogin.username" name="usernameLogin"
+        #usernameLogin="ngModel">
+        <div [hidden]="usernameLogin.valid || usernameLogin.pristine"
         class="alert alert-danger">
         Username é obrigatório.
         </div>
       </div>
 
       <div class="form-group">
-        <label for="senha">Senha</label>
-        <input type="text" class="form-control" id="senha" required
-        [(ngModel)]="dadosLogin.senha" name="senha"
-        #senha="ngModel">
-        <div [hidden]="senha.valid || senha.pristine"
+        <label for="senhaLogin">Senha</label>
+        <input type="password" class="form-control" id="senhaLogin" required
+        [(ngModel)]="dadosLogin.senha" name="senhaLogin"
+        #senhaLogin="ngModel">
+        <div [hidden]="senhaLogin.valid || senhaLogin.pristine"
         class="alert alert-danger">
         Senha é obrigatória.
         </div>

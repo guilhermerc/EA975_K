@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var schemaFilme = new Schema(
 {
-	id: 		Number,
+	id: 		String,
 	titulo:		String,
 	diretores:	[{
 		nome: String
@@ -12,7 +12,8 @@ var schemaFilme = new Schema(
 	elenco: 	[{
 		nome: String
 	}],
-	sinopse: String,
+	sinopse: 	String,
+	nota:		Number,
 	criticas: 	[{
 		username: 	String,
 		data:		String,

@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material';
 import { CriticaComponent } from './critica/critica.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { TestaServidorComponent } from './testa-servidor/testa-servidor.component';
+import { ConfirmacaoRegistroComponent } from './confirmacao-registro/confirmacao-registro.component';
 
 
 
@@ -28,7 +29,8 @@ import { TestaServidorComponent } from './testa-servidor/testa-servidor.componen
     ResultadoDeBuscaComponent,
     NavbarComponent,
     CriticaComponent,
-    TestaServidorComponent
+    TestaServidorComponent,
+    ConfirmacaoRegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { TestaServidorComponent } from './testa-servidor/testa-servidor.componen
     BrowserAnimationsModule
   ],
   entryComponents: [
-    CriticaComponent
+    CriticaComponent,
+    ConfirmacaoRegistroComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

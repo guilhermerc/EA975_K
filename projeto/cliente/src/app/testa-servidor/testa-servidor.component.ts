@@ -32,7 +32,7 @@ export class TestaServidorComponent implements OnInit {
 
   post() {
 
-    var req = {usuario: {username: "marcelo"}};
+    var req = JSON.stringify(this.query);
 
     console.log('post this query:' + req);
     this.http.post(this.router, req).subscribe(response =>{
@@ -41,7 +41,8 @@ export class TestaServidorComponent implements OnInit {
   }
 
   put() {
-    this.http.put(this.router, this.query).subscribe(response =>{
+    var req = JSON.stringify(this.query);
+    this.http.put(this.router, req).subscribe(response =>{
       this.response = response;
     });
   }

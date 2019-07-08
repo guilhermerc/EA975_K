@@ -13,7 +13,7 @@
     </div>
 
     <div class="form-group">
-      <label for="username">Nomde de Usuário</label>
+      <label for="username">Nome de Usuário</label>
       <input type="text" class="form-control" id="username" required
       [(ngModel)]="usuario.login.username" name="username"
       #username="ngModel">
@@ -35,6 +35,7 @@
         </div>
       </div>
 
+
       <div class="form-group" id="campo">
         <label for="sexo">Sexo</label>
         <select class="form-control" id="sexo" required
@@ -44,10 +45,42 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="password" class="form-control" id="senha" required
+      [(ngModel)]="senha" name="senha" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      #senhas="ngModel">
+      <div [hidden]="senhas.valid || senhas.pristine"
+      class="alert alert-danger">
+      A senha deve possuir no mímino 8 caracteres.<br>
+      Destes pelo menos uma letra maíuscula, uma minúscula e um número.
+      </div>
+    </div>
 
+
+    <div class="form-group">
+      <label for="repeticaoSenha">Repetição Senha</label>
+      <input type="password" class="form-control" id="repeticaoSenha" required
+      [(ngModel)]="repeticaoDeSenha" name="repeticaoSenha"
+      #repeticaoDeSenhas="ngModel">
+      <div [hidden]="repeticaoDeSenhas.valid || repeticaoDeSenhas.pristine"
+      class="alert alert-danger">
+      Senha é obrigatória
+      </div>
+    </div>
+
+    <div class="mensagem" *ngIf="senha != repeticaoDeSenha"
+    style="color: red; margin-bottom: 20px">
+      Senhas não coincidem.
+    </div>
+    <div class="mensagem" *ngIf="mensagemErro"
+    style="color: red; margin-bottom: 20px">
+      {{mensagemErro}}
+    </div>
 
     <button type="submit" class="btn btn-success"
     [disabled]="!formsUsuario.form.valid">Registrar</button>
 
   </form>
 </div>
+<br><br><br><br><br><br>
