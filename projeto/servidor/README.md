@@ -44,14 +44,14 @@
 | '/usuarios/username/:username' | GET           | Retorna as informações sobre um usuário especificado por username |
 
 
-| URL do recurso                | Req. HTTP     | JSON requisição                                                                                                             | JSON resposta                                        	        |
+| URL do recurso                | Req. HTTP     | JSON requisição                                                                                                             | JSON resposta                                        	        | 
 | ---                           | ---           | ---                                                                                                                         | ---                                                             |
 | '/usuarios/'                  | POST          | {{"login":{"username": String,"senha": String},"nome": String,"dataNascimento": String,"sexo": String,"moderador":Boolean}} | { "houveErro": Boolean, "mensagemErro": String}           
-| '/usuarios/autenticacao       | POST          | {"login": {"username":String,"senha": String}}        |
-{"houveErro": Boolean, "mensagemErro": String, "usuario": JSON do usuário}
-|'/usuarios/username/:username' | PUT           | JSON contendo os campos que o usuário deseja alterar  |
-{"houveErro": Boolean, "mensagemErro": String}
-|'/usuarios/autenticacao'       | DELETE        | {}                                                    |
-{"houveErro": Boolean, "mensagemErro": String}
-|'/usuarios/username/:username' | GET           | {}                                                    |
-{"houveErro": Boolean, "mensagemErro": String, "usuario": JSON do usuário}
+| '/usuarios/autenticacao       | POST          | {"login": {"username":String,"senha": String}}        
+|{"houveErro": Boolean, "mensagemErro": String, "usuario": JSON do usuário}                             |
+|'/usuarios/username/:username' | PUT           | JSON contendo os campos que o usuário deseja alterar  
+|{"houveErro": Boolean, "mensagemErro": String}                                                         |
+|'/usuarios/autenticacao'       | DELETE        | {}                                                    
+|{"houveErro": Boolean, "mensagemErro": String}                                                         |
+|'/usuarios/username/:username' | GET           | {}                                                    
+|{"houveErro": Boolean, "mensagemErro": String, "usuario": JSON do usuário}                             |
