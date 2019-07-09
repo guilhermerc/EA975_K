@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"filme":					[]
+		"filme":							[]
 	};
     
     var auth_response = checaAutenticacao(req,res);
@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
 			console.log(err);
 			console.log(res);
 		});
-		response.filme =	[filme],
+		response.filme =	filme,
 		res.send(response);
 	});
 });
@@ -294,7 +294,7 @@ router.post('/id/:id/criticas', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"filme":					[]
+		"filme":							[]
 		};
 	var query = {
 		"id":	req.params.id

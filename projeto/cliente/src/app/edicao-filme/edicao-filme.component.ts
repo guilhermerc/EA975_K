@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { FilmeService } from '../filme.service';
 import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-edicao-filme',
@@ -31,23 +33,43 @@ export class EdicaoFilmeComponent implements OnInit {
   criacaoDeFilme: boolean;
   mensagemErro: string = null;
 
-  constructor(
-                private route: ActivatedRoute,
+  constructor(  private route: ActivatedRoute,
                 private filmeService: FilmeService,
                 private location: Location,
-                private router: Router
-  ) { }
+                private router: Router,
+                private usuarioService: UsuarioService) {
+
+    this.observerUsuario();
+  }
 
   ngOnInit() {
 
     var url = this.router.url;
 
+    // Se estiver em /incluir-filme deve se configurar a página para adicionar
+    // filme ao invés de editar. Portanto não precisa carregar o filme do servidor.
     if (url == '/incluir-filme') {
       this.criacaoDeFilme = true;
     } else {
       this.criacaoDeFilme = false;
       this.getFilme();
     }
+  }
+
+  observerUsuario() {
+
+    this.usuarioService.usuario$.subscribe({
+
+      next: (novoUsuario) => {
+        // TODO: Apagar esse log
+        console.log(`Observer do edicao-filme.component: ${JSON.stringify(novoUsuario)}`);
+
+        if (novoUsuario == null || !novoUsuario.moderador) {
+          this.router.navigate(['/']);
+        }
+      }
+
+    });
   }
 
   clonarFilme() {
@@ -200,7 +222,7 @@ export class EdicaoFilmeComponent implements OnInit {
       if (resposta.houveErro) {
         this.mensagemErro = resposta.mensagemErro;
       } else {
-        var filmeId = "x";//resposta.filme.id; // TODO: Sem servidor
+        var filmeId = resposta.filme.id;
         this.router.navigate(['filme/' + filmeId]);
       }
     });

@@ -31,6 +31,8 @@ export class FilmeComponent implements OnInit {
     imagens: ["/assets/images/vingadores_0.jpg"],
     sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
   };
+  usuarioModerador: boolean = false;
+  usuario: Usuario;
 
 // TODO: Remover filme inicial
 
@@ -49,6 +51,10 @@ export class FilmeComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Obtém usuário logado
+    var usuarioAtual = this.usuarioService.getUser();
+    // Atualiza status de moderador para poder oferecer opções exclusivas de moderador.
+    this.atualizaUsuario(usuarioAtual);
 
     // Busca filme id
     this.getFilme();// TODO: Sem servidor
@@ -62,6 +68,9 @@ export class FilmeComponent implements OnInit {
     this.usuarioService.usuario$.subscribe({
 
       next: (novoUsuario) => {
+        // Atualiza usuário logado
+        this.atualizaUsuario(novoUsuario);
+
         // TODO: Apagar esse log
         console.log(`Observer do filme.component: ${JSON.stringify(novoUsuario)}`);
 
@@ -69,6 +78,15 @@ export class FilmeComponent implements OnInit {
       }
 
     });
+  }
+
+  atualizaUsuario(novoUsuario: Usuario) {
+    this.usuario = novoUsuario;
+    // Atualiza status de moderador para poder
+    // oferecer opções exclusivas de moderador.
+    if (this.usuario != null) {
+      this.usuarioModerador = this.usuario.moderador;
+    }
   }
 
   getFilme() {
@@ -108,20 +126,14 @@ export class FilmeComponent implements OnInit {
    *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
    */
   ajustaCriticas() {
-    console.log('estou em ajustaCriticas()');
 
-    var user = this.usuarioService.getUser();
-
-    if (user != null) {
-        console.log('Usuário Logado =>' + user.login.username);
-          console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
-          this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
-          console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
+    if (this.usuario != null) {
+      this.criticaDoUsuario = this.getCriticaDoUsuario(this.usuario.login.username);
     } else {
-      console.log('Usuário não esta logado.');
       this.criticaDoUsuario = null;
     }
   }
+
   /*
   * Extrai a crítica do usuário logado do vetor de críticas para exibir ela separadamente.
   * Após isso, o vetor críticas está pronto para ser exibido.
@@ -145,12 +157,10 @@ export class FilmeComponent implements OnInit {
    */
   criticar(): void {
 
-    var usuario = this.usuarioService.getUser();
-
     // Se this.criticaDoUsuario for null quer dizer não fez crítica antes.
     var dados: DialogData = {
       filme: this.filme,
-      usuario: usuario,
+      usuario: this.usuario,
       critica: this.criticaDoUsuario
     };
 
