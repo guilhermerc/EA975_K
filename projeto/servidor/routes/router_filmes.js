@@ -62,10 +62,12 @@ router.post('/', function(req, res, next) {
 			response.houveErro = 	true;
 			response.mensagemErro = err;
 		}
-		modelFilme.update({_id: filme._id}, {id: filme._id}, function(err, res) {
+		modelFilme.updateOne({_id: filme._id}, {id: filme._id}, function(err, res) {
 			console.log(err);
 			console.log(res);
 		});
+		
+		filme.id = filme._id;
 		response.filme =	filme,
 		res.send(response);
 	});
