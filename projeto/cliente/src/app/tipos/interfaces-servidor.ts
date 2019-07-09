@@ -33,6 +33,11 @@ export class RespPostUsuario {
   mensagemErro: string;
 }
 
+export class RespDelUsuario {
+  houveErro: boolean;
+  mensagemErro: string;
+}
+
 export class RespPostAutenticacao {
   houveErro:    boolean;
   mensagemErro: string;

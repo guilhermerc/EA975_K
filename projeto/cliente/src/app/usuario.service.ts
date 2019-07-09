@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespPostUsuario, RespPostAutenticacao } from './tipos/interfaces-servidor';
+import { RespPostUsuario, RespPostAutenticacao, RespDelUsuario } from './tipos/interfaces-servidor';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -63,12 +63,25 @@ export class UsuarioService {
         }
       )
     );
-        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
   }
 
-  public logout() {
-    console.log('Logout no serviço')
-    this.atualizaUsuario(null);
+  public logout(): Observable<RespDelUsuario> {
+    console.log('Logout no usuarioService');
+
+    var url = "/usuarios/autenticacao";
+
+    return this.http.delete<RespDelUsuario>(url, httpOptions).
+    pipe(
+      // Com tap podemos pegar a resposta antes dela ser retornada.
+      tap(resposta => {
+      
+        if (!resposta.houveErro) {
+          // Atualiza variável usuário e os observers.
+          this.atualizaUsuario(null);
+        }
+      }
+    )
+  );
   }
 
   private atualizaUsuario(novoUsuario: Usuario) {

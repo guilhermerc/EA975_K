@@ -70,8 +70,12 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    console.log("BOTAO SAIR");
-    this.usuarioService.logout();
-  }
 
+    this.usuarioService.logout().subscribe(resposta => {
+      console.log("Resposta de logout: " + JSON.stringify(resposta));
+        if (resposta.houveErro) {
+          console.error("Erro ao fazer o logout");
+        }
+    });
+  }
 }

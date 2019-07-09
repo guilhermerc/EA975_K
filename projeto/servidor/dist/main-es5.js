@@ -1396,8 +1396,12 @@ var NavbarComponent = /** @class */ (function () {
         });
     };
     NavbarComponent.prototype.logout = function () {
-        console.log("BOTAO SAIR");
-        this.usuarioService.logout();
+        this.usuarioService.logout().subscribe(function (resposta) {
+            console.log("Resposta de logout: " + JSON.stringify(resposta));
+            if (resposta.houveErro) {
+                console.error("Erro ao fazer o logout");
+            }
+        });
     };
     NavbarComponent.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
@@ -1758,11 +1762,20 @@ var UsuarioService = /** @class */ (function () {
                 _this.atualizaUsuario(resposta.usuario);
             }
         }));
-        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
     };
     UsuarioService.prototype.logout = function () {
-        console.log('Logout no serviço');
-        this.atualizaUsuario(null);
+        var _this = this;
+        console.log('Logout no usuarioService');
+        var url = "/usuarios/autenticacao";
+        return this.http.delete(url, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                _this.atualizaUsuario(null);
+            }
+        }));
     };
     UsuarioService.prototype.atualizaUsuario = function (novoUsuario) {
         if (this.usuario != novoUsuario) {

@@ -1313,8 +1313,12 @@ let NavbarComponent = class NavbarComponent {
         });
     }
     logout() {
-        console.log("BOTAO SAIR");
-        this.usuarioService.logout();
+        this.usuarioService.logout().subscribe(resposta => {
+            console.log("Resposta de logout: " + JSON.stringify(resposta));
+            if (resposta.houveErro) {
+                console.error("Erro ao fazer o logout");
+            }
+        });
     }
 };
 NavbarComponent.ctorParameters = () => [
@@ -1662,11 +1666,19 @@ let UsuarioService = class UsuarioService {
                 this.atualizaUsuario(resposta.usuario);
             }
         }));
-        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
     }
     logout() {
-        console.log('Logout no serviço');
-        this.atualizaUsuario(null);
+        console.log('Logout no usuarioService');
+        var url = "/usuarios/autenticacao";
+        return this.http.delete(url, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                this.atualizaUsuario(null);
+            }
+        }));
     }
     atualizaUsuario(novoUsuario) {
         if (this.usuario != novoUsuario) {
