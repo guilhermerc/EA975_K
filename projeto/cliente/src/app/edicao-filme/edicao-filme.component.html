@@ -1,11 +1,22 @@
 <div class="container">
-  <h1 style="font-size:20px; color:green">
-    Edição dos dados do filme: <b>{{filme.titulo}}</b></h1>
-  <div class="botoes-controle">
-    <button type="submit" (click)="salvar()" class="btn btn-success"
-    [disabled]="!formsUsuario.form.valid">Salvar</button>
-
+  <div *ngIf="!criacaoDeFilme">
+    <h1 style="font-size:20px; color:green">
+      Edição dos dados do filme: <b>{{filme.titulo}}</b></h1>
+    <div class="botoes-controle">
+      <button type="submit" (click)="salvar()" class="btn btn-success"
+      [disabled]="!formsUsuario.form.valid">Salvar</button>
+    </div>
   </div>
+
+  <div *ngIf="criacaoDeFilme">
+    <h1 style="font-size:20px; color:green">
+      Criação de um novo filme na base de dados.</h1>
+    <div class="botoes-controle">
+    </div>
+  </div>
+
+
+
   <br><br>
   <form  #formsUsuario="ngForm">
     <hr>
@@ -24,11 +35,11 @@
     <div class="form-group">
       <label for="ano">Ano</label>
       <input type="text" class="form-control" id="ano" required
-      [(ngModel)]="filme.ano" name="ano"
-      #ano="ngModel">
+      [(ngModel)]="filme.ano" name="ano" #ano="ngModel"
+      pattern="[0-9]{4,4}" maxlength="4">
       <div [hidden]="ano.valid || ano.pristine"
       class="alert alert-danger">
-      O campo Ano não pode ficar vazio
+      Utilize 4 caracteres numéricos para representar o ano.
       </div>
     </div>
 
@@ -99,9 +110,9 @@
       </div>
     </div>
 
-    <hr>
+    <hr *ngIf="!criacaoDeFilme">
     <!--Críticas-->
-    <div class="container-lista">
+    <div class="container-lista" *ngIf="!criacaoDeFilme">
       <div class="form-group">
         <label for="criticas">Críticas</label>
 
@@ -120,8 +131,13 @@
     </div>
   </form>
 
-  <hr>
+  <hr *ngIf="!criacaoDeFilme">
 
-  <button type="button" class="btn btn-danger" (click)="removerFilme()">Remover Filme</button>
+  <button type="button" class="btn btn-danger" *ngIf="!criacaoDeFilme"
+  (click)="removerFilme()">Remover Filme</button>
+
+  <button *ngIf="criacaoDeFilme" type="submit" (click)="adicionarFilme()" class="btn btn-success"
+  [disabled]="!formsUsuario.form.valid || filme.diretores.length == 0 || filme.elenco.length == 0">
+  Criar Filme</button>
 
 </div>

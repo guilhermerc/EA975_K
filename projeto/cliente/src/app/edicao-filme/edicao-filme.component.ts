@@ -14,21 +14,22 @@ import { Router } from '@angular/router';
 })
 export class EdicaoFilmeComponent implements OnInit {
 
-  filme: Filme  = { // TODO: Remover na versão final
-    id: "2",
-    titulo: "Vingadores: Ultimato",
-    ano: 2019,
-    diretores: [{nome: "Russo1"}, {nome: "Russo2"}],
-    elenco: [{nome: "Robert Downey Jr"}, {nome: "Scarlett Johansson"}],
-    criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
-                  {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
-    imagens: ["/assets/images/vingadores_0.jpg"],
-    sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
+  filme: Filme = {
+    id: "",
+    titulo: "",
+    ano: null,
+    diretores: [],
+    elenco: [],
+    criticas: [],
+    sinopse: ""
   };
 
   novoAtor: string;
   novoDiretor: string;
   filmeOriginal: Filme = new Filme();
+
+  criacaoDeFilme: boolean;
+  mensagemErro: string = null;
 
   constructor(
                 private route: ActivatedRoute,
@@ -38,7 +39,15 @@ export class EdicaoFilmeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getFilme();
+
+    var url = this.router.url;
+
+    if (url == '/incluir-filme') {
+      this.criacaoDeFilme = true;
+    } else {
+      this.criacaoDeFilme = false;
+      this.getFilme();
+    }
   }
 
   clonarFilme() {
@@ -184,4 +193,16 @@ export class EdicaoFilmeComponent implements OnInit {
     });
   }
 
+  adicionarFilme() {
+    this.filmeService.postFilme(this.filme).subscribe(resposta => {
+      console.log("Resposta do postFilme: " + JSON.stringify(resposta));
+
+      if (resposta.houveErro) {
+        this.mensagemErro = resposta.mensagemErro;
+      } else {
+        var filmeId = "x";//resposta.filme.id; // TODO: Sem servidor
+        this.router.navigate(['filme/' + filmeId]);
+      }
+    });
+  }
 }
