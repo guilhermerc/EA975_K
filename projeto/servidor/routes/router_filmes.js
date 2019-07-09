@@ -294,8 +294,16 @@ router.post('/id/:id/criticas', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"filme":							[]
-		};
+		"filme":					[]
+    };
+    
+    if(checaAutenticacao(req, res) == 'unauthorized') {
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado";
+        res.send(response);
+        return;
+    } 
+
 	var query = {
 		"id":	req.params.id
 	};
@@ -330,6 +338,14 @@ router.put('/id/:id/criticas', function(req, res, next) {
 		"mensagemErro":		"",
 		"filme":			[]
 	};
+    
+    if(checaAutenticacao(req, res) == 'unauthorized') {
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado";
+        res.send(response);
+        return;
+    } 
+    
 	var query = {
 		"id":	req.params.id,
 	};
@@ -364,6 +380,14 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 		"mensagemErro":		"",
 		"filme":			[]
 	};
+    
+    if(checaAutenticacao(req, res) == 'unauthorized') {
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado";
+        res.send(response);
+        return;
+    } 
+    
 	var query = {
 		"id":	req.params.id,
 	};
