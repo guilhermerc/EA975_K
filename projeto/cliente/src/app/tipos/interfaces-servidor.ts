@@ -20,9 +20,10 @@ export class RespPutFilme {
 export class RespPostFilme {
   houveErro: boolean;
   mensagemErro: string;
+  filme: Filme;
 }
 
-export class RespStatusFilme {
+export class RespDelFilme {
   houveErro: boolean;
   mensagemErro: string;
 }

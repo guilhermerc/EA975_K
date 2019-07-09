@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'busca/:id', component: ResultadoDeBuscaComponent},
   { path: 'home', component: PerfilUsuarioComponent},
   { path: 'developer', component: TestaServidorComponent},
-  { path: 'edicao-filme/:id', component: EdicaoFilmeComponent}
+  { path: 'edicao-filme/:id', component: EdicaoFilmeComponent},
+  { path: 'incluir-filme', component: EdicaoFilmeComponent}
 
 ];
 

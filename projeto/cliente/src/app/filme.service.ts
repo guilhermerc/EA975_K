@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespStatusFilme}  from './tipos/interfaces-servidor';
+import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespDelFilme}  from './tipos/interfaces-servidor';
 import { Critica } from './tipos/critica';
 
 const httpOptions = {
@@ -38,29 +38,33 @@ export class FilmeService {
     return this.http.get<RespostaServidorFilmes>(router);
   }
 
-  postFilme(filme: Filme) {
+  postFilme(filme: Filme): Observable<RespPostFilme>  {
+    var url = '/filmes';
+    var body = JSON.stringify(filme);
 
+    return this.http.post<RespPostFilme>(url, body, httpOptions);
   }
 
   putFilme(idFilme: string, body: string):Observable<RespPutFilme> {
 
     var url = '/filmes/id/' + idFilme;
 
-    return this.http.put<RespPostFilme>(url, body, httpOptions);
+    return this.http.put<RespPutFilme>(url, body, httpOptions);
   }
   /** Observable ativa uma chamada assincrona do retorno dessa função
   *  @idFilme: Id do filme que se deseja excluir
   */
-  deleteFilme(idFilme: string): Observable<RespStatusFilme> {
+  deleteFilme(idFilme: string): Observable<RespDelFilme> {
     var url = '/filmes/id/' + idFilme;
-    return this.http.delete<RespStatusFilme>(url, httpOptions);
+    return this.http.delete<RespDelFilme>(url, httpOptions);
   }
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
   postCritica(idFilme: string, critica: Critica): Observable<RespPostFilme> {
     var router = '/filmes/id/' + idFilme;
 
-    return this.http.post<RespPutFilme>(router, critica);
+    return this.http.post<RespPostFilme>(router, critica);
   }
+
   // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
   putCritica(idFilme: string, username: string, critica: Critica): Observable<RespPostFilme> {
     var router = '/filmes/criticas/' + idFilme + '/' + username;

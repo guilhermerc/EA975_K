@@ -74,7 +74,7 @@ module.exports = "<div class=\"container-critica\" *ngIf=\"!usuario\">\n  <h2 ma
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1 style=\"font-size:20px; color:green\">\n    Edição dos dados do filme: <b>{{filme.titulo}}</b></h1>\n  <div class=\"botoes-controle\">\n    <button type=\"submit\" (click)=\"salvar()\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Salvar</button>\n\n  </div>\n  <br><br>\n  <form  #formsUsuario=\"ngForm\">\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"titulo\">Titulo</label>\n      <input type=\"text\" class=\"form-control\" id=\"titulo\" required\n      [(ngModel)]=\"filme.titulo\" name=\"titulo\"\n      #titulo=\"ngModel\">\n      <div [hidden]=\"titulo.valid || titulo.pristine\"\n      class=\"alert alert-danger\">\n      O campo Título não pode ficar vazio\n      </div>\n    </div>\n\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"ano\">Ano</label>\n      <input type=\"text\" class=\"form-control\" id=\"ano\" required\n      [(ngModel)]=\"filme.ano\" name=\"ano\"\n      #ano=\"ngModel\">\n      <div [hidden]=\"ano.valid || ano.pristine\"\n      class=\"alert alert-danger\">\n      O campo Ano não pode ficar vazio\n      </div>\n    </div>\n\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"sinopse\">Sinopse</label>\n      <textarea name=\"sinopse\" id=\"sinopse\" required\n      [(ngModel)]=\"filme.sinopse\" class=\"form-control\"\n      #sinopse=\"ngModel\" rows=\"8\" cols=\"80\" ></textarea>\n\n      <div [hidden]=\"sinopse.valid || sinopse.pristine\"\n      class=\"alert alert-danger\">\n      O campo Sinopse não pode ficar vazio\n      </div>\n    </div>\n\n    <hr>\n    <!--Atores -->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"elenco\">Elenco</label>\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoAtor\" maxlength=\"50\" [(ngModel)]=\"novoAtor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarAtor()\">Adicionar</button>\n        </div>\n\n        <ul>\n          <li *ngFor=\"let pessoa of filme.elenco\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa do elenco\"\n          (click)=\"removerAtor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n        <div [hidden]=\"filme.elenco.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no elenco.\n        </div>\n      </div>\n    </div>\n    <hr>\n    <!--Direção-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Direção</label>\n\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoDiretor\" maxlength=\"50\" [(ngModel)]=\"novoDiretor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarDiretor()\">Adicionar</button>\n        </div>\n        <ul>\n          <li *ngFor=\"let pessoa of filme.diretores\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa da direção\"\n          (click)=\"removerDiretor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n\n        <div [hidden]=\"filme.diretores.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa na direção.\n        </div>\n      </div>\n    </div>\n\n    <hr>\n    <!--Críticas-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"criticas\">Críticas</label>\n\n        <ul>\n          <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n              <button class=\"botao-delete-critica\" title=\"Remover crítica\"\n          (click)=\"removerCritica(critica.username)\">x</button>\n              <br>\"{{critica.comentario}}\"\n              <br>Nota: {{critica.nota}}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </form>\n\n  <hr>\n\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"removerFilme()\">Remover Filme</button>\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div *ngIf=\"!criacaoDeFilme\">\n    <h1 style=\"font-size:20px; color:green\">\n      Edição dos dados do filme: <b>{{filme.titulo}}</b></h1>\n    <div class=\"botoes-controle\">\n      <button type=\"submit\" (click)=\"salvar()\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid\">Salvar</button>\n    </div>\n  </div>\n\n  <div *ngIf=\"criacaoDeFilme\">\n    <h1 style=\"font-size:20px; color:green\">\n      Criação de um novo filme na base de dados.</h1>\n    <div class=\"botoes-controle\">\n    </div>\n  </div>\n\n\n\n  <br><br>\n  <form  #formsUsuario=\"ngForm\">\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"titulo\">Titulo</label>\n      <input type=\"text\" class=\"form-control\" id=\"titulo\" required\n      [(ngModel)]=\"filme.titulo\" name=\"titulo\"\n      #titulo=\"ngModel\">\n      <div [hidden]=\"titulo.valid || titulo.pristine\"\n      class=\"alert alert-danger\">\n      O campo Título não pode ficar vazio\n      </div>\n    </div>\n\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"ano\">Ano</label>\n      <input type=\"text\" class=\"form-control\" id=\"ano\" required\n      [(ngModel)]=\"filme.ano\" name=\"ano\" #ano=\"ngModel\"\n      pattern=\"[0-9]{4,4}\" maxlength=\"4\">\n      <div [hidden]=\"ano.valid || ano.pristine\"\n      class=\"alert alert-danger\">\n      Utilize 4 caracteres numéricos para representar o ano.\n      </div>\n    </div>\n\n    <hr>\n    <div class=\"form-group\">\n      <label for=\"sinopse\">Sinopse</label>\n      <textarea name=\"sinopse\" id=\"sinopse\" required\n      [(ngModel)]=\"filme.sinopse\" class=\"form-control\"\n      #sinopse=\"ngModel\" rows=\"8\" cols=\"80\" ></textarea>\n\n      <div [hidden]=\"sinopse.valid || sinopse.pristine\"\n      class=\"alert alert-danger\">\n      O campo Sinopse não pode ficar vazio\n      </div>\n    </div>\n\n    <hr>\n    <!--Atores -->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"elenco\">Elenco</label>\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoAtor\" maxlength=\"50\" [(ngModel)]=\"novoAtor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarAtor()\">Adicionar</button>\n        </div>\n\n        <ul>\n          <li *ngFor=\"let pessoa of filme.elenco\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa do elenco\"\n          (click)=\"removerAtor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n        <div [hidden]=\"filme.elenco.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa no elenco.\n        </div>\n      </div>\n    </div>\n    <hr>\n    <!--Direção-->\n    <div class=\"container-lista\">\n      <div class=\"form-group\">\n        <label for=\"direcao\">Direção</label>\n\n        <div class=\"form-group\">\n\n          <input type=\"text\" class=\"input-pessoa\" name=\"novoDiretor\" maxlength=\"50\" [(ngModel)]=\"novoDiretor\">\n          <button type=\"button\" name=\"button\" class=\"botao-adicionar\" (click)=\"adicionarDiretor()\">Adicionar</button>\n        </div>\n        <ul>\n          <li *ngFor=\"let pessoa of filme.diretores\" class=\"item-lista-pessoas\">\n            <div class=\"pessoa\">\n\n              <div class=\"nome-pessoa\">{{pessoa.nome}}</div> <button class=\"delete\" title=\"Remover pessoa da direção\"\n          (click)=\"removerDiretor(pessoa.nome)\">x</button>\n            </div>\n          </li>\n        </ul>\n\n        <div [hidden]=\"filme.diretores.length != 0\"\n        class=\"alert alert-danger\">\n        O filme precisa de pelo menos uma pessoa na direção.\n        </div>\n      </div>\n    </div>\n\n    <hr *ngIf=\"!criacaoDeFilme\">\n    <!--Críticas-->\n    <div class=\"container-lista\" *ngIf=\"!criacaoDeFilme\">\n      <div class=\"form-group\">\n        <label for=\"criticas\">Críticas</label>\n\n        <ul>\n          <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n              <button class=\"botao-delete-critica\" title=\"Remover crítica\"\n          (click)=\"removerCritica(critica.username)\">x</button>\n              <br>\"{{critica.comentario}}\"\n              <br>Nota: {{critica.nota}}\n          </li>\n        </ul>\n      </div>\n    </div>\n  </form>\n\n  <hr *ngIf=\"!criacaoDeFilme\">\n\n  <button type=\"button\" class=\"btn btn-danger\" *ngIf=\"!criacaoDeFilme\"\n  (click)=\"removerFilme()\">Remover Filme</button>\n\n  <button *ngIf=\"criacaoDeFilme\" type=\"submit\" (click)=\"adicionarFilme()\" class=\"btn btn-success\"\n  [disabled]=\"!formsUsuario.form.valid || filme.diretores.length == 0 || filme.elenco.length == 0\">\n  Criar Filme</button>\n\n</div>\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<div class=\"container\">\n  <h1 style=\"font-size:20px; color
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n    <button class=\"botao-editar-filme\" type=\"button\"\n\n    name=\"button\" routerLink=\"/edicao-filme/{{filme.id}}\">Editar Filme</button>\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
+module.exports = "<div class=\"container\" *ngIf=\"filme\">\n\n    <button *ngIf=\"usuarioModerador\" class=\"botao-editar-filme\" type=\"button\"\n    name=\"button\" routerLink=\"/edicao-filme/{{filme.id}}\">Editar Filme</button>\n\n  <div class=\"titulo\">\n    {{filme.titulo}} ({{filme.ano}})\n    <div style=\"float:right; margin-top:-10px\">\n      <!-- img class=\"estrelas\" src=\"assets/estrelas/voto_1.jpeg\" -->\n    </div>\n  </div>\n\n  <div class=\"container-media\">\n    <div class=\"linha\">\n        <div class=\"coluna\">\n            <img src=\"/assets/imagens/vingadores_0.jpg\">\n        </div>\n        <div class=\"div-video\">\n          <iframe class=\"video\" src=\"https://www.youtube.com/embed/g6ng8iy-l0U\" frameborder=\"0\"\n          allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>\n        </div>\n    </div>\n  </div>\n\n  <div class=\"info-filme\">\n\n    <!--Direção--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Direção:</b></li>\n        <li *ngFor=\"let pessoa of filme.diretores\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n    <!--Elenco--->\n    <div class=\"lista-pessoas\">\n      <ul>\n        <li><b>Elenco:</b></li>\n        <li *ngFor=\"let pessoa of filme.elenco\">{{pessoa.nome}},</li>\n      </ul>\n    </div>\n\n  </div>\n\n  <div class=\"sinopse\">\n    <b>Sinopse:</b>\n    <br>{{filme.sinopse}}\n  </div>\n\n  <hr>\n\n\n  <div class=\"container-criticas\">\n    <span style=\"font-size: 28px; margin-left:20px\">Críticas de Usuários</span>\n\n    <br><br>\n\n      <ul>\n        <li *ngFor= \"let critica of filme.criticas\" class=\"critica\">\n              <span style=\"color:red\">{{critica.username}}</span>\n              escreveu, no dia {{critica.data}}:\n            <br>\"{{critica.comentario}}\"\n            <br>Nota: {{critica.nota}}\n        </li>\n      </ul>\n\n      <div *ngIf=\"!criticaDoUsuario\" class=\"critica\">\n        Já assistiu {{filme.titulo}}? Então deixe sua crítica aqui também!\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Avaliar esse filme</button>\n      </div>\n\n      <div *ngIf=\"criticaDoUsuario\" class=\"critica\">\n        <span style=\"color:red\">{{criticaDoUsuario.username}}</span>, no dia {{criticaDoUsuario.data}}, escreveu:\n        <br>\"{{criticaDoUsuario.comentario}}\"\n        <br>\"Nota: {{criticaDoUsuario.nota}}\"\n        <button with=\"400px\"(click)=\"criticar()\" class=\"critica-botao\">\n        Editar Crítica</button>\n      </div>\n  </div>\n\n</div>\n\n<br><br><br><br><br><br><br><br><br>\n"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<div class=\"container\">\n  <h1>Registro de Usuário</h1><br>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuario && usuario.moderador\" routerLink=\"/\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuario\"  routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
+module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image\" routerLink=\"/\">\n      <img src=\"assets/logo2.png\" height=\"55\" width=\"200\">\n    </a>\n\n    <div class=\"search-container\">\n\n\n        <input type=\"text\" placeholder=\"Procurar por um filme, elenco, direção...\" name=\"search\"\n        [(ngModel)]=\"barraDeBusca\" class=\"barra-input\">\n\n        <select class=\"barra-input\" id=\"filtroSelecionado\">\n         <option *ngFor=\"let filtro of filtros\" [value]=\"filtro.chave\">{{filtro.rotulo}}</option>\n       </select>\n\n        <button type=\"button\" (click)=\"buscaSimples()\" class=\"barra-input\">Buscar</button>\n\n    </div>\n\n    <div class=\"topnav-right\">\n      <a class=\"botao\" *ngIf=\"true\" routerLink=\"/developer\">Developer</a>\n      <a class=\"botao\" *ngIf=\"usuario && usuario.moderador\" routerLink=\"incluir-filme\">Adicionar Filme</a>\n\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"/perfil/0\"> Perfil: {{usuario.login.username}}</a>\n\n\n      <a class=\"botao\" *ngIf=\"!usuario\"  routerLink=\"/autenticacao\">Entrar</a>\n      <a class=\"botao\" *ngIf=\"usuario\" routerLink=\"\" (click)=\"logout()\">Sair</a>\n    </div>\n\n</div>\n"
 
 /***/ }),
 
@@ -180,7 +180,8 @@ const routes = [
     { path: 'busca/:id', component: _resultado_de_busca_resultado_de_busca_component__WEBPACK_IMPORTED_MODULE_6__["ResultadoDeBuscaComponent"] },
     { path: 'home', component: _perfil_usuario_perfil_usuario_component__WEBPACK_IMPORTED_MODULE_3__["PerfilUsuarioComponent"] },
     { path: 'developer', component: _testa_servidor_testa_servidor_component__WEBPACK_IMPORTED_MODULE_7__["TestaServidorComponent"] },
-    { path: 'edicao-filme/:id', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] }
+    { path: 'edicao-filme/:id', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] },
+    { path: 'incluir-filme', component: _edicao_filme_edicao_filme_component__WEBPACK_IMPORTED_MODULE_8__["EdicaoFilmeComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -601,6 +602,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
 /* harmony import */ var _filme_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../filme.service */ "./src/app/filme.service.ts");
+/* harmony import */ var _usuario_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../usuario.service */ "./src/app/usuario.service.ts");
+
 
 
 
@@ -609,26 +612,47 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EdicaoFilmeComponent = class EdicaoFilmeComponent {
-    constructor(route, filmeService, location, router) {
+    constructor(route, filmeService, location, router, usuarioService) {
         this.route = route;
         this.filmeService = filmeService;
         this.location = location;
         this.router = router;
+        this.usuarioService = usuarioService;
         this.filme = {
-            id: "2",
-            titulo: "Vingadores: Ultimato",
-            ano: 2019,
-            diretores: [{ nome: "Russo1" }, { nome: "Russo2" }],
-            elenco: [{ nome: "Robert Downey Jr" }, { nome: "Scarlett Johansson" }],
-            criticas: [{ username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9 },
-                { username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8 }],
-            imagens: ["/assets/images/vingadores_0.jpg"],
-            sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
+            id: "",
+            titulo: "",
+            ano: null,
+            diretores: [],
+            elenco: [],
+            criticas: [],
+            sinopse: ""
         };
         this.filmeOriginal = new _filme__WEBPACK_IMPORTED_MODULE_2__["Filme"]();
+        this.mensagemErro = null;
+        this.observerUsuario();
     }
     ngOnInit() {
-        this.getFilme();
+        var url = this.router.url;
+        // Se estiver em /incluir-filme deve se configurar a página para adicionar
+        // filme ao invés de editar. Portanto não precisa carregar o filme do servidor.
+        if (url == '/incluir-filme') {
+            this.criacaoDeFilme = true;
+        }
+        else {
+            this.criacaoDeFilme = false;
+            this.getFilme();
+        }
+    }
+    observerUsuario() {
+        this.usuarioService.usuario$.subscribe({
+            next: (novoUsuario) => {
+                // TODO: Apagar esse log
+                console.log(`Observer do edicao-filme.component: ${JSON.stringify(novoUsuario)}`);
+                if (novoUsuario == null || !novoUsuario.moderador) {
+                    this.router.navigate(['/']);
+                }
+            }
+        });
     }
     clonarFilme() {
         this.filmeOriginal = Object.assign({}, this.filme);
@@ -741,12 +765,25 @@ let EdicaoFilmeComponent = class EdicaoFilmeComponent {
             this.router.navigate(['/']);
         });
     }
+    adicionarFilme() {
+        this.filmeService.postFilme(this.filme).subscribe(resposta => {
+            console.log("Resposta do postFilme: " + JSON.stringify(resposta));
+            if (resposta.houveErro) {
+                this.mensagemErro = resposta.mensagemErro;
+            }
+            else {
+                var filmeId = resposta.filme.id;
+                this.router.navigate(['filme/' + filmeId]);
+            }
+        });
+    }
 };
 EdicaoFilmeComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"] },
     { type: _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+    { type: _usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"] }
 ];
 EdicaoFilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -757,7 +794,8 @@ EdicaoFilmeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         _filme_service__WEBPACK_IMPORTED_MODULE_5__["FilmeService"],
         _angular_common__WEBPACK_IMPORTED_MODULE_4__["Location"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+        _usuario_service__WEBPACK_IMPORTED_MODULE_6__["UsuarioService"]])
 ], EdicaoFilmeComponent);
 
 
@@ -806,6 +844,9 @@ let FilmeService = class FilmeService {
         return this.http.get(router);
     }
     postFilme(filme) {
+        var url = '/filmes';
+        var body = JSON.stringify(filme);
+        return this.http.post(url, body, httpOptions);
     }
     putFilme(idFilme, body) {
         var url = '/filmes/id/' + idFilme;
@@ -934,9 +975,14 @@ let FilmeComponent = class FilmeComponent {
             imagens: ["/assets/images/vingadores_0.jpg"],
             sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
         };
+        this.usuarioModerador = false;
         this.observerUsuario();
     }
     ngOnInit() {
+        // Obtém usuário logado
+        var usuarioAtual = this.usuarioService.getUser();
+        // Atualiza status de moderador para poder oferecer opções exclusivas de moderador.
+        this.atualizaUsuario(usuarioAtual);
         // Busca filme id
         this.getFilme(); // TODO: Sem servidor
     }
@@ -946,11 +992,21 @@ let FilmeComponent = class FilmeComponent {
     observerUsuario() {
         this.usuarioService.usuario$.subscribe({
             next: (novoUsuario) => {
+                // Atualiza usuário logado
+                this.atualizaUsuario(novoUsuario);
                 // TODO: Apagar esse log
                 console.log(`Observer do filme.component: ${JSON.stringify(novoUsuario)}`);
                 this.getFilme();
             }
         });
+    }
+    atualizaUsuario(novoUsuario) {
+        this.usuario = novoUsuario;
+        // Atualiza status de moderador para poder
+        // oferecer opções exclusivas de moderador.
+        if (this.usuario != null) {
+            this.usuarioModerador = this.usuario.moderador;
+        }
     }
     getFilme() {
         console.log('GET FILME' + this.route.snapshot.params.id);
@@ -984,16 +1040,10 @@ let FilmeComponent = class FilmeComponent {
      *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
      */
     ajustaCriticas() {
-        console.log('estou em ajustaCriticas()');
-        var user = this.usuarioService.getUser();
-        if (user != null) {
-            console.log('Usuário Logado =>' + user.login.username);
-            console.log('criticaDoUsuario antes:' + JSON.stringify(this.criticaDoUsuario));
-            this.criticaDoUsuario = this.getCriticaDoUsuario(user.login.username);
-            console.log('criticaDoUsuario depois:' + JSON.stringify(this.criticaDoUsuario));
+        if (this.usuario != null) {
+            this.criticaDoUsuario = this.getCriticaDoUsuario(this.usuario.login.username);
         }
         else {
-            console.log('Usuário não esta logado.');
             this.criticaDoUsuario = null;
         }
     }
@@ -1017,11 +1067,10 @@ let FilmeComponent = class FilmeComponent {
      *  As próximas funções são sobre a caixa de dialogo de crítica
      */
     criticar() {
-        var usuario = this.usuarioService.getUser();
         // Se this.criticaDoUsuario for null quer dizer não fez crítica antes.
         var dados = {
             filme: this.filme,
-            usuario: usuario,
+            usuario: this.usuario,
             critica: this.criticaDoUsuario
         };
         const dialogRef = this.dialog.open(_critica_critica_component__WEBPACK_IMPORTED_MODULE_6__["CriticaComponent"], {

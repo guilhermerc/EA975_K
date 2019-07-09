@@ -29,7 +29,7 @@ Baseado nos Casos de Uso.
 - [ ] Opinar sobre um filme
 - [ ] Editar opinião sobre um filme
 - [x] Remover opinião sobre um filme
-- [ ] Inserção de um filme na base de dados
+- [x] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
 - [x] Remoção de um filme na base de dados
 
@@ -46,7 +46,7 @@ Baseado nos Casos de Uso.
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme
 - [x] Remover opinião sobre um filme
-- [ ] Inserção de um filme na base de dados
+- [x] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
 - [x] Remoção de um filme na base de dados
 

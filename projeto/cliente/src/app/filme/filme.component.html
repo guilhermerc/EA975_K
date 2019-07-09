@@ -1,7 +1,6 @@
 <div class="container" *ngIf="filme">
 
-    <button class="botao-editar-filme" type="button"
-
+    <button *ngIf="usuarioModerador" class="botao-editar-filme" type="button"
     name="button" routerLink="/edicao-filme/{{filme.id}}">Editar Filme</button>
 
   <div class="titulo">
