@@ -29,6 +29,7 @@ router.post('/', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
+		"filme":					[]
 	};
 	var filme = {
 		"id": 			"",
@@ -50,6 +51,7 @@ router.post('/', function(req, res, next) {
 			console.log(err);
 			console.log(res);
 		});
+		response.filme =	[filme],
 		res.send(response);
 	});
 });
