@@ -30,13 +30,28 @@ router.post('/', function(req, res, next) {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
 	};
+    
+    var auth_response = checaAutenticacao(req,res);
+    if(auth_response == 'unauthorized'){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado"
+        res.send(response);
+        return
+    }
+    else if(auth_response != "moderador"){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não tem permissão para inserir um filme"
+        res.send(response);
+        return
+    }
+    
 	var filme = {
 		"id": 			"",
 		"titulo":		req.body.titulo,
 		"diretores": 	req.body.diretores,
 		"ano":			req.body.ano,
 		"elenco":		req.body.elenco,
-		"sinopse": 		req.body.sinospe,
+		"sinopse": 		req.body.sinopse,
 		"nota":			0,
 		"criticas":		[]
 	}
@@ -89,6 +104,21 @@ router.put('/id/:id', function(req, res, next) {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
 	};
+    
+    var auth_response = checaAutenticacao(req,res);
+    if(auth_response == 'unauthorized'){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado"
+        res.send(response);
+        return
+    }
+    else if(auth_response != "moderador"){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não tem permissão para inserir um filme"
+        res.send(response);
+        return
+    }
+    
 	var query = {
 		"id":	req.params.id
 	};
@@ -118,6 +148,21 @@ router.delete('/id/:id', function(req, res, next) {
 		"houveErro":              	false,
 		"mensagemErro":           	""
 	};
+    
+    var auth_response = checaAutenticacao(req,res);
+    if(auth_response == 'unauthorized'){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não autenticado"
+        res.send(response);
+        return
+    }
+    else if(auth_response != "moderador"){
+        response.houveErro = true;
+        response.mensagemErro = "Usuário não tem permissão para inserir um filme"
+        res.send(response);
+        return
+    }
+    
 	var query = {
 		"id":	req.params.id
 	};
@@ -372,6 +417,17 @@ function removeCritica(criticas, username) {
         	break;
      	}
    	}
+}
+
+function checaAutenticacao(req, res) {
+  cookies = req.cookies;
+  if(! cookies || ! cookies.autenticacaoUsuario) return 'unauthorized';
+  cauth = cookies.autenticacaoUsuario;
+  var content = JSON.parse(cauth);
+  var key = content.key;
+  var role = content.role;
+  if(key == 'secret') return role
+  return 'unauthorized';
 }
 
 module.exports = router;

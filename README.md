@@ -53,11 +53,12 @@ Baseado nos Casos de Uso.
 ##### Lado servidor/banco de dados:
 
 - [x] Cadastra
-- [ ] Autentica
-- [ ] Encerrar sessão
-- [ ] Alterar senha
+- [x] Autentica
+- [x] Encerrar sessão
+- [x] Exibir informações do usuário
+- [x] Alterar informações do usuário
 - [x] Busca simples por filme
-- [ ] Busca combinada por filme (??)
+- [x] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme

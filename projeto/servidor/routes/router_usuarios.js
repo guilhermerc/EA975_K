@@ -128,6 +128,10 @@ router.post('/', function(req, res, next) {
 		} else {
 			// response já está pronta
 			var novoUsuario = new modelUsuario(req.body);
+            /* Todo usuário que é cadastrado, é cadastrado como usuário,
+               moderadores já "nascem" moderadores
+             */
+            novoUsuario.moderador = false;
 			
 			novoUsuario.save( function(err, res){
 				if(err){
