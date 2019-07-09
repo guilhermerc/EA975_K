@@ -9,6 +9,22 @@
   padding-bottom: 50px;
 }
 
+.botoes-controle {
+  float: right;
+
+}
+.botoes-controle button {
+  margin: 2px;
+}
+
+.botao-salvar {
+
+}
+.botao-remover-filme {
+  background-color: red;
+  color: white;
+}
+
 .container-lista {
   max-width: 600px;
 }

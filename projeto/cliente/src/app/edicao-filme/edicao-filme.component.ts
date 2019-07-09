@@ -175,4 +175,13 @@ export class EdicaoFilmeComponent implements OnInit {
     });
   }
 
+  removerFilme() {
+    console.log("remover filme");
+
+    this.filmeService.deleteFilme(this.filme.id).subscribe(resposta => {
+      console.log("Resposta do deleteFilme: " + JSON.stringify(resposta));
+      this.router.navigate(['/']);
+    });
+  }
+
 }

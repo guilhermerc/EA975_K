@@ -21,3 +21,8 @@ export class RespPostFilme {
   houveErro: boolean;
   mensagemErro: string;
 }
+
+export class RespStatusFilme {
+  houveErro: boolean;
+  mensagemErro: string;
+}
