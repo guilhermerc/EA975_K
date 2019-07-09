@@ -20,15 +20,15 @@ Baseado nos Casos de Uso.
 #### Integração entre os lados: 
 
 - [x] Cadastra
-- [ ] Autentica
+- [x] Autentica
 - [ ] Encerrar sessão
-- [ ] Alterar senha
+- [ ] Alterar dados do perfil
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
 - [ ] Opinar sobre um filme
 - [ ] Editar opinião sobre um filme
-- [x] Remover opinião sobre um filme
+- [ ] Remover opinião sobre um filme
 - [x] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
 - [x] Remoção de um filme na base de dados
@@ -39,7 +39,7 @@ Baseado nos Casos de Uso.
 - [x] Cadastra
 - [x] Autentica
 - [x] Encerrar sessão
-- [ ] Alterar senha
+- [ ] Alterar dados do perfil
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme

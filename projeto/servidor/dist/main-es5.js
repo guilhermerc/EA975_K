@@ -1255,7 +1255,25 @@ var FormsCadastroUsuarioComponent = /** @class */ (function () {
                 console.log("houve erro" + _this.mensagemErro);
             }
             else {
+                _this.login();
+            }
+        });
+    };
+    /* Após criar conta é preciso autenticar no sistema
+    */
+    FormsCadastroUsuarioComponent.prototype.login = function () {
+        var _this = this;
+        console.log("login pós registro");
+        this.usuarioService.login(this.usuario.login).subscribe(function (resposta) {
+            console.log("Resposta de login pós registro: " + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                // Omite mensagem de erro no html
+                _this.mensagemErro = null;
                 _this.confirmacaoDeRegistro();
+            }
+            else {
+                // Exibe mensagem de erro
+                _this.mensagemErro = "Usuário criado com sucesso, porém ocorreu um erro ao se conectar ao sistema" + resposta.mensagemErro;
             }
         });
     };

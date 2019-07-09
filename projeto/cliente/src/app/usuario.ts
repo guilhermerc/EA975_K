@@ -3,10 +3,7 @@ export class Usuario {
 //  public fotoPerfil: string?,
 
   constructor(
-  	public login: {
-                username: string,
-                senha:  string
-    },
+  	public login: Login,
     public nome: string,
   	public dataNascimento: Date,
   	public sexo: string,

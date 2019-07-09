@@ -52,8 +52,27 @@ export class FormsCadastroUsuarioComponent implements OnInit {
         this.mensagemErro = resposta.mensagemErro;
         console.log("houve erro" + this.mensagemErro);
       } else {
-        this.confirmacaoDeRegistro();
+        this.login();
       }
+    });
+  }
+  /* Após criar conta é preciso autenticar no sistema
+  */
+  login() {
+    console.log("login pós registro");
+    this.usuarioService.login(this.usuario.login).subscribe(resposta => {
+
+      console.log("Resposta de login pós registro: " + JSON.stringify(resposta));
+        if (!resposta.houveErro) {
+
+          // Omite mensagem de erro no html
+          this.mensagemErro = null;
+          this.confirmacaoDeRegistro();
+        }
+        else {
+          // Exibe mensagem de erro
+          this.mensagemErro = "Usuário criado com sucesso, porém ocorreu um erro ao se conectar ao sistema" + resposta.mensagemErro;
+        }
     });
   }
 
