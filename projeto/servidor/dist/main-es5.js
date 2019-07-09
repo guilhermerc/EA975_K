@@ -377,20 +377,21 @@ var AutenticacaoComponent = /** @class */ (function () {
     AutenticacaoComponent.prototype.ngOnInit = function () {
     };
     AutenticacaoComponent.prototype.login = function () {
+        var _this = this;
         console.log('estou em login');
-        //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
-        var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
-        if (!resposta.houveErro) {
-            // Vai para a página inicial
-            this.router.navigate(['/']);
-            // Omite mensagem de erro no html
-            this.mensageDeErro = null;
-        }
-        else {
-            // Exibe mensagem de erro
-            this.mensageDeErro = resposta.mensagemErro;
-        }
-        //});
+        this.usuarioService.login(this.dadosLogin).subscribe(function (resposta) {
+            console.log("Resposta de login: " + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                // Vai para a página inicial
+                _this.router.navigate(['/']);
+                // Omite mensagem de erro no html
+                _this.mensageDeErro = null;
+            }
+            else {
+                // Exibe mensagem de erro
+                _this.mensageDeErro = resposta.mensagemErro;
+            }
+        });
     };
     AutenticacaoComponent.ctorParameters = function () { return [
         { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] },
@@ -1720,45 +1721,26 @@ var UsuarioService = /** @class */ (function () {
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
             if (!resposta.houveErro) {
                 // Atualiza variável usuário e os observers.
-                _this.atualizaUsuario(usuario);
+                _this.atualizaUsuario(usuario); // TODO: ATUALIZAR RETORNO E PEGAR USUARIO DE LÁ
             }
         }));
     };
-    UsuarioService.prototype.login = function (username, senha) {
+    UsuarioService.prototype.login = function (login) {
+        var _this = this;
         console.log('estou em login do servico');
-        // TODO: Requisição http
-        // se logou
-        if (username == 'guilherme' || username == 'marcelo' || username == 'gabriel') {
-            //TODO: pega o usuario obtido pelo servidor
-            var usuarioLogado = {
-                login: {
-                    username: username,
-                    senha: ""
-                },
-                nome: 'String',
-                dataNascimento: new Date(),
-                sexo: 'String',
-                moderador: true
-            };
-            // Atualiza o observable
-            this.atualizaUsuario(usuarioLogado);
-            //// TODO: Remover isso depois de criar login no Observer
-            if (this.usuario == null) {
-                var resposta = {
-                    houveErro: true,
-                    mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
-                };
-                return resposta;
+        var url = '/usuarios/autenticacao';
+        var body = JSON.stringify({ login: login });
+        console.log("body:" + body);
+        return this.http.post(url, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                _this.atualizaUsuario(resposta.usuario);
             }
-            else {
-                var resposta = {
-                    houveErro: false,
-                    mensagemErro: ""
-                };
-                return resposta;
-            }
-            //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-        }
+        }));
+        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
     };
     UsuarioService.prototype.logout = function () {
         console.log('Logout no serviço');

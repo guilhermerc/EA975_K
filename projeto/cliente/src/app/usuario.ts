@@ -13,3 +13,9 @@ export class Usuario {
     public moderador: boolean
   ){}
 }
+
+
+export class Login {
+  username: string;
+  senha: string;
+}

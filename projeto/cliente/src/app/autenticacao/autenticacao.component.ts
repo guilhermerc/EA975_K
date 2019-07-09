@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from '../usuario';
+import { Usuario, Login } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
-
-
-export interface Login {
-  username: string;
-  senha: string;
-}
 
 @Component({
   selector: 'app-autenticacao',
@@ -35,8 +29,8 @@ export class AutenticacaoComponent implements OnInit {
   login() {
     console.log('estou em login');
 
-    //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
-      var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
+    this.usuarioService.login(this.dadosLogin).subscribe(resposta => {
+      console.log("Resposta de login: " + JSON.stringify(resposta));
         if (!resposta.houveErro) {
             // Vai para a página inicial
             this.router.navigate(['/']);
@@ -47,6 +41,6 @@ export class AutenticacaoComponent implements OnInit {
           // Exibe mensagem de erro
           this.mensageDeErro = resposta.mensagemErro;
         }
-    //});
+    });
   }
 }

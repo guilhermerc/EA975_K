@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Usuario } from './usuario';
+import { Usuario, Login } from './usuario';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespPostUsuario } from './tipos/interfaces-servidor';
+import { RespPostUsuario, RespPostAutenticacao } from './tipos/interfaces-servidor';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -37,52 +37,33 @@ export class UsuarioService {
 
           if (!resposta.houveErro) {
             // Atualiza variável usuário e os observers.
-            this.atualizaUsuario(usuario);
+            this.atualizaUsuario(usuario);// TODO: ATUALIZAR RETORNO E PEGAR USUARIO DE LÁ
           }
         }));
   }
 
-  public login(username: string, senha: string): RespPostUsuario {//Observable<RespPostUsuario> {
+  public login(login: Login): Observable<RespPostAutenticacao> {
 
       console.log('estou em login do servico');
 
-        // TODO: Requisição http
-      // se logou
-      if (username == 'guilherme' || username == 'marcelo' ||  username == 'gabriel') {
+      var url = '/usuarios/autenticacao';
+      var body = JSON.stringify({login: login});
 
-        //TODO: pega o usuario obtido pelo servidor
-        var usuarioLogado  = {
-          login: {
-            username: username,
-            senha:  ""
-          },
-          nome: 'String',
-        	dataNascimento: new Date(),
-        	sexo: 'String',
-          moderador: true
-        }
+      console.log("body:" + body);
 
-        // Atualiza o observable
-        this.atualizaUsuario(usuarioLogado);
+      return this.http.post<RespPostAutenticacao>(url, body, httpOptions).
+      pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        tap(resposta => {
 
-        //// TODO: Remover isso depois de criar login no Observer
-        if (this.usuario == null) {
-          var resposta = {
-            houveErro: true,
-            mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
+          if (!resposta.houveErro) {
+            // Atualiza variável usuário e os observers.
+            this.atualizaUsuario(resposta.usuario);
           }
-          return resposta;
         }
-        else {
-           var resposta = {
-             houveErro: false,
-             mensagemErro: ""
-           }
-           return resposta;
-         }
-
+      )
+    );
         //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-      }
   }
 
   public logout() {

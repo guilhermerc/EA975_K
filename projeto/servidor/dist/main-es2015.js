@@ -371,19 +371,19 @@ let AutenticacaoComponent = class AutenticacaoComponent {
     }
     login() {
         console.log('estou em login');
-        //this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha).subscribe(resposta => {
-        var resposta = this.usuarioService.login(this.dadosLogin.username, this.dadosLogin.senha); // TODO: Apagar isso após ter login no servidor
-        if (!resposta.houveErro) {
-            // Vai para a página inicial
-            this.router.navigate(['/']);
-            // Omite mensagem de erro no html
-            this.mensageDeErro = null;
-        }
-        else {
-            // Exibe mensagem de erro
-            this.mensageDeErro = resposta.mensagemErro;
-        }
-        //});
+        this.usuarioService.login(this.dadosLogin).subscribe(resposta => {
+            console.log("Resposta de login: " + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                // Vai para a página inicial
+                this.router.navigate(['/']);
+                // Omite mensagem de erro no html
+                this.mensageDeErro = null;
+            }
+            else {
+                // Exibe mensagem de erro
+                this.mensageDeErro = resposta.mensagemErro;
+            }
+        });
     }
 };
 AutenticacaoComponent.ctorParameters = () => [
@@ -1627,45 +1627,25 @@ let UsuarioService = class UsuarioService {
         Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {
             if (!resposta.houveErro) {
                 // Atualiza variável usuário e os observers.
-                this.atualizaUsuario(usuario);
+                this.atualizaUsuario(usuario); // TODO: ATUALIZAR RETORNO E PEGAR USUARIO DE LÁ
             }
         }));
     }
-    login(username, senha) {
+    login(login) {
         console.log('estou em login do servico');
-        // TODO: Requisição http
-        // se logou
-        if (username == 'guilherme' || username == 'marcelo' || username == 'gabriel') {
-            //TODO: pega o usuario obtido pelo servidor
-            var usuarioLogado = {
-                login: {
-                    username: username,
-                    senha: ""
-                },
-                nome: 'String',
-                dataNascimento: new Date(),
-                sexo: 'String',
-                moderador: true
-            };
-            // Atualiza o observable
-            this.atualizaUsuario(usuarioLogado);
-            //// TODO: Remover isso depois de criar login no Observer
-            if (this.usuario == null) {
-                var resposta = {
-                    houveErro: true,
-                    mensagemErro: "Esta combinação de nome do usuário e senha é inválida."
-                };
-                return resposta;
+        var url = '/usuarios/autenticacao';
+        var body = JSON.stringify({ login: login });
+        console.log("body:" + body);
+        return this.http.post(url, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(resposta => {
+            if (!resposta.houveErro) {
+                // Atualiza variável usuário e os observers.
+                this.atualizaUsuario(resposta.usuario);
             }
-            else {
-                var resposta = {
-                    houveErro: false,
-                    mensagemErro: ""
-                };
-                return resposta;
-            }
-            //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
-        }
+        }));
+        //var mensagem = "Esta combinação de nome do usuário e senha é inválida.";
     }
     logout() {
         console.log('Logout no serviço');

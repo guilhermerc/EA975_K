@@ -1,15 +1,11 @@
 import { Filme } from '../filme';
+import { Usuario } from '../usuario';
 
 export class RespostaServidorFilmes {
     houveErro:              boolean;
     mensagemErro:           string;
     totalFilmesEncontrados: number;
     filmes:                 Filme[] ;
-}
-
-export class RespPostUsuario {
-  houveErro: boolean;
-  mensagemErro: string;
 }
 
 export class RespPutFilme {
@@ -26,4 +22,19 @@ export class RespPostFilme {
 export class RespDelFilme {
   houveErro: boolean;
   mensagemErro: string;
+}
+/*
+*   Interfaces relacionadas a usuários
+*/
+
+
+export class RespPostUsuario {
+  houveErro: boolean;
+  mensagemErro: string;
+}
+
+export class RespPostAutenticacao {
+  houveErro:    boolean;
+  mensagemErro: string;
+  usuario:      Usuario;
 }
