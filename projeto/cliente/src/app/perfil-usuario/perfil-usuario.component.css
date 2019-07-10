@@ -8,3 +8,56 @@
   background: white;
   padding-bottom: 50px;
 }
+
+.edicao-data {
+  width: 500px;
+}
+.data-inicial {
+  display: inline;
+}
+.edicao-data span {
+  margin-right: 10px;
+}
+
+.edicao-data input {
+  display: inline;
+  width: 160px;
+}
+.nova-data {
+  float: right;
+}
+
+/* Configuração de sexo */
+.edicao-sexo {
+  width: 500px;
+}
+.edicao-sexo select {
+
+  display: inline;
+  width: 160px;
+}
+
+.novo-sexo {
+  float: right;
+
+}
+
+.edicao-sexo span {
+  margin-left: 40px;
+  margin-right: 5px;
+}
+
+/* Exibição do perfil */
+.exibicao-perfil h1{
+  font-size: 40px;
+  margin-bottom: 50px;
+}
+.botado-editar {
+  float:right;
+  display: inline;
+}
+.info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}

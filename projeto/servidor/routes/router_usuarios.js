@@ -77,7 +77,7 @@ router.post('/autenticacao', function(req, res, next) {
             
             senha_dada = req.body.login.senha;
             if(usuario.login.senha != senha_dada){
-                response.mensagem = "Senha incorreta";
+                response.mensagemErro = "Senha incorreta";
                 response.houveErro = true;                
                 console.error(mensagem)
             }
@@ -146,8 +146,9 @@ router.post('/', function(req, res, next) {
 
 /*PUT/usuarios/login - Altera os dados do usuário*/
 router.put('/username/:username', function(req, res, next) {
-    console.log("PUT /usuarios/login");
-	console.log("Usuário recebido:" + /*req.body*/ JSON.stringify(req.body));
+   console.log("PUT /usuarios/login");
+	console.log("Usuário:" + req.params.username);
+	console.log("body: " + JSON.stringify(req.body));
     
     var response = {
         "houveErro":              	false,
@@ -160,7 +161,7 @@ router.put('/username/:username', function(req, res, next) {
         res.send(response);
         return;
     } 
-    
+
     var query = {
         "login.username":	req.params.username
     };
@@ -178,32 +179,17 @@ router.put('/username/:username', function(req, res, next) {
             console.error(mensagem);
             response.houveErro = 	true;
             response.mensagemErro = mensagem;
-        } else {
-            usuario.login.senha = (req.body.login.senha !== "") ? req.body.login.senha : usuario.login.senha;
-            usuario.nome = (req.body.nome !== "") ? req.body.nome : usuario.nome ;
-            usuario.dataNascimento = (req.body.dataNascimento !== "") ? req.body.dataNascimento : usuario.dataNascimento;
-            usuario.sexo = (req.body.sexo !== "") ? req.body.sexo : usuario.sexo;
-            
-            var modified_user = {
-                "login":{
-                    "username": usuario.login.username, 
-                    "senha": usuario.login.senha
-                },
-                "nome": usuario.nome,
-                "dataNascimento": usuario.dataNascimento,
-                "sexo": usuario.sexo,
-                "moderador": usuario.moderador                
-            }
-            
-            modelUsuario.findOneAndUpdate(query, modified_user, function(err, updatedUser){
-                if(err){
-                    console.error(err);
-                    response.houveErro = true;
-                    response.mensagemErro = err;
-                } 
-            });
-        }
-        res.send(response);
+        } else {        		
+        		modelUsuario.updateOne(query, req.body, function(err, respUpdate) {
+					if(err) {
+						console.error(err);
+						response.houveErro = true;
+                  response.mensagemErro = err;
+					}
+					console.log(respUpdate);
+			});
+       }
+   	res.send(response);
     });
 });
 

@@ -21,8 +21,8 @@ Baseado nos Casos de Uso.
 
 - [x] Cadastra
 - [x] Autentica
-- [ ] Encerrar sessão
-- [ ] Alterar dados do perfil
+- [x] Encerrar sessão
+- [x] Alterar dados do perfil
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
@@ -39,7 +39,7 @@ Baseado nos Casos de Uso.
 - [x] Cadastra
 - [x] Autentica
 - [x] Encerrar sessão
-- [ ] Alterar dados do perfil
+- [x] Alterar dados do perfil
 - [x] Busca simples por filme
 - [ ] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme

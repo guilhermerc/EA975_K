@@ -65,6 +65,30 @@ export class UsuarioService {
     );
   }
 
+  public putUsuario(usuarioAlterado: Usuario, body: string): Observable<RespPostUsuario> {
+
+      var url = '/usuarios/username/' + this.usuario.login.username;
+
+      console.log("body dentro do put:" + body);
+
+      return this.http.put<RespPostUsuario>(url, body, httpOptions).
+      pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        tap(resposta => {
+
+          if (!resposta.houveErro) {
+
+            console.log("user do serviço:" + JSON.stringify(this.usuario));
+            console.log("user do parametro:" + JSON.stringify(usuarioAlterado));
+
+
+            // Atualiza variável usuário e os observers.
+            this.atualizaUsuario(usuarioAlterado);
+          }
+        }));
+  }
+
+
   public logout(): Observable<RespDelUsuario> {
     console.log('Logout no usuarioService');
 
@@ -74,7 +98,7 @@ export class UsuarioService {
     pipe(
       // Com tap podemos pegar a resposta antes dela ser retornada.
       tap(resposta => {
-      
+
         if (!resposta.houveErro) {
           // Atualiza variável usuário e os observers.
           this.atualizaUsuario(null);
@@ -84,7 +108,7 @@ export class UsuarioService {
   );
   }
 
-  private atualizaUsuario(novoUsuario: Usuario) {
+  public atualizaUsuario(novoUsuario: Usuario) { // TODO: Sem servidor deixar private
 
     if (this.usuario != novoUsuario) {
       console.log('Atualização de usuário para: ' + novoUsuario);
@@ -97,7 +121,7 @@ export class UsuarioService {
   }
 
   getUser(): Usuario {
-    console.log("Usuário retornado em getUser: " + this.usuario);
+    console.log("Usuário retornado em getUser: " + JSON.stringify(this.usuario));
     return this.usuario;
   }
 }

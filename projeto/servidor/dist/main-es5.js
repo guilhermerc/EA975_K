@@ -118,7 +118,7 @@ module.exports = "<div class=\"navbar\">\n    <!-- logo-->\n    <a class=\"image
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h1>Edição de Perfil</h1><br>\n  <form (ngSubmit)=\"atualizarDados()\" #formsUsuario=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"nome\">Nome</label>\n      <input type=\"text\" class=\"form-control\" id=\"nome\" required\n      [(ngModel)]=\"usuario.nome\" name=\"nome\"\n      #nome=\"ngModel\">\n      <div [hidden]=\"nome.valid || nome.pristine\"\n      class=\"alert alert-danger\">\n      Nome é obrigatório\n      </div>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"username\">Nomde de Usuário</label>\n      <input type=\"text\" class=\"form-control\" id=\"username\" required\n      [(ngModel)]=\"usuario.login.username\" name=\"username\"\n      #username=\"ngModel\">\n      <div [hidden]=\"username.valid || username.pristine\"\n      class=\"alert alert-danger\">\n      username é obrigatório\n      </div>\n    </div>\n\n\n    <div id=\"inline-forms\">\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"data\">Data de Nascimento</label>\n        <input type=\"date\" class=\"form-control\" id=\"data\" required\n        [(ngModel)]=\"usuario.dataNascimento\" name=\"data\" #dataNascimento=\"ngModel\">\n        <div [hidden]=\"dataNascimento.valid || dataNascimento.pristine\"\n        class=\"alert alert-danger\">\n        Data de nascimento é obrigatório\n        </div>\n      </div>\n\n      <div class=\"form-group\" id=\"campo\">\n        <label for=\"sexo\">Sexo</label>\n        <select class=\"form-control\" id=\"sexo\" required\n        [(ngModel)]=\"usuario.sexo\" name= \"sexo\">\n          <option *ngFor=\"let sexo of sexos\" [value]=\"sexo\">{{sexo}}</option>\n        </select>\n      </div>\n    </div>\n\n\n\n    <button type=\"submit\" class=\"btn btn-success\"\n    [disabled]=\"!formsUsuario.form.valid\">Registrar</button>\n\n  </form>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"usuario\">\n<div class=\"exibicao-perfil\" *ngIf=\"!estaEditando\">\n  <button type=\"button\" class=\"botado-editar \"(click)=editarPerfile() name=\"button\">Editar Perfil</button>\n\n  <h1>Perfil de Usuário</h1>\n  <div class=\"info\">\n    Nome de Usuário: {{usuario.login.username}}\n  </div>\n\n  <div class=\"info\">\n    Nome: {{usuario.nome}}\n  </div>\n\n  <div class=\"info\">\n    Data de Nascimento:\n    {{ usuario.dataNascimento | date: 'dd/MMM/yyyy' }}\n  </div>\n\n  <div class=\"info\">\n    Sexo: {{usuario.sexo}}\n  </div>\n  <br><br><br><br><br><br><br><br><br><br>\n</div>\n\n  <div class=\"\" *ngIf=\"estaEditando\">\n    <h1>Edição de Perfil</h1><br>\n    <form (ngSubmit)=\"atualizarDados()\" #formsUsuario=\"ngForm\">\n\n      <div class=\"form-group\">\n        <label for=\"username\">Nome de Usuário</label><br>\n        <span id=\"username\">{{usuario.login.username}}</span>\n      </div>\n\n      <div class=\"form-group\">\n        <label for=\"nome\">Nome</label>\n        <input type=\"text\" class=\"form-control\" id=\"nome\" required\n        [(ngModel)]=\"usuario.nome\" name=\"nome\"\n        #nome=\"ngModel\">\n        <div [hidden]=\"nome.valid || nome.pristine\"\n        class=\"alert alert-danger\">\n        Nome é obrigatório\n        </div>\n      </div>\n\n      <!--Data de nascimento-->\n      <div class=\"form-group\" id=\"dataDeNascimento\">\n        <label for=\"dataDeNascimento\">Data de Nascimento</label><br>\n            <input type=\"date\" class=\"form-control\" id=\"dataDeNascimento\" value=\"2017-06-01\" required\n            [(ngModel)]=\"usuario.dataNascimento\" name=\"dataDeNascimento\">\n      </div>\n\n\n        <div class=\"form-group\" id=\"campo\">\n          <label for=\"sexo\">Sexo</label>\n          <div class=\"edicao-sexo\">\n            Sexo atual: <b>{{usuarioOriginal.sexo}}</b>\n            <div class=\"novo-sexo\">\n              <span>Alterar:</span>\n              <select class=\"form-control\" id=\"sexo\"\n              [(ngModel)]=\"usuario.sexo\" name= \"sexo\">\n                <option *ngFor=\"let sexo of sexos\" [value]=\"sexo\">{{sexo}}</option>\n              </select>\n            </div>\n\n          </div>\n        </div>\n\n        <div class=\"form-group\">\n          <label for=\"senha\">Nova Senha</label>\n          <input type=\"password\" class=\"form-control\" id=\"senha\"\n          [(ngModel)]=\"novaSenha\" name=\"senha\" pattern=\"(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\"\n          #senha=\"ngModel\">\n          <div [hidden]=\"senha.valid || senha.pristine\"\n          class=\"alert alert-danger\">\n          A senha deve possuir no mímino 8 caracteres.<br>\n          Destes pelo menos uma letra maíuscula, uma minúscula e um número.\n          </div>\n        </div>\n\n\n        <div class=\"form-group\">\n          <label for=\"repeticaoSenha\">Repetição da Nova Senha</label>\n          <input type=\"password\" class=\"form-control\" id=\"repeticaoSenha\"\n          [(ngModel)]=\"repeticaoNovaSenha\" name=\"repeticaoSenha\"\n          #repeticaoDeSenha=\"ngModel\">\n          <div [hidden]=\"repeticaoDeSenha.valid || repeticaoDeSenha.pristine\"\n          class=\"alert alert-danger\">\n          Senha é obrigatória\n          </div>\n          <div class=\"mensagem\" *ngIf=\"novaSenha != repeticaoNovaSenha\"\n          style=\"color: red; margin-bottom: 20px\">\n            Senhas não coincidem.\n          </div>\n        </div>\n\n\n\n\n        <div class=\"form-group\">\n          <label for=\"senhaOriginal\">Para salvar as mudanças digite a senha atual</label>\n          <input type=\"password\" class=\"form-control\" id=\"senhaOriginal\" required\n          [(ngModel)]=\"senhaDigitada\" name=\"senhaOriginal\"\n          #senhaOriginal=\"ngModel\">\n          <div [hidden]=\"senhaOriginal.valid || senhaOriginal.pristine\"\n          class=\"alert alert-danger\">\n          Senha é obrigatória\n          </div>\n        </div>\n\n      <div class=\"mensagem\" *ngIf=\"mensagemErro\"\n      style=\"color: red; margin-bottom: 20px\">\n        {{mensagemErro}}\n      </div>\n\n      <button type=\"submit\" class=\"btn btn-success\"\n      [disabled]=\"!formsUsuario.form.valid || novaSenha != repeticaoNovaSenha\">\n      Salvar Mudanças</button>\n\n    </form>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -376,6 +376,19 @@ var AutenticacaoComponent = /** @class */ (function () {
     }
     AutenticacaoComponent.prototype.ngOnInit = function () {
     };
+    AutenticacaoComponent.prototype.loginFake = function () {
+        var usuario = {
+            login: {
+                username: "admin",
+                senha: "admin"
+            },
+            nome: "marcelo",
+            dataNascimento: new Date("1994-07-19"),
+            moderador: false,
+            sexo: "masculino"
+        };
+        this.usuarioService.atualizaUsuario(usuario);
+    };
     AutenticacaoComponent.prototype.login = function () {
         var _this = this;
         console.log('estou em login');
@@ -389,6 +402,7 @@ var AutenticacaoComponent = /** @class */ (function () {
             }
             else {
                 // Exibe mensagem de erro
+                console.error(resposta.mensagemErro);
                 _this.mensageDeErro = resposta.mensagemErro;
             }
         });
@@ -1430,7 +1444,7 @@ var NavbarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".container {\n  padding-left: 20px;\n  padding-right: 20px;\n  padding-top: 20px;\n  padding-bottom: 0px;\n\n  width: 900px;\n  background: white;\n  padding-bottom: 50px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGVyZmlsLXVzdWFyaW8vcGVyZmlsLXVzdWFyaW8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLG1CQUFtQjs7RUFFbkIsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixvQkFBb0I7QUFDdEIiLCJmaWxlIjoic3JjL2FwcC9wZXJmaWwtdXN1YXJpby9wZXJmaWwtdXN1YXJpby5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNvbnRhaW5lciB7XG4gIHBhZGRpbmctbGVmdDogMjBweDtcbiAgcGFkZGluZy1yaWdodDogMjBweDtcbiAgcGFkZGluZy10b3A6IDIwcHg7XG4gIHBhZGRpbmctYm90dG9tOiAwcHg7XG5cbiAgd2lkdGg6IDkwMHB4O1xuICBiYWNrZ3JvdW5kOiB3aGl0ZTtcbiAgcGFkZGluZy1ib3R0b206IDUwcHg7XG59XG4iXX0= */"
+module.exports = ".container {\n  padding-left: 20px;\n  padding-right: 20px;\n  padding-top: 20px;\n  padding-bottom: 0px;\n\n  width: 900px;\n  background: white;\n  padding-bottom: 50px;\n}\n\n.edicao-data {\n  width: 500px;\n}\n\n.data-inicial {\n  display: inline;\n}\n\n.edicao-data span {\n  margin-right: 10px;\n}\n\n.edicao-data input {\n  display: inline;\n  width: 160px;\n}\n\n.nova-data {\n  float: right;\n}\n\n/* Configuração de sexo */\n\n.edicao-sexo {\n  width: 500px;\n}\n\n.edicao-sexo select {\n\n  display: inline;\n  width: 160px;\n}\n\n.novo-sexo {\n  float: right;\n\n}\n\n.edicao-sexo span {\n  margin-left: 40px;\n  margin-right: 5px;\n}\n\n/* Exibição do perfil */\n\n.exibicao-perfil h1{\n  font-size: 40px;\n  margin-bottom: 50px;\n}\n\n.botado-editar {\n  float:right;\n  display: inline;\n}\n\n.info {\n  margin-top: 20px;\n  margin-bottom: 20px;\n  font-size: 20px;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGVyZmlsLXVzdWFyaW8vcGVyZmlsLXVzdWFyaW8uY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGtCQUFrQjtFQUNsQixtQkFBbUI7RUFDbkIsaUJBQWlCO0VBQ2pCLG1CQUFtQjs7RUFFbkIsWUFBWTtFQUNaLGlCQUFpQjtFQUNqQixvQkFBb0I7QUFDdEI7O0FBRUE7RUFDRSxZQUFZO0FBQ2Q7O0FBQ0E7RUFDRSxlQUFlO0FBQ2pCOztBQUNBO0VBQ0Usa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsZUFBZTtFQUNmLFlBQVk7QUFDZDs7QUFDQTtFQUNFLFlBQVk7QUFDZDs7QUFFQSx5QkFBeUI7O0FBQ3pCO0VBQ0UsWUFBWTtBQUNkOztBQUNBOztFQUVFLGVBQWU7RUFDZixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZOztBQUVkOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLGlCQUFpQjtBQUNuQjs7QUFFQSx1QkFBdUI7O0FBQ3ZCO0VBQ0UsZUFBZTtFQUNmLG1CQUFtQjtBQUNyQjs7QUFDQTtFQUNFLFdBQVc7RUFDWCxlQUFlO0FBQ2pCOztBQUNBO0VBQ0UsZ0JBQWdCO0VBQ2hCLG1CQUFtQjtFQUNuQixlQUFlO0FBQ2pCIiwiZmlsZSI6InNyYy9hcHAvcGVyZmlsLXVzdWFyaW8vcGVyZmlsLXVzdWFyaW8uY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXIge1xuICBwYWRkaW5nLWxlZnQ6IDIwcHg7XG4gIHBhZGRpbmctcmlnaHQ6IDIwcHg7XG4gIHBhZGRpbmctdG9wOiAyMHB4O1xuICBwYWRkaW5nLWJvdHRvbTogMHB4O1xuXG4gIHdpZHRoOiA5MDBweDtcbiAgYmFja2dyb3VuZDogd2hpdGU7XG4gIHBhZGRpbmctYm90dG9tOiA1MHB4O1xufVxuXG4uZWRpY2FvLWRhdGEge1xuICB3aWR0aDogNTAwcHg7XG59XG4uZGF0YS1pbmljaWFsIHtcbiAgZGlzcGxheTogaW5saW5lO1xufVxuLmVkaWNhby1kYXRhIHNwYW4ge1xuICBtYXJnaW4tcmlnaHQ6IDEwcHg7XG59XG5cbi5lZGljYW8tZGF0YSBpbnB1dCB7XG4gIGRpc3BsYXk6IGlubGluZTtcbiAgd2lkdGg6IDE2MHB4O1xufVxuLm5vdmEtZGF0YSB7XG4gIGZsb2F0OiByaWdodDtcbn1cblxuLyogQ29uZmlndXJhw6fDo28gZGUgc2V4byAqL1xuLmVkaWNhby1zZXhvIHtcbiAgd2lkdGg6IDUwMHB4O1xufVxuLmVkaWNhby1zZXhvIHNlbGVjdCB7XG5cbiAgZGlzcGxheTogaW5saW5lO1xuICB3aWR0aDogMTYwcHg7XG59XG5cbi5ub3ZvLXNleG8ge1xuICBmbG9hdDogcmlnaHQ7XG5cbn1cblxuLmVkaWNhby1zZXhvIHNwYW4ge1xuICBtYXJnaW4tbGVmdDogNDBweDtcbiAgbWFyZ2luLXJpZ2h0OiA1cHg7XG59XG5cbi8qIEV4aWJpw6fDo28gZG8gcGVyZmlsICovXG4uZXhpYmljYW8tcGVyZmlsIGgxe1xuICBmb250LXNpemU6IDQwcHg7XG4gIG1hcmdpbi1ib3R0b206IDUwcHg7XG59XG4uYm90YWRvLWVkaXRhciB7XG4gIGZsb2F0OnJpZ2h0O1xuICBkaXNwbGF5OiBpbmxpbmU7XG59XG4uaW5mbyB7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1ib3R0b206IDIwcHg7XG4gIGZvbnQtc2l6ZTogMjBweDtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -1453,22 +1467,25 @@ __webpack_require__.r(__webpack_exports__);
 var PerfilUsuarioComponent = /** @class */ (function () {
     function PerfilUsuarioComponent(usuarioService) {
         this.usuarioService = usuarioService;
+        this.usuarioOriginal = this.usuario;
+        this.estaEditando = false;
+        this.sexos = ['Masculino', 'Feminino', 'Outro'];
+        this.novaSenha = "";
+        this.repeticaoNovaSenha = "";
+        console.log("construtor");
         this.observerUsuario();
     }
-    /*
-    login: {
-            username:   String,
-            senha:      String
-        },
-        nome:           String,
-        dataNascimento: String,
-        sexo:           String,
-        moderador:      Boolean
-    */
+    ;
     PerfilUsuarioComponent.prototype.ngOnInit = function () {
+        console.log("init");
         var usuario = this.usuarioService.getUser();
         if (usuario != null) {
-            this.usuario = usuario;
+            // Faz uma copia do usuário para caso vá editá-lo.
+            this.usuario = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, usuario);
+            //console.log("copia feita:" + JSON.stringify(this.usuario));// TODO: apagar
+        }
+        else {
+            console.error("Usuário não encontrado em perfile-usuario");
         }
     };
     /**
@@ -1489,8 +1506,50 @@ var PerfilUsuarioComponent = /** @class */ (function () {
             }
         });
     };
+    PerfilUsuarioComponent.prototype.editarPerfile = function () {
+        // Faz uma cópia do usuário para comparar depois
+        this.usuarioOriginal = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.usuario);
+        // Inicializa as variáveis de senha
+        this.novaSenha = "";
+        this.repeticaoNovaSenha = "";
+        ;
+        this.senhaDigitada = "";
+        this.estaEditando = true;
+    };
     PerfilUsuarioComponent.prototype.atualizarDados = function () {
+        var _this = this;
         console.log(JSON.stringify(this.usuario));
+        this.mensagemErro = null;
+        if (this.senhaDigitada != this.usuarioOriginal.login.senha) {
+            this.mensagemErro = "Senha incorreta, tente novamente.";
+            return;
+        }
+        var body = {};
+        if (this.usuario.nome != this.usuarioOriginal.nome) {
+            body["nome"] = this.usuario.nome;
+        }
+        if (this.usuario.dataNascimento != this.usuarioOriginal.dataNascimento) {
+            body["dataNascimento"] = this.usuario.dataNascimento;
+        }
+        if (this.usuario.sexo != this.usuarioOriginal.sexo) {
+            body["sexo"] = this.usuario.sexo;
+        }
+        // Se a senha não foi alterada então this.novaSenha = ""
+        if (this.novaSenha != "" && this.novaSenha != this.usuarioOriginal.login.senha) {
+            // registra nova senha
+            this.usuario.login.senha = this.novaSenha;
+            var login = {};
+            login["username"] = this.usuario.login.username;
+            login["senha"] = this.novaSenha;
+            body["login"] = login;
+        }
+        var bodyFinal = JSON.stringify(body);
+        console.log("Usuário Final" + JSON.stringify(this.usuario)); // TODO: apagar
+        console.log("body que será enviado:" + bodyFinal);
+        this.usuarioService.putUsuario(this.usuario, bodyFinal).subscribe(function (resposta) {
+            console.log("Resposta do putUsuario: " + JSON.stringify(resposta));
+            _this.estaEditando = false;
+        });
     };
     PerfilUsuarioComponent.ctorParameters = function () { return [
         { type: _usuario_service__WEBPACK_IMPORTED_MODULE_2__["UsuarioService"] }
@@ -1763,6 +1822,22 @@ var UsuarioService = /** @class */ (function () {
             }
         }));
     };
+    UsuarioService.prototype.putUsuario = function (usuarioAlterado, body) {
+        var _this = this;
+        var url = '/usuarios/username/' + this.usuario.login.username;
+        console.log("body dentro do put:" + body);
+        return this.http.put(url, body, httpOptions).
+            pipe(
+        // Com tap podemos pegar a resposta antes dela ser retornada.
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (resposta) {
+            if (!resposta.houveErro) {
+                console.log("user do serviço:" + JSON.stringify(_this.usuario));
+                console.log("user do parametro:" + JSON.stringify(usuarioAlterado));
+                // Atualiza variável usuário e os observers.
+                _this.atualizaUsuario(usuarioAlterado);
+            }
+        }));
+    };
     UsuarioService.prototype.logout = function () {
         var _this = this;
         console.log('Logout no usuarioService');
@@ -1788,7 +1863,7 @@ var UsuarioService = /** @class */ (function () {
         }
     };
     UsuarioService.prototype.getUser = function () {
-        console.log("Usuário retornado em getUser: " + this.usuario);
+        console.log("Usuário retornado em getUser: " + JSON.stringify(this.usuario));
         return this.usuario;
     };
     UsuarioService.ctorParameters = function () { return [

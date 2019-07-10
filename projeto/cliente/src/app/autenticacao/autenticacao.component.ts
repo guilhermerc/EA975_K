@@ -26,6 +26,20 @@ export class AutenticacaoComponent implements OnInit {
   ngOnInit() {
   }
 
+  loginFake() {
+    var usuario = {
+      login: {
+        username: "admin",
+        senha:    "admin"
+      },
+      nome: "marcelo",
+      dataNascimento: new Date("1994-07-19"),
+      moderador: false,
+      sexo: "masculino"
+    };
+    this.usuarioService.atualizaUsuario(usuario);
+  }
+
   login() {
     console.log('estou em login');
 
@@ -39,6 +53,7 @@ export class AutenticacaoComponent implements OnInit {
         }
         else {
           // Exibe mensagem de erro
+          console.error(resposta.mensagemErro);
           this.mensageDeErro = resposta.mensagemErro;
         }
     });
