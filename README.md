@@ -24,10 +24,10 @@ Baseado nos Casos de Uso.
 - [x] Encerrar sessão
 - [x] Alterar dados do perfil
 - [x] Busca simples por filme
-- [ ] Busca combinada por filme (??)
+- [?] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
-- [ ] Opinar sobre um filme
-- [ ] Editar opinião sobre um filme
+- [x] Opinar sobre um filme
+- [x] Editar opinião sobre um filme
 - [x] Remover opinião sobre um filme
 - [x] Inserção de um filme na base de dados
 - [x] Edição de um filme na base de dados
@@ -41,7 +41,7 @@ Baseado nos Casos de Uso.
 - [x] Encerrar sessão
 - [x] Alterar dados do perfil
 - [x] Busca simples por filme
-- [ ] Busca combinada por filme (??)
+- [?] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme
@@ -58,7 +58,7 @@ Baseado nos Casos de Uso.
 - [x] Exibir informações do usuário
 - [x] Alterar informações do usuário
 - [x] Busca simples por filme
-- [x] Busca combinada por filme (??)
+- [?] Busca combinada por filme (??)
 - [x] Exibir informações sobre um filme
 - [x] Opinar sobre um filme
 - [x] Editar opinião sobre um filme

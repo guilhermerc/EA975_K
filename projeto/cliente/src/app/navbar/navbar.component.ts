@@ -15,8 +15,8 @@ export class NavbarComponent implements OnInit {
     {chave: "titulo", rotulo: "Título"},
     {chave: "diretores", rotulo: "Direção"},
     {chave: "elenco", rotulo: "Elenco"},
-    {chave: "ano", rotulo: "Ano"},
-    {chave: "todos", rotulo: "Todos"}
+    {chave: "ano", rotulo: "Ano"}
+    //{chave: "todos", rotulo: "Todos"}
   ];
 
   barraDeBusca: String = '';

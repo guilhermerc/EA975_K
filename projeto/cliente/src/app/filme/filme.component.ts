@@ -1,15 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Filme } from '../filme';
+import { Filme, Critica } from '../filme';
 import { FilmeService } from '../filme.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CriticaComponent } from '../critica/critica.component';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
-import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
-import { RespGetById }  from '../tipos/interfaces-servidor';
+import { RespGetFilmeById }  from '../tipos/interfaces-servidor';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -20,17 +19,7 @@ import { Subject } from 'rxjs';
 
 export class FilmeComponent implements OnInit {
 
-  filme: Filme = {
-    id: "2",
-    titulo: "Vingadores: Ultimato",
-    ano: 2019,
-    diretores: [{nome: "Russo1"}, {nome: "Russo2"}],
-    elenco: [{nome: "Robert Downey Jr"}, {nome: "Scarlett Johansson"}],
-    criticas: [{username: "guilherme", data: "12/12/2012", comentario: "adorei, achei uma porcaria", nota: 9},
-                  {username: "marcelo", data: "12/12/2012", comentario: "adorei, mas nem tanto", nota: 8}],
-    imagens: ["/assets/images/vingadores_0.jpg"],
-    sinopse: "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos.Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco."
-  };
+  filme: Filme;
   usuarioModerador: boolean = false;
   usuario: Usuario;
 
@@ -164,9 +153,13 @@ export class FilmeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(filme => {
-      console.log('Fechou caixa de dialogo');
-    
-      this.carregaDadosDoFilme(filme);
+      console.log('Fechou caixa de dialogo e recebi a resposta:'+ JSON.stringify(filme));
+
+      // Se o usuário fechou  a caixa sem mexer nas críticas ou se ele foi direcionado
+      // pra página de login não chegará um filme nesse retorno.
+      if (filme != null) {
+        this.carregaDadosDoFilme(filme);
+      }
 
     });
   }

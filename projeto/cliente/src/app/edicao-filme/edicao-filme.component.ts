@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Filme } from '../filme';
-import { Critica } from '../tipos/critica';
+import { Filme, Critica } from '../filme';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FilmeService } from '../filme.service';
-import { RespGetById }  from '../tipos/interfaces-servidor';
+import { RespGetFilmeById }  from '../tipos/interfaces-servidor';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UsuarioService } from '../usuario.service';
@@ -91,7 +90,7 @@ export class EdicaoFilmeComponent implements OnInit {
   }
 
   // Essa função carrega os dados do filme na página
-  carregaDadosDoFilme(resposta: RespGetById) {
+  carregaDadosDoFilme(resposta: RespGetFilmeById) {
 
     if (!resposta.houveErro) {
 

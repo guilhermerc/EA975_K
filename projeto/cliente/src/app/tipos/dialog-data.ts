@@ -1,6 +1,5 @@
-import { Critica } from './critica';
 import { Usuario } from '../usuario';
-import { Filme } from '../filme';
+import { Filme, Critica } from '../filme';
 
 export interface DialogData {
   filme: Filme;

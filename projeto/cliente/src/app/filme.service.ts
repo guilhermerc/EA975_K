@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Filme } from './filme';
+import { Filme, Critica } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespDelFilme, RespGetById}  from './tipos/interfaces-servidor';
-import { RespDelCritica }  from './tipos/interfaces-servidor';
-import { Critica } from './tipos/critica';
+import { RespGetFilmes, RespGetFilmeById, RespPutFilme, RespPostFilme, RespDelFilme}  from './tipos/interfaces-servidor';
+import { RespDelCritica, RespPostCritica, RespPutCritica}  from './tipos/interfaces-servidor';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,17 +27,24 @@ export class FilmeService {
   *   2. "filtro/informação do Filme
   *   3. "id/id do filme"
   */
-  getFilme(identificador: string):Observable<RespostaServidorFilmes> {
-    var router = '/filmes/' + identificador;
+  getFilmes(filtro: string, conteudoDeBusca: string):Observable<RespGetFilmes> {
 
-    return this.http.get<RespostaServidorFilmes>(router);
+    var url;
+
+    if (conteudoDeBusca == "") {
+      url = '/filmes/';
+    } else {
+      url = `/filmes/${filtro}/${conteudoDeBusca}`;
+    }
+
+    return this.http.get<RespGetFilmes>(url, httpOptions);
   }
 
-  getFilmeById(id: string): Observable<RespGetById> {
+  getFilmeById(id: string): Observable<RespGetFilmeById> {
 
     var url = '/filmes/id/' + id;
 
-    return this.http.get<RespGetById>(url, httpOptions);
+    return this.http.get<RespGetFilmeById>(url, httpOptions);
   }
 
   postFilme(filme: Filme): Observable<RespPostFilme>  {
@@ -61,18 +67,22 @@ export class FilmeService {
     var url = '/filmes/id/' + idFilme;
     return this.http.delete<RespDelFilme>(url, httpOptions);
   }
-  // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  postCritica(idFilme: string, critica: Critica): Observable<RespPostFilme> {
-    var router = '/filmes/id/' + idFilme;
+  /*
+  Seção de Críticas
+  */
 
-    return this.http.post<RespPostFilme>(router, critica);
+  postCritica(idFilme: string, critica: Critica): Observable<RespPostCritica> {
+
+    var url = `/filmes/id/${idFilme}/criticas`;
+
+    return this.http.post<RespPostCritica>(url, critica, httpOptions);
   }
 
-  // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  putCritica(idFilme: string, username: string, critica: Critica): Observable<RespPostFilme> {
-    var router = '/filmes/criticas/' + idFilme + '/' + username;
+  putCritica(idFilme: string, critica: Critica): Observable<RespPutCritica> {
 
-    return this.http.put<RespPostFilme>(router, critica);
+    var url = `/filmes/id/${idFilme}/criticas`;
+
+    return this.http.put<RespPutCritica>(url, critica, httpOptions);
   }
 
   deleteCritica(idFilme: string, username: string): Observable<RespDelCritica> {

@@ -6,8 +6,6 @@
 
 button {
   margin-top: 20px;
-  width: 100px;
-  padding: 10px 20px;
 }
 
 textarea {
@@ -18,12 +16,4 @@ textarea {
   margin: auto;
   width: 400px;
   margin-bottom: 30px;
-}
-.botao-remover-critica {
-  width: auto;
-  border-color: red;
-}
-.botao-critica {
-  width: auto;
-
 }

@@ -15,22 +15,36 @@
 
     <div class="form-group" id="nota">
       <label for="nota">Qual nota você dá pra esse filme?</label>
-      <select class="form-control" id="nota"
-      [(ngModel)]="critica.nota" name= "nota">
+      <select class="form-control" id="nota" required
+      [(ngModel)]="critica.nota" #nota="ngModel" name= "nota">
         <option *ngFor="let opcaoNota of notasPossiveis" [value]="opcaoNota">{{opcaoNota}}</option>
+
       </select>
     </div>
+    <div [hidden]="nota.valid || nota.ng-untouched"
+    class="alert alert-danger">
+      Você precisar dar uma nota para enviar sua crítica.
+    </div>
+
 
     <div class="form-group">
       <label for="comentario">Escreva uma sua crítica</label>
-      <textarea name="name" [(ngModel)]="critica.comentario" rows="4"
-      style="margin-right: 0"></textarea>
+      <textarea name="comentario" [(ngModel)]="critica.comentario" rows="4" required
+      #comentario="ngModel" style="margin-right: 0" autofocus></textarea>
+    </div>
+    <div [hidden]="comentario.valid || comentario.pristine"
+    class="alert alert-danger">
+      Você precisar fazer um comentário para enviar sua crítica.
     </div>
 
-    <button *ngIf="!primeiraVez" type="submit" class="botao-critica">Atualizar Crítica</button>
-    <button *ngIf="primeiraVez"type="submit" class="botao-critica">Adicionar Crítica</button>
+    <button *ngIf="!primeiraVez" type="submit" class="btn btn-success"
+    [disabled]="!formsUsuario.form.valid">Atualizar Crítica</button>
+
+    <button *ngIf="primeiraVez"type="submit" class="btn btn-success"
+    [disabled]="!formsUsuario.form.valid">Adicionar Crítica</button>
+
     <br><button *ngIf="!primeiraVez" type="button" (click)="removerCritica()"
-     class="botao-remover-critica">Remover sua crítica</button>
+     class="btn btn-danger">Remover Crítica</button>
 
   </form>
 

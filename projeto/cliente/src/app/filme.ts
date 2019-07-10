@@ -8,12 +8,14 @@ export class Filme {
 	elenco: {
 		nome: 	string
 	}[];
-  criticas: {
-		username: string,
-		data: string,
-		comentario: string,
-		nota: Number
-	}[];
+  criticas: Critica[];
 	sinopse: string;
 	imagens?: string[];
+}
+
+export class Critica {
+    username: string;
+    data: Date;
+    comentario: string;
+    nota: Number;
 }

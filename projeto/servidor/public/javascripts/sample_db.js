@@ -26,20 +26,7 @@ exports.create = function() {
 		],
 		"sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.",
 		"nota":	0,
-		"criticas": [
-			{
-				"username": 	"guilherme",
-				"data": 		"00/00/0000",
-				"comentario": "Oloquinho meu",
-				"nota": 2
-			},
-			{
-				"username": 	"marcelo",
-				"data": 		"11/11/1111",
-				"comentario": "Um grande pedaço de merda",
-				"nota": 10
-			}
-		]
+		"criticas": []
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
@@ -59,20 +46,7 @@ exports.create = function() {
 		],
 		"sinopse": "O CARA É UM LEÃO E É REI",
 		"nota":	0,
-		"criticas": [
-			{
-				"username": 	"guilherme",
-				"data": 		"00/00/0000",
-				"comentario": 	"Gostei",
-				"nota": 2
-			},
-			{
-				"username": 	"marcelo",
-				"data": 		"11/11/1994",
-				"comentario": 	"Esperando live action desde 1994",
-				"nota": 10
-			}
-		]
+		"criticas": []
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
@@ -92,20 +66,7 @@ exports.create = function() {
 		],
 		"sinopse": "EITA BRUXINHA...",
 		"nota":	0,
-		"criticas": [
-			{
-				"username": 	"guilherme",
-				"data": 		"00/00/0000",
-				"comentario": 	"A vara quer raba",
-				"nota": 2
-			},
-			{
-				"username": 	"marcelo",
-				"data": 		"01/11/2019",
-				"comentario": 	"Muito diferente do livro",
-				"nota": 10
-			}
-		]
+		"criticas": []
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
