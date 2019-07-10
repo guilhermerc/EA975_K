@@ -544,26 +544,28 @@ let CriticaComponent = class CriticaComponent {
             this.filmeService.postCritica(this.filme.id, this.critica)
                 .subscribe(resposta => {
                 console.log('resposta do post da critica:' + JSON.stringify(resposta));
-                this.getFilmeAndClose();
+                //// TODO: senão tiver erro
+                this.dialogRef.close(resposta.filme);
             });
             // Senão faz put
         }
         else {
             this.filmeService.putCritica(this.filme.id, this.usuario.login.username, this.critica)
                 .subscribe(resposta => {
-                this.getFilmeAndClose();
+                console.log("Resposta do putCritica: " + JSON.stringify(resposta));
+                //// TODO: senão tiver erro
+                this.dialogRef.close(resposta.filme);
             });
         }
     }
     removerCritica() {
+        console.log("Estou em remover Critica");
         this.filmeService.deleteCritica(this.filme.id, this.usuario.login.username)
             .subscribe(resposta => {
-            this.getFilmeAndClose();
-        });
-    }
-    getFilmeAndClose() {
-        this.filmeService.getFilmeById(this.filme.id).subscribe(resposta => {
-            this.dialogRef.close(resposta);
+            console.log("Resposta do deleteCritica: " + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                this.dialogRef.close(resposta.filme);
+            }
         });
     }
 };
@@ -678,28 +680,20 @@ let EdicaoFilmeComponent = class EdicaoFilmeComponent {
         console.log('GET FILME EM EDIÇÃO' + this.route.snapshot.params.id);
         var id = this.route.snapshot.params.id;
         this.filmeService.getFilmeById(id).subscribe(resposta => {
+            console.log('resposta getFilmeById em edicao-filme:' + JSON.stringify(resposta));
             this.carregaDadosDoFilme(resposta);
         });
     }
     // Essa função carrega os dados do filme na página
     carregaDadosDoFilme(resposta) {
-        console.log('resposta do server:' + JSON.stringify(resposta));
         if (!resposta.houveErro) {
-            if (resposta.filmes.length > 0) {
-                this.filme = resposta.filmes[0];
-                console.log('achou um filme');
-                // Faz cópia de filme para comparar depois
-                this.clonarFilme();
-            }
-            else {
-                // TODO: Dispara ação quando não acha filme.
-                console.log("nenhumFilmeFoiEncontrado");
-            }
+            this.filme = resposta.filme;
+            // Faz cópia de filme para comparar depois
+            this.clonarFilme();
         }
         else {
-            // Houve erro
-            console.log("ERRO!");
-            console.log(resposta.mensagemErro);
+            // TODO: Dispara ação quando não acha filme.
+            console.error("Erro ao buscar filme por id em filme.component");
         }
     }
     removerAtor(nome) {
@@ -854,8 +848,8 @@ let FilmeService = class FilmeService {
         return this.http.get(router);
     }
     getFilmeById(id) {
-        var router = '/filmes/id/' + id;
-        return this.http.get(router);
+        var url = '/filmes/id/' + id;
+        return this.http.get(url, httpOptions);
     }
     postFilme(filme) {
         var url = '/filmes';
@@ -883,10 +877,9 @@ let FilmeService = class FilmeService {
         var router = '/filmes/criticas/' + idFilme + '/' + username;
         return this.http.put(router, critica);
     }
-    // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
     deleteCritica(idFilme, username) {
-        var router = '/filmes/criticas/' + idFilme + '/' + username;
-        return this.http.get(router);
+        var url = `/filmes/id/${idFilme}/criticas/${username}`;
+        return this.http.delete(url, httpOptions);
     }
     /**
        * Fonte: https://angular.io/tutorial/toh-pt6
@@ -1022,33 +1015,26 @@ let FilmeComponent = class FilmeComponent {
             this.usuarioModerador = this.usuario.moderador;
         }
     }
+    // Obtém filme pelo ido do servidor
     getFilme() {
         console.log('GET FILME' + this.route.snapshot.params.id);
-        var router = 'id/' + this.route.snapshot.params.id;
-        this.filmeService.getFilme(router).subscribe(resposta => {
-            this.carregaDadosDoFilme(resposta);
-        });
-    }
-    // Essa função carrega os dados do filme na página
-    carregaDadosDoFilme(resposta) {
-        console.log('resposta do server:' + JSON.stringify(resposta));
-        if (!resposta.houveErro) {
-            if (resposta.filmes.length > 0) {
-                this.filme = resposta.filmes[0];
-                console.log('achou um filme');
-                // Separa o comentario do usuario se ele existir
-                this.ajustaCriticas();
+        var id = this.route.snapshot.params.id;
+        this.filmeService.getFilmeById(id).subscribe(resposta => {
+            console.log("Resposta de getFilmeById em filme.component" + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                this.carregaDadosDoFilme(resposta.filme);
             }
             else {
                 // TODO: Dispara ação quando não acha filme.
-                console.log("nenhumFilmeFoiEncontrado");
+                console.error("Erro ao buscar filme por id em filme.component");
             }
-        }
-        else {
-            // Houve erro
-            console.log("ERRO!");
-            console.log(resposta.mensagemErro);
-        }
+        });
+    }
+    // Essa função carrega os dados do filme na página
+    carregaDadosDoFilme(filme) {
+        this.filme = filme;
+        // Separa o comentario do usuario se ele existir
+        this.ajustaCriticas();
     }
     /* Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
      *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
@@ -1066,12 +1052,11 @@ let FilmeComponent = class FilmeComponent {
     * Após isso, o vetor críticas está pronto para ser exibido.
     */
     getCriticaDoUsuario(username) {
-        var index = -1;
         var criticaDoUsuario = null;
         for (let critica of this.filme.criticas) {
             if (critica.username == username) {
                 // Encontra a posição da crítica e a remove do vetor
-                index = this.filme.criticas.indexOf(critica);
+                var index = this.filme.criticas.indexOf(critica);
                 criticaDoUsuario = this.filme.criticas.splice(index, 1)[0];
             }
         }
@@ -1091,14 +1076,9 @@ let FilmeComponent = class FilmeComponent {
             width: '500px',
             data: dados
         });
-        dialogRef.afterClosed().subscribe(resposta => {
+        dialogRef.afterClosed().subscribe(filme => {
             console.log('Fechou caixa de dialogo');
-            console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(resposta));
-            // atualiza os dados da página
-            // TODO: Uma possível otimização seria só atualizar as críticas
-            if (resposta != null) {
-                this.carregaDadosDoFilme(resposta);
-            }
+            this.carregaDadosDoFilme(filme);
         });
     }
 };

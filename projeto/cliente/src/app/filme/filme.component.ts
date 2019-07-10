@@ -9,7 +9,7 @@ import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 import { Critica } from '../tipos/critica';
 import { DialogData } from '../tipos/dialog-data';
-import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
+import { RespGetById }  from '../tipos/interfaces-servidor';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -89,36 +89,30 @@ export class FilmeComponent implements OnInit {
     }
   }
 
+  // Obtém filme pelo ido do servidor
   getFilme() {
     console.log('GET FILME' + this.route.snapshot.params.id);
-    var router = 'id/' + this.route.snapshot.params.id;
+    var id = this.route.snapshot.params.id;
 
-    this.filmeService.getFilme(router).subscribe(resposta => {
-      this.carregaDadosDoFilme(resposta);
+    this.filmeService.getFilmeById(id).subscribe(resposta => {
+      console.log("Resposta de getFilmeById em filme.component" + JSON.stringify(resposta));
+
+      if (!resposta.houveErro) {
+        this.carregaDadosDoFilme(resposta.filme);
+      } else {
+        // TODO: Dispara ação quando não acha filme.
+        console.error("Erro ao buscar filme por id em filme.component");
+      }
     });
   }
 
   // Essa função carrega os dados do filme na página
-  carregaDadosDoFilme(resposta: RespostaServidorFilmes) {
-    console.log('resposta do server:' + JSON.stringify(resposta));
+  carregaDadosDoFilme(filme: Filme) {
 
-    if (!resposta.houveErro) {
+      this.filme = filme;
 
-      if (resposta.filmes.length > 0) {
-        this.filme = resposta.filmes[0];
-        console.log('achou um filme');
-
-        // Separa o comentario do usuario se ele existir
-        this.ajustaCriticas();
-      } else {
-        // TODO: Dispara ação quando não acha filme.
-        console.log("nenhumFilmeFoiEncontrado");
-      }
-    } else {
-      // Houve erro
-      console.log("ERRO!");
-      console.log(resposta.mensagemErro)
-    }
+      // Separa o comentario do usuario se ele existir
+      this.ajustaCriticas();
   }
 
 
@@ -139,13 +133,13 @@ export class FilmeComponent implements OnInit {
   * Após isso, o vetor críticas está pronto para ser exibido.
   */
   getCriticaDoUsuario(username: String): Critica {
-    var index = -1;
+
     var criticaDoUsuario: Critica = null;
 
     for (let critica of this.filme.criticas) {
       if (critica.username == username) {
         // Encontra a posição da crítica e a remove do vetor
-        index = this.filme.criticas.indexOf(critica);
+        var index = this.filme.criticas.indexOf(critica);
         criticaDoUsuario = this.filme.criticas.splice(index, 1)[0];
       }
     }
@@ -169,15 +163,10 @@ export class FilmeComponent implements OnInit {
       data: dados
     });
 
-    dialogRef.afterClosed().subscribe(resposta => {
+    dialogRef.afterClosed().subscribe(filme => {
       console.log('Fechou caixa de dialogo');
-      console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(resposta));
-
-      // atualiza os dados da página
-      // TODO: Uma possível otimização seria só atualizar as críticas
-      if (resposta != null) {
-        this.carregaDadosDoFilme(resposta);
-      }
+    
+      this.carregaDadosDoFilme(filme);
 
     });
   }

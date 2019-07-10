@@ -79,8 +79,7 @@ router.get('/id/:id', function(req, res, next) {
 	var response = {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
-		"totalFilmesEncontrados":	0,
-		"filmes":                 	[]
+		"filme":                 	null
 	};
 	var query = {
 		"id":	req.params.id
@@ -94,8 +93,7 @@ router.get('/id/:id', function(req, res, next) {
 		} else if (filme == null) {
 			// 'response' já está pronto para ser enviado
 		} else {
-			response.totalFilmesEncontrados =	filme.length;
-			response.filmes =					[filme];
+			response.filme = filme;
 		}
 		res.send(response);
 	});
@@ -380,7 +378,7 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 	var response = {
 		"houveErro":		false,
 		"mensagemErro":		"",
-		"filme":			[]
+		"filme":				null
 	};
     
     if(checaAutenticacao(req, res) == 'unauthorized') {
@@ -410,7 +408,7 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 					console.log(err);
 				}
 			});
-			response.filme =	[filme];
+			response.filme =	filme;
 		}
 		res.send(response);
 	});

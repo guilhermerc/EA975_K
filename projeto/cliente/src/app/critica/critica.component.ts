@@ -76,31 +76,32 @@ export class CriticaComponent implements OnInit {
       this.filmeService.postCritica(this.filme.id, this.critica)
       .subscribe(resposta => {
         console.log('resposta do post da critica:' + JSON.stringify(resposta));
-        this.getFilmeAndClose();
+        //// TODO: senão tiver erro
+        this.dialogRef.close(resposta.filme);
       });
 
     // Senão faz put
     } else {
       this.filmeService.putCritica(this.filme.id, this.usuario.login.username,this.critica)
       .subscribe(resposta => {
-        this.getFilmeAndClose();
+
+        console.log("Resposta do putCritica: " + JSON.stringify(resposta));
+        //// TODO: senão tiver erro
+        this.dialogRef.close(resposta.filme);
       });
     }
   }
 
   removerCritica() {
+    console.log("Estou em remover Critica");
 
     this.filmeService.deleteCritica(this.filme.id, this.usuario.login.username)
     .subscribe(resposta => {
-      this.getFilmeAndClose();
-    });
+      console.log("Resposta do deleteCritica: " + JSON.stringify(resposta));
 
-  }
-
-  getFilmeAndClose() {
-
-    this.filmeService.getFilmeById(this.filme.id).subscribe(resposta => {
-      this.dialogRef.close(resposta);
+      if (!resposta.houveErro) {
+        this.dialogRef.close(resposta.filme);
+      }
     });
   }
 }

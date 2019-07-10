@@ -4,7 +4,7 @@ import { Critica } from '../tipos/critica';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FilmeService } from '../filme.service';
-import { RespostaServidorFilmes }  from '../tipos/interfaces-servidor';
+import { RespGetById }  from '../tipos/interfaces-servidor';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { UsuarioService } from '../usuario.service';
@@ -84,34 +84,27 @@ export class EdicaoFilmeComponent implements OnInit {
     var id = this.route.snapshot.params.id;
 
     this.filmeService.getFilmeById(id).subscribe(resposta => {
+      console.log('resposta getFilmeById em edicao-filme:' + JSON.stringify(resposta));
+
       this.carregaDadosDoFilme(resposta);
     });
   }
 
   // Essa função carrega os dados do filme na página
-  carregaDadosDoFilme(resposta: RespostaServidorFilmes) {
-    console.log('resposta do server:' + JSON.stringify(resposta));
+  carregaDadosDoFilme(resposta: RespGetById) {
 
     if (!resposta.houveErro) {
 
-      if (resposta.filmes.length > 0) {
-        this.filme = resposta.filmes[0];
-        console.log('achou um filme');
+      this.filme = resposta.filme;
 
-        // Faz cópia de filme para comparar depois
-        this.clonarFilme();
-      } else {
-        // TODO: Dispara ação quando não acha filme.
-        console.log("nenhumFilmeFoiEncontrado");
-      }
+      // Faz cópia de filme para comparar depois
+      this.clonarFilme();
+
     } else {
-      // Houve erro
-      console.log("ERRO!");
-      console.log(resposta.mensagemErro)
+        // TODO: Dispara ação quando não acha filme.
+        console.error("Erro ao buscar filme por id em filme.component");
     }
   }
-
-
 
   removerAtor(nome: string) {
 

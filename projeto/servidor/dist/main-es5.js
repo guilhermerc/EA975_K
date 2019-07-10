@@ -555,28 +555,29 @@ var CriticaComponent = /** @class */ (function () {
             this.filmeService.postCritica(this.filme.id, this.critica)
                 .subscribe(function (resposta) {
                 console.log('resposta do post da critica:' + JSON.stringify(resposta));
-                _this.getFilmeAndClose();
+                //// TODO: senão tiver erro
+                _this.dialogRef.close(resposta.filme);
             });
             // Senão faz put
         }
         else {
             this.filmeService.putCritica(this.filme.id, this.usuario.login.username, this.critica)
                 .subscribe(function (resposta) {
-                _this.getFilmeAndClose();
+                console.log("Resposta do putCritica: " + JSON.stringify(resposta));
+                //// TODO: senão tiver erro
+                _this.dialogRef.close(resposta.filme);
             });
         }
     };
     CriticaComponent.prototype.removerCritica = function () {
         var _this = this;
+        console.log("Estou em remover Critica");
         this.filmeService.deleteCritica(this.filme.id, this.usuario.login.username)
             .subscribe(function (resposta) {
-            _this.getFilmeAndClose();
-        });
-    };
-    CriticaComponent.prototype.getFilmeAndClose = function () {
-        var _this = this;
-        this.filmeService.getFilmeById(this.filme.id).subscribe(function (resposta) {
-            _this.dialogRef.close(resposta);
+            console.log("Resposta do deleteCritica: " + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                _this.dialogRef.close(resposta.filme);
+            }
         });
     };
     CriticaComponent.ctorParameters = function () { return [
@@ -694,28 +695,20 @@ var EdicaoFilmeComponent = /** @class */ (function () {
         console.log('GET FILME EM EDIÇÃO' + this.route.snapshot.params.id);
         var id = this.route.snapshot.params.id;
         this.filmeService.getFilmeById(id).subscribe(function (resposta) {
+            console.log('resposta getFilmeById em edicao-filme:' + JSON.stringify(resposta));
             _this.carregaDadosDoFilme(resposta);
         });
     };
     // Essa função carrega os dados do filme na página
     EdicaoFilmeComponent.prototype.carregaDadosDoFilme = function (resposta) {
-        console.log('resposta do server:' + JSON.stringify(resposta));
         if (!resposta.houveErro) {
-            if (resposta.filmes.length > 0) {
-                this.filme = resposta.filmes[0];
-                console.log('achou um filme');
-                // Faz cópia de filme para comparar depois
-                this.clonarFilme();
-            }
-            else {
-                // TODO: Dispara ação quando não acha filme.
-                console.log("nenhumFilmeFoiEncontrado");
-            }
+            this.filme = resposta.filme;
+            // Faz cópia de filme para comparar depois
+            this.clonarFilme();
         }
         else {
-            // Houve erro
-            console.log("ERRO!");
-            console.log(resposta.mensagemErro);
+            // TODO: Dispara ação quando não acha filme.
+            console.error("Erro ao buscar filme por id em filme.component");
         }
     };
     EdicaoFilmeComponent.prototype.removerAtor = function (nome) {
@@ -907,8 +900,8 @@ var FilmeService = /** @class */ (function () {
         return this.http.get(router);
     };
     FilmeService.prototype.getFilmeById = function (id) {
-        var router = '/filmes/id/' + id;
-        return this.http.get(router);
+        var url = '/filmes/id/' + id;
+        return this.http.get(url, httpOptions);
     };
     FilmeService.prototype.postFilme = function (filme) {
         var url = '/filmes';
@@ -936,10 +929,9 @@ var FilmeService = /** @class */ (function () {
         var router = '/filmes/criticas/' + idFilme + '/' + username;
         return this.http.put(router, critica);
     };
-    // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
     FilmeService.prototype.deleteCritica = function (idFilme, username) {
-        var router = '/filmes/criticas/' + idFilme + '/' + username;
-        return this.http.get(router);
+        var url = "/filmes/id/" + idFilme + "/criticas/" + username;
+        return this.http.delete(url, httpOptions);
     };
     /**
        * Fonte: https://angular.io/tutorial/toh-pt6
@@ -1082,34 +1074,27 @@ var FilmeComponent = /** @class */ (function () {
             this.usuarioModerador = this.usuario.moderador;
         }
     };
+    // Obtém filme pelo ido do servidor
     FilmeComponent.prototype.getFilme = function () {
         var _this = this;
         console.log('GET FILME' + this.route.snapshot.params.id);
-        var router = 'id/' + this.route.snapshot.params.id;
-        this.filmeService.getFilme(router).subscribe(function (resposta) {
-            _this.carregaDadosDoFilme(resposta);
-        });
-    };
-    // Essa função carrega os dados do filme na página
-    FilmeComponent.prototype.carregaDadosDoFilme = function (resposta) {
-        console.log('resposta do server:' + JSON.stringify(resposta));
-        if (!resposta.houveErro) {
-            if (resposta.filmes.length > 0) {
-                this.filme = resposta.filmes[0];
-                console.log('achou um filme');
-                // Separa o comentario do usuario se ele existir
-                this.ajustaCriticas();
+        var id = this.route.snapshot.params.id;
+        this.filmeService.getFilmeById(id).subscribe(function (resposta) {
+            console.log("Resposta de getFilmeById em filme.component" + JSON.stringify(resposta));
+            if (!resposta.houveErro) {
+                _this.carregaDadosDoFilme(resposta.filme);
             }
             else {
                 // TODO: Dispara ação quando não acha filme.
-                console.log("nenhumFilmeFoiEncontrado");
+                console.error("Erro ao buscar filme por id em filme.component");
             }
-        }
-        else {
-            // Houve erro
-            console.log("ERRO!");
-            console.log(resposta.mensagemErro);
-        }
+        });
+    };
+    // Essa função carrega os dados do filme na página
+    FilmeComponent.prototype.carregaDadosDoFilme = function (filme) {
+        this.filme = filme;
+        // Separa o comentario do usuario se ele existir
+        this.ajustaCriticas();
     };
     /* Se o usuário estiver logado vai precisar ver se ele já faz uma crítica
      *  E se esse for o caso precisa-se mostrar essa cŕitica de forma diferente
@@ -1128,14 +1113,13 @@ var FilmeComponent = /** @class */ (function () {
     */
     FilmeComponent.prototype.getCriticaDoUsuario = function (username) {
         var e_1, _a;
-        var index = -1;
         var criticaDoUsuario = null;
         try {
             for (var _b = tslib__WEBPACK_IMPORTED_MODULE_0__["__values"](this.filme.criticas), _c = _b.next(); !_c.done; _c = _b.next()) {
                 var critica = _c.value;
                 if (critica.username == username) {
                     // Encontra a posição da crítica e a remove do vetor
-                    index = this.filme.criticas.indexOf(critica);
+                    var index = this.filme.criticas.indexOf(critica);
                     criticaDoUsuario = this.filme.criticas.splice(index, 1)[0];
                 }
             }
@@ -1164,14 +1148,9 @@ var FilmeComponent = /** @class */ (function () {
             width: '500px',
             data: dados
         });
-        dialogRef.afterClosed().subscribe(function (resposta) {
+        dialogRef.afterClosed().subscribe(function (filme) {
             console.log('Fechou caixa de dialogo');
-            console.log('resposta vinda da caixa de dialogo:' + JSON.stringify(resposta));
-            // atualiza os dados da página
-            // TODO: Uma possível otimização seria só atualizar as críticas
-            if (resposta != null) {
-                _this.carregaDadosDoFilme(resposta);
-            }
+            _this.carregaDadosDoFilme(filme);
         });
     };
     FilmeComponent.ctorParameters = function () { return [

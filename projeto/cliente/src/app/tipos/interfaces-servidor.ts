@@ -8,6 +8,12 @@ export class RespostaServidorFilmes {
     filmes:                 Filme[] ;
 }
 
+export class RespGetById {
+  houveErro:    boolean;
+  mensagemErro: string;
+  filme:       Filme;
+}
+
 export class RespPutFilme {
   houveErro: boolean;
   mensagemErro: string;
@@ -23,6 +29,18 @@ export class RespDelFilme {
   houveErro: boolean;
   mensagemErro: string;
 }
+/*
+Interfaces sobre críticas
+*/
+export class RespDelCritica {
+  houveErro:    boolean;
+  mensagemErro: String;
+  filme:        Filme;
+}
+
+
+
+
 /*
 *   Interfaces relacionadas a usuários
 */

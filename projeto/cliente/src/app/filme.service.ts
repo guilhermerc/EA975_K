@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Filme } from './filme';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespDelFilme}  from './tipos/interfaces-servidor';
+import { RespostaServidorFilmes, RespPutFilme, RespPostFilme, RespDelFilme, RespGetById}  from './tipos/interfaces-servidor';
+import { RespDelCritica }  from './tipos/interfaces-servidor';
 import { Critica } from './tipos/critica';
 
 const httpOptions = {
@@ -32,10 +33,12 @@ export class FilmeService {
 
     return this.http.get<RespostaServidorFilmes>(router);
   }
-  getFilmeById(id: string): Observable<RespostaServidorFilmes> {
-    var router = '/filmes/id/' + id;
 
-    return this.http.get<RespostaServidorFilmes>(router);
+  getFilmeById(id: string): Observable<RespGetById> {
+
+    var url = '/filmes/id/' + id;
+
+    return this.http.get<RespGetById>(url, httpOptions);
   }
 
   postFilme(filme: Filme): Observable<RespPostFilme>  {
@@ -72,15 +75,12 @@ export class FilmeService {
     return this.http.put<RespPostFilme>(router, critica);
   }
 
-  // TODO: ATUALIZAR COM INTERFACE CERTA QUANDO TIVER
-  deleteCritica(idFilme: string, username: string): Observable<RespPostFilme> {
-    var router = '/filmes/criticas/' + idFilme + '/' + username;
+  deleteCritica(idFilme: string, username: string): Observable<RespDelCritica> {
 
-    return this.http.get<RespPostFilme>(router);
+    var url = `/filmes/id/${idFilme}/criticas/${username}`;
+
+    return this.http.delete<RespDelCritica>(url, httpOptions);
   }
-
-
-
 
   /**
      * Fonte: https://angular.io/tutorial/toh-pt6
