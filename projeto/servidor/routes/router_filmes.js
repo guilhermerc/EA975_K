@@ -27,9 +27,9 @@ router.get('/', function(req, res, next) {
 // POST /filmes
 router.post('/', function(req, res, next) {
 	var response = {
-		"houveErro":              	false,
-		"mensagemErro":           	"",
-		"filme":							[]
+		"houveErro":	false,
+		"mensagemErro":	"",
+		"filme":		undefined				
 	};
 
     var auth_response = checaAutenticacao(req,res);
