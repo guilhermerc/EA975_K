@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
 		"mensagemErro":           	"",
 		"filme":							[]
 	};
-    
+
     var auth_response = checaAutenticacao(req,res);
     if(auth_response == 'unauthorized'){
         response.houveErro = true;
@@ -45,7 +45,7 @@ router.post('/', function(req, res, next) {
         res.send(response);
         return
     }
-    
+
 	var filme = {
 		"id": 			"",
 		"titulo":		req.body.titulo,
@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
 			console.log(err);
 			console.log(res);
 		});
-		
+
 		filme.id = filme._id;
 		response.filme =	filme,
 		res.send(response);
@@ -106,7 +106,7 @@ router.put('/id/:id', function(req, res, next) {
 		"houveErro":              	false,
 		"mensagemErro":           	"",
 	};
-    
+
     var auth_response = checaAutenticacao(req,res);
     if(auth_response == 'unauthorized'){
         response.houveErro = true;
@@ -120,7 +120,7 @@ router.put('/id/:id', function(req, res, next) {
         res.send(response);
         return
     }
-    
+
 	var query = {
 		"id":	req.params.id
 	};
@@ -150,7 +150,7 @@ router.delete('/id/:id', function(req, res, next) {
 		"houveErro":              	false,
 		"mensagemErro":           	""
 	};
-    
+
     var auth_response = checaAutenticacao(req,res);
     if(auth_response == 'unauthorized'){
         response.houveErro = true;
@@ -164,7 +164,7 @@ router.delete('/id/:id', function(req, res, next) {
         res.send(response);
         return
     }
-    
+
 	var query = {
 		"id":	req.params.id
 	};
@@ -243,7 +243,7 @@ router.get('/ano/:ano', function(req, res, next) {
 	var query = {
 		"ano":	req.params.ano
 	};
-	modelFilme.find(query, function (err, filme) {
+	modelFilme.find(query, function (err, filmes) {
 		if (err) {
 			console.error(err);
 			response.houveErro = 	true;
@@ -296,13 +296,13 @@ router.post('/id/:id/criticas', function(req, res, next) {
 		"mensagemErro":           	"",
 		"filme":							null
     };
-    
+
     if(checaAutenticacao(req, res) == 'unauthorized') {
         response.houveErro = true;
         response.mensagemErro = "Usuário não autenticado";
         res.send(response);
         return;
-    } 
+    }
 
 	var query = {
 		"id":	req.params.id
@@ -338,14 +338,14 @@ router.put('/id/:id/criticas', function(req, res, next) {
 		"mensagemErro":	"",
 		"filme":				null
 	};
-    
+
     if(checaAutenticacao(req, res) == 'unauthorized') {
         response.houveErro = true;
         response.mensagemErro = "Usuário não autenticado";
         res.send(response);
         return;
-    } 
-    
+    }
+
 	var query = {
 		"id":	req.params.id,
 	};
@@ -380,14 +380,14 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 		"mensagemErro":		"",
 		"filme":				null
 	};
-    
+
     if(checaAutenticacao(req, res) == 'unauthorized') {
         response.houveErro = true;
         response.mensagemErro = "Usuário não autenticado";
         res.send(response);
         return;
-    } 
-    
+    }
+
 	var query = {
 		"id":	req.params.id,
 	};
