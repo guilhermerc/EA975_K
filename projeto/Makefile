@@ -3,7 +3,7 @@ TEST_FOLDER = $(SERVER_FOLDER)/spec/api
 
 # Performs a test suite
 frisby-test:
-	jasmine-node $(TEST_FOLDER)
+	jasmine-node --verbose $(TEST_FOLDER)
 
 make test: cliente-build serve-update serve-start
 
