@@ -11,7 +11,7 @@ exports.create = function() {
             console.log('Remoção de todo conteúdo da collection filmes');
         }
     });
-    
+
     console.log("Inserindo usuários na UMDB");
 	modelUsuario.deleteMany({}, function(err) {
         if (err) {
@@ -43,20 +43,20 @@ exports.create = function() {
 	});
 
 	new modelFilme({
-		"id": "CHE",
-		"titulo": 	"O Rei Leão",
+		"id": 		"0001",
+		"titulo":	"O Rei Leão",
 		"diretores": 	[
-			{"nome":	"Mufasa"},
-			{"nome":	"SEGREDO"}
+			{"nome":	"Jon Favreau"}
 		],
-		"ano": 2019,
+		"ano": 		2019,
 		"elenco": [
-			{"nome": 	"Timão"},
-			{"nome": 	"Pumba"}
+			{"nome":	"Keegan-Michael Key"},
+			{"nome": 	"Donald Glover"},
+			{"nome":	"Seth Rogen"}
 		],
-		"sinopse": "O CARA É UM LEÃO E É REI",
-		"nota":	0,
-		"criticas": []
+		"sinopse": 	"Traído e exilado de seu reino, o leãozinho Simba precisa descobrir como crescer e retomar seu destino como herdeiro real nas planícies da savana africana.",
+		"nota":		0,
+		"criticas":	[]
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
@@ -81,7 +81,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-    
+
     new modelUsuario({
 		"login": {
             "username":   "xaburao",
@@ -95,7 +95,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-    
+
     new modelUsuario({
 		"login": {
             "username":   "Marcelovi",
@@ -109,7 +109,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-    
+
     new modelUsuario({
 		"login": {
             "username":   "Allado",
@@ -123,7 +123,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-    
+
     new modelUsuario({
 		"login": {
             "username":   "Psycho",
@@ -137,7 +137,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
-    
+
     new modelUsuario({
 		"login": {
             "username":   "mimola",
