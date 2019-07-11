@@ -361,7 +361,7 @@ router.put('/id/:id/criticas', function(req, res, next) {
 			response.mensagemErro = "Filme não encontrado na base de dados.";
 		} else {
 			atualizaCritica(filme.criticas, req.body);
-			atualizaNotaMedia(filme, filme.criticas);
+			atualizaNotaMedia(filme);
 			modelFilme.replaceOne({_id: filme._id}, filme, function(err, res){
 				if(err){
 					console.log(err);
@@ -416,9 +416,14 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 
 function atualizaNotaMedia(filme) {
 	var i = 0, notaMedia = 0;
+    
+    if(filme.criticas.length === 0)
+        return;
+    
 	for (i = 0; i < filme.criticas.length; i++) {
-		notaMedia += filme.criticas[i].nota;
+		notaMedia += Number(filme.criticas[i].nota);
 	}
+	
 	notaMedia /= filme.criticas.length;
 	filme.nota = notaMedia;
 }
