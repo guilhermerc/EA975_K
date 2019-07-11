@@ -738,3 +738,334 @@ describe("E) Remoção de um filme", function() {
     });
 
 });
+
+describe("1 Editar informações do usuario", function() {
+    
+    it("Usuário se cadastra", function(TF22) {
+        frisby.post('http://localhost:3000/usuarios',{
+            login: {
+                username: "Thor",
+                senha: "Mjolnir"
+            },
+            nome: "Thor",
+            dataNascimento: "04/15/1901",
+            sexo: "masculino",
+            moderador: false            
+        })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF22);
+    });
+    
+    it("Usuário se autentica", function(TF23){
+        frisby.post('http://localhost:3000/usuarios/autenticacao', {
+            login: {
+                username: "Thor",
+                senha: "Mjolnir"
+            }
+        })
+        .expect('status', 200)
+        .expect('header', 'Set-Cookie', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }            
+        })
+        .done(TF23)
+    });
+    
+    it("Usuário tenta modificar sua senha e nome", function(TF24){
+        frisby.put('http://localhost:3000/usuarios/username/Thor', {
+            login: {
+                username: "Thor",
+                senha: "odin"
+            },
+            nome: "Odinson"            
+        })
+        .expect('status', 200)
+        .expect('header', 'Content-Type', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+        })
+        .done(TF24)
+    });
+    
+});
+
+describe("2 Autenticar", function() {
+    
+    it("Usuário se cadastra com username: CapAmerica e senha: i cam do this all day", function(TF25) {
+        frisby.post('http://localhost:3000/usuarios',{
+            login: {
+                username: "CapAmerica",
+                senha: "i can do this all day"
+            },
+            nome: "Steve Rogers",
+            dataNascimento: "04/15/1901",
+            sexo: "masculino",
+            moderador: false            
+        })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF25);
+    });
+    
+    it("Usuário se autentica", function(TF26){
+        frisby.post('http://localhost:3000/usuarios/autenticacao', {
+            login: {
+                username: "CapAmerica",
+                senha: "i can do this all day",
+            }
+        })
+        .expect('status', 200)
+        .expect('header', 'Set-Cookie', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }            
+        })
+        .done(TF26)
+    });
+});
+
+
+describe("5 Cadastrar", function() {
+    
+    it("Usuário entra com suas informações e se cadastra", function(TF27) {
+        frisby.post('http://localhost:3000/usuarios',{
+            login: {
+                username: "IronMan",
+                senha: "iamironman"
+            },
+            nome: "Tony Stark",
+            dataNascimento: "02/21/1978",
+            sexo: "masculino",
+            moderador: false            
+        })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF27);
+    });            
+});
+
+describe("8 Encerrar sessão", function() {
+    
+    it("Usuário se cadastra", function(TF28) {
+        frisby.post('http://localhost:3000/usuarios',{
+            login: {
+                username: "StarLord",
+                senha: "hookDownAfeeling"
+            },
+            nome: "Peter Quill",
+            dataNascimento: "04/15/1989",
+            sexo: "masculino",
+            moderador: false            
+        })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF28);
+    });
+    
+    it("Usuário se autentica", function(TF29){
+        frisby.post('http://localhost:3000/usuarios/autenticacao', {
+            login: {
+                username: "StarLord",
+                senha: "hookDownAfeeling"
+            }
+        })
+        .expect('status', 200)
+        .expect('header', 'Set-Cookie', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }            
+        })
+        .done(TF29)
+    });
+    
+    it("Usuário encerra a sessão", function(T30) {
+        frisby.delete('http://localhost:3000/usuarios/autenticacao')
+        .expect('status', 200)
+        .expect('header', 'Set-Cookie', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+        })
+        .done(T30)
+    });
+});
+
+describe("9 consultar informações de conta", function(T31) {
+   
+    it("Usuário se cadastra", function(TF32) {
+        frisby.post('http://localhost:3000/usuarios',{
+            login: {
+                username: "Hulk",
+                senha: "smash"
+            },
+            nome: "Bruce Banner",
+            dataNascimento: "08/23/1978",
+            sexo: "masculino",
+            moderador: false            
+        })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF32);
+    });
+    
+    it("Usuário se autentica", function(TF33){
+        frisby.post('http://localhost:3000/usuarios/autenticacao', {
+            login: {
+                username: "Hulk",
+                senha: "smash"
+            }
+        })
+        .expect('status', 200)
+        .expect('header', 'Set-Cookie', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }            
+        })
+        .done(TF33)
+    });
+    
+    it("Usuário consulta suas informações", function(TF34) {
+        frisby.get('http://localhost:3000/usuarios/username/Hulk')
+        .expect('status', 200)
+        .expect('header', 'Content-Type', new RegExp('[autenticacaoUsuario].*'))
+        .expect('jsonTypes', {
+            houveErro:              Joi.boolean().required(),
+            mensagemErro:           Joi.string().allow("").required(),
+            usuario:                {
+                login:                  {
+                    username:               Joi.string().required(),
+                    senha:                  Joi.string().required(),
+                },
+                nome:               Joi.string().required(),
+                dataNascimento:     Joi.string().required(),
+                sexo:               Joi.string().required(),
+                moderador:          Joi.boolean().required()
+            }
+        })
+        .done(TF34)
+    });
+});
+// describe("8 Encerrar sessão", function() {
+//    
+//     it("Usuário clica no botão de sair e encerra a sessão", function(T23) {
+//         frisby.delete('http://localhost:3000/usuarios/autenticacao')
+//         .expect('status', 200)
+//         .expect('jsonTypes', {
+//             houveErro:              Joi.boolean().required(),
+//             mensagemErro:           Joi.string().allow("").required(),
+//         })
+//     });
+// });
+
+// describe("1") "Editar informações de conta", function() {
+//     
+//     it()
+// }
