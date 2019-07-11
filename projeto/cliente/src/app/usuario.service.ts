@@ -30,16 +30,8 @@ export class UsuarioService {
 
       console.log("body:" + body);
 
-      return this.http.post<RespPostUsuario>(router, body, httpOptions).
-      pipe(
-        // Com tap podemos pegar a resposta antes dela ser retornada.
-        tap(resposta => {
-
-          if (!resposta.houveErro) {
-            // Atualiza variável usuário e os observers.
-            this.atualizaUsuario(usuario);// TODO: ATUALIZAR RETORNO E PEGAR USUARIO DE LÁ
-          }
-        }));
+      // Não atualiza o usuário pq não está logado.
+      return this.http.post<RespPostUsuario>(router, body, httpOptions);
   }
 
   public login(login: Login): Observable<RespPostAutenticacao> {
