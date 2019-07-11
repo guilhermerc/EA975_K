@@ -1,8 +1,9 @@
-<div class="container" *ngIf="filme">
 
+<div class="container" *ngIf="filme">
+  <div style="magin-bottom: 10px" *ngIf="filme">
     <button *ngIf="usuarioModerador" class="botao-editar-filme" type="button"
     name="button" routerLink="/edicao-filme/{{filme.id}}">Editar Filme</button>
-
+  </div>
   <div class="titulo">
     {{filme.titulo}} ({{filme.ano}})
 
@@ -12,7 +13,7 @@
     </div>
   </div>
 
-  <div class="container-media">
+  <!--div class="container-media">
     <div class="linha">
         <div class="coluna">
             <img src="/assets/imagens/vingadores_0.jpg">
@@ -22,7 +23,7 @@
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
-  </div>
+  </div-->
 
   <div class="info-filme">
 

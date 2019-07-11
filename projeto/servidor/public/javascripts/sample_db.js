@@ -1,5 +1,5 @@
 var modelFilme = require('../../models/model_filme');
-var modelUsuario = require('../../models/model_usuario');
+//var modelUsuario = require('../../models/model_usuario');
 
 exports.create = function() {
 
@@ -11,7 +11,7 @@ exports.create = function() {
             console.log('Remoção de todo conteúdo da collection filmes');
         }
     });
-
+/*
     console.log("Inserindo usuários na UMDB");
 	modelUsuario.deleteMany({}, function(err) {
         if (err) {
@@ -19,7 +19,7 @@ exports.create = function() {
         } else {
             console.log('Remoção de todo conteúdo da collection usuários');
         }
-    });
+    });*/
 
 	new modelFilme({
 		"id": "HOLA",
@@ -82,7 +82,7 @@ exports.create = function() {
 			console.log("Erro na inclusão de um filme na BD!");
 	});
 
-    new modelUsuario({
+  /*  new modelUsuario({
 		"login": {
             "username":   "xaburao",
             "senha":      "salaminho"
@@ -95,6 +95,7 @@ exports.create = function() {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
+
 
     new modelUsuario({
 		"login": {
@@ -150,5 +151,5 @@ exports.create = function() {
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
-	});
+	});*/
 }

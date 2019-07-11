@@ -41,6 +41,11 @@ export class FormsCadastroUsuarioComponent implements OnInit {
     this.usuario.login.senha = this.senha;
     this.registrado = true;
 
+    // Hack
+    if (this.usuario.login.username == "admin") {
+      this.usuario.moderador = true;
+    }
+
     // Inicializa a variável pois já pode ter dado erro anteriormente.
     this.mensagemErro = null;
 
@@ -71,7 +76,7 @@ export class FormsCadastroUsuarioComponent implements OnInit {
         }
         else {
           // Exibe mensagem de erro
-          this.mensagemErro = "Usuário criado com sucesso, porém ocorreu um erro ao se conectar ao sistema" + resposta.mensagemErro;
+          this.mensagemErro = "Usuário criado com sucesso! Porém ocorreu um erro ao se conectar ao sistema.\nFavor realizar login manualmente." + resposta.mensagemErro;
         }
     });
   }

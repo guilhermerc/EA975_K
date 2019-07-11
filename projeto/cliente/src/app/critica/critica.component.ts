@@ -65,7 +65,8 @@ export class CriticaComponent implements OnInit {
   submeterCritica() {
     console.log("submeter crítica");
     // Atualiza a data
-    this.critica.data = new Date();
+    this.critica.data = (new Date()).toLocaleString();
+    
     // Se o usuário tem acesso a essas opções quer dizer que ele está logado
     // portanto this.usuario.login não é null
     this.critica.username = this.usuario.login.username;

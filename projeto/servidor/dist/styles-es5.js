@@ -557,7 +557,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/marcelo/EA975/EA975_K/projeto/cliente/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /home/marcelo/Desktop/EA975_K/projeto/cliente/src/styles.css */"./src/styles.css");
 
 
 /***/ })

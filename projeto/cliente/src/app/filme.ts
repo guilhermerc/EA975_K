@@ -15,7 +15,7 @@ export class Filme {
 
 export class Critica {
     username: string;
-    data: Date;
+    data: string;
     comentario: string;
     nota: Number;
 }
