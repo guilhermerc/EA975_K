@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
 	var response = {
 		"houveErro":	false,
 		"mensagemErro":	"",
-		"filme":		undefined				
+		"filme":		undefined
 	};
 
     var auth_response = checaAutenticacao(req,res);
@@ -416,14 +416,16 @@ router.delete('/id/:id/criticas/:username', function(req, res, next) {
 
 function atualizaNotaMedia(filme) {
 	var i = 0, notaMedia = 0;
-    
-    if(filme.criticas.length === 0)
-        return;
-    
+
+    if(filme.criticas.length === 0) {
+		filme.nota = 0;
+		return;
+	}
+
 	for (i = 0; i < filme.criticas.length; i++) {
 		notaMedia += Number(filme.criticas[i].nota);
 	}
-	
+
 	notaMedia /= filme.criticas.length;
 	filme.nota = notaMedia;
 }
