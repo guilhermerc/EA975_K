@@ -1,4 +1,5 @@
 var modelFilme = require('../../models/model_filme');
+var modelUsuario = require('../../models/model_usuario');
 
 exports.create = function() {
 
@@ -8,6 +9,15 @@ exports.create = function() {
             console.log(err);
         } else {
             console.log('Remoção de todo conteúdo da collection filmes');
+        }
+    });
+    
+    console.log("Inserindo usuários na UMDB");
+	modelUsuario.deleteMany({}, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Remoção de todo conteúdo da collection usuários');
         }
     });
 
@@ -67,6 +77,76 @@ exports.create = function() {
 		"sinopse": "EITA BRUXINHA...",
 		"nota":	0,
 		"criticas": []
+	}).save(function (err, filme) {
+		if(err)
+			console.log("Erro na inclusão de um filme na BD!");
+	});
+    
+    new modelUsuario({
+		"login": {
+            "username":   "xaburao",
+            "senha":      "salaminho"
+        },
+        "nome":          "Augusto",
+        dataNascimento:  "11/08/1996",
+        sexo:            "Masculino",
+        moderador:        true,
+	}).save(function (err, filme) {
+		if(err)
+			console.log("Erro na inclusão de um filme na BD!");
+	});
+    
+    new modelUsuario({
+		"login": {
+            "username":   "Marcelovi",
+            "senha":      "love"
+        },
+        "nome":          "Marcelo",
+        dataNascimento:  "17/05/1995",
+        sexo:            "Masculino",
+        moderador:        true,
+	}).save(function (err, filme) {
+		if(err)
+			console.log("Erro na inclusão de um filme na BD!");
+	});
+    
+    new modelUsuario({
+		"login": {
+            "username":   "Allado",
+            "senha":      "Awholeneworld"
+        },
+        "nome":          "Guilherme",
+        dataNascimento:  "13/08/1995",
+        sexo:            "Masculino",
+        moderador:        true,
+	}).save(function (err, filme) {
+		if(err)
+			console.log("Erro na inclusão de um filme na BD!");
+	});
+    
+    new modelUsuario({
+		"login": {
+            "username":   "Psycho",
+            "senha":      "42earesposta"
+        },
+        "nome":          "Gabriel",
+        dataNascimento:  "18/12/1995",
+        sexo:            "Masculino",
+        moderador:        true,
+	}).save(function (err, filme) {
+		if(err)
+			console.log("Erro na inclusão de um filme na BD!");
+	});
+    
+    new modelUsuario({
+		"login": {
+            "username":   "mimola",
+            "senha":      "xenty"
+        },
+        "nome":          "Miguel",
+        dataNascimento:  "20/12/1999",
+        sexo:            "Masculino",
+        moderador:        false,
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
