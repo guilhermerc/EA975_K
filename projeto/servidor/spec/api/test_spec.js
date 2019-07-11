@@ -4,7 +4,7 @@ var frisby = require('frisby');
 frisby.globalSetup({
     request: {
         headers: {
-            'Cookie': 'autenticacaoUsuario={"key":"secret", "moderador":"moderador"}',
+            'Cookie': 'autenticacaoUsuario={"key":"secret", "role":"moderador"}',
         }
     }
 })
