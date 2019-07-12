@@ -3,7 +3,6 @@ var modelFilme = require('../../models/model_filme');
 
 exports.create = function() {
 
-	console.log("Inserindo filmes na UMDB");
 	modelFilme.deleteMany({}, function(err) {
         if (err) {
             console.log(err);
@@ -11,31 +10,33 @@ exports.create = function() {
             console.log('Remoção de todo conteúdo da collection filmes');
         }
     });
-/*
-    console.log("Inserindo usuários na UMDB");
+
+	/*
 	modelUsuario.deleteMany({}, function(err) {
         if (err) {
             console.log(err);
         } else {
             console.log('Remoção de todo conteúdo da collection usuários');
         }
-    });*/
+    });
+	*/
+
+	console.log("Inserindo filmes na UMDB");
 
 	new modelFilme({
-		"id": "HOLA",
-		"titulo": 	"Vingadores: Ultimato",
+		"id": 		"0000",
+		"titulo":	"The Avengers",
 		"diretores": 	[
-			{"nome": "Joe Russo"},
-			{"nome": "Anthony Russo"}
+			{"nome": "Joss Whedon"}
 		],
-		"ano": 2019,
+		"ano":		2012,
 		"elenco": [
 			{"nome": 	"Robert Downey Jr."},
-			{"nome": 	"Scarlett Johansson"},
-			{"nome": 	"Chris Evans"}
+			{"nome": 	"Chris Evans"},
+			{"nome": 	"Scarlett Johansson"}
 		],
-		"sinopse": "Após Thanos eliminar metade das criaturas vivas, os Vingadores precisam lidar com a dor da perda de amigos e seus entes queridos. Com Tony Stark (Robert Downey Jr.) vagando perdido no espaço sem água nem comida, Steve Rogers (Chris Evans) e Natasha Romanov (Scarlett Johansson) precisam liderar a resistência contra o titã louco.",
-		"nota":	0,
+		"sinopse":	"Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki and his alien army from enslaving humanity.",
+		"nota":		0,
 		"criticas": []
 	}).save(function (err, filme) {
 		if(err)
@@ -63,63 +64,57 @@ exports.create = function() {
 	});
 
 	new modelFilme({
-		"id": "QUE",
-		"titulo": 	"Harry Potter e a Pedra Filosofal",
+		"id": 		"0002",
+		"titulo":	"Pulp Fiction",
 		"diretores": 	[
-			{"nome":	"	Chris Columbus"}
+			{"nome":	"Chris Columbus"}
 		],
-		"ano": 2001,
+		"ano": 		1994,
 		"elenco": [
-			{"nome": 	"Daniel Radcliffe"},
-			{"nome": 	"Emma Watson"},
-			{"nome": 	"Rupert Grint"}
+			{"nome": 	"John Travolta"},
+			{"nome": 	"Uma Thurman"},
+			{"nome": 	"Samuel L. Jackson"}
 		],
-		"sinopse": "EITA BRUXINHA...",
-		"nota":	0,
-		"criticas": []
+		"sinopse": "The lives of two mob hitmen, a boxer, a gangster & his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
+		"nota":		0,
+		"criticas":	[]
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
 
-  /*  new modelUsuario({
-		"login": {
-            "username":   "xaburao",
-            "senha":      "salaminho"
-        },
-        "nome":          "Augusto",
-        dataNascimento:  "11/08/1996",
-        sexo:            "Masculino",
-        moderador:        true,
+	new modelFilme({
+		"id": 		"0003",
+		"titulo":	"Lady Bird",
+		"diretores": 	[
+			{"nome":	"Greta Gerwig"}
+		],
+		"ano": 		2017,
+		"elenco": [
+			{"nome": 	"Saoirse Ronan"},
+			{"nome": 	"Laurie Metcalf"},
+			{"nome": 	"Tracy Letts"}
+		],
+		"sinopse": 	"In 2002, an artistically inclined seventeen-year-old girl comes of age in Sacramento, California.",
+		"nota":		0,
+		"criticas":	[]
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
 	});
 
+	/*
+	console.log("Inserindo usuários na UMDB");
 
-    new modelUsuario({
+	new modelUsuario({
 		"login": {
-            "username":   "Marcelovi",
-            "senha":      "love"
+            "username":   	"guilherme",
+            "senha":      	"098765"
         },
-        "nome":          "Marcelo",
-        dataNascimento:  "17/05/1995",
-        sexo:            "Masculino",
-        moderador:        true,
-	}).save(function (err, filme) {
-		if(err)
-			console.log("Erro na inclusão de um filme na BD!");
-	});
-
-    new modelUsuario({
-		"login": {
-            "username":   "Allado",
-            "senha":      "Awholeneworld"
-        },
-        "nome":          "Guilherme",
-        dataNascimento:  "13/08/1995",
-        sexo:            "Masculino",
-        moderador:        true,
+        "nome":				"Guilherme R. C.",
+        dataNascimento:  	"08/13/1995",
+        sexo:            	"Masculino",
+        moderador:        	true,
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
@@ -127,13 +122,13 @@ exports.create = function() {
 
     new modelUsuario({
 		"login": {
-            "username":   "Psycho",
-            "senha":      "42earesposta"
+            "username":		"marcelo",
+            "senha":		"123456"
         },
-        "nome":          "Gabriel",
-        dataNascimento:  "18/12/1995",
-        sexo:            "Masculino",
-        moderador:        true,
+        "nome":				"Marcelo M. J.",
+        dataNascimento:		"00/00/0000",
+        sexo:				"Masculino",
+        moderador:			false,
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
@@ -141,15 +136,16 @@ exports.create = function() {
 
     new modelUsuario({
 		"login": {
-            "username":   "mimola",
-            "senha":      "xenty"
+            "username":  	"gabriel",
+            "senha":      	"098321"
         },
-        "nome":          "Miguel",
-        dataNascimento:  "20/12/1999",
-        sexo:            "Masculino",
-        moderador:        false,
+        "nome":          	"Gabriel S. R.",
+        dataNascimento:  	"12/18/1995",
+        sexo:            	"Masculino",
+        moderador:        	false,
 	}).save(function (err, filme) {
 		if(err)
 			console.log("Erro na inclusão de um filme na BD!");
-	});*/
+	});
+	*/
 }
