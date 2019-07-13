@@ -1,68 +1,25 @@
 # EA975_K - "Laboratório de Engenharia de Software"
-Repositório do projeto de EA975 - "Laboratório de Engenharia de Software".
 
-Projeto: UMDB - University Movie Database 
+## Projeto: UMDB - University Movie Database 
 
-Um catálogo/sistema de avaliação de filmes onde é possível acrescentar, 
-remover, consultar e avaliar filmes. Inspirado no IMDB.
+### Autores
 
+#### Front-end e integração (Angular) 
+Marcelo Martimiano Junior       RA:156532       (m156532@dac.unicamp.br)
 
-### Grupo 1 (G1)
-RA: 155475 - Gabriel Silvano Ramirez\
-RA: 156531 - Marcelo Martimiano Junior\
-RA: 169127 - Guilherme Ricioli Cruz
+#### Back-end e testes (MongoDB, Express, Node.js e Frisby)
+Gabriel Silvano Ramirez         RA:155475       (g155475@dac.unicamp.br)
+Guilherme Ricioli Cruz          RA:169127       (g169127@dac.unicamp.br)
 
+### Descrição
 
-### Checklist das funcionalidades implementadas
+UMDB (University Movie Database) é uma aplicação web distribuída para avaliação
+de filmes. Foi inspirada no famoso IMDb (Internet Movie Database).
 
-Baseado nos Casos de Uso.
-
-#### Integração entre os lados: 
-
-- [x] Cadastra
-- [x] Autentica
-- [x] Encerrar sessão
-- [x] Alterar dados do perfil
-- [x] Busca simples por filme
-- [?] Busca combinada por filme (??)
-- [x] Exibir informações sobre um filme
-- [x] Opinar sobre um filme
-- [x] Editar opinião sobre um filme
-- [x] Remover opinião sobre um filme
-- [x] Inserção de um filme na base de dados
-- [x] Edição de um filme na base de dados
-- [x] Remoção de um filme na base de dados
+Utilizou-se a stack de desenvolvimento web MEAN (MongoDB, Express, Angular e 
+Node.js), além do framework de testes Frisby.js.
 
 
-#### Lado cliente:
-
-- [x] Cadastra
-- [x] Autentica
-- [x] Encerrar sessão
-- [x] Alterar dados do perfil
-- [x] Busca simples por filme
-- [?] Busca combinada por filme (??)
-- [x] Exibir informações sobre um filme
-- [x] Opinar sobre um filme
-- [x] Editar opinião sobre um filme
-- [x] Remover opinião sobre um filme
-- [x] Inserção de um filme na base de dados
-- [x] Edição de um filme na base de dados
-- [x] Remoção de um filme na base de dados
-
-##### Lado servidor/banco de dados:
-
-- [x] Cadastra
-- [x] Autentica
-- [x] Encerrar sessão
-- [x] Exibir informações do usuário
-- [x] Alterar informações do usuário
-- [x] Busca simples por filme
-- [?] Busca combinada por filme (??)
-- [x] Exibir informações sobre um filme
-- [x] Opinar sobre um filme
-- [x] Editar opinião sobre um filme
-- [x] Remover opinião sobre um filme
-- [x] Inserção de um filme na base de dados
-- [x] Edição de um filme na base de dados
-- [x] Remoção de um filme na base de dados
+TODO: Colocar imagens do front-end
+TODO: Descrever passos para execução do servidor
+TODO: Descrever passos para execução dos testes 
