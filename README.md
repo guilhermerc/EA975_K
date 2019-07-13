@@ -14,10 +14,9 @@ Node.js), além do framework de testes Frisby.js.
 Marcelo Martimiano Junior (m156532@dac.unicamp.br)
 
 #### Back-end e testes (MongoDB, Express, Node.js e Frisby)
-Gabriel Silvano Ramirez (g155475@dac.unicamp.br)\\
-Guilherme Ricioli Cruz (g169127@dac.unicamp.br)\\
-\\
+Gabriel Silvano Ramirez (g155475@dac.unicamp.br)\
+Guilherme Ricioli Cruz (g169127@dac.unicamp.br)\
 
-TODO: Colocar imagens do front-end\\
-TODO: Descrever passos para execução do servidor\\
+TODO: Colocar imagens do front-end\
+TODO: Descrever passos para execução do servidor\
 TODO: Descrever passos para execução dos testes 
