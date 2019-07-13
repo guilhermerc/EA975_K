@@ -1,4 +1,4 @@
-# EA975_K - "Laboratório de Engenharia de Software"
+# EA975_K - Laboratório de Engenharia de Software
 
 ## Projeto: UMDB - University Movie Database 
 
